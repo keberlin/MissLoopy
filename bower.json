@@ -1,0 +1,15 @@
+{
+  "name":        "Miss Loopy",
+  "version":     "1",
+
+  "dependencies": {
+    "jquery":    "~1",
+    "bootstrap": "~3",
+    "bootstrap-datepicker": "",
+    "bs-typeahead": "",
+    "angularjs":    "~1"
+  },
+
+  "devDependencies": {
+  }
+}

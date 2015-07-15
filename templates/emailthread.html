@@ -1,0 +1,236 @@
+{% extends 'template-panel.html' %}
+
+{% import 'macros.html' as macros %}
+
+{% set heading = 'Conversation with ' + (name or '') %}
+
+{% if num_pages == 0 %}
+  {% set message = 'No messages found.' %}
+{% endif %}
+
+{% block panel_header %}
+  <div class="col-xs-12">
+    <table border=0 style="width:100%;border-spacing:0px 0px;border-collapse:separate">
+      {{ macros.member(www,action,nav,type,entry) }}
+    </table>
+  </div>
+  <div class="col-xs-7 col-xs-offset-5" align="right" id="send_text_panel" hidden>
+    <form class="form-horizontal" id="form_text" role="form">
+      <div class="form-group">
+        <div class="col-xs-12">
+          <textarea class="form-control" rows="5" id="message" name="message" required maxlength="3000"></textarea>
+        </div>
+      </div>
+      <div class="col-xs-12">
+        <button type="submit" class="btn btn-primary" id="send">Send</button>
+        <button type="button" class="btn btn-default" id="cancel_text">Cancel</button>
+      </div>
+      <input type="number" value="{{ id }}" name="id" hidden>
+    </form>
+  </div>
+  <div class="col-xs-7 col-xs-offset-5" align="right" id="send_photo_panel" hidden>
+    <form class="form" id="form_photo" role="form" enctype="multipart/form-data">
+      <div class="form-group">
+        <label class="col-xs-3 control-label" for="file">Select photo</label>
+        <div class="col-xs-9">
+          <input type="file" id="file" class="form-control" name="file" required>
+        </div>
+      </div>
+      <div class="col-xs-12">
+        <br>
+        <button type="submit" class="btn btn-primary">Upload</button>
+        <button type="button" class="btn btn-default" id="cancel_photo">Cancel</button>
+      </div>
+      <input type="number" value="{{ id }}" name="id" hidden>
+    </form>
+  </div>
+  <div class="col-xs-12" align="right" id="reply_panel">
+    <button type="button" class="btn btn-info" id="reply">Message</button>
+    <button type="button" class="btn btn-info" id="upload">Upload photo</button>
+  </div>
+  <div class="col-xs-12">
+    <br>
+  </div>
+{% endblock %}
+
+{% block panel %}
+  {% if num_pages > 0 %}
+    {% for page in range(num_pages) %}
+      <div id="page{{ page }}" {% if page > 0 %}hidden{% endif %}>
+        {% set advert = True %}
+        {% for message in entries[page*per_page:(page+1)*per_page] %}
+          {{ macros.message(www,nav,message) }}
+          {% if advert %}
+            {% set advert = False %}
+            <div align="center">
+              {% set ad = 'publishers/' + publisher + '-banner.htm' %}
+              {% include ad %}
+            </div>
+            <div>
+              <br>
+            </div>
+          {% endif %}
+        {% endfor %}
+      </div>
+    {% endfor %}
+  {% endif %}
+{% endblock %}
+
+{% block panel_footer %}
+  <div class="col-xs-12" align="center">
+    <br>
+    <small>Please note messages are removed after 3 months.</small>
+  </div>
+{% endblock %}
+
+{% block actions %}
+  <div class="col-xs-12">
+    <br>
+    <button class="btn btn-info" id="favorite">Add to Favorites</button>
+    &nbsp;
+    <button class="btn btn-danger" id="block">Block</button>
+    <button class="btn btn-danger" id="spam">Report Spam</button>
+  </div>
+{% endblock %}
+    
+{% block scripts %}
+  <script language="javascript">
+    // Handle Previous button
+    $("#previous").click( function(e) {
+      window.location = "/emailthread?nav={{ nav }}&id={{ id_previous }}";
+    });
+    // Handle Next button
+    $("#next").click( function(e) {
+      window.location = "/emailthread?nav={{ nav }}&id={{ id_next }}";
+    });
+    // Handle Message button
+    $("#reply").click( function(e) {
+      $("#reply_panel").hide();
+      $("#send_text_panel").show();
+    });
+    // Handle Upload Photo button
+    $("#upload").click( function(e) {
+      $("#reply_panel").hide();
+      $("#send_photo_panel").show();
+    });
+    // Handle Send form button
+    $("#form_text").submit( function(e) {
+      e.preventDefault();
+      $.ajax({
+        url: '/mlsendemail',
+        type: 'POST',
+        data: $(this).serialize(),
+        error: function(jqXHR, textStatus, errorThrown) {
+          jsShowError("There's a problem with your Internet connection.");
+        },
+        success: function(data) {
+          if (data.error)
+            jsShowError(data.error);
+          else if (data.message) {
+            jsShowMessage(data.message);
+            location.reload(true);
+          }
+        },
+        async: false
+      });
+      return false;
+    });
+    // Handle Cancel button
+    $("#cancel_text").click( function(e) {
+      $("#reply_panel").show();
+      $("#send_text_panel").hide();
+    });
+    // Handle Upload form button
+    $("#form_photo").submit( function(e) {
+      e.preventDefault();
+      jsShowMessage('Photo uploading...');
+      var formData = new FormData($(this)[0]);
+      $.ajax({
+        url: '/mlsendphoto',
+        type: 'POST',
+        data: formData,
+        error: function(jqXHR, textStatus, errorThrown) {
+          jsShowError("There's a problem with your Internet connection.");
+        },
+        success: function(data) {
+          if (data.error)
+            jsShowError(data.error);
+          else if (data.message) {
+            $("#file").replaceWith($("#file").clone());
+            jsShowMessage(data.message);
+            location.reload(true);
+          }
+        },
+        cache: false,
+        contentType: false,
+        processData: false,
+        async: false
+      });
+    });
+    // Handle Cancel button
+    $("#cancel_photo").click( function(e) {
+      $("#reply_panel").show();
+      $("#send_photo_panel").hide();
+    });
+    // Handle Add Favorite button
+    $("#favorite").click( function(e) {
+      $.ajax({
+        url: '/mladdfavorite',
+        type: 'POST',
+        data: 'id={{ id }}',
+        error: function(jqXHR, textStatus, errorThrown) {
+          jsShowError("There's a problem with your Internet connection.");
+        },
+        success: function(data) {
+          if (data.error)
+            jsShowError(data.error);
+          else if (data.message) {
+            jsShowMessage(data.message);
+            $("#favorite").prop('disabled',true);
+          }
+        }
+      });
+      return false;
+    });
+    // Handle Block button
+    $("#block").click( function(e) {
+      $.ajax({
+        url: '/mlblock',
+        type: 'POST',
+        data: 'id={{ id }}',
+        error: function(jqXHR, textStatus, errorThrown) {
+          jsShowError("There's a problem with your Internet connection.");
+        },
+        success: function(data) {
+          if (data.error)
+            jsShowError(data.error);
+          else if (data.message) {
+            jsShowMessage(data.message);
+            $("#block").prop('disabled',true);
+          }
+        }
+      });
+      return false;
+    });
+    // Handle Report Spam button
+    $("#spam").click( function(e) {
+      $.ajax({
+        url: '/mlspam',
+        type: 'POST',
+        data: 'id={{ id }}',
+        error: function(jqXHR, textStatus, errorThrown) {
+          jsShowError("There's a problem with your Internet connection.");
+        },
+        success: function(data) {
+          if (data.error)
+            jsShowError(data.error);
+          else if (data.message) {
+            jsShowMessage(data.message);
+            $("#spam").prop('disabled',true);
+          }
+        }
+      });
+      return false;
+    });
+  </script>
+{% endblock %}

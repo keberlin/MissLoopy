@@ -1,0 +1,103 @@
+{% extends 'template-panel.html' %}
+
+{% set heading = 'What I\'m seeking' %}
+
+{% block panel %}
+  <form class="form-horizontal" id="form" role="form">
+    <div class="form-group">
+      <label class="col-xs-3 control-label" for="gender_choice">Gender</label>
+      <div class="col-xs-4">
+      <select multiple class="form-control" id="gender_choice" name="gender_choice" required>
+        <option value="1"  {% if gender_choice |bitcompare( 1) %}selected{% endif %}>Men</option>
+        <option value="2"  {% if gender_choice |bitcompare( 2) %}selected{% endif %}>Women</option>
+        <option value="4"  {% if gender_choice |bitcompare( 4) %}selected{% endif %}>Sugar Pups</option>
+        <option value="8"  {% if gender_choice |bitcompare( 8) %}selected{% endif %}>Sugar Babies</option>
+        <option value="16" {% if gender_choice |bitcompare(16) %}selected{% endif %}>Sugar Daddies</option>
+        <option value="32" {% if gender_choice |bitcompare(32) %}selected{% endif %}>Sugar Mommas</option>
+      </select>
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="col-xs-3 control-label" for="age_min">Age from</label>
+      <div class="col-xs-2">
+        <input type="number" class="form-control" id="age_min" name="age_min" value="{{ age_min|e }}" min="18" max="99" placeholder="18"/>
+      </div>
+      <label class="col-xs-1 control-label" for="age_max">to</label>
+      <div class="col-xs-2">
+        <input type="number" class="form-control" id="age_max" name="age_max" value="{{ age_max|e }}" min="18" max="99" placeholder="99"/>
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="col-xs-3 control-label" for="ethnicity_choice">Ethnicity</label>
+      <div class="col-xs-4">
+      <select multiple class="form-control" id="ethnicity_choice" name="ethnicity_choice">
+        <option value="1"  {% if ethnicity_choice |bitcompare( 1) %}selected{% endif %}>White</option>
+        <option value="2"  {% if ethnicity_choice |bitcompare( 2) %}selected{% endif %}>Black</option>
+        <option value="4"  {% if ethnicity_choice |bitcompare( 4) %}selected{% endif %}>Latino</option>
+        <option value="64" {% if ethnicity_choice |bitcompare(64) %}selected{% endif %}>Indian</option>
+        <option value="8"  {% if ethnicity_choice |bitcompare( 8) %}selected{% endif %}>Asian</option>
+        <option value="16" {% if ethnicity_choice |bitcompare(16) %}selected{% endif %}>Mixed</option>
+        <option value="32" {% if ethnicity_choice |bitcompare(32) %}selected{% endif %}>Other</option>
+      </select>
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="col-xs-3 control-label" for="height_min">Height from</label>
+      <div class="col-xs-2">
+        <input type="text" class="form-control" id="height_min" name="height_min" value="{{ (height_min or '')|e }}" placeholder="any"/>
+      </div>
+      <label class="col-xs-1 control-label" for="height_max">to</label>
+      <div class="col-xs-2">
+        <input type="text" class="form-control" id="height_max" name="height_max" value="{{ (height_max or '')|e }}" placeholder="any"/>
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="col-xs-3 control-label" for="weight_choice">Body type</label>
+      <div class="col-xs-4">
+      <select multiple class="form-control" id="weight_choice" name="weight_choice">
+        <option value="1"  {% if weight_choice |bitcompare( 1) %}selected{% endif %}>Slim</option>
+        <option value="2"  {% if weight_choice |bitcompare( 2) %}selected{% endif %}>Athletic</option>
+        <option value="4"  {% if weight_choice |bitcompare( 4) %}selected{% endif %}>Average</option>
+        <option value="8"  {% if weight_choice |bitcompare( 8) %}selected{% endif %}>A few extra pounds</option>
+        <option value="16" {% if weight_choice |bitcompare(16) %}selected{% endif %}>Large</option>
+      </select>
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="col-xs-3 control-label" for="looking_for">Description</label>
+      <div class="col-xs-9">
+        <textarea rows="5" class="form-control" id="looking_for" name="looking_for" maxlength="3000">{{ (looking_for or '')|e }}</textarea>
+      </div>
+    </div>
+    <div class="col-xs-12">
+      <br>
+      <button type="submit" class="btn btn-success">Update</button>
+    </div>
+  </form>
+{% endblock %}
+
+{% block scripts %}
+  <script>
+    // Handle generic ajax response
+    function handleSuccess(data) {
+      if (data.error)
+        jsShowError(data.error);
+      if (data.message)
+        jsShowMessage(data.message);
+    }
+    // Handle submit of update form
+    $('#form').submit( function(e) {
+      e.preventDefault();
+      $.ajax({
+        url: '/mlseeking',
+        type: 'POST',
+        data: $(this).serialize(),
+        error: function(jqXHR, textStatus, errorThrown) {
+          jsShowError("There's a problem with your Internet connection.");
+        },
+        success: handleSuccess
+      });
+      return false;
+    });
+  </script>
+{% endblock %}

@@ -1,0 +1,48 @@
+{% extends 'template-panel.html' %}
+
+{% set heading = 'Welcome to ' + title %}
+
+{% block panel %}
+    <table cols=2 border=0 style="width:100%;border-spacing:10px 10px;border-collapse:separate">
+    <tr>
+      <td>
+        <h4><span class="label label-info">Profile</span></h4>
+      <td>Edit information about yourself. The more you enter here the better your matches will be.
+    <tr>
+      <td>
+	      <h4><span class="label label-info">Photos</span></h4>
+      <td>Upload images of yourself. Please keep them respectable. No nudity!
+    <tr>
+      <td>
+	      <h4><span class="label label-info">Seeking</span></h4>
+      <td>Edit what you're looking for. Your matches will only include members who match these criteria.
+    <tr>
+      <td>
+	      <h4><span class="label label-info">Matches</span></h4>
+      <td>Shows your local matching members around your registered location.
+    <tr>
+      <td>
+	      <h4><span class="label label-info">Search</span></h4>
+      <td>Search for matching members either nearby or anywhere in the world.
+    <tr>
+      <td>
+	      <h4><span class="label label-info">Inbox</span></h4>
+      <td>Shows all the messages you have received.
+    <tr>
+      <td>
+	      <h4><span class="label label-info">Outbox</span></h4>
+      <td>Shows all the messages you have sent.
+    <tr>
+      <td>
+	      <h4><span class="label label-info">Favorites</span></h4>
+      <td>Holds a list of all your favorite members.
+    <tr>
+      <td>
+	      <h4><span class="label label-info">Blocked</span></h4>
+      <td>Holds a list of any members you have blocked.
+    <tr>
+      <td>
+	      <h4><span class="label label-info">Account</span></h4>
+      <td>Edit your account information.
+    </table>
+{% endblock %}

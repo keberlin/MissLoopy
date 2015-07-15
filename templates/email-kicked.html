@@ -1,0 +1,12 @@
+{% extends 'email.html' %}
+
+{% block body %}
+Unfortunely we have had to remove your account from our system as it breaches our terms and conditions. This may be for one or more of the following reasons:
+<ul>
+<li>Spamming.</li>
+<li>Your IP address or email matches one from the Stop Forum Spam database (http://www.stopforumspam.com).</li>
+<li>Obscene or underage graphic content.
+<li>A member has reported you for abusive, racist or indecent behaviour.</li>
+</ul>
+If you feel you do not meet any of these criteria and should not have been removed then please let us know at <a href="mailto:admin@{{ domain }}">admin@{{ domain }}</a>.
+{% endblock %}

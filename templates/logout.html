@@ -1,0 +1,27 @@
+{% extends 'template-panel.html' %}
+
+{% set partial = 6 %}
+
+{% set heading = 'Logout' %}
+
+{% block panel %}
+  <div class="col-xs-12 alert alert-info">
+    <h4>You have now been logged out.</h4>
+  </div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+  // Cookie handling
+  function setCookie(cname,cvalue,exdays) {
+    var d = new Date();
+    d.setTime(d.getTime()+(exdays*24*60*60*1000));
+    var expires = "expires="+d.toGMTString();
+    document.cookie = cname + "=" + cvalue + "; " + expires + "; path=/";
+  } 
+  $(window).load(function() {
+    setCookie('email', '', 0);
+    setCookie('password', '', 0);
+  });
+</script>
+{% endblock %}

@@ -1,0 +1,25 @@
+{% extends 'template-panel.html' %}
+
+{% set partial = 10 %}
+
+{% set heading = 'Romance Scammer - Beware!' %}
+{% set heading_type = 'danger' %}
+
+{% block panel %}
+  <div class="col-xs-12">
+    <b>From:</b> {{ sender }}<br>
+    <b>Subject:</b> {{ subject }}<br>
+  </div>
+  <div class="col-xs-12">
+    <br>
+    <table>{{ msg }}</table>
+  </div>
+  {% if images %}
+    <div class="col-xs-12">
+      <br>
+      {% for image in images %}
+        <img src="{{ image }}" width="300px">
+      {% endfor %}
+    </div>
+  {% endif %}
+{% endblock %}

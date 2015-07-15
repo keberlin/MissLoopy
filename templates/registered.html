@@ -1,0 +1,36 @@
+{% extends 'template-panel.html' %}
+
+{% set partial = 6 %}
+
+{% set heading = 'Registration successful' %}
+
+{% block panel %}
+  <div class="col-xs-12 alert alert-success">
+    <h4>You have successfully registered on the {{ title }} website.</h4>
+  </div>
+  <div class="col-xs-12 alert alert-info">
+    Please check your Inbox for your Verify Registration email in order to confirm your email address.
+  </div>
+  <div class="col-xs-12 alert alert-danger">
+    Remember to check your Junk folder just in case it ends up in there!
+  </div>
+
+  {% include 'conversion.html' %}
+{% endblock %}
+
+{% block actions %}
+  <div class="col-xs-12">
+    <br>
+    <button class="btn btn-primary" id="login" autofocus>Login</button>
+  </div>
+{% endblock %}
+
+{% block scripts %}
+  <script language="javascript">
+    // Handle Login button
+    $("#login").click(function(e) {
+      window.location = "/login";
+      return false;
+    });
+  </script>
+{% endblock %}

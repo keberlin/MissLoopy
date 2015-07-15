@@ -1,0 +1,117 @@
+{% extends 'template.html' %}
+
+{% block header %}
+  <table border=0 style="width:100%;border-spacing:10px 0px;border-collapse:separate;height=60px">
+    <tr>
+      <td align="left">
+        <a href="{{ www }}"><img src="{{ url_for('static', filename='images/logo.png') }}" alt="{{ domain }}" title="{{ domain }}"></a>
+      <td align="right">
+        <ul class="list-inline">
+          <li class="login"><a href="/login">Login</a></li>
+          <li class="register"><a href="/register">Register</a></li>
+        </ul>
+    <tr>
+      <td>
+        <br>
+  </table>
+{% endblock %}
+
+{% block canvas %}
+  <table border=0 style="width:100%;border-spacing:10px 0px;border-collapse:separate">
+    <tr>
+      <td>
+        <div class="slider-top-left">
+          <p class="font-up">
+            21, 5'3&quot; Marketing</p>
+          <p class="font-lower">
+            looking for my soulmate</p>
+          <img src="{{ url_for('static', filename='images/downarrow.png') }}" alt="" title="">
+        </div>
+        <div class="slider-top-right">
+          <p class="font-up">
+            22, 5'6&quot; PR Consultant</p>
+          <p class="font-lower">
+            wanna have fun..</p>
+          <img src="{{ url_for('static', filename='images/downarrow.png') }}" alt="" title="">
+        </div>
+        <div class="slide-left">
+          <img src="{{ url_for('static', filename='images/girl.png') }}" alt="" title="">
+        </div>
+        <div class="slide-right">
+          <img src="{{ url_for('static', filename='images/boy.png') }}" alt="" title="">
+        </div>
+      </td>
+    </tr>
+  </table>
+  <table border=0 style="width:100%;border-spacing:10px 5px;border-collapse:separate" class="slider-bottom">
+    <tr>
+      <td width="75%">
+        <div class="slider-bottom-left">
+          <p class="slider-bottom-left-top">
+            A completely <span>100% free</span> online dating site</p>
+          <p class="slider-bottom-left-bottom">
+            Meet, chat and love diverse matches around the world</p>
+        </div>
+      <td width="25%">
+        <div class="slider-bottom-right">
+          <a href="/register">Join Now FREE</a>
+        </div>
+      </td>
+    </tr>
+  </table>
+  <table border=0 style="width:100%;border-spacing:10px 0px;border-collapse:separate;margin-top:-60px">
+    <tr>
+      <td width="60%" align="center" valign="top">
+        <table border=0 style="width:100%;border-spacing:0px 0px;border-collapse:separate" class="center-left">
+          <tr>
+            <td colspan={{ (entries|length)-(entries|length)/2 }} align="left" valign="middle">
+              <h1>Featured Members <a href="/register"></h1>
+            <td colspan={{ (entries|length)/2 }} align="right" valign="middle">
+              <h1><a>View All Members<img src="{{ url_for('static', filename='images/side-arrow.png') }}" alt="" title=""></a></h1>
+          <tr>
+            {% set xx = 100 %}
+            {% for entry in entries %}
+              {% if entry.size[0] > entry.size[1] %}
+                {% set w = xx %}
+                {% set h = xx*entry.size[1]/entry.size[0] %}
+              {% else %}
+                {% set w = xx*entry.size[0]/entry.size[1] %}
+                {% set h = xx %}
+              {% endif %}
+              {% set pw = (xx-w)/2 %}
+              {% set ph = (xx-h)/2 %}
+              <td width="{{ 100/(entries|length) }}%" aalign="center" valign="top" class="member">
+                <li>
+                <p>
+                  <img src="{{ url_for('static', filename=entry.image) }}" width="{{ w }}px" height="{{ h }}px" style="margin:{{ ph }}px {{ pw }}px">
+                <p>
+                  {{ entry.name }}<br><small>{{ entry.country }}</small>
+                <p>
+                  <a href="/member?id={{ entry.id }}">Details<img src="{{ url_for('static', filename='images/side-arrow.png') }}" alt="" title=""></a></li>
+              </td>
+            {% endfor %}
+        </table>
+      </td>
+      <td width="40%" align="left" valign="middle" class="center-right" style="float:none;padding-left:10px">
+        <h1>Why Join?</h1>
+        <ul class="join-now">
+          <li class="step-1"><a href="/register">Register Now</a></li>
+          <li class="step-2"><a href="/register">Create Profile</a></li>
+          <li class="step-3"><a href="/register">Find True Love</a></li>
+        </ul>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <br>
+    </tr>
+    <tr>
+      <td colspan=2 class="center-bottom">
+        <h1>Welcome to <span>{{ title }}</span></h1>
+        <p>
+          We welcome people from any country or any background. So much so that we cater for singles, married, gays, bisexuals, even sugar babies and sugar daddies, everyone is welcome. With our sophisticated matching engine you will only see those members you are interested in, all others will be completely masked and they will not be able to see you either. On top of that we have facilities for blocking members too just in case one slips through the net!
+        <p>
+          A completely 100% free online dating site <b>&mdash;</b> Search for members who match your criteria <b>&mdash;</b> Quickly filter out those members who don't match! <b>&mdash;</b> Search for members anywhere in the world <b>&mdash;</b> Free membership for life <b>&mdash;</b> No fake profiles <b>&mdash;</b> Fast to register <b>&mdash;</b> What are you waiting for?</p>
+    </tr>
+  </table>
+{% endblock %}

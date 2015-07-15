@@ -1,0 +1,32 @@
+<table border=0 style="width:100%;border-spacing:10px 0px;border-collapse:separate;height:60px" id="header">
+  <tr>
+    <td width="25%" align="left" valign="middle">
+      <a href="{{ www }}"><img src="{{ url_for('static', filename='images/logo.png') }}" height="50px"></a>
+    </td>
+    <td width="50%" align="center" valign="middle">
+      {% set ad = 'publishers/' + banner + '.htm' %}
+      {% include ad %}
+    </td>
+    <td width="25%" align="right">
+      {% if user %}
+        <div class="input-group-btn">
+        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">Hi {{ user }} <span class="caret"></span></button>
+        <ul class="dropdown-menu pull-right" role="menu">
+          <li><a href="/logout">Logout</a></li>
+        </ul>
+        </div>
+      {% else %}
+        <div class="input-group-btn">
+          <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">Register/Login <span class="caret"></span></button>
+          <ul class="dropdown-menu pull-right" role="menu">
+            <li><a href="/register">Register</a></li>
+            <li><a href="/login">Login</a></li>
+          </ul>
+        </div>
+      {% endif %}
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <br>
+</table>

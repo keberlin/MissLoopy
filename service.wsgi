@@ -1,0 +1,9 @@
+#!/usr/bin/python
+
+import os, sys
+
+BASE_DIR = os.path.dirname(__file__)
+
+sys.path.insert(0,BASE_DIR)
+
+from app import application

@@ -1,0 +1,14 @@
+{% extends 'email.html' %}
+
+{% block body %}
+Hi {{ name }}, did you know you have some unread emails on the {{ title }} website?
+<p>
+<br>
+Click on the following link to view them.<br>
+<br>
+<a href="{{ www }}/inbox"><b>Click Here</b></a><br>
+<br>
+<br>
+or alternatively copy and paste the following into your browser.<br>
+<pre>{{ www }}/inbox</pre>
+{% endblock %}

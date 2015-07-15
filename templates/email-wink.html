@@ -1,0 +1,19 @@
+{% extends 'email.html' %}
+
+{% import 'macros.html' as macros %}
+
+{% block body %}
+You have received a Wink! from <b>{{ entry.name|e }}</b>.<br>
+<br>
+<table border=0 style="width:100%;border-spacing:0px 0px;border-collapse:separate">
+  {{ macros.member(www,action,nav,type,entry) }}
+</table>
+<br>
+Click on the following link to view it.<br>
+<br>
+<a href="{{ www }}/emailthread?nav=inbox&id={{ entry.id }}"><b>Click Here</b></a><br>
+<br>
+<br>
+or alternatively copy and paste the following into your browser.<br>
+<pre>{{ www }}/emailthread?nav=inbox&id={{ entry.id }}</pre>
+{% endblock %}

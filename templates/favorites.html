@@ -1,0 +1,84 @@
+{% extends 'template-panel.html' %}
+
+{% import 'macros.html' as macros %}
+
+{% set heading = 'Favorite Members' %}
+
+{% if num_pages == 0 %}
+  {% set message = 'None found.' %}
+{% endif %}
+
+{% set no_panel = True %}
+
+{% block list %}
+  {% if num_pages > 0 %}
+    {% for page in range(num_pages) %}
+      <div id="page{{ page }}" {% if page > 0 %}hidden{% endif %}>
+        <table class="table" border=0 style="width:100%;border-spacing:0px 0px;border-collapse:separate">
+          {% for entry in entries[page*per_page:(page+1)*per_page] %}
+            {{ macros.member(www,action,nav,type,entry) }}
+          {% endfor %}
+        </table>
+      </div>
+    {% endfor %}
+  {% endif %}
+{% endblock %}
+
+{% block actions %}
+  <div class="col-xs-12">
+    <br>
+    <button type="button" class="btn btn-info" id="remove" disabled>Remove</button>
+    <button type="button" class="btn btn-default" id="clear" disabled>Clear</button>
+  </div>
+{% endblock %}
+
+{% block scripts %}
+  <script language="javascript">
+    // Handle logic of buttons
+    function jsEnableButtons() {
+      var n = $("img.selected").length;    
+      $("#remove").prop('disabled',(n==0));
+      $("#clear").prop('disabled',(n==0));
+    }
+    // Handle selection of members
+    $("#selection img").click(function(e) {
+      $(this).toggleClass("selected");
+      if ($(this).hasClass("selected"))
+        $(this).attr("src","{{ url_for('static', filename='images/checked.png') }}");
+      else
+        $(this).attr("src","{{ url_for('static', filename='images/unchecked.png') }}");
+      jsEnableButtons();
+    });
+    // Handle generic ajax response
+    function handleSuccess(data) {
+      if (data.error)
+        jsShowError(data.error);
+      if (data.message)
+        location.reload(true);
+    }
+    // Handle unblock button
+    $("#remove").click(function(e) {
+      var imgs = $("img.selected");
+      var data = [];
+      for (var i=0; i<imgs.length; i++)
+        data.push('id='+imgs[i].id);
+      $.ajax({
+        url: '/mldeletefavorite',
+        type: 'POST',
+        data: data.join('&'),
+        error: function(jqXHR, textStatus, errorThrown) {
+          jsShowError("There's a problem with your Internet connection.");
+        },
+        success: handleSuccess
+      });
+    });
+    // Handle clear button
+    $("#clear").click(function(e) {      
+      var imgs = $("img.selected");
+      for (var i=0; i<imgs.length; i++)
+        $(imgs[i]).attr("src","{{ url_for('static', filename='images/unchecked.png') }}");
+      imgs.removeClass("selected");
+      jsEnableButtons();
+    });
+  </script>
+{% endblock %}

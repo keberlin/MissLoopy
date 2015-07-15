@@ -1,0 +1,227 @@
+{% macro member(www,action,nav,type,entry) %}
+  <tr class="profile">
+    <td valign="middle">
+      <a href="{{ www }}/{{ action }}?nav={{ nav }}&id={{ entry.id }}">
+        <table border=0 style="width:100%;border-spacing:5px 5px;border-collapse:separate">
+          <tr>
+            <td width="10%" valign="middle">
+              <img src="{{ www }}{{ url_for('static', filename=entry.image) }}" width="100%" style="min-width:50px">
+            </td>
+            <td width="90%" valign="middle">
+              <table cols=4 border=0 style="width:100%;border-spacing:5px 0px;border-collapse:separate">
+                <tr>
+                  <td width="20%">
+                    <b>Name</b>
+                  </td>
+                  <td width="40%">
+                    {{ entry.name|e }} ({{ entry.gender }})
+                  </td>
+                  <td width="20%">
+                    <b>Age</b>
+                  </td>
+                  <td width="20%">
+                    {{ entry.age }} ({{ entry.starsign }})
+                  </td>
+                <tr>
+                  <td width="20%">
+                    <b>Ethnicity</b>
+                  </td>
+                  <td width="40%">
+                    {{ entry.ethnicity }}
+                  </td>
+                  <td width="20%">
+                    <b>Distance</b>
+                  </td>
+                  <td width="20%">
+                    {{ entry.distance }}
+                  </td>
+                <tr>
+                  <td width="20%">
+                    <b>Last login</b>
+                  </td>
+                  <td width="40%">
+                    {{ entry.last_login }} ({% if entry.login_country!=entry.country %}<span class="mismatch">{% endif %}{{ entry.login_country }}{% if entry.login_country!=entry.country %}</span>{% endif %})
+                  </td>
+                  <td width="20%">
+                    <b>Date joined</b>
+                  </td>
+                  <td width="20%">
+                    {{ entry.created }}
+                  </td>
+                <tr>
+                  <td width="20%">
+                    <b>Location</b>
+                  </td>
+                  <td colspan=3>
+                    {{ entry.location }}
+                  </td>
+                <tr>
+                  <td width="20%">
+                    <b>Summary</b>
+                  </td>
+                  <td colspan=3>
+                    {{ (entry.summary or '')|e }}
+                  </td>
+              </table>
+            </td>
+          </tr>
+        </table>
+      </a>
+    </td>
+    {% if type=='full' %}
+      <td valign="middle" id="selection">
+        {% if entry.active %}
+          {% set fn='images/checked.png' %}
+        {% else %}
+          {% set fn='images/unchecked.png' %}
+        {% endif %}
+        <img src="{{ www }}{{ url_for('static', filename=fn) }}" width="20px" height="20px" id="{{ entry.id }}">
+      </td>
+    {% endif %}
+    {% if type=='number' and entry.active %}
+      <td valign="middle" id="selection">
+        <h4><span class="label label-primary">{{ entry.active|e }}</span></h4>
+      </td>
+    {% endif %}
+  </tr>
+{% endmacro %}
+
+{% macro image_sent(www,nav,entry) %}
+  <table class="col-xs-12" border=0 style="width:100%;border-spacing:5px 0px;border-collapse:separate">
+    <tr>
+      <td width="40%">
+        <br>
+      </td>
+      <td width="60%" valign="top">
+        <div class="panel panel-info">
+          <div class="panel-body">
+            <table border=0 style="width:100%;border-spacing:5px 0px;border-collapse:separate">
+            <tr>
+              <td width="100%" colspan=2 align="right" valign="top">
+                <img src="{{ entry.message }}">
+              </td>
+            </tr>
+            <tr>
+              <td align="left">
+                {% if entry.viewed %}
+                  <img src="{{ url_for('static', filename='tick2.jpg') }}" width="15px" height="10px">
+                {% endif %}
+              </td>
+              <td align="right">
+                <em><small>{{ entry.time }}</small></em>
+              </td>
+            </tr>
+            </table>
+          </div>
+        </div>
+      </td>
+    </tr>
+  </table>
+{% endmacro %}
+
+{% macro message_sent(www,nav,entry) %}
+  <table class="col-xs-12" border=0 style="width:100%;border-spacing:5px 0px;border-collapse:separate">
+    <tr>
+      <td width="40%">
+        <br>
+      </td>
+      <td width="60%" valign="top">
+        <div class="panel panel-info">
+          <div class="panel-body">
+            <table border=0 style="width:100%;border-spacing:5px 0px;border-collapse:separate">
+            <tr>
+              <td width="100%" colspan=2 align="right" valign="top">
+                <strong>{{ entry.message }}</strong>
+              </td>
+            <tr>
+              <td align="left">
+                {% if entry.viewed %}
+                  <img src="{{ url_for('static', filename='tick2.jpg') }}" width="15px" height="10px">
+                {% endif %}
+              </td>
+              <td align="right">
+                <em><small>{{ entry.time }}</small></em>
+              </td>
+            </table>
+          </div>
+        </div>
+      </td>
+    </tr>
+  </table>
+{% endmacro %}
+
+{% macro image_recv(www,nav,entry) %}
+  <table class="col-xs-12" border=0 style="width:100%;border-spacing:5px 0px;border-collapse:separate">
+    <tr>
+      <td width="70%" valign="top">
+        <div class="panel panel-info">
+          <div class="panel-body">
+            <table border=0 style="width:100%;border-spacing:5px 0px;border-collapse:separate">
+            <tr>
+              <td width="100%" align="left" valign="top">
+                <img src="{{ entry.message }}">
+              </td>
+            </tr>
+            <tr>
+              <td align="left">
+                <em><small>{{ entry.time }}</small></em>
+              </td>
+            </tr>
+            </table>
+          </div>
+        </div>
+      </td>
+      <td width="30%">
+        <br>
+      </td>
+    </tr>
+  </table>
+{% endmacro %}
+
+{% macro message_recv(www,nav,entry) %}
+  <table class="col-xs-12" border=0 style="width:100%;border-spacing:5px 0px;border-collapse:separate">
+    <tr>
+      <td width="70%" valign="top">
+        <div class="panel panel-info">
+          <div class="panel-body">
+            <table border=0 style="width:100%;border-spacing:5px 0px;border-collapse:separate">
+            <tr>
+              <td width="10%" rowspan=2 valign="top">
+                <a href="/member?nav={{ nav }}&id={{ entry.id_with }}"><img src="{{ url_for('static', filename=entry.image) }}" width="100%" style="min-width:50px"></a>
+              </td>
+              <td width="90%" colspan=2 align="left" valign="top">
+                <strong>{{ entry.message }}</strong>
+              </td>
+            <tr>
+              <td align="left">
+                <em><small>{{ entry.time }}</small></em>
+              </td>
+            </table>
+          </div>
+        </div>
+      </td>
+      <td width="30%" align="center">
+        {% if entry.spam %}
+          <span class="label label-danger">Potential spam!</span><br><br>
+          <a href="http://images.google.com/searchbyimage?image_url={{ www }}{{ url_for('static', filename=entry.image) }}" target="_blank"><small>Search Google for this member</small></a>
+        {% endif %}
+      </td>
+    </tr>
+  </table>
+{% endmacro %}
+
+{% macro message(www,nav,entry) %}
+  {% if entry.sent %}
+    {% if entry.is_image %}
+      {{ image_sent(www,nav,entry) }}
+    {% else %}
+      {{ message_sent(www,nav,entry) }}
+    {% endif %}
+  {% else %}
+    {% if entry.is_image %}
+      {{ image_recv(www,nav,entry) }}
+    {% else %}
+      {{ message_recv(www,nav,entry) }}
+    {% endif %}
+  {% endif %}
+{% endmacro %}

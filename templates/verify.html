@@ -1,0 +1,31 @@
+{% extends 'template-panel.html' %}
+
+{% set partial = 6 %}
+
+{% set heading = 'Account verification' %}
+
+{% block panel %}
+  <div class="col-xs-12 alert alert-success">
+    <h4>Account verified.</h4>
+  </div>
+  <div class="col-xs-12 alert alert-info">
+    You can now login to the site and start using all its features.
+  </div>
+{% endblock %}
+
+{% block actions %}
+  <div class="col-xs-12">
+    <br>
+    <button class="btn btn-primary" id="login" autofocus>Login</button>
+  </div>
+{% endblock %}
+
+{% block scripts %}
+  <script language="javascript">
+    // Handle Login button
+    $("#login").click(function(e) {
+      window.location = "/login";
+      return false;
+    });
+  </script>
+{% endblock %}

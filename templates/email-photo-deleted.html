@@ -1,0 +1,13 @@
+{% extends 'email.html' %}
+
+{% block body %}
+Unfortunely we have had to remove one of your photos from our system as it breaches our terms and conditions. This may be for one or more of the following reasons:
+<ul>
+<li>Advertising.</li>
+<li>Personal details.</li>
+<li>Portrays obscenity or nudity.</li>
+<li>Includes distasteful or disturbing content.</li>
+<li>May offend certain religious groups.</li>
+</ul>
+If you feel your photo does not meet any of these criteria and should not have been removed then please let us know at <a href="mailto:admin@{{ domain }}">admin@{{ domain }}</a>.
+{% endblock %}

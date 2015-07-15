@@ -1,0 +1,56 @@
+{% extends 'template-panel.html' %}
+
+{% set partial = 6 %}
+
+{% set heading = 'Account Not Verified' %}
+
+{% block panel %}
+  <div class="col-xs-12 alert alert-info">
+    <h4>Your account has not been verified yet.</h4>
+  </div>
+  <div class="col-xs-12 alert alert-info">
+    Please check your Inbox for your Verify Registration email in order to confirm your email address.<br>
+  </div>
+  <div class="col-xs-12 alert alert-danger">
+    Remember to check your Junk folder just in case it ends up in there!
+  </div>
+{% endblock %}
+
+{% block actions %}
+  <div class="col-xs-12">
+    <br>
+    <button class="btn btn-primary" id="login" autofocus>Login</button>
+    &nbsp;
+    <button class="btn btn-info" id="resend">Resend Verification Email</button>
+  </div>
+{% endblock %}
+
+{% block scripts %}
+  <script language="javascript">
+    // Handle generic ajax response
+    function handleSuccess(data) {
+      if (data.error)
+        jsShowError(data.error);
+      else if (data.message)
+        jsShowMessage(data.message);
+    }
+    // Handle Login button
+    $("#login").click(function(e) {
+      window.location = "/login";
+      return false;
+    });
+    // Handle Resend button
+    $("#resend").click(function(e) {
+      $.ajax({
+        url: '/mlresend',
+        type: 'POST',
+        data: ({'email':'{{ email }}'}),
+        error: function(jqXHR, textStatus, errorThrown) {
+          jsShowError("There's a problem with your Internet connection.");
+        },
+        success: handleSuccess
+      });
+      return false;
+    });
+  </script>
+{% endblock %}

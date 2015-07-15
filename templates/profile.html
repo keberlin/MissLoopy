@@ -1,0 +1,221 @@
+{% extends 'template-panel.html' %}
+
+{% set heading = 'About me' %}
+{% set heading2 = 'Confirm your location' %}
+
+{% block panel %}
+  <form class="form-horizontal" id="form" role="form">
+    <div class="form-group">
+      <label class="col-xs-3 control-label" for="name">Display name</label>
+      <div class="col-xs-8">
+        <input type="text" class="form-control" id="name" name="name" value="{{ name|e }}" maxlength="50" required>
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="col-xs-3 control-label" for="location">Location</label>
+      <div class="col-xs-9">
+        <input type="text" class="form-control" id="location" name="location" value="{{ location }}" autocomplete="off">
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="col-xs-3 control-label" for="gender">Gender</label>
+      <div class="col-xs-5">
+      <select class="form-control" id="gender" name="gender" required>
+        <option value="1"  {% if gender|bitcompare( 1) %}selected{% endif %}>Man</option>
+        <option value="2"  {% if gender|bitcompare( 2) %}selected{% endif %}>Woman</option>
+        <option value="4"  {% if gender|bitcompare( 4) %}selected{% endif %}>Sugar Pup</option>
+        <option value="8"  {% if gender|bitcompare( 8) %}selected{% endif %}>Sugar Baby</option>
+        <option value="16" {% if gender|bitcompare(16) %}selected{% endif %}>Sugar Daddy</option>
+        <option value="32" {% if gender|bitcompare(32) %}selected{% endif %}>Sugar Momma</option>
+      </select>
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="col-xs-3 control-label" for="ethnicity">Ethnicity</label>
+      <div class="col-xs-5">
+      <select class="form-control" id="ethnicity" name="ethnicity" required>
+        <option value="1"  {% if ethnicity|bitcompare( 1) %}selected{% endif %}>White</option>
+        <option value="2"  {% if ethnicity|bitcompare( 2) %}selected{% endif %}>Black</option>
+        <option value="4"  {% if ethnicity|bitcompare( 4) %}selected{% endif %}>Latino</option>
+        <option value="64" {% if ethnicity|bitcompare(64) %}selected{% endif %}>Indian</option>
+        <option value="8"  {% if ethnicity|bitcompare( 8) %}selected{% endif %}>Asian</option>
+        <option value="16" {% if ethnicity|bitcompare(16) %}selected{% endif %}>Mixed</option>
+        <option value="32" {% if ethnicity|bitcompare(32) %}selected{% endif %}>Other</option>
+      </select>
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="col-xs-3 control-label" for="height">Height</label>
+      <div class="col-xs-5">
+        <input type="text" class="form-control" id="height" name="height" value="{{ height or '' }}"/>
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="col-xs-3 control-label" for="weight">Body type</label>
+      <div class="col-xs-5">
+      <select class="form-control" id="weight" name="weight">
+        <option value=""                             >-</option>
+        <option value="1"  {% if weight|bitcompare( 1) %}selected{% endif %}>Slim</option>
+        <option value="2"  {% if weight|bitcompare( 2) %}selected{% endif %}>Athletic</option>
+        <option value="4"  {% if weight|bitcompare( 4) %}selected{% endif %}>Average</option>
+        <option value="8"  {% if weight|bitcompare( 8) %}selected{% endif %}>A few extra pounds</option>
+        <option value="16" {% if weight|bitcompare(16) %}selected{% endif %}>Large</option>
+      </select>
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="col-xs-3 control-label" for="education">Education</label>
+      <div class="col-xs-5">
+      <select class="form-control" id="education" name="education">
+        <option value=""                             >-</option>
+        <option value="1" {% if education|bitcompare( 1) %}selected{% endif %}>School</option>
+        <option value="2" {% if education|bitcompare( 2) %}selected{% endif %}>College</option>
+        <option value="4" {% if education|bitcompare( 4) %}selected{% endif %}>University</option>
+      </select>
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="col-xs-3 control-label" for="status">Status</label>
+      <div class="col-xs-5">
+      <select class="form-control" id="status" name="status">
+        <option value=""                             >-</option>
+        <option value="1"  {% if status|bitcompare( 1) %}selected{% endif %}>Single</option>
+        <option value="2"  {% if status|bitcompare( 2) %}selected{% endif %}>Married</option>
+        <option value="4"  {% if status|bitcompare( 4) %}selected{% endif %}>Cohabitating</option>
+        <option value="8"  {% if status|bitcompare( 8) %}selected{% endif %}>With friends</option>
+        <option value="16" {% if status|bitcompare(16) %}selected{% endif %}>With family</option>
+        <option value="32" {% if status|bitcompare(32) %}selected{% endif %}>It's complicated</option>
+      </select>
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="col-xs-3 control-label" for="smoking">Smoking</label>
+      <div class="col-xs-5">
+      <select class="form-control" id="smoking" name="smoking">
+        <option value=""                            >-</option>
+        <option value="1" {% if smoking|bitcompare( 1) %}selected{% endif %}>Never</option>
+        <option value="2" {% if smoking|bitcompare( 2) %}selected{% endif %}>Social</option>
+        <option value="4" {% if smoking|bitcompare( 4) %}selected{% endif %}>Regular</option>
+        <option value="8" {% if smoking|bitcompare( 8) %}selected{% endif %}>Heavy</option>
+      </select>
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="col-xs-3 control-label" for="drinking">Drinking</label>
+      <div class="col-xs-5">
+      <select class="form-control" id="drinking" name="drinking">
+        <option value=""                            >-</option>
+        <option value="1" {% if drinking|bitcompare( 1) %}selected{% endif %}>Never</option>
+        <option value="2" {% if drinking|bitcompare( 2) %}selected{% endif %}>Social</option>
+        <option value="4" {% if drinking|bitcompare( 4) %}selected{% endif %}>Regular</option>
+        <option value="8" {% if drinking|bitcompare( 8) %}selected{% endif %}>Heavy</option>
+      </select>
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="col-xs-3 control-label" for="occupation">Occupation</label>
+      <div class="col-xs-9">
+        <input type="text" class="form-control" id="occupation" name="occupation" value="{{ (occupation or '')|e }}" maxlength="100"/>
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="col-xs-3 control-label" for="summary">Summary</label>
+      <div class="col-xs-9">
+        <input type="text" class="form-control" id="summary" name="summary" value="{{ (summary or '')|e }}" maxlength="100"/>
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="col-xs-3 control-label" for="description">Description</label>
+      <div class="col-xs-9">
+        <textarea rows="5" class="form-control" id="description" name="description" maxlength="3000">{{ (description or '')|e }}</textarea>
+      </div>
+    </div>
+    <div class="col-xs-12">
+      <br>
+      <button type="submit" class="btn btn-success">Update</button>
+    </div>
+  </form>
+{% endblock %}
+
+{% block panel2 %}
+  <ul class="nav nav-pills nav-stacked" id="locations">
+  </ul>
+  <div class="col-xs-12">
+    <br>
+    <button type="button" class="btn btn-default" id="cancel">Cancel</button>
+  </div>
+{% endblock %}
+
+{% block scripts %}
+  <script>
+    // Handle name matching (typeahead) on location field
+    function preProcessMatches(data) {
+      if (!data.matches)
+        return false;
+      if (data.matches.length == 1) {
+        $("#location").blur();
+        $("#location").val(data.matches[0]);
+        return false;
+      }
+      var source = [];
+      for (var i in data.matches)
+        source.push({ id: data.matches[i], name: data.matches[i] });
+      return source;
+    }
+    $('#location').typeahead({
+      ajax: { 
+        url: '/closestnames',
+        triggerLength: 3,
+        preProcess: preProcessMatches
+      },
+      matcher: function (item) { return true; }
+    });
+    $("#location").focusin(function() {
+      $(this).select();
+    });
+  //  $("#location").mouseup(function() {
+  //    event.preventDefault();
+  //    $(this).select();
+  //  });
+    // Handle submit of update form
+    $('#form').submit( function(e) {
+      $.ajax({
+        url: '/mlprofile',
+        type: 'POST',
+        data: $(this).serialize(),
+        error: function(jqXHR, textStatus, errorThrown) {
+          jsShowError("There's a problem with your Internet connection.");
+        },
+        success: function(data) {
+          if (data.matches) {
+            var html = '';
+            for (var i in data.matches)
+              html = html.concat('<li><a>'+data.matches[i]+'</a></li>');
+            $("#locations li").remove();
+            $("#locations").append(html);
+            $("#panel1").hide();
+            $("#panel2").show();
+          }
+          else if (data.error)
+            jsShowError(data.error);
+          else if (data.message)
+            jsShowMessage(data.message);
+        },
+        async: false
+      });
+      return false;
+    });
+    $("#cancel").click( function(e) {
+      e.preventDefault();
+      $("#panel2").hide();
+      $("#panel1").show();
+      return false;
+    });
+    $("#locations").on('click', 'a', function(e) {
+      e.preventDefault();
+      $("#location").val($(this).text());
+      $("#form").submit();
+      return false;
+    });
+  </script>
+{% endblock %}

@@ -1,0 +1,13 @@
+{% extends 'email.html' %}
+
+{% import 'macros.html' as macros %}
+
+{% block body %}
+New members have joined nearby who match your profile.<br>
+<br>
+<table border=0 style="width:100%;border-spacing:0px 0px;border-collapse:separate">
+  {% for entry in entries %}
+    {{ macros.member(www,action,nav,type,entry) }}
+  {% endfor %}
+</table>
+{% endblock %}

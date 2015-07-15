@@ -1,0 +1,196 @@
+{% extends 'template-panel.html' %}
+
+{% set partial = 8 %}
+
+{% set heading = 'Register new member' %}
+{% set heading2 = 'Confirm your location' %}
+
+{% block panel %}
+  <form class="form-horizontal" id="form" role="form" method="post">
+    <div class="form-group">
+      <label class="col-xs-3 control-label" for="email">Email Address</label>
+      <div class="col-xs-8">
+        <input type="email" id="email" class="form-control" name="email" placeholder="email address" required autofocus>
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="col-xs-3 control-label" for="password">Password</label>
+      <div class="col-xs-8">
+        <input type="password" id="password" class="form-control" name="password" placeholder="password" maxlength="50" required>
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="col-xs-3 control-label" for="dob">Date of Birth</label>
+      <div class="col-xs-3">
+        <input type="text" id="dob" class="form-control" name="dob" placeholder="yyyy-mm-dd" required autocomplete="off"/>
+      </div>
+      <div class="col-xs-3 control-label">
+        (e.g. 1974-08-22)
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="col-xs-3 control-label" for="name">Display Name</label>
+      <div class="col-xs-9">
+        <input type="text" id="name" class="form-control" name="name" required>
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="col-xs-3 control-label" for="location">Location</label>
+      <div class="col-xs-9">
+        <input type="text" id="location" class="form-control" name="location" placeholder="city or town" required autocomplete="off">
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="col-xs-3 control-label" for="gender">Gender</label>
+      <div class="col-xs-5">
+      <select id="gender" class="form-control" name="gender" required>
+        <option value="1" selected>Man</option>
+        <option value="2"         >Woman</option>
+        <option value="4"         >Sugar Pup</option>
+        <option value="8"         >Sugar Baby</option>
+        <option value="16"        >Sugar Daddy</option>
+        <option value="32"        >Sugar Momma</option>
+      </select>
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="col-xs-3 control-label" for="ethnicity">Ethnicity</label>
+      <div class="col-xs-5">
+      <select id="ethnicity" class="form-control" name="ethnicity" required>
+        <option value="1" >White</option>
+        <option value="2" >Black</option>
+        <option value="4" >Latino</option>
+        <option value="64">Indian</option>
+        <option value="8" >Asian</option>
+        <option value="16">Mixed</option>
+        <option value="32">Other</option>
+      </select>
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="col-xs-3 control-label" for="gender_choice">Seeking</label>
+      <div class="col-xs-5">
+      <select id="gender_choice" class="form-control" name="gender_choice" required>
+        <option value="1"         >Men</option>
+        <option value="2" selected>Women</option>
+        <option value="4"         >Sugar Pups</option>
+        <option value="8"         >Sugar Babies</option>
+        <option value="16"        >Sugar Daddies</option>
+        <option value="32"        >Sugar Mommas</option>
+      </select>
+      </div>
+    </div>
+    <div class="col-xs-12">
+      <br>
+      <button type="submit" class="btn btn-primary" id="register">Register</button>
+    </div>
+  </form>
+{% endblock %}
+
+{% block panel2 %}
+  <ul class="nav nav-pills nav-stacked" id="locations">
+  </ul>
+  <div class="col-xs-12">
+    <br>
+    <button type="button" class="btn btn-default" id="cancel">Cancel</button>
+  </div>
+{% endblock %}
+
+{% block actions %}
+  <div class="col-xs-12">
+    <br>
+    <a id="login">Already have an account?</a>
+  </div>
+{% endblock %}
+
+{% block scripts %}
+  <script>
+    $('#dob').datepicker({format:'yyyy-mm-dd',endDate:'{{ dob_max }}',startView:'decade',autoclose:true});
+    // Handle selection on gender field
+    $('#gender').change(function() {
+      if ($(this).val() == 1) // Man
+        $('#gender_choice').val(2);
+      else if ($(this).val() == 2) // Woman
+        $('#gender_choice').val(1);
+      else if ($(this).val() == 4) // Sugar Pup
+        $('#gender_choice').val(32);
+      else if ($(this).val() == 8) // Sugar Baby
+        $('#gender_choice').val(16);
+      else if ($(this).val() == 16) // Sugar Daddy
+        $('#gender_choice').val(8);
+      else if ($(this).val() == 32) // Sugar Momma
+        $('#gender_choice').val(4);
+    });
+    // Handle name matching (typeahead) on location field
+    function preProcessMatches(data) {
+      if (!data.matches)
+        return false;
+      if (data.matches.length == 1) {
+        $("#location").blur();
+        $("#location").val(data.matches[0]);
+        return false;
+      }
+      var source = [];
+      for (var i in data.matches)
+        source.push({ id: data.matches[i], name: data.matches[i] });
+      return source;
+    }
+    $('#location').typeahead({
+      ajax: { 
+        url: '/closestnames',
+        triggerLength: 3,
+        preProcess: preProcessMatches
+      },
+      matcher: function (item) { return true; }
+    });
+    $("#location").focusin(function() {
+      $(this).select();
+    });
+    $("#form").submit( function(e) {
+      jsShowMessage('Registering...');
+      $("#email").val($("#email").val().replace(/\s+/g, ''));
+      $.ajax({
+        url: '/mlregister',
+        type: 'POST',
+        data: $(this).serialize(),
+        error: function(jqXHR, textStatus, errorThrown) {
+          jsShowError("There's a problem with your Internet connection.");
+        },
+        success: function(data) {
+          if (data.error)
+            jsShowError(data.error);
+          else if (data.matches) {
+            var html = '';
+            for (var i in data.matches)
+              html = html.concat('<li><a>'+data.matches[i]+'</a></li>');
+            $("#locations li").remove();
+            $("#locations").append(html);
+            $("#panel1").hide();
+            $("#panel2").show();
+          }
+          else if (data.code == 1002)
+            window.location = "/registered";
+        },
+        async: false
+      });
+      return false;
+    });
+    $("#cancel").click( function(e) {
+      e.preventDefault();
+      $("#panel2").hide();
+      $("#panel1").show();
+      return false;
+    });
+    $("#locations").on('click', 'a', function(e) {
+      e.preventDefault();
+      $("#location").val($(this).text());
+      $("#form").submit();
+      return false;
+    });
+    // Handle login button
+    $("#login").click(function(e) {
+      window.location = "/login";
+      return false;
+    });
+  </script>
+{% endblock %}

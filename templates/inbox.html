@@ -1,0 +1,25 @@
+{% extends 'template-panel.html' %}
+
+{% import 'macros.html' as macros %}
+
+{% set heading = 'Inbox' %}
+
+{% if num_pages == 0 %}
+  {% set message = 'None found.' %}
+{% endif %}
+
+{% set no_panel = True %}
+
+{% block list %}
+  {% if num_pages > 0 %}
+    {% for page in range(num_pages) %}
+      <div id="page{{ page }}" {% if page > 0 %}hidden{% endif %}>
+        <table class="table" border=0 style="width:100%;border-spacing:0px 0px;border-collapse:separate">
+          {% for entry in entries[page*per_page:(page+1)*per_page] %}
+            {{ macros.member(www,action,nav,type,entry) }}
+          {% endfor %}
+        </table>
+      </div>
+    {% endfor %}
+  {% endif %}
+{% endblock %}

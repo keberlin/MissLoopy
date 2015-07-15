@@ -1,0 +1,199 @@
+{% extends 'template-panel.html' %}
+
+{% set heading = name %}
+
+{% block panel %}
+  <table class="col-xs-12" cols=2 border=0 style="width:100%;border-spacing:5px;border-collapse:separate">
+    <tr>
+      <td width="25%" valign="top">
+        <table cols=2 id="images" border=0 style="width:100%;border-spacing:1px;border-collapse:separate">
+          <tr>
+            <td colspan=2>
+              <img src="{{ image }}" id="master" width="100%" style="min-width:150px">
+            </td>
+          </tr>
+          {% set cols = 2 %}
+          {% set col = 0 %}
+          {% set perc = 100/cols %}
+          {% for image in images %}
+            {% if col == 0 %}
+              <tr>
+            {% endif %}
+            <td style="width:{{ perc }}%" align="center" valign="middle"><img src="{{ image }}" style="width:100%"></td>
+            {% set col = (col+1)%cols %}
+          {% endfor %}
+          {% for i in range(cols-col) %}
+            <td style="width:{{ perc }}%"></td>
+          {% endfor %}
+        </table>
+      <td width="75%" valign="top">
+        <table cols=4 border=0 style="width:100%;border-spacing:5px 2px;border-collapse:separate">
+          <tr>
+            <td colspan=4>
+              <h4><span class="label label-info">About me</span></h4>
+            </td>
+          </tr>
+          <tr>
+            <td width="20%">
+              <b>Name</b>
+            </td>
+            <td width="30%">
+              {{ name|e }}
+            </td>
+            <td width="20%">
+              <b>Age</b>
+            </td>
+            <td width="30%">
+              {{ age }}
+            </td>
+          </tr>
+          <tr>
+            <td width="20%">
+              <b>Gender</b>
+            </td>
+            <td width="30%">
+              {{ gender }}
+            </td>
+            <td width="20%">
+              <b>Starsign</b>
+            </td>
+            <td width="30%">
+              {{ starsign }}
+            </td>
+          </tr>
+          <tr>
+            <td width="20%">
+              <b>Ethnicity</b>
+            </td>
+            <td width="30%">
+              {{ ethnicity }}
+            </td>
+            <td width="20%">
+              <b>Status</b>
+            </td>
+            <td width="30%">
+              {{ status|e }}
+            </td>
+          </tr>
+          <tr>
+            <td width="20%">
+              <b>Height</b>
+            </td>
+            <td width="30%">
+              {{ height or '' }}
+            </td>
+            <td width="20%">
+              <b>Body type</b>
+            </td>
+            <td width="30%">
+              {{ weight or '' }}
+            </td>
+          </tr>
+          <tr>
+            <td width="20%">
+              <b>Education</b>
+            </td>
+            <td width="30%">
+              {{ education or '' }}
+            </td>
+            <td width="20%">
+              <b>Smoking</b>
+            </td>
+            <td width="30%">
+              {{ smoking or '' }}
+            </td>
+          </tr>
+          <tr>
+            <td width="20%">
+              <b>Date joined</b>
+            </td>
+            <td width="30%">
+              {{ created }}
+            </td>
+            <td width="20%">
+              <b>Drinking</b>
+            </td>
+            <td width="30%">
+              {{ drinking or '' }}
+            </td>
+          </tr>
+          <tr>
+            <td width="20%">
+              <b>Last login</b>
+            </td>
+            <td colspan=3>
+              {{ last_login }} (from country {{ login_country }})
+            </td>
+          </tr>
+          <tr>
+            <td width="20%">
+              <b>Location</b>
+            </td>
+            <td colspan=3>
+              {{ location }}
+            </td>
+          </tr>
+          <tr>
+            <td width="20%">
+              <b>Occupation</b>
+            </td>
+            <td colspan=3>
+              {% if occupation and occupation|length > 100 %}<small>{% endif %}
+              {{ (occupation or '')|e }}
+              {% if occupation and occupation|length > 100 %}</small>{% endif %}
+            </td>
+          </tr>
+          <tr>
+            <td width="20%">
+              <b>Summary</b>
+            </td>
+            <td colspan=3>
+              {% if summary and summary|length > 100 %}<small>{% endif %}
+              {{ (summary or '')|e }}
+              {% if summary and summary|length > 100 %}</small>{% endif %}
+            </td>
+          </tr>
+          <tr>
+            <td width="20%" valign="top">
+              <b>Description</b>
+            </td>
+            <td colspan=3>
+              {% if description and description|length > 100 %}<small>{% endif %}
+              {{ (description or '')|e }}
+              {% if description and description|length > 100 %}</small>{% endif %}
+            </td>
+          </tr>
+          <tr>
+            <td colspan=4>
+              <h4><span class="label label-info">What I'm seeking</span></h4>
+            </td>
+          </tr>
+          <tr>
+            <td width="20%">
+              <b>Seeking</b>
+            </td>
+            <td width="30%">
+              {{ gender_choice }}
+            </td>
+            <td width="20%">
+              <b>Age range</b>
+            </td>
+            <td width="30%">
+              {{ (age_range or '')|e }}
+            </td>
+          </tr>
+          <tr>
+            <td width="20%" valign="top">
+              <b>Description</b>
+            </td>
+            <td colspan=3>
+              {% if looking_for and looking_for|length > 100 %}<small>{% endif %}
+              {{ (looking_for or '')|e }}
+              {% if looking_for and looking_for|length > 100 %}</small>{% endif %}
+            </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+  </table>
+{% endblock %}

@@ -1,0 +1,49 @@
+<table border=0 style="width:100%;border-spacing:10px 5px;border-collapse:separate" class="footer" id="footer">
+  <tr>
+    <td align="left" valign="middle" class="find_box">
+      <p>Share us on</p>
+      <ul>
+      <li><a href="http://www.facebook.com/sharer.php?u={{ www|urlencode }}" target="_blank" title="Facebook">
+        <img src="{{ url_for('static', filename='images/facebook.png') }}" alt="Facebook" title="Facebook" height="20px" width="20px"></a>
+      <li><a href="http://twitter.com/intent/tweet?url={{ www|urlencode }}&text={{ promo|urlencode }}" target="_blank" title="Twitter">
+        <img src="{{ url_for('static', filename='images/twitter.png') }}" alt="Twitter" title="Twitter" height="20px" width="20px"></a>
+      <li><a href="http://plus.google.com/share?url={{ www|urlencode }}" target="_blank" title="Gplus">
+        <img src="{{ url_for('static', filename='images/googleplus.png') }}" alt="Gplus" title="Gplus" height="20px" width="20px"></a>
+      <li><a href="http://pinterest.com/pin/create/button/?url={{ www|urlencode }}&media={{ (www + url_for('static', filename='images/logo.png'))|urlencode }}&description={{ promo|urlencode }}" target="_blank" title="Pinterest">
+        <img src="{{ url_for('static', filename='images/pinterest.png') }}" alt="Pinterest" title="Pinterest" height="20px" width="20px"></a>
+      <li><a href="http://digg.com/submit?url={{ www|urlencode }}&title={{ promo|urlencode }}"
+        target="_blank" title="Digg">
+        <img src="{{ url_for('static', filename='images/digg.png') }}" alt="Digg" title="Digg" width="20px" height="20px"></a>
+      <li><a href="http://delicious.com/save?v=5&noui&jump=close&url={{ www|urlencode }}&title={{ promo|urlencode }}"
+        target="_blank" title="Delicious">
+        <img src="{{ url_for('static', filename='images/delicious.png') }}" alt="Delicious" title="Delicious" width="20px" height="20px"></a>
+      <li><a href="http://www.blogger.com/blog_this.pyra?t=&u={{ www|urlencode }}&n={{ promo|urlencode }}"
+        target="_blank" title="Blogger">
+        <img src="{{ url_for('static', filename='images/blogger.png') }}" alt="Blogger" title="Blogger" width="20px" height="20px"></a>
+      <li><a href="http://www.stumbleupon.com/badge/?url={{ www|urlencode }}"
+        target="_blank" title="StumbleUpon">
+        <img src="{{ url_for('static', filename='images/stumbleupon.png') }}" alt="StumbleUpon" title="StumbleUpon" width="20px" height="20px"></a>
+      <li><a href="http://www.reddit.com/submit?url={{ www|urlencode }}&title={{ promo|urlencode }}"
+        target="_blank" title="Reddit">
+        <img src="{{ url_for('static', filename='images/reddit.png') }}" alt="Reddit" title="Reddit" width="20px" height="20px"></a>
+      </ul>
+    </td>
+    <td align="right" valign="middle" class="social">
+      {% include 'social.html' %}
+    </td>
+  </tr>
+  <tr>
+    <td align="left" valign="middle" class="copy_prt">
+      Copyright &copy; {{ year }} {{ domain }}. All rights reserved. Website design by <span><a href="http://www.looogo-web.com/" target="_blank"> LoooGo</a></span>
+    </td>
+    <td align="right" valign="middle" class="foot_rit_nav">
+      <ul>
+        <li><a href="/about">About</a></li>
+        <li><a href="mailto:admin@{{ domain }}">Contact</a></li>
+        <li><a href="/about">Terms Privacy</a></li>
+        <li><a href="/about">Quick Links</a></li>
+        <li><a href="/about">Help</a></li>
+      </ul>
+    </td>
+  </tr>
+</table>

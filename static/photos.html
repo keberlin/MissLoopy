@@ -1,0 +1,309 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <title>Miss Loopy - 100% Free Online Dating Site</title>
+    <meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width">
+    <meta name="description" content="A completely 100% free online dating site. World-wide members are waiting for you. Only see members who match your search. Quickly filter out those who don't! Everyone is welcome Singles, Married, Gay, Bisexual, Students, Arrangement Seekers, Sugar Pups, Sugar Babies, Sugar Daddies and Sugar Mommas.">
+    <meta name="google-site-verification" content="J56RH6UBAEztic6VGOfiVduklTupfynu-UFIHnDxNhc" />
+
+    <!-- Bootstrap -->
+    <link href="/static/css/bootstrap.min.css" rel="stylesheet" type="text/css">
+    <!-- Bootstrap datepicker -->
+    <link href="/static/css/bootstrap-datepicker.min.css" rel="stylesheet" type="text/css">
+    <!-- Custom -->
+    <link href="/static/css/global.css" rel="stylesheet" type="text/css">
+
+    <!-- Favicon -->
+    <link rel="apple-touch-icon" sizes="57x57" href="/static/apple-touch-icon-57x57.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="/static/apple-touch-icon-114x114.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="/static/apple-touch-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="144x144" href="/static/apple-touch-icon-144x144.png">
+    <link rel="apple-touch-icon" sizes="60x60" href="/static/apple-touch-icon-60x60.png">
+    <link rel="apple-touch-icon" sizes="120x120" href="/static/apple-touch-icon-120x120.png">
+    <link rel="apple-touch-icon" sizes="76x76" href="/static/apple-touch-icon-76x76.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="/static/apple-touch-icon-152x152.png">
+    <link rel="icon" type="image/png" href="/static/favicon-96x96.png" sizes="96x96">
+    <link rel="icon" type="image/png" href="/static/favicon-16x16.png" sizes="16x16">
+    <link rel="icon" type="image/png" href="/static/favicon-32x32.png" sizes="32x32">
+    <meta name="msapplication-TileColor" content="#da532c">
+    <meta name="msapplication-TileImage" content="/mstile-144x144.png">
+
+    <style>
+      #bulk {
+        background: url(/static/images/bg.jpg);
+      }
+
+      div, form, table {
+        background: rgb(255,255,255) transparent;
+      }
+
+      #success, #error {
+        position: fixed;
+        top: 10px;
+        z-index: 2;
+      }
+    </style>
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+      <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="/static/js/jquery.min.js"></script>
+    <!-- AngularJS -->
+    <script src="/static/js/angular.min.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="/static/js/bootstrap.min.js"></script>
+    <!-- Include Bootstrap typeahead plugin -->
+    <script src="/static/js/bootstrap-typeahead.min.js"></script>
+    <!-- Include Bootstrap datepicker plugin -->
+    <script src="/static/js/bootstrap-datepicker.min.js"></script>
+  </head>
+
+  <body ng-app="app" ng-controller="ctrl">
+    <div align="center">
+      <div class="col-md-6 col-md-offset-3 col-xs-12 alert alert-success" align="center" id="success" hidden>
+        Success.
+      </div>
+      <div class="col-md-6 col-md-offset-3 col-xs-12 alert alert-danger" align="center" id="error" hidden>
+        Error.
+      </div>
+      <table border=0 style="width:100%;border-spacing:0px 0px;border-collapse:separate;min-width:640px;max-width:1024px" id="bulk">
+        <tr><td>
+          
+            <table border=0 style="width:100%;border-spacing:10px 0px;border-collapse:separate;height:60px" id="header">
+  <tr>
+    <td width="25%" align="left" valign="middle">
+      <a href="http://www.missloopy.com"><img src="/static/images/logo.png" height="50px"></a>
+    </td>
+    <td width="50%" align="center" valign="middle">
+      
+      <script type="text/javascript">
+    google_ad_client = "ca-pub-3009778079151237";
+    google_ad_slot = "9055377502";
+    google_ad_width = 728;
+    google_ad_height = 90;
+</script>
+<!-- Banner -->
+<script type="text/javascript"
+src="//pagead2.googlesyndication.com/pagead/show_ads.js">
+</script>
+    </td>
+    <td width="25%" align="right">
+      
+        <div class="input-group-btn">
+          <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">Register/Login <span class="caret"></span></button>
+          <ul class="dropdown-menu pull-right" role="menu">
+            <li><a href="/register">Register</a></li>
+            <li><a href="/login">Login</a></li>
+          </ul>
+        </div>
+      
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <br>
+</table>
+          
+        <tr><td>
+          <table border=0 style="width:100%;border-spacing:10px 0px;border-collapse:separate" id="canvas">
+            <tr>
+              
+              <td width="80%" valign="top">
+                
+  <table>
+<tr>
+<td align="center"><img width="100px" src="static/photos/img10876.jpg"><br>img10876.jpg</td>
+<td align="center"><img width="100px" src="static/photos/img10875.jpg"><br>img10875.jpg</td>
+<td align="center"><img width="100px" src="static/photos/img10874.jpg"><br>img10874.jpg</td>
+<td align="center"><img width="100px" src="static/photos/img10873.jpg"><br>img10873.jpg</td>
+<td align="center"><img width="100px" src="static/photos/img10872.jpg"><br>img10872.jpg</td>
+<td align="center"><img width="100px" src="static/photos/img10870.jpg"><br>img10870.jpg</td>
+<td align="center"><img width="100px" src="static/photos/img10869.jpg"><br>img10869.jpg</td>
+<td align="center"><img width="100px" src="static/photos/img10868.jpg"><br>img10868.jpg</td>
+<td align="center"><img width="100px" src="static/photos/img10867.jpg"><br>img10867.jpg</td>
+<td align="center"><img width="100px" src="static/photos/img10866.jpg"><br>img10866.jpg</td>
+<td align="center"><img width="100px" src="static/photos/img10865.jpg"><br>img10865.jpg</td>
+<td align="center"><img width="100px" src="static/photos/img10862.jpg"><br>img10862.jpg</td>
+<tr>
+<td align="center"><img width="100px" src="static/photos/img10860.jpg"><br>img10860.jpg</td>
+<td align="center"><img width="100px" src="static/photos/img10859.jpg"><br>img10859.jpg</td>
+<td align="center"><img width="100px" src="static/photos/img10858.jpg"><br>img10858.jpg</td>
+<td align="center"><img width="100px" src="static/photos/img10857.jpg"><br>img10857.jpg</td>
+<td align="center"><img width="100px" src="static/photos/img10856.jpg"><br>img10856.jpg</td>
+<td align="center"><img width="100px" src="static/photos/img10855.jpg"><br>img10855.jpg</td>
+<td align="center"><img width="100px" src="static/photos/img10854.jpg"><br>img10854.jpg</td>
+<td align="center"><img width="100px" src="static/photos/img10853.jpg"><br>img10853.jpg</td>
+<td align="center"><img width="100px" src="static/photos/img10852.jpg"><br>img10852.jpg</td>
+<td align="center"><img width="100px" src="static/photos/img10851.jpg"><br>img10851.jpg</td>
+<td align="center"><img width="100px" src="static/photos/img10850.jpg"><br>img10850.jpg</td>
+<td align="center"><img width="100px" src="static/photos/img10849.jpg"><br>img10849.jpg</td>
+<tr>
+<td align="center"><img width="100px" src="static/photos/img10844.jpg"><br>img10844.jpg</td>
+<td align="center"><img width="100px" src="static/photos/img10843.jpg"><br>img10843.jpg</td>
+<td align="center"><img width="100px" src="static/photos/img10842.jpg"><br>img10842.jpg</td>
+<td align="center"><img width="100px" src="static/photos/img10841.jpg"><br>img10841.jpg</td>
+<td align="center"><img width="100px" src="static/photos/img10840.jpg"><br>img10840.jpg</td>
+<td align="center"><img width="100px" src="static/photos/img10839.jpg"><br>img10839.jpg</td>
+<td align="center"><img width="100px" src="static/photos/img10837.jpg"><br>img10837.jpg</td>
+<td align="center"><img width="100px" src="static/photos/img10835.jpg"><br>img10835.jpg</td>
+<td align="center"><img width="100px" src="static/photos/img10834.jpg"><br>img10834.jpg</td>
+<td align="center"><img width="100px" src="static/photos/img10833.jpg"><br>img10833.jpg</td>
+<td align="center"><img width="100px" src="static/photos/img10832.jpg"><br>img10832.jpg</td>
+<td align="center"><img width="100px" src="static/photos/img10830.jpg"><br>img10830.jpg</td>
+<tr>
+<td align="center"><img width="100px" src="static/photos/img10829.jpg"><br>img10829.jpg</td>
+<td align="center"><img width="100px" src="static/photos/img10827.jpg"><br>img10827.jpg</td>
+<td align="center"><img width="100px" src="static/photos/img10826.jpg"><br>img10826.jpg</td>
+<td align="center"><img width="100px" src="static/photos/img10824.jpg"><br>img10824.jpg</td>
+<td align="center"><img width="100px" src="static/photos/img10823.jpg"><br>img10823.jpg</td>
+<td align="center"><img width="100px" src="static/photos/img10820.jpg"><br>img10820.jpg</td>
+<td align="center"><img width="100px" src="static/photos/img10819.jpg"><br>img10819.jpg</td>
+<td align="center"><img width="100px" src="static/photos/img10816.jpg"><br>img10816.jpg</td>
+<td align="center"><img width="100px" src="static/photos/img10815.jpg"><br>img10815.jpg</td>
+<td align="center"><img width="100px" src="static/photos/img10814.jpg"><br>img10814.jpg</td>
+<td align="center"><img width="100px" src="static/photos/img10813.jpg"><br>img10813.jpg</td>
+<td align="center"><img width="100px" src="static/photos/img10812.jpg"><br>img10812.jpg</td>
+<tr>
+<td align="center"><img width="100px" src="static/photos/img10811.jpg"><br>img10811.jpg</td>
+<td align="center"><img width="100px" src="static/photos/img10810.jpg"><br>img10810.jpg</td>
+</table>
+
+              </td>
+              
+            </tr>
+            <tr>
+              <td>
+                <br>
+              </td>
+            </tr>
+          </table>
+        <tr>
+          <td>
+            <table border=0 style="width:100%;border-spacing:10px 5px;border-collapse:separate" class="footer" id="footer">
+  <tr>
+    <td align="left" valign="middle" class="find_box">
+      <p>Share us on</p>
+      <ul>
+      <li><a href="http://www.facebook.com/sharer.php?u=http%3A//www.missloopy.com" target="_blank" title="Facebook">
+        <img src="/static/images/facebook.png" alt="Facebook" title="Facebook" height="20px" width="20px"></a>
+      <li><a href="http://twitter.com/intent/tweet?url=http%3A//www.missloopy.com&text=100%25%20Free%20Online%20Dating%20Site" target="_blank" title="Twitter">
+        <img src="/static/images/twitter.png" alt="Twitter" title="Twitter" height="20px" width="20px"></a>
+      <li><a href="http://plus.google.com/share?url=http%3A//www.missloopy.com" target="_blank" title="Gplus">
+        <img src="/static/images/googleplus.png" alt="Gplus" title="Gplus" height="20px" width="20px"></a>
+      <li><a href="http://pinterest.com/pin/create/button/?url=http%3A//www.missloopy.com&media=http%3A//www.missloopy.com/static/images/logo.png&description=100%25%20Free%20Online%20Dating%20Site" target="_blank" title="Pinterest">
+        <img src="/static/images/pinterest.png" alt="Pinterest" title="Pinterest" height="20px" width="20px"></a>
+      <li><a href="http://digg.com/submit?url=http%3A//www.missloopy.com&title=100%25%20Free%20Online%20Dating%20Site"
+        target="_blank" title="Digg">
+        <img src="/static/images/digg.png" alt="Digg" title="Digg" width="20px" height="20px"></a>
+      <li><a href="http://delicious.com/save?v=5&noui&jump=close&url=http%3A//www.missloopy.com&title=100%25%20Free%20Online%20Dating%20Site"
+        target="_blank" title="Delicious">
+        <img src="/static/images/delicious.png" alt="Delicious" title="Delicious" width="20px" height="20px"></a>
+      <li><a href="http://www.blogger.com/blog_this.pyra?t=&u=http%3A//www.missloopy.com&n=100%25%20Free%20Online%20Dating%20Site"
+        target="_blank" title="Blogger">
+        <img src="/static/images/blogger.png" alt="Blogger" title="Blogger" width="20px" height="20px"></a>
+      <li><a href="http://www.stumbleupon.com/badge/?url=http%3A//www.missloopy.com"
+        target="_blank" title="StumbleUpon">
+        <img src="/static/images/stumbleupon.png" alt="StumbleUpon" title="StumbleUpon" width="20px" height="20px"></a>
+      <li><a href="http://www.reddit.com/submit?url=http%3A//www.missloopy.com&title=100%25%20Free%20Online%20Dating%20Site"
+        target="_blank" title="Reddit">
+        <img src="/static/images/reddit.png" alt="Reddit" title="Reddit" width="20px" height="20px"></a>
+      </ul>
+    </td>
+    <td align="right" valign="middle" class="social">
+      <ul class="social">
+  <li>
+    <iframe src="http://www.facebook.com/plugins/like.php?locale=en_US&href=https%3A%2F%2Fwww.facebook.com%2Floopydating&amp;send=false&amp;layout=button_count&amp;width=150&amp;show_faces=true&amp;action=like&amp;colorscheme=light&amp;font=arial&amp;height=21" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:90px; height:21px;" allowTransparency="true"></iframe>
+  </li>
+  <li>
+    <!-- Place this tag in your head or just before your close body tag. -->
+    <script type="text/javascript" src="https://apis.google.com/js/plusone.js">
+      {parsetags: 'explicit'}
+    </script>
+    <!-- Place this tag where you want the +1 button to render. -->
+    <div class="g-plusone" data-size="medium" data-href="https://plus.google.com/communities/112512567700927228676" ></div>
+    <!-- Place this render call where appropriate. -->
+    <script type="text/javascript">gapi.plusone.go();</script>
+  </li>
+  <li>
+    <a href="https://twitter.com/share" class="twitter-share-button" data-url="http://www.missloopy.com" data-hashtags="missloopy">Tweet</a>
+    <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+  </li>
+</ul>
+    </td>
+  </tr>
+  <tr>
+    <td align="left" valign="middle" class="copy_prt">
+      Copyright &copy; 2015 MissLoopy.com. All rights reserved. Website design by <span><a href="http://www.looogo-web.com/" target="_blank"> LoooGo</a></span>
+    </td>
+    <td align="right" valign="middle" class="foot_rit_nav">
+      <ul>
+        <li><a href="/about">About</a></li>
+        <li><a href="mailto:admin@MissLoopy.com">Contact</a></li>
+        <li><a href="/about">Terms Privacy</a></li>
+        <li><a href="/about">Quick Links</a></li>
+        <li><a href="/about">Help</a></li>
+      </ul>
+    </td>
+  </tr>
+</table>
+        </table>
+
+      <script>
+        $(window).load( function(e) {
+          // Get the footer to be at the bottom of the viewing window
+          var b = $(window).height();
+          var y = $("#footer").offset().top;
+          var h = $("#footer").height();
+          if (y < b-h) $("#footer").offset({top:b-h});
+        });
+        // Handle messages
+        var timeout = null;
+        function jsTimeout() {
+          $("#success").fadeOut();
+          $("#error").fadeOut();
+        }
+        function jsShowMessage(str) {
+          $("#error").hide();
+          $("#success").text(str);
+          $("#success").show();
+          if (timeout) window.clearTimeout(timeout);
+          timeout = window.setTimeout(jsTimeout, 10000);
+        }
+        function jsShowError(str) {
+          $("#success").hide();
+          $("#error").text(str);
+          $("#error").show();
+          if (timeout) window.clearTimeout(timeout);
+          timeout = window.setTimeout(jsTimeout, 10000);
+        }
+      </script>
+
+      <!-- Start of StatCounter Code for Default Guide -->
+<script type="text/javascript">
+var sc_project=8242906; 
+var sc_invisible=0; 
+var sc_security="ef554574"; 
+</script>
+<script type="text/javascript" src="http://www.statcounter.com/counter/counter.js">
+</script>
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-47718562-1', 'missloopy.com');
+  ga('send', 'pageview');
+
+</script>
+    </div>
+  </body>
+</html>

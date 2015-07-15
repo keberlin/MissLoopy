@@ -1,0 +1,73 @@
+{% extends 'template.html' %}
+
+{% block canvas %}
+<div class="bs-docs-header" id="content">
+<div class="container bs-docs-container">
+  <div class="row">
+    <div class="col-md-10" role="main">
+
+      <div class="bs-docs-section">
+        <h2 id="history">History</h2>
+        The {{ title }} website went live in February 2014 and has rapidly been gaining members and recognition ever since. We set-up the site as a complete free online dating portal where people from all over the world can meet and make friends. We welcome people from any country or any background. So much so that we cater for singles, married, gays, bisexuals, even sugar babies and sugar daddies, everyone is welcome. With our sophisticated matching engine you will only see those members you are interested in, all others will be completely masked and they will not be able to see you either. On top of that we have facilities for blocking members too just in case one slips through the net!
+      </div>
+      
+      <div class="bs-docs-section">
+        <h2 id="worldwide">Worldwide Members</h2>
+        Our site caters for members anywhere in the world. We have over 70,000 placenames in our gazetteer so you should be able to locate a town or city pretty close to you. On top of this you can search for members anywhere in the world too. Their distance from you is shown within the search results so that you can see how far you'll need to travel to see them.
+      </div>
+
+      <div class="bs-docs-section">
+        <h2 id="spam">Scammers and Spam</h2>
+        We all live in a modern world and unfortunately so do the scammers! We see scammers sending spam junk mail all over the place and it's hard to stop them. However, we've incorporated a state-of-the-art spam detection system that removes a large portion of those nasty messages. Occasionally some might get through and we're working hard to overcome this but in the meantime anything our system thinks might be dubious in nature is flagged as <span class="label label-danger">Potential spam!</span>. If you see any of these and you agree with us that it may contain spam then you can report it to us for further investigation. Our system is self learning too so that the more spam you tell it about the better it will be able to filter it out!
+      </div>
+      
+      <div class="bs-docs-section">
+        <h2 id="technical">Technology</h2>
+        <h3 id="technical-frontend">User Interface</h3>
+        The user interface has been designed using the very capable <a href="http://http://getbootstrap.com/">Bootstrap</a> CSS library designed by <a href="http://twitter.com">Twitter</a>. It has a modern day look-and-feel and has been designed to cope with any size screen meaning our site should look as good as it does on an iPhone as it does a desktop. We also make use of HTML5 as often as we can to make our web pages as easy as possible to interact with.
+        
+        <h3 id="technical-backend">Server</h3>
+        We've been very busy under the hood to make your web experience as intuitive and fluid as possible. We run our site using an industry standard Apache server with all the scripting performed using the powerful Python 2.6 language along with an Sqlite database. Too technical for you? Well don't worry, this is the bit we have to keep running smoothly so you can have the best experience possible.
+      </div>
+      
+      <div class="bs-docs-section">
+        <h2 id="suggestions">Suggestions</h2>
+        Any suggestions for improvement are always welcome and you can reach us at <a href="mailto:admin@{{ domain }}">admin@{{ domain }}</a> any time of the day.
+      </div>
+      
+    </div>
+
+    <div class="col-md-2">
+      <div class="bs-docs-sidebar hidden-print affix-top" role="complementary">
+        <ul class="nav bs-docs-sidenav">              
+          <li class="active">
+            <a href="#history">History</a>
+          </li>
+          <li>
+            <a href="#worldwide">Worldwide</a>
+          </li>
+          <li>
+            <a href="#spam">Scammers and Spam</a>
+          </li>
+          <li>
+            <a href="#technical">Technology</a>
+            <ul class="nav">
+              <li>
+                <a href="#technical=frontend">User Interface</a>
+              </li>
+              <li>
+                <a href="#technical=backend">Server</a>
+              </li>
+            </ul>
+          </li>
+          <li>
+            <a href="#suggestions">Suggestions</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+    
+  </div>
+</div>
+</div>
+{% endblock %}

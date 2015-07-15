@@ -1,0 +1,40 @@
+{% extends 'template.html' %}
+
+{% block canvas %}
+<div style="width:100%" id="map-canvas"/>
+
+<script src="https://maps.googleapis.com/maps/api/js?sensor=false"></script>
+
+<script language="javascript">
+  $(window).load(function() {
+    var b = $(window).height();
+    var h1 = $("#header").height();
+    var h2 = $("#footer").height();
+    var y = $("#map-canvas").offset().top;
+    console.log('window', b, 'header', h1, 'map-canvas', y, 'footer', h2);
+    $("#map-canvas").height(b-h1-h2);
+    var map_canvas = document.getElementById('map-canvas');
+    var coord = new google.maps.LatLng(0,0);
+    var map_options = {
+      center: coord,
+      zoom: 11,
+      mapTypeId: google.maps.MapTypeId.ROADMAP
+    }
+    var map = new google.maps.Map(map_canvas, map_options);
+    var bounds = new google.maps.LatLngBounds();
+    var coords = {{ coords }};
+    for (var i=0; i<coords.length; i+=2) {
+      var coord = new google.maps.LatLng(coords[i], coords[i+1]);
+      var marker = new google.maps.Marker({
+        position: coord,
+        map: map,
+        icon: 'https://maps.google.com/mapfiles/marker_yellow.png'
+      }); 
+      marker.setMap(map);
+      bounds.extend(coord);
+    }
+    map.setCenter(bounds.getCenter());
+    map.fitBounds(bounds);
+  });
+</script>
+{% endblock %}
