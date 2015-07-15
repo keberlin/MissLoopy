@@ -11,7 +11,7 @@ parser = argparse.ArgumentParser(description='Create Geographical Gazetteer Info
 parser.add_argument('file', nargs='+', help='a geographical file')
 args = parser.parse_args()
 
-db = database2.Database(GAZETTEER_PG)
+db = database2.Database(GAZETTEER_DB)
 
 db.execute('DROP TABLE IF EXISTS tmp')
 db.execute('CREATE TABLE tmp (location VARCHAR PRIMARY KEY NOT NULL, x INTEGER, y INTEGER, tz VARCHAR, population INTEGER)')

@@ -6,7 +6,7 @@ from emails import *
 
 db = database.Database(MISS_LOOPY_DB)
 
-db.execute('SELECT * FROM profiles WHERE email LIKE "keith.hollis@gmail.com" LIMIT 1')
+db.execute("SELECT * FROM profiles WHERE email ILIKE 'keith.hollis@gmail.com' LIMIT 1")
 entry = db.fetchone()
 
 email    = entry[COL_EMAIL]

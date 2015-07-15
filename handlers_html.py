@@ -85,7 +85,7 @@ def handle_photos(entry,values):
 
   dict = {}
   dict['id']     = id
-  dict['pids']   = pids
+  dict['pids']   = json.dumps(pids)
   dict['master'] = master
 
   return dict
@@ -397,7 +397,7 @@ def handle_emailthread(entry,values):
     emails.append(d)
   dict['entries'] = emails
 
-  db.execute('UPDATE emails SET viewed=1 WHERE id_from=%d AND id_to=%d' % (id_with, id))
+  db.execute('UPDATE emails SET viewed=true WHERE id_from=%d AND id_to=%d' % (id_with, id))
   db.commit()
 
   return dict
@@ -410,7 +410,7 @@ def handle_inbox(entry,values):
   y        = entry[COL_Y]
   tz       = entry[COL_TZ]
 
-  db.execute('SELECT DISTINCT id_from FROM emails WHERE id_to=%d ORDER BY sent DESC' % (id))
+  db.execute('SELECT id_from FROM (SELECT DISTINCT id_from,MAX(sent) FROM emails WHERE id_to=%d GROUP BY id_from ORDER BY MAX(sent) DESC) sub' % (id))
   ids = map(lambda x:x[0], db.fetchall())
 
   # Remove blocked members
@@ -420,7 +420,7 @@ def handle_inbox(entry,values):
 
   counts = []
   for id_from in ids:
-    db.execute('SELECT COUNT(*) FROM emails WHERE id_from=%d and id_to=%d and viewed=0' % (id_from, id))
+    db.execute('SELECT COUNT(*) FROM emails WHERE id_from=%d and id_to=%d and not viewed' % (id_from, id))
     entry = db.fetchone()
     counts.append(entry[0])
 
@@ -443,7 +443,7 @@ def handle_outbox(entry,values):
   y        = entry[COL_Y]
   tz       = entry[COL_TZ]
 
-  db.execute('SELECT DISTINCT id_to FROM emails WHERE id_from=%d ORDER BY sent DESC' % (id))
+  db.execute('SELECT id_to FROM (SELECT DISTINCT id_to,MAX(sent) FROM emails WHERE id_from=%d GROUP BY id_to ORDER BY MAX(sent) DESC) sub' % (id))
   ids = map(lambda x:x[0], db.fetchall())
 
   # Remove blocked members
@@ -453,7 +453,7 @@ def handle_outbox(entry,values):
 
   counts = []
   for id_to in ids:
-    db.execute('SELECT COUNT(*) FROM emails WHERE id_from=%d and id_to=%d and viewed=0' % (id, id_to))
+    db.execute('SELECT COUNT(*) FROM emails WHERE id_from=%d and id_to=%d and not viewed' % (id, id_to))
     entry = db.fetchone()
     counts.append(entry[0])
 
@@ -476,7 +476,7 @@ def handle_favorites(entry,values):
   y        = entry[COL_Y]
   tz       = entry[COL_TZ]
 
-  db.execute('SELECT DISTINCT f.id_favorite FROM favorites AS f INNER JOIN profiles AS p ON f.id_favorite=p.id WHERE f.id=%d ORDER BY p.last_login DESC' % (id))
+  db.execute('SELECT DISTINCT f.id_favorite,p.last_login FROM favorites AS f INNER JOIN profiles AS p ON f.id_favorite=p.id WHERE f.id=%d ORDER BY p.last_login DESC' % (id))
   ids = map(lambda x:x[0], db.fetchall())
 
   # Remove blocked members
@@ -541,7 +541,7 @@ def handle_verify(entry,values):
   id    = int(values['id'])
   email = values['email']
 
-  db.execute('SELECT id FROM profiles WHERE email LIKE %s LIMIT 1' % (Quote(email)))
+  db.execute('SELECT id FROM profiles WHERE email ILIKE %s LIMIT 1' % (Quote(email)))
   entry = db.fetchone()
   if not entry:
     return {'error': 'Email address not found'}
@@ -549,7 +549,7 @@ def handle_verify(entry,values):
     return {'error': 'Id does not match'}
 
   now = datetime.datetime.now()
-  db.execute('UPDATE profiles SET created2=%s, verified=1 WHERE id=%d AND not verified' % (Quote(str(now)), id))
+  db.execute('UPDATE profiles SET created2=%s, verified=true WHERE id=%d AND not verified' % (Quote(str(now)), id))
   db.commit()
 
   return {}

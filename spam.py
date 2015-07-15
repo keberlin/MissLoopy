@@ -11,7 +11,7 @@ def AnalyseSpammer(id):
   count = entry[1]
   if count == 0:
     return (0, 0)
-  sent_min = datetime.datetime(*time.strptime(entry[2],"%Y-%m-%d %H:%M:%S.%f")[:6])
+  sent_min = entry[2] #datetime.datetime(*time.strptime(entry[2],"%Y-%m-%d %H:%M:%S.%f")[:6])
   sent_max = datetime.datetime.utcnow()
   td = sent_max-sent_min
   frequency = (td.days*24*60*60 + td.seconds)/count

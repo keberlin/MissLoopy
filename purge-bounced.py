@@ -16,7 +16,7 @@ db.execute('SELECT LOWER(email) FROM profiles WHERE verified')
 emails = set([(entry[0]) for entry in db.fetchall()])
 
 for email in emails.intersection(bounced):
-  db.execute('SELECT id FROM profiles WHERE email LIKE %s LIMIT 1' % (Quote(email)))
+  db.execute('SELECT id FROM profiles WHERE email ILIKE %s LIMIT 1' % (Quote(email)))
   entry = db.fetchone()
   id = entry[0]
   DeleteMember(id)

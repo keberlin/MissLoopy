@@ -20,7 +20,7 @@ def search(distance,order,id,x,y,tz,gender,age,ethnicity,height,weight,gender_ch
     dy = distance*1000
     rules.append('x BETWEEN %d AND %d' % (x-dx, x+dx))
     rules.append('y BETWEEN %d AND %d' % (y-dy, y+dy))
-  rules.append('gender & %d' % (gender_choice))
+  rules.append('(gender & %d)!=0' % (gender_choice))
   if age_min:
     now = datetime.datetime.utcnow()
     ref = Datetime(now, tz)
@@ -32,24 +32,24 @@ def search(distance,order,id,x,y,tz,gender,age,ethnicity,height,weight,gender_ch
     dob = datetime.date(ref.year-age_max-1,ref.month,ref.day)
     rules.append('dob > %s' % (Quote(str(dob))))
   if ethnicity_choice:
-    rules.append('ethnicity & %d' % (ethnicity_choice))
+    rules.append('(ethnicity & %d)!=0' % (ethnicity_choice))
   if height_min:
     rules.append('(height IS NULL OR height >= %d)' % (height_min))
   if height_max:
     rules.append('(height IS NULL OR height <= %d)' % (height_max))
   if weight_choice:
-    rules.append('(weight IS NULL OR weight & %d)' % (weight_choice))
+    rules.append('(weight IS NULL OR (weight & %d)!=0)' % (weight_choice))
   # Only list profiles which match the other member's selection criteria
-  rules.append('(gender_choice IS NULL OR gender_choice & %d)' % (gender))
+  rules.append('(gender_choice IS NULL OR (gender_choice & %d)!=0)' % (gender))
   rules.append('(age_min IS NULL OR age_min <= %d)' % (age))
   rules.append('(age_max IS NULL OR age_max >= %d)' % (age))
   if ethnicity:
-    rules.append('(ethnicity_choice IS NULL OR ethnicity_choice & %d)' % (ethnicity))
+    rules.append('(ethnicity_choice IS NULL OR (ethnicity_choice & %d)!=0)' % (ethnicity))
   if height:
     rules.append('(height_min IS NULL OR height_min <= %d)' % (height))
     rules.append('(height_max IS NULL OR height_max >= %d)' % (height))
   if weight:
-    rules.append('(weight_choice IS NULL OR weight_choice & %d)' % (weight))
+    rules.append('(weight_choice IS NULL OR (weight_choice & %d)!=0)' % (weight))
   criteria = ' AND '.join(rules)
   order_by = ''
   if order:
@@ -96,7 +96,7 @@ def search2(distance,order,id,x,y,tz,gender,age,ethnicity,height,weight,gender_c
     dy = distance*1000
     rules.append('x BETWEEN %d AND %d' % (x-dx, x+dx))
     rules.append('y BETWEEN %d AND %d' % (y-dy, y+dy))
-  rules.append('gender & %d' % (gender_choice))
+  rules.append('(gender & %d)!=0' % (gender_choice))
   if age_min:
     now = datetime.datetime.utcnow()
     ref = Datetime(now, tz)
@@ -108,24 +108,24 @@ def search2(distance,order,id,x,y,tz,gender,age,ethnicity,height,weight,gender_c
     dob = datetime.date(ref.year-age_max-1,ref.month,ref.day)
     rules.append('dob > %s' % (Quote(str(dob))))
   if ethnicity_choice:
-    rules.append('ethnicity & %d' % (ethnicity_choice))
+    rules.append('(ethnicity & %d)!=0' % (ethnicity_choice))
   if height_min:
     rules.append('(height IS NULL OR height >= %d)' % (height_min))
   if height_max:
     rules.append('(height IS NULL OR height <= %d)' % (height_max))
   if weight_choice:
-    rules.append('(weight IS NULL OR weight & %d)' % (weight_choice))
+    rules.append('(weight IS NULL OR (weight & %d)!=0)' % (weight_choice))
   # Only list profiles which match the other member's selection criteria
-  rules.append('(gender_choice IS NULL OR gender_choice & %d)' % (gender))
+  rules.append('(gender_choice IS NULL OR (gender_choice & %d)!=0)' % (gender))
   rules.append('(age_min IS NULL OR age_min <= %d)' % (age))
   rules.append('(age_max IS NULL OR age_max >= %d)' % (age))
   if ethnicity:
-    rules.append('(ethnicity_choice IS NULL OR ethnicity_choice & %d)' % (ethnicity))
+    rules.append('(ethnicity_choice IS NULL OR (ethnicity_choice & %d)!=0)' % (ethnicity))
   if height:
     rules.append('(height_min IS NULL OR height_min <= %d)' % (height))
     rules.append('(height_max IS NULL OR height_max >= %d)' % (height))
   if weight:
-    rules.append('(weight_choice IS NULL OR weight_choice & %d)' % (weight))
+    rules.append('(weight_choice IS NULL OR (weight_choice & %d)!=0)' % (weight))
   criteria = ' AND '.join(rules)
   order_by = ''
   if order:

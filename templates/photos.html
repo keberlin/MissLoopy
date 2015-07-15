@@ -68,7 +68,7 @@
         else return "img"+pid;
       }
 
-      $scope.pids = {{ pids }};
+      $scope.pids = {{ pids|safe }};
       $scope.master = {{ master }};
       $scope.sels = [];
 

@@ -16,7 +16,7 @@ if entry:
   email = entry[1]
   name = entry[2]
   messages = []
-  db.execute('SELECT DISTINCT message FROM emails WHERE id_from=%d AND message NOT LIKE "data:image/%%"' % (id))
+  db.execute("SELECT DISTINCT message FROM emails WHERE id_from=%d AND message NOT LIKE 'data:image/%%'" % (id))
   for entry in db.fetchall():
     messages.append(entry[0])
   db.execute('SELECT COUNT(DISTINCT id_to) FROM emails WHERE id_from=%d' % (id))

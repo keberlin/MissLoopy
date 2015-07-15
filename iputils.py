@@ -4,8 +4,7 @@ import database2
 
 BASE_DIR = os.path.dirname(__file__)
 
-IP_ADDRESS_DB = os.path.join(BASE_DIR, 'ipaddress.db')
-IP_ADDRESS_PG = 'ipaddress'
+IP_ADDRESS_DB = 'ipaddress'
 
 def IpCountry(ip):
   def IpNumber(ip):
@@ -17,7 +16,7 @@ def IpCountry(ip):
   if not ip:
     return 'Unknown'
 
-  db = database2.Database(IP_ADDRESS_PG)
+  db = database2.Database(IP_ADDRESS_DB)
 
   n = IpNumber(ip)
   db.execute('SELECT country FROM ranges WHERE lower<=%d AND %d<=upper LIMIT 1' % (n, n))

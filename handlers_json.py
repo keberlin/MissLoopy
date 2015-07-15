@@ -151,7 +151,7 @@ def handle_mlpassword(entry,values,files):
   email = values['email']
 
   # Retrieve the password
-  db.execute('SELECT password FROM profiles WHERE email LIKE %s LIMIT 1' % (Quote(email)))
+  db.execute('SELECT password FROM profiles WHERE email ILIKE %s LIMIT 1' % (Quote(email)))
   entry = db.fetchone()
   if not entry:
     return {'error': 'Email address not found.'}
@@ -227,10 +227,14 @@ def handle_mlregister(entry,values,files):
   if age<18:
     return {'error': 'Sorry, you\'re too young to register.'}
 
-  db.execute('SELECT COUNT(*) FROM profiles WHERE email LIKE %s LIMIT 1' % (Quote(email)))
+  db.execute('SELECT COUNT(*) FROM profiles WHERE email ILIKE %s LIMIT 1' % (Quote(email)))
   entry = db.fetchone()
   if entry[0]:
     return {'error': 'Email address already in use.'}
+
+  db.execute('SELECT MAX(id) FROM profiles')
+  entry = db.fetchone()
+  id = entry[0]+1
 
   attributes = ['email', 'password', 'name', 'gender', 'ethnicity',
                 'height', 'weight', 'education', 'status', 'smoking', 'drinking', 'occupation', 'summary', 'description',
@@ -238,6 +242,7 @@ def handle_mlregister(entry,values,files):
 
   attrs = {}
   now = datetime.datetime.utcnow()
+  attrs['id'] = Quote(str(id))
   attrs['created2'] = Quote(str(now))
   attrs['dob'] = Quote(dt.strftime('%Y-%m-%d'))
   if 'location' in values:
@@ -268,9 +273,6 @@ def handle_mlregister(entry,values,files):
   except sqlite3.IntegrityError:
     return {'error': 'Email address already in use.'}
 
-  # Retrieve the newly created id
-  id = db.lastrowid
-
   EmailVerify(email,id)
 
   return {'code': 1002}
@@ -282,7 +284,7 @@ def handle_mlpassword(entry,values,files):
   email = values['email']
 
   # Retrieve the password
-  db.execute('SELECT password FROM profiles WHERE email LIKE %s LIMIT 1' % (Quote(email)))
+  db.execute('SELECT password FROM profiles WHERE email ILIKE %s LIMIT 1' % (Quote(email)))
   entry = db.fetchone()
   if not entry:
     return {'error': 'Email address not found.'}
@@ -298,7 +300,7 @@ def handle_mlresend(entry,values,files):
   email = values['email']
 
   # Retrieve the newly created id
-  db.execute('SELECT id FROM profiles WHERE email LIKE %s LIMIT 1' % (Quote(email)))
+  db.execute('SELECT id FROM profiles WHERE email ILIKE %s LIMIT 1' % (Quote(email)))
   entry = db.fetchone()
   if not entry:
     return {'error': 'Account not found.'}
@@ -448,7 +450,7 @@ def handle_mlspam(entry,values,files):
 
   id_spam = int(values['id'])
 
-  db.execute('SELECT DISTINCT message FROM emails WHERE id_from=%d AND id_to=%d AND message NOT LIKE "data:image/%%"' % (id_spam, id))
+  db.execute("SELECT DISTINCT message FROM emails WHERE id_from=%d AND id_to=%d AND message NOT LIKE 'data:image/%%'" % (id_spam, id))
   for entry in db.fetchall():
     message = re.sub('[\r\n]+',' ',entry[0])
     with open(os.path.join(BASE_DIR, 'junk-reported.log'), 'a') as f:
@@ -500,11 +502,12 @@ def handle_mluploadphoto(entry,values,files):
   layer.paste(mark, (im.size[0]-mark.size[0], im.size[1]-mark.size[1]))
   im = Image.composite(layer, im, layer)
 
-  db.execute('INSERT INTO photos (id) VALUES (%d)' % (id))
-  db.commit()
+  db.execute('SELECT MAX(pid) FROM photos')
+  entry = db.fetchone()
+  pid = entry[0]+1
 
-  # Retrieve the newly created id
-  pid = db.lastrowid
+  db.execute('INSERT INTO photos (pid,id) VALUES (%d,%d)' % (pid,id))
+  db.commit()
 
   # Create a photo file using pid and copy data into it
   filename = os.path.join(BASE_DIR, 'static', PhotoFilename(pid))

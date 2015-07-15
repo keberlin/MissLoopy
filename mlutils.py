@@ -9,8 +9,7 @@ from iputils import *
 
 BASE_DIR = os.path.dirname(__file__)
 
-MISS_LOOPY_DB = os.path.join(BASE_DIR, 'missloopy.db')
-MISS_LOOPY_PG = 'missloopy'
+MISS_LOOPY_DB = 'missloopy'
 
 AGE_MIN = 18
 AGE_MAX = 99
@@ -309,7 +308,7 @@ def PhotoFilename(pid):
   return os.path.join(PHOTOS_DIR, name + '.jpg')
 
 def MasterPhoto(id):
-  db.execute('SELECT pid FROM photos WHERE id=%d AND master=1 LIMIT 1' % (id))
+  db.execute('SELECT pid FROM photos WHERE id=%d AND master LIMIT 1' % (id))
   entry = db.fetchone()
   if not entry:
     db.execute('SELECT pid FROM photos WHERE id=%d LIMIT 1' % (id))
@@ -320,7 +319,7 @@ def MasterPhoto(id):
 
 def Login(email,password):
   # Authenticate
-  db.execute('SELECT * FROM profiles WHERE email LIKE %s LIMIT 1' % (Quote(email)))
+  db.execute('SELECT * FROM profiles WHERE email ILIKE %s LIMIT 1' % (Quote(email)))
   entry = db.fetchone()
   if not entry:
     return {'error': 'Email address not found.'}
@@ -351,7 +350,7 @@ def Authenticate(cookies=None,remote_addr=None):
   password = cookies['password']
 
   # Authenticate
-  db.execute('SELECT * FROM profiles WHERE id=%d AND email LIKE %s AND password=%s LIMIT 1' % (id, Quote(email), Quote(password)))
+  db.execute('SELECT * FROM profiles WHERE id=%d AND email ILIKE %s AND password=%s LIMIT 1' % (id, Quote(email), Quote(password)))
   entry = db.fetchone()
   if not entry:
     return None
@@ -401,12 +400,12 @@ def DeleteMember(id):
   db.commit()
 
 def InboxCount(id):
-  db.execute('SELECT COUNT(*) FROM emails WHERE id_to=%d AND viewed=0 AND id_from NOT IN (SELECT id_block FROM blocked WHERE id=id_to) AND id_to NOT IN (SELECT id_block FROM blocked WHERE id=id_from)' % (id))
+  db.execute('SELECT COUNT(*) FROM emails WHERE id_to=%d AND not viewed AND id_from NOT IN (SELECT id_block FROM blocked WHERE id=id_to) AND id_to NOT IN (SELECT id_block FROM blocked WHERE id=id_from)' % (id))
   entry = db.fetchone()
   return entry[0]
 
 def OutboxCount(id):
-  db.execute('SELECT COUNT(*) FROM emails WHERE id_from=%d AND viewed=0 AND id_from NOT IN (SELECT id_block FROM blocked WHERE id=id_to) AND id_to NOT IN (SELECT id_block FROM blocked WHERE id=id_from)' % (id))
+  db.execute('SELECT COUNT(*) FROM emails WHERE id_from=%d AND not viewed AND id_from NOT IN (SELECT id_block FROM blocked WHERE id=id_to) AND id_to NOT IN (SELECT id_block FROM blocked WHERE id=id_from)' % (id))
   entry = db.fetchone()
   return entry[0]
 

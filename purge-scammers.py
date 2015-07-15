@@ -19,7 +19,7 @@ with open('listed_email_365.txt', 'rb') as csvfile:
   for row in reader:
     email = row[0].decode('utf-8', 'ignore').lower()
     if email in emails:
-      db.execute('SELECT id FROM profiles WHERE email LIKE %s LIMIT 1' % (Quote(email)))
+      db.execute('SELECT id FROM profiles WHERE email ILIKE %s LIMIT 1' % (Quote(email)))
       entry = db.fetchone()
       ids.append((entry[0], email))
 

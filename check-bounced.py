@@ -17,5 +17,5 @@ emails = set([(entry[0]) for entry in db.fetchall()])
 
 for email in emails.intersection(bounced):
   print 'Bounced email address %s is registered' % (email)
-  db.execute('SELECT id,name,location,last_ip FROM profiles WHERE email LIKE %s LIMIT 1' % (Quote(email)))
+  db.execute('SELECT id,name,location,last_ip FROM profiles WHERE email ILIKE %s LIMIT 1' % (Quote(email)))
   print ' ', db.fetchone()

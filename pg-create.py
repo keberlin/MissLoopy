@@ -7,7 +7,7 @@ db = database2.Database('missloopy')
 db.execute('DROP TABLE IF EXISTS profiles')
 
 db.execute('''CREATE TABLE profiles (
-    id INTEGER PRIMARY KEY,
+    id BIGSERIAL PRIMARY KEY,
     email VARCHAR UNIQUE,
     password VARCHAR,
     created DATE,
@@ -50,27 +50,27 @@ db.execute('CREATE INDEX idx1 ON profiles (lower(email))')
 
 db.execute('DROP TABLE IF EXISTS photos')
 
-db.execute('CREATE TABLE photos (pid INTEGER PRIMARY KEY, id INTEGER, master BOOLEAN DEFAULT False)')
+db.execute('CREATE TABLE photos (pid BIGSERIAL PRIMARY KEY, id BIGINT, master BOOLEAN DEFAULT False)')
 db.execute('CREATE INDEX idx2 ON photos (id)')
 
 db.execute('DROP TABLE IF EXISTS emails')
 
-db.execute('CREATE TABLE emails (id_from INTEGER, id_to INTEGER, message VARCHAR, sent TIMESTAMP, viewed BOOLEAN DEFAULT False)')
+db.execute('CREATE TABLE emails (id_from BIGINT, id_to BIGINT, message VARCHAR, sent TIMESTAMP, viewed BOOLEAN DEFAULT False)')
 db.execute('CREATE INDEX idx3 ON emails (id_from, id_to)')
 
 db.execute('DROP TABLE IF EXISTS blocked')
 
-db.execute('CREATE TABLE blocked (id INTEGER, id_block INTEGER)')
+db.execute('CREATE TABLE blocked (id BIGINT, id_block BIGINT)')
 db.execute('CREATE INDEX idx4 ON blocked (id, id_block)')
 
 db.execute('DROP TABLE IF EXISTS favorites')
 
-db.execute('CREATE TABLE favorites (id INTEGER, id_favorite INTEGER)')
+db.execute('CREATE TABLE favorites (id BIGINT, id_favorite BIGINT)')
 db.execute('CREATE INDEX idx5 ON favorites (id, id_favorite)')
 
 db.execute('DROP TABLE IF EXISTS results')
 
-db.execute('CREATE TABLE results (id INTEGER, id_search INTEGER, id_previous INTEGER, id_next INTEGER)')
+db.execute('CREATE TABLE results (id BIGINT, id_search BIGINT, id_previous BIGINT, id_next BIGINT)')
 db.execute('CREATE INDEX idx6 ON results (id, id_search)')
 
 db.execute('DROP TABLE IF EXISTS admin')
