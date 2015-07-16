@@ -140,9 +140,9 @@ def handle_mlmasterphoto(entry,values,files):
   if entry[0] == 0:
     return {'error': 'You are not the owner of this photo.'}
   # Remove the master flag from all photos
-  db.execute('UPDATE photos SET master=0 WHERE id=%d' % (id))
+  db.execute('UPDATE photos SET master=false WHERE id=%d' % (id))
   # Restore the master flag for the selected photo
-  db.execute('UPDATE photos SET master=1 WHERE pid=%d' % (pid))
+  db.execute('UPDATE photos SET master=true WHERE pid=%d' % (pid))
   db.commit()
 
   return {'message': 'This photo has been set to your main profile photo.', 'master': pid}
@@ -399,7 +399,17 @@ def handle_mlsendemail(entry,values,files):
   if not notifications & NOT_NEW_MESSAGE:
     EmailNotify(email, id, x, y, tz, unit_distance)
 
-  return {'message': 'Your message has been sent.'}
+  d = {}
+  d['sent']     = True
+  d['message']  = mask.MaskEverything(message)
+  d['is_image'] = False
+  d['time']     = Since(now, False)
+  d['viewed']   = False
+  if not d['sent'] and not d['is_image']:
+    d['id_with'] = id
+    d['spam']    = spam.IsSpamFactored(spam.AnalyseSpam(d['message']), spammer, 2)
+
+  return {'message': 'Your message has been sent.', 'entry': d}
 
 def handle_mlsendphoto(entry,values,files):
   IMAGE_MAX_SIZE = 400

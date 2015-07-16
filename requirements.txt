@@ -5,4 +5,5 @@ Flask
 Jinja2
 nose
 Pillow
+psycopg2
 pytz

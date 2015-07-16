@@ -134,7 +134,7 @@ def parse(msg,indent=0):
       text = msg.get_payload(decode=True)
       with open('html.txt', 'w') as f:
         f.write(text)
-      soup = BeautifulSoup(text)
+      soup = BeautifulSoup(text, "html.parser")
       dict['msg'] = ''
       overflow = False
       for string in walker(soup):

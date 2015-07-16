@@ -4,10 +4,6 @@
 
 {% set heading = 'Conversation with ' + (name or '') %}
 
-{% if num_pages == 0 %}
-  {% set message = 'No messages found.' %}
-{% endif %}
-
 {% block panel_header %}
   <div class="col-xs-12">
     <table border=0 style="width:100%;border-spacing:0px 0px;border-collapse:separate">
@@ -73,6 +69,10 @@
         {% endfor %}
       </div>
     {% endfor %}
+  {% else %}
+    <div align="left">
+      <strong><span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span> No messages found.</strong>
+    </div>
   {% endif %}
 {% endblock %}
 

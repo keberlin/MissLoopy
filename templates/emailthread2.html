@@ -4,10 +4,6 @@
 
 {% set heading = 'Conversation with ' + (name or '') %}
 
-{% if num_pages == 0 %}
-  {% set message = 'No messages found.' %}
-{% endif %}
-
 {% block panel_header %}
   <div class="col-xs-12">
     <table border=0 style="width:100%;border-spacing:0px 0px;border-collapse:separate">
@@ -18,11 +14,11 @@
     <form class="form-horizontal" id="form_text" role="form">
       <div class="form-group">
         <div class="col-xs-12">
-          <textarea class="form-control" rows="5" id="message" name="message" required maxlength="3000"></textarea>
+          <textarea class="form-control" rows="5" id="message" name="message" required maxlength="3000" ng-model="message"></textarea>
         </div>
       </div>
       <div class="col-xs-12">
-        <button type="submit" class="btn btn-primary" id="send">Send</button>
+        <button type="submit" class="btn btn-primary" id="send" ng-click="send()">Send</button>
         <button type="button" class="btn btn-default" id="cancel_text">Cancel</button>
       </div>
       <input type="number" value="{{ id }}" name="id" hidden>
@@ -54,6 +50,9 @@
 {% endblock %}
 
 {% block panel %}
+  <div ng-cloak ng-if="num_pages==0" align="left">
+    <strong><span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span> No messages found.</strong>
+  </div>
   <div ng-repeat="chunk in chunked" ng-show="page==$index">
     <div ng-repeat="message in chunk">
       <!-- Image Sent -->
@@ -212,11 +211,27 @@
 
       $scope.page = 0;
       $scope.max_pages = {{ num_pages }};
-      $scope.entries = [
-        {% for entry in entries %}
-          { sent:{{ entry.sent|tojson }}, is_image:{{ entry.is_image|tojson }}, message:'{{ entry.message }}', time:'{{ entry.time }}', viewed:{{ entry.viewed|tojson }} },
-        {% endfor %} ];
+      $scope.entries = {{ entries|tojson|safe }};
       $scope.chunked = $scope.mkgrid($scope.entries);
+      $scope.num_pages = $scope.chunked.length;
+
+      // Handle Send Message button
+      $scope.send = function(e) {
+        $http.post('/mlsendemail', {message: $scope.message, id:{{ id }}}).
+          success(function(data, status, headers, config) {
+            if (data.error)
+              jsShowError(data.error);
+            else if (data.message) {
+              jsShowMessage(data.message);
+              $scope.entries.splice(0,0,data.entry);
+              $scope.chunked = $scope.mkgrid($scope.entries);
+              $scope.num_pages = $scope.chunked.length;
+            }
+          }).
+          error(function(data, status, headers, config) {
+            jsShowError("There's a problem with your Internet connection.");
+          });
+      }
     });
 
     // Handle Previous button
@@ -236,28 +251,6 @@
     $("#upload").click( function(e) {
       $("#reply_panel").hide();
       $("#send_photo_panel").show();
-    });
-    // Handle Send form button
-    $("#form_text").submit( function(e) {
-      e.preventDefault();
-      $.ajax({
-        url: '/mlsendemail',
-        type: 'POST',
-        data: $(this).serialize(),
-        error: function(jqXHR, textStatus, errorThrown) {
-          jsShowError("There's a problem with your Internet connection.");
-        },
-        success: function(data) {
-          if (data.error)
-            jsShowError(data.error);
-          else if (data.message) {
-            jsShowMessage(data.message);
-            location.reload(true);
-          }
-        },
-        async: false
-      });
-      return false;
     });
     // Handle Cancel button
     $("#cancel_text").click( function(e) {

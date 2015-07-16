@@ -11,7 +11,7 @@ db.execute('''CREATE TABLE profiles (
     email VARCHAR UNIQUE,
     password VARCHAR,
     created DATE,
-    verified BOOLEAN DEFAULT False,
+    verified BOOLEAN DEFAULT false,
     last_login TIMESTAMP,
     name VARCHAR,
     gender INTEGER,
@@ -50,12 +50,12 @@ db.execute('CREATE INDEX idx1 ON profiles (lower(email))')
 
 db.execute('DROP TABLE IF EXISTS photos')
 
-db.execute('CREATE TABLE photos (pid BIGSERIAL PRIMARY KEY, id BIGINT, master BOOLEAN DEFAULT False)')
+db.execute('CREATE TABLE photos (pid BIGSERIAL PRIMARY KEY, id BIGINT, master BOOLEAN DEFAULT false)')
 db.execute('CREATE INDEX idx2 ON photos (id)')
 
 db.execute('DROP TABLE IF EXISTS emails')
 
-db.execute('CREATE TABLE emails (id_from BIGINT, id_to BIGINT, message VARCHAR, sent TIMESTAMP, viewed BOOLEAN DEFAULT False)')
+db.execute('CREATE TABLE emails (id_from BIGINT, id_to BIGINT, message VARCHAR, sent TIMESTAMP, viewed BOOLEAN DEFAULT false)')
 db.execute('CREATE INDEX idx3 ON emails (id_from, id_to)')
 
 db.execute('DROP TABLE IF EXISTS blocked')
