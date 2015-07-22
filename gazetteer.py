@@ -1,6 +1,6 @@
 import os, math, difflib, re
 
-import database2
+import database
 
 from utils import *
 
@@ -13,7 +13,7 @@ def GazLatAdjust(y):
   return math.cos(y*2*math.pi/CIRCUM_Y)
 
 def GazLocation(location):
-  db = database2.Database(GAZETTEER_DB)
+  db = database.Database(GAZETTEER_DB)
 
   db.execute('SELECT x,y,tz FROM locations WHERE location=%s LIMIT 1' % (Quote(location)))
   return db.fetchone()
@@ -31,7 +31,7 @@ def Alias(query):
   return None
 
 def GazClosestMatchesQuick(query,max):
-  db = database2.Database(GAZETTEER_DB)
+  db = database.Database(GAZETTEER_DB)
 
   alias = Alias(query)
   if alias:
@@ -50,7 +50,7 @@ def GazClosestMatchesQuick(query,max):
   return closest[:max]
 
 def GazClosestMatches(query,max):
-  db = database2.Database(GAZETTEER_DB)
+  db = database.Database(GAZETTEER_DB)
 
   alias = Alias(query)
   if alias:

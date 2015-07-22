@@ -2,12 +2,12 @@
 
 import csv
 
-import database2
+import database
 
 from utils import *
 from mlutils import *
 
-db = database2.Database('missloopy')
+db = database.Database('missloopy')
 
 def Null(v):
   if v: return Quote(v)

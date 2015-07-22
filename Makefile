@@ -44,3 +44,6 @@ ipaddress: ipreset.py geolite2.txt dbip.txt
 
 spamkeywords.py: junk-auto.log junk-reported.log
 	./analyse-junk.sh
+
+run_tests:
+	nosetests --with-coverage

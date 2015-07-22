@@ -22,7 +22,9 @@ class Database():
       conn = None
   def execute(self,sql):
     self.cursor.execute(sql.encode('utf-8'))
-    self.lastrowid = self.cursor.lastrowid
+  def lastval(self):
+      self.execute('SELECT LASTVAL()')
+      return self.fetchone()[0]
   def fetchone(self):
     #return self.cursor.fetchone()
     entry = self.cursor.fetchone()

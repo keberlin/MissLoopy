@@ -1,8 +1,8 @@
 #!/usr/bin/python
 
-import argparse, csv
+import argparse, csv, psycopg2
 
-import psycopg2, database2
+import database
 
 from utils import *
 from iputils import *
@@ -11,7 +11,7 @@ parser = argparse.ArgumentParser(description='Create IP Address Database.')
 parser.add_argument('file', nargs='+', help='a file for conversion')
 args = parser.parse_args()
 
-db = database2.Database(IP_ADDRESS_DB)
+db = database.Database(IP_ADDRESS_DB)
 
 db.execute('DROP TABLE IF EXISTS tmp')
 db.execute('CREATE TABLE tmp (lower BIGINT NOT NULL, upper BIGINT NOT NULL, country VARCHAR)')

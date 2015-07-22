@@ -22,6 +22,9 @@ class Database():
       conn = None
   def execute(self,sql):
     self.cursor.execute(sql.encode('utf-8'))
+  def lastval(self):
+      self.execute('SELECT LASTVAL()')
+      return self.fetchone()[0]
   def fetchone(self):
     #return self.cursor.fetchone()
     entry = self.cursor.fetchone()
@@ -30,10 +33,8 @@ class Database():
     return map(lambda x:x.decode('utf-8','ignore') if isinstance(x,str) else x,entry)
   def fetchall(self):
     #return self.cursor.fetchall()
-    entries = []
     for entry in self.cursor.fetchall():
-      entries.append(map(lambda x:x.decode('utf-8','ignore') if isinstance(x,str) else x,entry))
-    return entries
+      yield map(lambda x:x.decode('utf-8','ignore') if isinstance(x,str) else x,entry)
   def rollback(self):
     return self.conn.rollback()
   def commit(self):

@@ -1,8 +1,8 @@
 #!/usr/bin/python
 
-import database2
+import database
 
-db = database2.Database('missloopy')
+db = database.Database('missloopy')
 
 db.execute('DROP TABLE IF EXISTS profiles')
 

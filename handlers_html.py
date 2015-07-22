@@ -369,7 +369,7 @@ def handle_emailthread(entry,values):
     return dict
 
   dict['entry'] = ListMember(id_with,0,location,x,y,tz,unit_distance)
-  dict['name']  = mask.MaskEverything(entry[COL_NAME])
+  dict['name']  = entry[COL_NAME]
 
   if Blocked(id_with, id):
     dict['error'] = 'This member has blocked you.'
@@ -393,7 +393,6 @@ def handle_emailthread(entry,values):
       d['id_with'] = id_with
       d['image']   = image
       d['spam']    = spam.IsSpamFactored(spam.AnalyseSpam(d['message']), spammer, 2)
-      d['message'] = mask.MaskEverything(d['message'])
     emails.append(d)
   dict['entries'] = emails
 

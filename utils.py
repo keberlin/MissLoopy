@@ -1,4 +1,4 @@
-import datetime, bisect, re, os, cgi
+import datetime, bisect, re, os, cgi, requests
 
 def Days(month,day):
   return month*31+day
@@ -84,3 +84,13 @@ def FetchRemoteAddr():
 def FetchFormFields(sep='|'):
   form = cgi.FieldStorage()
   return dict([(field,sep.join(form.getlist(field)).decode('utf-8','ignore')) for field in form.keys()])
+
+def StopForumSpamAdd(username,email,ip,evidence):
+  data = {
+    'username': username,
+    'email': email,
+    'ip': ip,
+    'api_key': 'dejcsw8ph7iu5n',
+    'evidence': evidence
+  }
+  requests.post('http://www.stopforumspam.com/add',data)

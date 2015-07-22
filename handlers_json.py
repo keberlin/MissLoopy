@@ -1,4 +1,4 @@
-import os, re, datetime, io, cStringIO, base64, sqlite3
+import os, re, datetime, io, cStringIO, base64, psycopg2
 
 from PIL import Image
 
@@ -232,17 +232,12 @@ def handle_mlregister(entry,values,files):
   if entry[0]:
     return {'error': 'Email address already in use.'}
 
-  db.execute('SELECT MAX(id) FROM profiles')
-  entry = db.fetchone()
-  id = entry[0]+1
-
   attributes = ['email', 'password', 'name', 'gender', 'ethnicity',
                 'height', 'weight', 'education', 'status', 'smoking', 'drinking', 'occupation', 'summary', 'description',
                 'gender_choice', 'ethnicity_choice', 'age_min', 'age_max', 'height_min', 'height_max', 'weight_choice', 'looking_for']
 
   attrs = {}
   now = datetime.datetime.utcnow()
-  attrs['id'] = Quote(str(id))
   attrs['created2'] = Quote(str(now))
   attrs['dob'] = Quote(dt.strftime('%Y-%m-%d'))
   if 'location' in values:
@@ -267,11 +262,14 @@ def handle_mlregister(entry,values,files):
       continue
     attrs[attr] = 'Null'
 
-  try:
-    db.execute('INSERT INTO profiles (%s) VALUES (%s)' % (','.join([(attr) for attr,value in attrs.iteritems()]), ','.join([(value) for attr,value in attrs.iteritems()])))
-    db.commit()
-  except sqlite3.IntegrityError:
-    return {'error': 'Email address already in use.'}
+  while True:
+    try:
+      db.execute('INSERT INTO profiles (%s) VALUES (%s)' % (','.join([(attr) for attr,value in attrs.iteritems()]), ','.join([(value) for attr,value in attrs.iteritems()])))
+      id = db.lastval()
+      db.commit()
+      break
+    except psycopg2.IntegrityError:
+      db.rollback()
 
   EmailVerify(email,id)
 
@@ -401,13 +399,10 @@ def handle_mlsendemail(entry,values,files):
 
   d = {}
   d['sent']     = True
-  d['message']  = mask.MaskEverything(message)
+  d['message']  = message
   d['is_image'] = False
   d['time']     = Since(now, False)
   d['viewed']   = False
-  if not d['sent'] and not d['is_image']:
-    d['id_with'] = id
-    d['spam']    = spam.IsSpamFactored(spam.AnalyseSpam(d['message']), spammer, 2)
 
   return {'message': 'Your message has been sent.', 'entry': d}
 
@@ -512,12 +507,14 @@ def handle_mluploadphoto(entry,values,files):
   layer.paste(mark, (im.size[0]-mark.size[0], im.size[1]-mark.size[1]))
   im = Image.composite(layer, im, layer)
 
-  db.execute('SELECT MAX(pid) FROM photos')
-  entry = db.fetchone()
-  pid = entry[0]+1
-
-  db.execute('INSERT INTO photos (pid,id) VALUES (%d,%d)' % (pid,id))
-  db.commit()
+  while True:
+    try:
+      db.execute('INSERT INTO photos (id) VALUES (%d)' % (id))
+      pid = db.lastval()
+      db.commit()
+      break
+    except psycopg2.IntegrityError:
+      db.rollback()
 
   # Create a photo file using pid and copy data into it
   filename = os.path.join(BASE_DIR, 'static', PhotoFilename(pid))

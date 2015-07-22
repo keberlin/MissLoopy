@@ -84,6 +84,6 @@ for item,count in keywords.iteritems():
 for item in MANDATORY:
   if item in keywords:
     continue
-  spam[item.replace(r' ',r'\W+')] = 0.5
+  spam[item.replace(r' ',r'\W+')] = 0.75
 with open('spamkeywords.py','w') as f:
   f.write('SPAM_KEYWORDS = '+str(spam)+'\n')
