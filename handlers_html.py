@@ -9,6 +9,8 @@ from mlutils import *
 from mlparse import *
 from mllist import *
 
+from logger import *
+
 db = database.Database(MISS_LOOPY_DB)
 
 # HTML Pages
@@ -368,16 +370,15 @@ def handle_emailthread(entry,values):
     dict['error'] = "This member doesn't exist or has removed their account."
     return dict
 
-  dict['entry'] = ListMember(id_with,0,location,x,y,tz,unit_distance)
-  dict['name']  = entry[COL_NAME]
-
   if Blocked(id_with, id):
     dict['error'] = 'This member has blocked you.'
     return dict
 
-  spammer = spam.AnalyseSpammer(id_with)
+  dict['entry']  = ListMember(id_with,0,location,x,y,tz,unit_distance)
+  dict['name']   = entry[COL_NAME]
+  dict['action'] = 'member'
 
-  SetLocale(country)
+  spammer = spam.AnalyseSpammer(id_with)
 
   image = PhotoFilename(MasterPhoto(id_with))
   emails = []
@@ -390,9 +391,7 @@ def handle_emailthread(entry,values):
     d['time']     = Since(entry[COL4_SENT], False)
     d['viewed']   = entry[COL4_VIEWED]
     if not d['sent'] and not d['is_image']:
-      d['id_with'] = id_with
-      d['image']   = image
-      d['spam']    = spam.IsSpamFactored(spam.AnalyseSpam(d['message']), spammer, 2)
+      d['spam']   = spam.IsSpamFactored(spam.AnalyseSpam(d['message']), spammer, 2)
     emails.append(d)
   dict['entries'] = emails
 

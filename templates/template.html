@@ -82,7 +82,7 @@
           <table border=0 style="width:100%;border-spacing:10px 0px;border-collapse:separate" id="canvas">
             <tr>
               {% if advert %}
-                <td width="15%" valign="top">
+                <td width="120px" valign="top">
                   <ul class="nav nav-pills nav-stacked">
                     <li id="dashboard" {% if nav == "dashboard" %}class="active"{% endif %}><a href="/dashboard">Home</a></li>
                     <li id="profile"   {% if nav == "profile"   %}class="active"{% endif %}><a href="/profile"  >Profile</a></li>
@@ -98,7 +98,7 @@
                   </ul>
                 </td>
               {% endif %}
-              <td width="85%" valign="top">
+              <td wwidth="100%" valign="top">
                 {% block canvas %}
                 {% endblock %}
               </td>

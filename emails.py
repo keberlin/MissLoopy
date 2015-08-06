@@ -1,9 +1,21 @@
 #!/usr/bin/python
 
+from html import *
 from mlhtml import *
 from mlutils import *
 from mllist import *
 from mlemail import *
+
+FROM = TITLE + '<noreply@' + DOMAIN + '>'
+
+def EmailNewPhoto(pid,id):
+  dict = {}
+  dict['id']  = id
+  dict['pid'] = pid
+
+  #html = RenderY('email-verify.html', dict)
+  #Email2(FROM, [email], 'Verify Registration', html, 1)
+  Email2(FROM, ['keith.hollis@gmail.com'], 'New Photo Uploaded (%d)' % (pid), HtmlLink(HtmlImage('%s/%s' % (WWW,PhotoFilename(pid)), 'width="300px"'), '%s/member?id=%d' % (WWW,id)))
 
 def EmailVerify(email,id):
   dict = {}
@@ -11,32 +23,32 @@ def EmailVerify(email,id):
   dict['email'] = email
 
   html = RenderY('email-verify.html', dict)
-  Email(email, 'Verify Registration', html, 1)
+  Email2(FROM, [email], 'Verify Registration', html, 1)
 
 def EmailPassword(email,password):
   dict = {}
   dict['password'] = password
 
   html = RenderY('email-password.html', dict)
-  Email(email, 'Password Reminder', html, 1)
+  Email2(FROM, [email], 'Password Reminder', html, 1)
 
 def EmailKicked(email):
   dict = {}
 
   html = RenderY('email-kicked.html', dict)
-  Email(email, 'Removal Alert', html)
+  Email2(FROM, [email], 'Removal Alert', html)
 
 def EmailKickedStopForumSpam(email):
   dict = {}
 
   html = RenderY('email-kicked-stopforumspam.html', dict)
-  Email(email, 'Removal Alert', html)
+  Email2(FROM, [email], 'Removal Alert', html)
 
 def EmailPhotoDeleted(email):
   dict = {}
 
   html = RenderY('email-photo-deleted.html', dict)
-  Email(email, 'Photo Removal Alert', html)
+  Email2(FROM, [email], 'Photo Removal Alert', html)
 
 def EmailWink(email,id,x,y,tz,unit_distance):
   db = database.Database(MISS_LOOPY_DB)
@@ -69,7 +81,7 @@ def EmailWink(email,id,x,y,tz,unit_distance):
   dict['entry'] = member
 
   html = RenderY('email-wink.html', dict)
-  Email(email, 'New Wink! Received', html)
+  Email2(FROM, [email], 'New Wink! Received', html)
 
 def EmailNotify(email,id,x,y,tz,unit_distance):
   db = database.Database(MISS_LOOPY_DB)
@@ -102,7 +114,7 @@ def EmailNotify(email,id,x,y,tz,unit_distance):
   dict['entry'] = member
 
   html = RenderY('email-notify.html', dict)
-  Email(email, 'New Message Received', html)
+  Email2(FROM, [email], 'New Message Received', html)
 
 def EmailNewMembers(email,ids,location,x,y,tz,unit_distance):
   db = database.Database(MISS_LOOPY_DB)
@@ -112,11 +124,11 @@ def EmailNewMembers(email,ids,location,x,y,tz,unit_distance):
   dict['entries'] = ListMembers(ids,None,location,x,y,tz,unit_distance)
 
   html = RenderY('email-newmembers.html', dict)
-  Email(email, 'New Members Available', html, 4)
+  Email2(FROM, [email], 'New Members Available', html, 4)
 
 def EmailInboxReminder(email,name):
   dict = {}
   dict['name'] = name
 
   html = RenderY('email-inbox-reminder.html', dict)
-  Email(email, 'Unread Messages Reminder', html, 1)
+  Email2(FROM, [email], 'Unread Messages Reminder', html, 1)

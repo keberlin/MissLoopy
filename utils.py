@@ -35,7 +35,9 @@ def Text(text,alt=''):
   return alt
 
 def Quote(str):
-  return "'" + re.sub(r"'",r"''",str) + "'"
+  str = re.sub(r'\\',r'\\\\',str)
+  str = re.sub(r"'",r"''",str)
+  return "'" + str + "'"
 
 def TimeDiff(td):
   def Format(unit,n):

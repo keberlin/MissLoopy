@@ -448,7 +448,14 @@ def handle_mlsendphoto(entry,values,files):
 
   EmailNotify(email, id, x, y, tz, unit_distance)
 
-  return {'message': 'Your photo has been sent.'}
+  d = {}
+  d['sent']     = True
+  d['message']  = message
+  d['is_image'] = True
+  d['time']     = Since(now, False)
+  d['viewed']   = False
+
+  return {'message': 'Your photo has been sent.', 'entry': d}
 
 def handle_mlspam(entry,values,files):
   id = entry[COL_ID]
@@ -520,7 +527,7 @@ def handle_mluploadphoto(entry,values,files):
   filename = os.path.join(BASE_DIR, 'static', PhotoFilename(pid))
   im.save(filename, 'JPEG')
 
-  Email('keith.hollis@gmail.com', 'New Photo Uploaded (%d)' % (pid), HtmlLink(HtmlImage('%s/%s' % (WWW,PhotoFilename(pid)), 'width="300px"'), '%s/member?id=%d' % (WWW,id)))
+  EmailNewPhoto(pid, id)
 
   return {'message': 'Photo uploaded successfully.', 'pid': pid}
 

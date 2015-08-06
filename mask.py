@@ -64,7 +64,6 @@ patterns.append('('+NAME+')\W*(?:[@#]|'+AT+'\W*)('+LOOSE_DOMAIN+')')
 EMAIL_PATTERN = r'|'.join([(pattern) for pattern in patterns])
 
 def MaskEmailAddresses(text):
-  return text
   if not text:
     return None
   text = re.sub(EMAIL_REGULAR, '<blocked email address>', text)
