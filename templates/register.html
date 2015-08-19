@@ -104,7 +104,11 @@
 {% endblock %}
 
 {% block scripts %}
-  <script>
+  <script language="javascript">
+    angular.module('app', [])
+    .controller('ctrl', function($scope, $http) {
+    });
+
     $('#dob').datepicker({format:'yyyy-mm-dd',endDate:'{{ dob_max }}',startView:'decade',autoclose:true});
     // Handle selection on gender field
     $('#gender').change(function() {

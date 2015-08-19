@@ -75,9 +75,13 @@ def logged_out_html():
 @application.route("/emailthread")
 @application.route("/emailthread2")
 @application.route("/inbox")
+@application.route("/inbox2")
 @application.route("/outbox")
+@application.route("/outbox2")
 @application.route("/favorites")
+@application.route("/favorites2")
 @application.route("/blocked")
+@application.route("/blocked2")
 @application.route("/account")
 @login_required
 def logged_in_html():
@@ -103,9 +107,8 @@ def logged_in_html():
   attrs['advert'] = True
   attrs['inbox']  = InboxCount(id)
   attrs['outbox'] = OutboxCount(id)
-  func = globals().get("handle_%s" % page)
+  func = globals().get("handle_%s" % (page[:-1] if page.endswith('2') else page))
   if func: attrs.update(func(g.entry,values))
-  attrs['num_pages'] = (len(attrs['entries'])+PAGE_SIZE-1)/PAGE_SIZE if 'entries' in attrs else 0
   attrs['per_page']  = PAGE_SIZE
   return render_template(page+'.html', **attrs)
 

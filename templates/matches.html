@@ -4,28 +4,81 @@
 
 {% set heading = 'Your local matches' %}
 
-{% if num_pages == 0 %}
-  {% set message = 'None found.' %}
-{% endif %}
-
 {% block panel %}
-  <div class="panel panel-info">
-    <div class="panel-body">
-      Filter: {{ criteria|e }}
-    </div>
+  <div class="col-xs-12 alert alert-info" align="left">
+    Filter: {{ criteria|e }}
+  </div>
+  <div ng-cloak ng-if="num_pages==0" class="col-xs-12 alert alert-warning" align="left">
+    <strong><span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span> None found.</strong>
   </div>
 {% endblock %}
 
 {% block list %}
-  {% if num_pages > 0 %}
-    {% for page in range(num_pages) %}
-      <div id="page{{ page }}" {% if page > 0 %}hidden{% endif %}>
-        <table class="table" border=0 style="width:100%;border-spacing:0px 0px;border-collapse:separate">
-          {% for entry in entries[page*per_page:(page+1)*per_page] %}
-            {{ macros.member(www,action,nav,type,entry) }}
-          {% endfor %}
-        </table>
-      </div>
-    {% endfor %}
-  {% endif %}
+  <div ng-repeat="chunk in chunked" ng-show="page==$index">
+    <table class="table" border=0 style="width:100%;border-spacing:0px 0px;border-collapse:separate">
+      <tr ng-repeat="entry in chunk" member entry="entry" index="$parent.$index*per_page+$index" class="profile"/>
+    </table>
+  </div>
+{% endblock %}
+
+{% block scripts %}
+  <script language="javascript">
+    angular.module('app', [])
+    .controller('ctrl', function($scope, $http) {
+      function chunk(arr, size) {
+        var newArr = [];
+        for (var i=0; i<arr.length; i+=size) {
+          var s=arr.slice(i,i+size);
+          newArr.push(s);
+        }
+        return newArr;
+      }
+      function mkgrid(entries) {
+        return chunk(entries, {{ per_page }});
+      }
+      function findentry(entries, id) {
+        for (var i=0; i<entries.length; i+=1) {
+          var entry = entries[i];
+          if (entry.id == id) return entry;
+        }
+        return null;
+      }
+
+      $scope.action = '{{ action }}';
+      $scope.nav = '{{ nav }}';
+      $scope.type = '{{ type }}';
+      $scope.per_page = {{ per_page }};
+      $scope.page = 0;
+      $scope.entries = {{ (entries or [])|tojson|safe }};
+      $scope.chunked = mkgrid($scope.entries);
+      $scope.num_pages = $scope.chunked.length;
+      $scope.sels = [];
+
+      // Handle Page buttons
+      $scope.tab = function(page) {
+        $scope.page = page;
+      }
+
+      // Handle Previous Page button
+      $scope.prev = function() {
+        if ($scope.page <= 0) return;
+        $scope.page -= 1;
+      }
+
+      // Handle Next Page button
+      $scope.next = function() {
+        if ($scope.page >= $scope.num_pages-1) return;
+        $scope.page += 1;
+      }
+
+    })
+    .directive('member', function($parse) {
+      return {
+        link: function(scope,elem,attrs) {
+          scope.entry = $parse(attrs.entry)(scope);
+        },
+        templateUrl: '/static/ng-templates/member.html'
+      }
+    });
+  </script>
 {% endblock %}

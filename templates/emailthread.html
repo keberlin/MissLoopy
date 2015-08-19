@@ -1,13 +1,11 @@
 {% extends 'template-panel.html' %}
 
-{% import 'macros.html' as macros %}
-
 {% set heading = 'Conversation with ' + (name or '') %}
 
 {% block panel_header %}
   <div class="col-xs-12">
     <table border=0 style="width:100%;border-spacing:0px 0px;border-collapse:separate">
-      {{ macros.member(www,action,nav,type,entry) }}
+      <tr member class="profile"/>
     </table>
   </div>
   <div class="col-xs-7 col-xs-offset-5" align="right" id="send_text_panel" hidden>
@@ -50,7 +48,7 @@
 {% endblock %}
 
 {% block panel %}
-  <div ng-cloak ng-if="num_pages==0" align="left">
+  <div ng-cloak ng-if="num_pages==0" class="col-xs-12 alert alert-warning" align="left">
     <strong><span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span> No messages found.</strong>
   </div>
   <div ng-repeat="chunk in chunked" ng-show="page==$index">
@@ -206,11 +204,14 @@
         return newArr;
       }
       $scope.mkgrid = function(entries) {
-        return chunk(entries, 20);
+        return chunk(entries, {{ per_page }});
       }
 
+      $scope.action = '{{ action }}';
+      $scope.nav = '{{ nav }}';
+      $scope.entry = {{ (entry or '')|tojson|safe }};
+      $scope.per_page = {{ per_page }};
       $scope.page = 0;
-      $scope.max_pages = {{ num_pages }};
       $scope.entries = {{ (entries or [])|tojson|safe }};
       $scope.chunked = $scope.mkgrid($scope.entries);
       $scope.num_pages = $scope.chunked.length;
@@ -272,6 +273,29 @@
           processData: false,
           async: true
         });
+      }
+
+      // Handle Page buttons
+      $scope.tab = function(page) {
+        $scope.page = page;
+      }
+
+      // Handle Previous Page button
+      $scope.prev = function() {
+        if ($scope.page <= 0) return;
+        $scope.page -= 1;
+      }
+
+      // Handle Next Page button
+      $scope.next = function() {
+        if ($scope.page >= $scope.num_pages-1) return;
+        $scope.page += 1;
+      }
+
+    })
+    .directive('member', function() {
+      return {
+        templateUrl: '/static/ng-templates/member.html'
       }
     });
 

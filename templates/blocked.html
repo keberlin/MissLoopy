@@ -4,83 +4,135 @@
 
 {% set heading = 'Blocked Members' %}
 
-{% if num_pages == 0 %}
-  {% set message = 'None found.' %}
-{% endif %}
-
 {% set no_panel = True %}
 
 {% block list %}
-  {% if num_pages > 0 %}
-    {% for page in range(num_pages) %}
-      <div id="page{{ page }}" {% if page > 0 %}hidden{% endif %}>
-        <table class="table" border=0 style="width:100%;border-spacing:0px 0px;border-collapse:separate">
-          {% for entry in entries[page*per_page:(page+1)*per_page] %}
-            {{ macros.member(www,action,nav,type,entry) }}
-          {% endfor %}
-        </table>
-      </div>
-    {% endfor %}
-  {% endif %}
+  <div ng-cloak ng-if="num_pages==0" class="panel-body">
+    <div class="col-xs-12 alert alert-warning" align="left">
+      <strong><span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span> None found.</strong>
+    </div>
+  </div>
+  <div ng-repeat="chunk in chunked" ng-show="page==$index">
+    <table class="table" border=0 style="width:100%;border-spacing:0px 0px;border-collapse:separate">
+      <tr ng-repeat="entry in chunk" member entry="entry" index="$parent.$index*per_page+$index" class="profile"/>
+    </table>
+  </div>
 {% endblock %}
 
 {% block actions %}
   <div class="col-xs-12">
     <br>
-    <span class="span">
-      <button type="button" class="btn btn-info" id="remove" disabled>Unblock</button>
-      <button type="button" class="btn btn-default" id="clear" disabled>Clear</button>
-    </span>
+    <button type="button" class="btn btn-info" ng-click="remove()" ng-disabled="!(sels.length>0)">Unblock</button>
+    <button type="button" class="btn btn-default" ng-click="clear()" ng-disabled="!(sels.length>0)">Clear</button>
   </div>
 {% endblock %}
 
 {% block scripts %}
   <script language="javascript">
-  // Handle logic of buttons
-  function jsEnableButtons() {
-    var n = $("img.selected").length;    
-    $("#remove").prop('disabled',(n==0));
-    $("#clear").prop('disabled',(n==0));
-  }
-  // Handle selection of members
-  $("#selection img").click(function(e) {
-    $(this).toggleClass("selected");
-    if ($(this).hasClass("selected"))
-      $(this).attr("src","{{ url_for('static', filename='images/checked.png') }}");
-    else
-      $(this).attr("src","{{ url_for('static', filename='images/unchecked.png') }}");
-    jsEnableButtons();
-  });
-  // Handle generic ajax response
-  function handleSuccess(data) {
-    if (data.error)
-      jsShowError(data.error);
-    if (data.message)
-      location.reload(true);
-  }
-  // Handle unblock button
-  $("#remove").click(function(e) {
-    var imgs = $("img.selected");
-    var data = [];
-    for (var i=0; i<imgs.length; i++)
-      data.push('id='+imgs[i].id);
-    $.ajax({
-      url: '/mlunblock',
-      type: 'POST',
-      data: data.join('&'),
-      error: function(jqXHR, textStatus, errorThrown) {
-        jsShowError("There's a problem with your Internet connection.");
-      },
-      success: handleSuccess
+    angular.module('app', [])
+    .controller('ctrl', function($scope, $http) {
+      function chunk(arr, size) {
+        var newArr = [];
+        for (var i=0; i<arr.length; i+=size) {
+          var s=arr.slice(i,i+size);
+          newArr.push(s);
+        }
+        return newArr;
+      }
+      function mkgrid(entries) {
+        return chunk(entries, {{ per_page }});
+      }
+      function findentry(entries, id) {
+        for (var i=0; i<entries.length; i+=1) {
+          var entry = entries[i];
+          if (entry.id == id) return entry;
+        }
+        return null;
+      }
+
+      $scope.action = '{{ action }}';
+      $scope.nav = '{{ nav }}';
+      $scope.type = '{{ type }}';
+      $scope.per_page = {{ per_page }};
+      $scope.page = 0;
+      $scope.entries = {{ (entries or [])|tojson|safe }};
+      $scope.chunked = mkgrid($scope.entries);
+      $scope.num_pages = $scope.chunked.length;
+      $scope.sels = [];
+
+      // Handle selection of members
+      $scope.select = function(index) {
+        if (index < 0) return;
+        var idx = $scope.sels.indexOf(index);
+        if (idx >= 0) $scope.sels.splice(idx, 1);
+        else $scope.sels.push(index);
+        var entry = $scope.entries[index];
+        entry.active = !entry.active;
+      }
+
+      // Handle Unblock button
+      $scope.remove = function(e) {
+        var ids = [];
+        for (var i in $scope.sels) {
+          var index = $scope.sels[i];
+          ids.push($scope.entries[index].id);
+        }
+        $http.post('/mlunblock', {ids: ids}).
+          success(function(data, status, headers, config) {
+            if (data.error)
+              jsShowError(data.error);
+            else if (data.message) {
+              jsShowMessage(data.message);
+              for (var i=$scope.sels.length-1; i>=0; i--) {
+                var index = $scope.sels[i];
+                $scope.entries.splice(index, 1);
+              }
+              $scope.chunked = mkgrid($scope.entries);
+              $scope.num_pages = $scope.chunked.length;
+              $scope.sels = [];
+            }
+          }).
+          error(function(data, status, headers, config) {
+            jsShowError("There's a problem with your Internet connection.");
+          });
+      }
+
+      // Handle Clear button
+      $scope.clear = function(e) {
+        for (var i in $scope.sels) {
+          var index = $scope.sels[i];
+          var entry = $scope.entries[index];
+          entry.active = false;
+        }
+        $scope.sels = [];
+      }
+
+      // Handle Page buttons
+      $scope.tab = function(page) {
+        $scope.page = page;
+      }
+
+      // Handle Previous Page button
+      $scope.prev = function() {
+        if ($scope.page <= 0) return;
+        $scope.page -= 1;
+      }
+
+      // Handle Next Page button
+      $scope.next = function() {
+        if ($scope.page >= $scope.num_pages-1) return;
+        $scope.page += 1;
+      }
+
+    })
+    .directive('member', function($parse) {
+      return {
+        link: function(scope,elem,attrs) {
+          scope.entry = $parse(attrs.entry)(scope);
+          scope.index = $parse(attrs.index)(scope);
+        },
+        templateUrl: '/static/ng-templates/member.html'
+      }
     });
-  });
-  // Handle clear button
-  $("#clear").click(function(e) {      
-    var imgs = $("img.selected");
-    for (var i=0; i<imgs.length; i++)
-      $(imgs[i]).attr("src","{{ url_for('static', filename='images/unchecked.png') }}");
-    imgs.removeClass("selected");
-    jsEnableButtons();
-  });
   </script>
 {% endblock %}

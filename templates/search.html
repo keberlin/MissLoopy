@@ -110,7 +110,11 @@
 {% endblock %}
 
 {% block scripts %}
-  <script>
+  <script language="javascript">
+    angular.module('app', [])
+    .controller('ctrl', function($scope, $http) {
+    });
+
     // Handle selection on distance field
     $(window).load(function() {
       if ($('#distance').val() == "") // Worldwide

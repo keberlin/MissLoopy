@@ -13,6 +13,8 @@ from mlutils import *
 from mlparse import *
 from mlemail import *
 
+from logger import *
+
 BASE_DIR = os.path.dirname(__file__)
 
 db = database.Database(MISS_LOOPY_DB)
@@ -91,7 +93,8 @@ def handle_mlblock(entry,values,files):
 def handle_mldeletefavorite(entry,values,files):
   id = entry[COL_ID]
 
-  ids = map(lambda x:int(x), values['id'].split('|'))
+  if 'ids' in values: ids = values['ids']
+  else: ids = map(lambda x:int(x), values['id'].split('|'))
 
   for id_favorite in ids:
     db.execute('DELETE FROM favorites WHERE id=%d AND id_favorite=%d' % (id, id_favorite))
@@ -154,7 +157,7 @@ def handle_mlpassword(entry,values,files):
   db.execute('SELECT password FROM profiles WHERE email ILIKE %s LIMIT 1' % (Quote(email)))
   entry = db.fetchone()
   if not entry:
-    return {'error': 'Email address not found.'}
+    return {'error': 'Email Address not found.'}
 
   EmailPassword(email,entry[0])
 
@@ -220,6 +223,8 @@ def handle_mlregister(entry,values,files):
   dob      = values['dob']
   location = values['location']
 
+  if not ParseEmail(email):
+    return {'error': 'Email Address not valid.'}
   dt = ParseDob(dob)
   if not dt or dt.year < 1900:
     return {'error': 'Date of birth not valid.'}
@@ -230,7 +235,7 @@ def handle_mlregister(entry,values,files):
   db.execute('SELECT COUNT(*) FROM profiles WHERE email ILIKE %s LIMIT 1' % (Quote(email)))
   entry = db.fetchone()
   if entry[0]:
-    return {'error': 'Email address already in use.'}
+    return {'error': 'Email Address already in use.'}
 
   attributes = ['email', 'password', 'name', 'gender', 'ethnicity',
                 'height', 'weight', 'education', 'status', 'smoking', 'drinking', 'occupation', 'summary', 'description',
@@ -268,8 +273,14 @@ def handle_mlregister(entry,values,files):
       id = db.lastval()
       db.commit()
       break
-    except psycopg2.IntegrityError:
+    except psycopg2.IntegrityError as e:
       db.rollback()
+      id = db.lastval()
+      db.execute('SELECT COUNT(*) FROM profiles WHERE id=%d' % (id))
+      entry = db.fetchone()
+      if entry[0] == 0:
+        logger.error('ERROR: Problem registering %s' % repr(attrs))
+        raise e
 
   EmailVerify(email,id)
 
@@ -285,7 +296,7 @@ def handle_mlpassword(entry,values,files):
   db.execute('SELECT password FROM profiles WHERE email ILIKE %s LIMIT 1' % (Quote(email)))
   entry = db.fetchone()
   if not entry:
-    return {'error': 'Email address not found.'}
+    return {'error': 'Email Address not found.'}
 
   EmailPassword(email,entry[0])
 
@@ -473,7 +484,8 @@ def handle_mlspam(entry,values,files):
 def handle_mlunblock(entry,values,files):
   id = entry[COL_ID]
 
-  ids = map(lambda x:int(x), values['id'].split('|'))
+  if 'ids' in values: ids = values['ids']
+  else: ids = map(lambda x:int(x), values['id'].split('|'))
 
   for id_block in ids:
     db.execute('DELETE FROM blocked WHERE id=%d AND id_block=%d' % (id, id_block))

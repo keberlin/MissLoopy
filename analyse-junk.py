@@ -12,7 +12,7 @@ MANDATORY = ['western union', 'proposal', 'money', 'usd', 'solicitor', 'lawyer',
              'results', 'gbp', 'jackpot', 'reference', 'important', 'yahoo', 'gmail', 'hotmail', 'outlook', 'live', 'skype',
              'rocketmail', 'facebook', 'ymail', 'loan', 'dollar', 'apply', 'collateral']
 
-EXCLUSIONS = ['hello']
+EXCLUSIONS = ['hello', 'wink']
 
 message_count = 0
 keywords = {}

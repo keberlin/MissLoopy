@@ -282,7 +282,7 @@ def handle_member(entry,values):
   db.execute('SELECT * FROM profiles WHERE verified AND id=%d LIMIT 1' % (id_view))
   entry = db.fetchone()
   if not entry:
-    dict['error'] = "This member doesn't exist or has removed their account."
+    dict['error'] = 'This member does not exist or has removed their account.'
     return dict
 
   dict['name'] = mask.MaskEverything(entry[COL_NAME])
@@ -338,9 +338,6 @@ def handle_member(entry,values):
     dict['images'].append(PhotoFilename(pid))
 
   return dict
-
-def handle_emailthread2(entry,values):
-  return handle_emailthread(entry,values)
 
 def handle_emailthread(entry,values):
   if not values.get('id'):

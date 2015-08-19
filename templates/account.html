@@ -37,7 +37,11 @@
 {% endblock %}
 
 {% block scripts %}
-  <script>
+  <script language="javascript">
+    angular.module('app', [])
+    .controller('ctrl', function($scope, $http) {
+    });
+
     // Handle submit of update form
     $('#form').submit( function(e) {
       e.preventDefault();

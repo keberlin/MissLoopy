@@ -13,11 +13,11 @@ def parse(msg):
     if not recipient:
       recipient = msg.get('Final-Recipient')
     if not recipient:
-      logger.error('noreply: Could not find recipient in %s' % (msg))
+      logger.error('ERROR: noreply: Could not find recipient in %s' % (msg))
       return None
     m = re.search(r'rfc822; *(.*)',recipient)
     if not m:
-      logger.error('noreply: Did not understand recipient %s' % (recipient))
+      logger.error('ERROR: noreply: Did not understand recipient %s' % (recipient))
       return None
     return m.group(1)
   if msg.is_multipart():

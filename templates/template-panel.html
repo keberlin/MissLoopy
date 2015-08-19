@@ -1,11 +1,5 @@
 {% extends 'template.html' %}
 
-{% if entries %}
-  {% set num_pages = ((entries|length+per_page-1)/per_page)|int %}
-{% else %}
-  {% set num_pages = 0 %}
-{% endif %}
-
 {% block canvas %}
   {% if partial %}
     <div class="col-md-{{ partial }} col-md-offset-{{ ((12-partial)/2)|int }} col-xs-12">
@@ -23,29 +17,24 @@
             </td>
           {% endif %}
         </tr>
-      </table></div>
-      {% if error or message or not no_panel %}
-        <div class="panel-body">
-          {% if error %}
-            <div class="col-xs-12 alert alert-danger">
-              <strong><span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span> {{ error }}</strong>
-            </div>
-          {% else %}
-            {% block panel_header %}
-            {% endblock %}
-            {% if message %}
-              <div align="left">
-                <strong><span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span> {{ message }}</strong>
-              </div>
-            {% else %}
-              {% block panel %}
-              {% endblock %}
-            {% endif %}
-            {% block panel_footer %}
-            {% endblock %}
-          {% endif %}
-        </div><!-- panel-body -->
+      </table>
+    </div>
+    {% if error or not no_panel %}
+      <div class="panel-body">
+        {% if error %}
+        <div class="col-xs-12 alert alert-danger">
+          <strong><span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span> {{ error }}</strong>
+        </div>
+      {% else %}
+        {% block panel_header %}
+        {% endblock %}
+        {% block panel %}
+        {% endblock %}
+        {% block panel_footer %}
+        {% endblock %}
       {% endif %}
+      </div><!-- panel-body -->
+    {% endif %}
 
     {% block list %}
     {% endblock %}
@@ -54,17 +43,13 @@
     {% endblock %}
   </div><!-- panel -->
 
-  {% if num_pages > 1 %}
-    <div align="center" id="pagetabs">
-      <ul class="pagination">
-        <li id="previous"><span>&laquo;</span></li>
-        {% for page in range(num_pages) %}
-          <li id="tab{{ page }}" {% if page == 0 %}class="active"{% endif %}><span>{{ page+1 }}</span></li>
-        {% endfor %}
-        <li id="next"><span>&raquo;</span></li>
-      </ul>
-    </div>
-  {% endif %}
+  <div ng-cloak ng-if="num_pages>1" align="center" id="pagetabs">
+    <ul class="pagination">
+      <li ng-click="prev()" ng-disabled="page==0"><span>&laquo;</span></li>
+      <li ng-repeat="chunk in chunked" ng-class="{active:page==$index}" ng-click="tab($index)"><span>{% raw %}{{$index+1}}{% endraw %}</span></li>
+      <li ng-click="next()" ng-disabled="page==num_pages-1"><span>&raquo;</span></li>
+    </ul>
+  </div>
 
   {% if partial %}
     </div>
@@ -87,38 +72,6 @@
       </div>
     {% endif %}
   {% endif %}
-
-  <script>
-    {% if num_pages %}
-      // Handle selection of pages
-      var page = 0;
-      var max_pages = {{ num_pages }};
-      function jsShowPage(m,n) {
-        $("#page"+m).hide();
-        $("#page"+n).show();
-        $("#tab"+m).removeClass('active');
-        $("#tab"+n).addClass('active');
-      }
-      $("#pagetabs li").on("click", function(e) {
-        var name = $(this).attr('id');
-        if (name == "previous") {
-          if (page == 0)
-            return;
-          jsShowPage(page,--page);
-        }
-        else if (name == "next") {
-          if (page == max_pages-1)
-            return;
-          jsShowPage(page,++page);
-        }
-        else {
-          var n = name.substring(3);
-          jsShowPage(page,n);
-          page = n;
-        }
-      });
-    {% endif %}
-  </script>
 
   {% block scripts %}
   {% endblock %}

@@ -1,0 +1,75 @@
+    <td valign="middle">
+      <a href="/{{action}}?nav={{nav}}&id={{entry.id}}">
+        <table border=0 style="width:100%;border-spacing:5px 5px;border-collapse:separate">
+          <tr>
+            <td width="10%" valign="middle">
+              <img ng-src="/static/{{entry.image}}" width="100%" style="min-width:50px">
+            </td>
+            <td width="90%" valign="middle">
+              <table cols=4 border=0 style="width:100%;border-spacing:5px 0px;border-collapse:separate">
+                <tr>
+                  <td width="20%">
+                    <b>Name</b>
+                  </td>
+                  <td width="40%">
+                    {{entry.name}} ({{entry.gender}})
+                  </td>
+                  <td width="20%">
+                    <b>Age</b>
+                  </td>
+                  <td width="20%">
+                    {{entry.age}} ({{entry.starsign}})
+                  </td>
+                <tr>
+                  <td width="20%">
+                    <b>Ethnicity</b>
+                  </td>
+                  <td width="40%">
+                    {{entry.ethnicity}}
+                  </td>
+                  <td width="20%">
+                    <b>Distance</b>
+                  </td>
+                  <td width="20%">
+                    {{entry.distance}}
+                  </td>
+                <tr>
+                  <td width="20%">
+                    <b>Last login</b>
+                  </td>
+                  <td width="40%">
+                    {{entry.last_login}} (<span ng-class="{mismatch:entry.login_country!=entry.country}">{{entry.login_country}}</span>)
+                  </td>
+                  <td width="20%">
+                    <b>Date joined</b>
+                  </td>
+                  <td width="20%">
+                    {{entry.created}}
+                  </td>
+                <tr>
+                  <td width="20%">
+                    <b>Location</b>
+                  </td>
+                  <td colspan=3>
+                    {{entry.location}}
+                  </td>
+                <tr>
+                  <td width="20%">
+                    <b>Summary</b>
+                  </td>
+                  <td colspan=3>
+                    {{entry.summary}}
+                  </td>
+              </table>
+            </td>
+          </tr>
+        </table>
+      </a>
+    </td>
+    <td ng-if="type=='full'" valign="middle">
+      <img ng-cloak ng-if="entry.active" src="/static/images/checked.png" width="20px" height="20px" ng-click="select(index)">
+      <img ng-cloak ng-if="!entry.active" src="/static/images/unchecked.png" width="20px" height="20px" ng-click="select(index)">
+    </td>
+    <td ng-if="type=='number' && entry.active" valign="middle">
+      <h4><span class="label label-primary">{{entry.active}}</span></h4>
+    </td>

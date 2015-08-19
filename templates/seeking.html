@@ -77,7 +77,11 @@
 {% endblock %}
 
 {% block scripts %}
-  <script>
+  <script language="javascript">
+    angular.module('app', [])
+    .controller('ctrl', function($scope, $http) {
+    });
+
     // Handle generic ajax response
     function handleSuccess(data) {
       if (data.error)

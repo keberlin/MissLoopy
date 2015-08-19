@@ -219,6 +219,12 @@
   <script src="https://maps.googleapis.com/maps/api/js?sensor=true"></script>
 
   <script language="javascript">
+    angular.module('app', [])
+    .controller('ctrl', function($scope, $http) {
+      $scope.error = "{{ error or '' }}";
+    });
+
+    {% if not error %}
     var map = null;
     function initialize(e) {
       var map_canvas = document.getElementById('map-canvas');
@@ -254,6 +260,8 @@
       }
     });
     //google.maps.event.addDomListener(window, 'load', initialize);
+    {% endif %}
+
     // Handle Previous button
     $("#previous").click( function(e) {
       window.location = "/member?nav={{ nav }}&id={{ id_previous }}";

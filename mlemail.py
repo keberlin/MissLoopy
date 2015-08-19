@@ -13,9 +13,6 @@ def Email2(sender,to,subject,message,importance=3):
   msg['To']         = ', '.join(to)
   msg['X-Priority'] = str(importance)
   msg.attach(MIMEText(message, 'html'))
-  try:
-    server = smtplib.SMTP('localhost')
-    server.sendmail(sender, to, msg.as_string())
-    server.quit()
-  except:
-    pass
+  server = smtplib.SMTP('localhost')
+  server.sendmail(sender, to, msg.as_string())
+  server.quit()

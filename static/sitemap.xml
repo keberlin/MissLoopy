@@ -6,7 +6,7 @@
                       http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
  <url>
   <loc>http://www.missloopy.com/</loc>
-  <lastmod>2015-07-16T07:36:51Z</lastmod>
+  <lastmod>2015-08-11T12:31:35Z</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
@@ -1453,17 +1453,17 @@
  </url>
  <url>
   <loc>http://www.missloopy.com/members/</loc>
-  <lastmod>2015-07-31T03:01:04Z</lastmod>
+  <lastmod>2015-08-14T01:01:09Z</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
   <loc>http://www.missloopy.com/members/all.html</loc>
-  <lastmod>2015-07-31T04:01:04Z</lastmod>
+  <lastmod>2015-08-14T04:08:01Z</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
   <loc>http://www.missloopy.com/members/member1.html</loc>
-  <lastmod>2015-07-30T09:01:06Z</lastmod>
+  <lastmod>2015-08-12T15:01:11Z</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
@@ -1493,7 +1493,7 @@
  </url>
  <url>
   <loc>http://www.missloopy.com/members/member10003.html</loc>
-  <lastmod>2015-07-30T17:01:05Z</lastmod>
+  <lastmod>2015-08-01T09:01:06Z</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
@@ -1728,7 +1728,7 @@
  </url>
  <url>
   <loc>http://www.missloopy.com/members/member1008.html</loc>
-  <lastmod>2015-07-23T01:01:07Z</lastmod>
+  <lastmod>2015-08-10T20:01:05Z</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
@@ -2753,7 +2753,7 @@
  </url>
  <url>
   <loc>http://www.missloopy.com/members/member1039.html</loc>
-  <lastmod>2015-07-23T04:01:05Z</lastmod>
+  <lastmod>2015-08-10T15:01:05Z</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
@@ -3043,7 +3043,7 @@
  </url>
  <url>
   <loc>http://www.missloopy.com/members/member1047.html</loc>
-  <lastmod>2015-07-23T06:01:04Z</lastmod>
+  <lastmod>2015-08-10T20:01:06Z</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
@@ -3343,7 +3343,7 @@
  </url>
  <url>
   <loc>http://www.missloopy.com/members/member1056.html</loc>
-  <lastmod>2015-07-23T09:01:05Z</lastmod>
+  <lastmod>2015-08-10T21:01:07Z</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
@@ -3664,6 +3664,11 @@
  <url>
   <loc>http://www.missloopy.com/members/member10659.html</loc>
   <lastmod>2015-05-28T19:19:28Z</lastmod>
+  <priority>0.5000</priority>
+ </url>
+ <url>
+  <loc>http://www.missloopy.com/members/member1066.html</loc>
+  <lastmod>2015-08-10T22:01:05Z</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
@@ -4077,6 +4082,11 @@
   <priority>0.5000</priority>
  </url>
  <url>
+  <loc>http://www.missloopy.com/members/member108.html</loc>
+  <lastmod>2015-08-05T16:01:10Z</lastmod>
+  <priority>0.5000</priority>
+ </url>
+ <url>
   <loc>http://www.missloopy.com/members/member1080.html</loc>
   <lastmod>2015-05-28T19:03:24Z</lastmod>
   <priority>0.5000</priority>
@@ -4178,7 +4188,7 @@
  </url>
  <url>
   <loc>http://www.missloopy.com/members/member1083.html</loc>
-  <lastmod>2015-07-30T12:01:09Z</lastmod>
+  <lastmod>2015-08-04T13:01:08Z</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
@@ -4328,7 +4338,7 @@
  </url>
  <url>
   <loc>http://www.missloopy.com/members/member1087.html</loc>
-  <lastmod>2015-05-28T19:03:25Z</lastmod>
+  <lastmod>2015-08-10T23:01:05Z</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
@@ -4423,7 +4433,7 @@
  </url>
  <url>
   <loc>http://www.missloopy.com/members/member109.html</loc>
-  <lastmod>2015-07-20T18:01:06Z</lastmod>
+  <lastmod>2015-08-07T07:01:07Z</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
@@ -4613,7 +4623,7 @@
  </url>
  <url>
   <loc>http://www.missloopy.com/members/member1097.html</loc>
-  <lastmod>2015-07-24T21:01:07Z</lastmod>
+  <lastmod>2015-08-13T14:01:08Z</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
@@ -5128,7 +5138,7 @@
  </url>
  <url>
   <loc>http://www.missloopy.com/members/member1112.html</loc>
-  <lastmod>2015-07-25T22:01:03Z</lastmod>
+  <lastmod>2015-08-08T13:01:04Z</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
@@ -5238,7 +5248,7 @@
  </url>
  <url>
   <loc>http://www.missloopy.com/members/member1115.html</loc>
-  <lastmod>2015-07-31T02:01:04Z</lastmod>
+  <lastmod>2015-08-06T10:01:11Z</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
@@ -5283,7 +5293,7 @@
  </url>
  <url>
   <loc>http://www.missloopy.com/members/member1117.html</loc>
-  <lastmod>2015-07-26T17:01:07Z</lastmod>
+  <lastmod>2015-08-12T10:01:06Z</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
@@ -5698,7 +5708,7 @@
  </url>
  <url>
   <loc>http://www.missloopy.com/members/member1128.html</loc>
-  <lastmod>2015-07-28T21:01:04Z</lastmod>
+  <lastmod>2015-08-11T08:01:07Z</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
@@ -5983,7 +5993,7 @@
  </url>
  <url>
   <loc>http://www.missloopy.com/members/member1134.html</loc>
-  <lastmod>2015-07-28T22:01:04Z</lastmod>
+  <lastmod>2015-08-13T13:01:10Z</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
@@ -6128,7 +6138,7 @@
  </url>
  <url>
   <loc>http://www.missloopy.com/members/member1138.html</loc>
-  <lastmod>2015-07-29T19:01:06Z</lastmod>
+  <lastmod>2015-07-31T06:01:04Z</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
@@ -6308,7 +6318,7 @@
  </url>
  <url>
   <loc>http://www.missloopy.com/members/member1142.html</loc>
-  <lastmod>2015-07-29T09:01:04Z</lastmod>
+  <lastmod>2015-08-11T07:01:04Z</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
@@ -6353,7 +6363,7 @@
  </url>
  <url>
   <loc>http://www.missloopy.com/members/member1143.html</loc>
-  <lastmod>2015-07-29T18:01:05Z</lastmod>
+  <lastmod>2015-08-11T08:01:07Z</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
@@ -6518,7 +6528,7 @@
  </url>
  <url>
   <loc>http://www.missloopy.com/members/member1147.html</loc>
-  <lastmod>2015-07-30T13:01:05Z</lastmod>
+  <lastmod>2015-08-13T20:01:11Z</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
@@ -6553,7 +6563,7 @@
  </url>
  <url>
   <loc>http://www.missloopy.com/members/member1148.html</loc>
-  <lastmod>2015-07-30T13:01:05Z</lastmod>
+  <lastmod>2015-08-11T08:01:07Z</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
@@ -6843,7 +6853,7 @@
  </url>
  <url>
   <loc>http://www.missloopy.com/members/member1155.html</loc>
-  <lastmod>2015-07-30T15:01:05Z</lastmod>
+  <lastmod>2015-08-12T13:01:08Z</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
@@ -6888,7 +6898,7 @@
  </url>
  <url>
   <loc>http://www.missloopy.com/members/member1156.html</loc>
-  <lastmod>2015-07-30T21:01:03Z</lastmod>
+  <lastmod>2015-08-11T21:01:04Z</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
@@ -7003,7 +7013,7 @@
  </url>
  <url>
   <loc>http://www.missloopy.com/members/member1159.html</loc>
-  <lastmod>2015-07-30T20:01:04Z</lastmod>
+  <lastmod>2015-08-11T09:01:10Z</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
@@ -7662,6 +7672,11 @@
   <priority>0.5000</priority>
  </url>
  <url>
+  <loc>http://www.missloopy.com/members/member1176.html</loc>
+  <lastmod>2015-07-31T20:01:05Z</lastmod>
+  <priority>0.5000</priority>
+ </url>
+ <url>
   <loc>http://www.missloopy.com/members/member11760.html</loc>
   <lastmod>2014-12-02T21:01:05Z</lastmod>
   <priority>0.5000</priority>
@@ -8152,6 +8167,11 @@
   <priority>0.5000</priority>
  </url>
  <url>
+  <loc>http://www.missloopy.com/members/member1188.html</loc>
+  <lastmod>2015-08-11T09:01:10Z</lastmod>
+  <priority>0.5000</priority>
+ </url>
+ <url>
   <loc>http://www.missloopy.com/members/member11880.html</loc>
   <lastmod>2014-12-07T12:01:06Z</lastmod>
   <priority>0.5000</priority>
@@ -8202,6 +8222,11 @@
   <priority>0.5000</priority>
  </url>
  <url>
+  <loc>http://www.missloopy.com/members/member1189.html</loc>
+  <lastmod>2015-08-01T14:01:04Z</lastmod>
+  <priority>0.5000</priority>
+ </url>
+ <url>
   <loc>http://www.missloopy.com/members/member11890.html</loc>
   <lastmod>2015-04-23T08:01:27Z</lastmod>
   <priority>0.5000</priority>
@@ -8248,7 +8273,7 @@
  </url>
  <url>
   <loc>http://www.missloopy.com/members/member1190.html</loc>
-  <lastmod>2014-07-16T15:31:19Z</lastmod>
+  <lastmod>2015-08-12T06:01:05Z</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
@@ -8492,6 +8517,11 @@
   <priority>0.5000</priority>
  </url>
  <url>
+  <loc>http://www.missloopy.com/members/member1196.html</loc>
+  <lastmod>2015-08-02T08:01:06Z</lastmod>
+  <priority>0.5000</priority>
+ </url>
+ <url>
   <loc>http://www.missloopy.com/members/member11961.html</loc>
   <lastmod>2015-05-28T19:21:08Z</lastmod>
   <priority>0.5000</priority>
@@ -8559,6 +8589,11 @@
  <url>
   <loc>http://www.missloopy.com/members/member11979.html</loc>
   <lastmod>2014-12-09T07:01:04Z</lastmod>
+  <priority>0.5000</priority>
+ </url>
+ <url>
+  <loc>http://www.missloopy.com/members/member1198.html</loc>
+  <lastmod>2015-08-11T09:01:10Z</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
@@ -8633,7 +8668,7 @@
  </url>
  <url>
   <loc>http://www.missloopy.com/members/member12.html</loc>
-  <lastmod>2015-07-18T12:01:05Z</lastmod>
+  <lastmod>2015-08-05T11:01:18Z</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
@@ -8684,6 +8719,11 @@
  <url>
   <loc>http://www.missloopy.com/members/member12009.html</loc>
   <lastmod>2014-12-18T15:01:07Z</lastmod>
+  <priority>0.5000</priority>
+ </url>
+ <url>
+  <loc>http://www.missloopy.com/members/member1201.html</loc>
+  <lastmod>2015-08-13T06:01:08Z</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
@@ -8802,6 +8842,11 @@
   <priority>0.5000</priority>
  </url>
  <url>
+  <loc>http://www.missloopy.com/members/member1204.html</loc>
+  <lastmod>2015-08-11T10:01:06Z</lastmod>
+  <priority>0.5000</priority>
+ </url>
+ <url>
   <loc>http://www.missloopy.com/members/member12040.html</loc>
   <lastmod>2015-05-28T19:21:17Z</lastmod>
   <priority>0.5000</priority>
@@ -8903,7 +8948,7 @@
  </url>
  <url>
   <loc>http://www.missloopy.com/members/member12065.html</loc>
-  <lastmod>2015-07-15T12:01:04Z</lastmod>
+  <lastmod>2015-08-12T04:01:08Z</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
@@ -9228,7 +9273,7 @@
  </url>
  <url>
   <loc>http://www.missloopy.com/members/member12144.html</loc>
-  <lastmod>2015-05-28T19:21:26Z</lastmod>
+  <lastmod>2015-08-11T18:01:09Z</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
@@ -9323,7 +9368,7 @@
  </url>
  <url>
   <loc>http://www.missloopy.com/members/member1217.html</loc>
-  <lastmod>2014-07-16T15:31:19Z</lastmod>
+  <lastmod>2015-08-04T04:01:08Z</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
@@ -9394,6 +9439,11 @@
  <url>
   <loc>http://www.missloopy.com/members/member12185.html</loc>
   <lastmod>2015-05-28T19:21:30Z</lastmod>
+  <priority>0.5000</priority>
+ </url>
+ <url>
+  <loc>http://www.missloopy.com/members/member12186249.html</loc>
+  <lastmod>2015-08-05T06:01:22Z</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
@@ -9557,6 +9607,11 @@
   <priority>0.5000</priority>
  </url>
  <url>
+  <loc>http://www.missloopy.com/members/member1222.html</loc>
+  <lastmod>2015-08-08T08:01:08Z</lastmod>
+  <priority>0.5000</priority>
+ </url>
+ <url>
   <loc>http://www.missloopy.com/members/member12220.html</loc>
   <lastmod>2014-12-17T10:01:18Z</lastmod>
   <priority>0.5000</priority>
@@ -9598,7 +9653,7 @@
  </url>
  <url>
   <loc>http://www.missloopy.com/members/member1223.html</loc>
-  <lastmod>2014-07-16T15:31:19Z</lastmod>
+  <lastmod>2015-08-04T06:01:04Z</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
@@ -9649,6 +9704,11 @@
  <url>
   <loc>http://www.missloopy.com/members/member12248.html</loc>
   <lastmod>2015-05-28T19:21:36Z</lastmod>
+  <priority>0.5000</priority>
+ </url>
+ <url>
+  <loc>http://www.missloopy.com/members/member1225.html</loc>
+  <lastmod>2015-08-04T14:01:08Z</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
@@ -10002,6 +10062,11 @@
   <priority>0.5000</priority>
  </url>
  <url>
+  <loc>http://www.missloopy.com/members/member1234.html</loc>
+  <lastmod>2015-08-05T10:01:08Z</lastmod>
+  <priority>0.5000</priority>
+ </url>
+ <url>
   <loc>http://www.missloopy.com/members/member12341.html</loc>
   <lastmod>2014-12-22T19:01:05Z</lastmod>
   <priority>0.5000</priority>
@@ -10159,6 +10224,11 @@
  <url>
   <loc>http://www.missloopy.com/members/member12387.html</loc>
   <lastmod>2014-12-21T07:01:07Z</lastmod>
+  <priority>0.5000</priority>
+ </url>
+ <url>
+  <loc>http://www.missloopy.com/members/member1239.html</loc>
+  <lastmod>2015-08-05T14:01:15Z</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
@@ -10812,6 +10882,11 @@
   <priority>0.5000</priority>
  </url>
  <url>
+  <loc>http://www.missloopy.com/members/member1256.html</loc>
+  <lastmod>2015-08-08T12:01:04Z</lastmod>
+  <priority>0.5000</priority>
+ </url>
+ <url>
   <loc>http://www.missloopy.com/members/member12560.html</loc>
   <lastmod>2015-05-28T19:22:01Z</lastmod>
   <priority>0.5000</priority>
@@ -10923,7 +10998,7 @@
  </url>
  <url>
   <loc>http://www.missloopy.com/members/member1259.html</loc>
-  <lastmod>2015-05-28T19:03:44Z</lastmod>
+  <lastmod>2015-08-13T08:01:05Z</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
@@ -11058,7 +11133,7 @@
  </url>
  <url>
   <loc>http://www.missloopy.com/members/member1263.html</loc>
-  <lastmod>2014-04-01T03:42:27Z</lastmod>
+  <lastmod>2015-08-05T05:01:13Z</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
@@ -11233,7 +11308,7 @@
  </url>
  <url>
   <loc>http://www.missloopy.com/members/member1268.html</loc>
-  <lastmod>2014-07-16T15:31:19Z</lastmod>
+  <lastmod>2015-08-04T18:01:23Z</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
@@ -11442,6 +11517,11 @@
   <priority>0.5000</priority>
  </url>
  <url>
+  <loc>http://www.missloopy.com/members/member1273.html</loc>
+  <lastmod>2015-08-06T20:01:09Z</lastmod>
+  <priority>0.5000</priority>
+ </url>
+ <url>
   <loc>http://www.missloopy.com/members/member12730.html</loc>
   <lastmod>2015-05-28T19:22:13Z</lastmod>
   <priority>0.5000</priority>
@@ -11469,6 +11549,11 @@
  <url>
   <loc>http://www.missloopy.com/members/member12736.html</loc>
   <lastmod>2015-05-28T19:22:13Z</lastmod>
+  <priority>0.5000</priority>
+ </url>
+ <url>
+  <loc>http://www.missloopy.com/members/member1274.html</loc>
+  <lastmod>2015-08-04T17:01:09Z</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
@@ -11672,6 +11757,11 @@
   <priority>0.5000</priority>
  </url>
  <url>
+  <loc>http://www.missloopy.com/members/member1280.html</loc>
+  <lastmod>2015-08-04T18:01:24Z</lastmod>
+  <priority>0.5000</priority>
+ </url>
+ <url>
   <loc>http://www.missloopy.com/members/member12802.html</loc>
   <lastmod>2015-01-02T09:01:06Z</lastmod>
   <priority>0.5000</priority>
@@ -11694,6 +11784,11 @@
  <url>
   <loc>http://www.missloopy.com/members/member12809.html</loc>
   <lastmod>2015-05-28T19:22:19Z</lastmod>
+  <priority>0.5000</priority>
+ </url>
+ <url>
+  <loc>http://www.missloopy.com/members/member1281.html</loc>
+  <lastmod>2015-08-04T17:01:09Z</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
@@ -11824,6 +11919,11 @@
  <url>
   <loc>http://www.missloopy.com/members/member12849.html</loc>
   <lastmod>2015-05-28T19:22:23Z</lastmod>
+  <priority>0.5000</priority>
+ </url>
+ <url>
+  <loc>http://www.missloopy.com/members/member1285.html</loc>
+  <lastmod>2015-08-04T18:01:23Z</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
@@ -12018,7 +12118,12 @@
  </url>
  <url>
   <loc>http://www.missloopy.com/members/member129.html</loc>
-  <lastmod>2015-07-19T02:01:06Z</lastmod>
+  <lastmod>2015-08-06T19:01:09Z</lastmod>
+  <priority>0.5000</priority>
+ </url>
+ <url>
+  <loc>http://www.missloopy.com/members/member1290.html</loc>
+  <lastmod>2015-08-04T18:01:23Z</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
@@ -12059,6 +12164,16 @@
  <url>
   <loc>http://www.missloopy.com/members/member1291.html</loc>
   <lastmod>2015-05-28T19:03:48Z</lastmod>
+  <priority>0.5000</priority>
+ </url>
+ <url>
+  <loc>http://www.missloopy.com/members/member12910852.html</loc>
+  <lastmod>2015-08-09T10:01:04Z</lastmod>
+  <priority>0.5000</priority>
+ </url>
+ <url>
+  <loc>http://www.missloopy.com/members/member12910853.html</loc>
+  <lastmod>2015-08-12T14:01:17Z</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
@@ -12177,6 +12292,11 @@
   <priority>0.5000</priority>
  </url>
  <url>
+  <loc>http://www.missloopy.com/members/member1294.html</loc>
+  <lastmod>2015-08-04T19:01:13Z</lastmod>
+  <priority>0.5000</priority>
+ </url>
+ <url>
   <loc>http://www.missloopy.com/members/member12940.html</loc>
   <lastmod>2015-05-28T19:22:32Z</lastmod>
   <priority>0.5000</priority>
@@ -12209,6 +12329,11 @@
  <url>
   <loc>http://www.missloopy.com/members/member12949.html</loc>
   <lastmod>2015-01-04T20:01:05Z</lastmod>
+  <priority>0.5000</priority>
+ </url>
+ <url>
+  <loc>http://www.missloopy.com/members/member1295.html</loc>
+  <lastmod>2015-08-04T19:01:13Z</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
@@ -12274,6 +12399,11 @@
  <url>
   <loc>http://www.missloopy.com/members/member12969.html</loc>
   <lastmod>2015-05-28T19:22:35Z</lastmod>
+  <priority>0.5000</priority>
+ </url>
+ <url>
+  <loc>http://www.missloopy.com/members/member1297.html</loc>
+  <lastmod>2015-08-04T19:01:13Z</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
@@ -12482,6 +12612,11 @@
   <priority>0.5000</priority>
  </url>
  <url>
+  <loc>http://www.missloopy.com/members/member1302.html</loc>
+  <lastmod>2015-08-04T19:01:13Z</lastmod>
+  <priority>0.5000</priority>
+ </url>
+ <url>
   <loc>http://www.missloopy.com/members/member13021.html</loc>
   <lastmod>2015-01-06T10:01:06Z</lastmod>
   <priority>0.5000</priority>
@@ -12564,6 +12699,11 @@
  <url>
   <loc>http://www.missloopy.com/members/member13039.html</loc>
   <lastmod>2015-01-06T15:01:04Z</lastmod>
+  <priority>0.5000</priority>
+ </url>
+ <url>
+  <loc>http://www.missloopy.com/members/member1304.html</loc>
+  <lastmod>2015-08-04T19:01:13Z</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
@@ -12773,7 +12913,7 @@
  </url>
  <url>
   <loc>http://www.missloopy.com/members/member1309.html</loc>
-  <lastmod>2015-05-28T19:03:50Z</lastmod>
+  <lastmod>2015-08-04T19:01:13Z</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
@@ -13004,6 +13144,11 @@
  <url>
   <loc>http://www.missloopy.com/members/member13147.html</loc>
   <lastmod>2015-05-28T19:22:51Z</lastmod>
+  <priority>0.5000</priority>
+ </url>
+ <url>
+  <loc>http://www.missloopy.com/members/member1315.html</loc>
+  <lastmod>2015-08-04T19:01:13Z</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
@@ -13308,7 +13453,7 @@
  </url>
  <url>
   <loc>http://www.missloopy.com/members/member13219.html</loc>
-  <lastmod>2015-05-28T19:22:57Z</lastmod>
+  <lastmod>2015-08-01T15:01:05Z</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
@@ -13608,12 +13753,12 @@
  </url>
  <url>
   <loc>http://www.missloopy.com/members/member133.html</loc>
-  <lastmod>2015-07-19T12:01:05Z</lastmod>
+  <lastmod>2015-08-13T15:01:05Z</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
   <loc>http://www.missloopy.com/members/member1330.html</loc>
-  <lastmod>2015-01-30T17:01:10Z</lastmod>
+  <lastmod>2015-08-04T23:01:22Z</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
@@ -13793,7 +13938,7 @@
  </url>
  <url>
   <loc>http://www.missloopy.com/members/member13345.html</loc>
-  <lastmod>2015-05-28T19:23:10Z</lastmod>
+  <lastmod>2015-08-01T11:01:05Z</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
@@ -13977,6 +14122,11 @@
   <priority>0.5000</priority>
  </url>
  <url>
+  <loc>http://www.missloopy.com/members/member13395.html</loc>
+  <lastmod>2015-08-03T16:01:04Z</lastmod>
+  <priority>0.5000</priority>
+ </url>
+ <url>
   <loc>http://www.missloopy.com/members/member13396.html</loc>
   <lastmod>2015-01-15T12:01:04Z</lastmod>
   <priority>0.5000</priority>
@@ -14028,7 +14178,7 @@
  </url>
  <url>
   <loc>http://www.missloopy.com/members/member1341.html</loc>
-  <lastmod>2014-07-16T15:31:20Z</lastmod>
+  <lastmod>2015-08-05T00:01:14Z</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
@@ -14262,6 +14412,11 @@
   <priority>0.5000</priority>
  </url>
  <url>
+  <loc>http://www.missloopy.com/members/member1346.html</loc>
+  <lastmod>2015-08-11T10:01:06Z</lastmod>
+  <priority>0.5000</priority>
+ </url>
+ <url>
   <loc>http://www.missloopy.com/members/member13460.html</loc>
   <lastmod>2015-05-28T19:23:21Z</lastmod>
   <priority>0.5000</priority>
@@ -14309,6 +14464,11 @@
  <url>
   <loc>http://www.missloopy.com/members/member13469.html</loc>
   <lastmod>2015-01-16T08:01:03Z</lastmod>
+  <priority>0.5000</priority>
+ </url>
+ <url>
+  <loc>http://www.missloopy.com/members/member1347.html</loc>
+  <lastmod>2015-08-05T02:01:08Z</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
@@ -14583,7 +14743,7 @@
  </url>
  <url>
   <loc>http://www.missloopy.com/members/member1355.html</loc>
-  <lastmod>2014-07-16T15:31:20Z</lastmod>
+  <lastmod>2015-08-05T03:01:09Z</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
@@ -14632,6 +14792,11 @@
   <priority>0.5000</priority>
  </url>
  <url>
+  <loc>http://www.missloopy.com/members/member1356.html</loc>
+  <lastmod>2015-08-11T14:01:08Z</lastmod>
+  <priority>0.5000</priority>
+ </url>
+ <url>
   <loc>http://www.missloopy.com/members/member13560.html</loc>
   <lastmod>2015-05-28T19:23:28Z</lastmod>
   <priority>0.5000</priority>
@@ -14659,6 +14824,11 @@
  <url>
   <loc>http://www.missloopy.com/members/member13569.html</loc>
   <lastmod>2015-05-28T19:23:29Z</lastmod>
+  <priority>0.5000</priority>
+ </url>
+ <url>
+  <loc>http://www.missloopy.com/members/member1357.html</loc>
+  <lastmod>2015-08-11T10:01:06Z</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
@@ -14868,7 +15038,7 @@
  </url>
  <url>
   <loc>http://www.missloopy.com/members/member1362.html</loc>
-  <lastmod>2015-05-20T12:13:55Z</lastmod>
+  <lastmod>2015-08-11T10:01:06Z</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
@@ -14904,6 +15074,11 @@
  <url>
   <loc>http://www.missloopy.com/members/member13629.html</loc>
   <lastmod>2015-05-28T19:23:34Z</lastmod>
+  <priority>0.5000</priority>
+ </url>
+ <url>
+  <loc>http://www.missloopy.com/members/member1363.html</loc>
+  <lastmod>2015-08-11T10:01:06Z</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
@@ -15054,6 +15229,11 @@
  <url>
   <loc>http://www.missloopy.com/members/member13669.html</loc>
   <lastmod>2015-05-28T19:23:37Z</lastmod>
+  <priority>0.5000</priority>
+ </url>
+ <url>
+  <loc>http://www.missloopy.com/members/member1367.html</loc>
+  <lastmod>2015-08-11T10:01:06Z</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
@@ -15387,6 +15567,11 @@
   <priority>0.5000</priority>
  </url>
  <url>
+  <loc>http://www.missloopy.com/members/member1375.html</loc>
+  <lastmod>2015-08-12T07:01:06Z</lastmod>
+  <priority>0.5000</priority>
+ </url>
+ <url>
   <loc>http://www.missloopy.com/members/member13750.html</loc>
   <lastmod>2015-05-28T19:23:44Z</lastmod>
   <priority>0.5000</priority>
@@ -15459,6 +15644,11 @@
  <url>
   <loc>http://www.missloopy.com/members/member13769.html</loc>
   <lastmod>2015-05-28T19:23:45Z</lastmod>
+  <priority>0.5000</priority>
+ </url>
+ <url>
+  <loc>http://www.missloopy.com/members/member1377.html</loc>
+  <lastmod>2015-08-11T14:01:08Z</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
@@ -15652,6 +15842,11 @@
   <priority>0.5000</priority>
  </url>
  <url>
+  <loc>http://www.missloopy.com/members/member1382.html</loc>
+  <lastmod>2015-08-11T11:01:10Z</lastmod>
+  <priority>0.5000</priority>
+ </url>
+ <url>
   <loc>http://www.missloopy.com/members/member13822.html</loc>
   <lastmod>2015-05-28T19:23:49Z</lastmod>
   <priority>0.5000</priority>
@@ -15714,6 +15909,11 @@
  <url>
   <loc>http://www.missloopy.com/members/member13839.html</loc>
   <lastmod>2015-04-23T08:01:30Z</lastmod>
+  <priority>0.5000</priority>
+ </url>
+ <url>
+  <loc>http://www.missloopy.com/members/member1384.html</loc>
+  <lastmod>2015-08-12T06:01:04Z</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
@@ -16133,7 +16333,7 @@
  </url>
  <url>
   <loc>http://www.missloopy.com/members/member1394.html</loc>
-  <lastmod>2014-07-16T15:31:20Z</lastmod>
+  <lastmod>2015-08-11T11:01:10Z</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
@@ -16289,6 +16489,11 @@
  <url>
   <loc>http://www.missloopy.com/members/member13979.html</loc>
   <lastmod>2015-01-26T20:01:07Z</lastmod>
+  <priority>0.5000</priority>
+ </url>
+ <url>
+  <loc>http://www.missloopy.com/members/member1398.html</loc>
+  <lastmod>2015-08-11T11:01:10Z</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
@@ -16633,7 +16838,7 @@
  </url>
  <url>
   <loc>http://www.missloopy.com/members/member1406.html</loc>
-  <lastmod>2014-09-28T19:01:03Z</lastmod>
+  <lastmod>2015-08-11T11:01:10Z</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
@@ -16733,7 +16938,7 @@
  </url>
  <url>
   <loc>http://www.missloopy.com/members/member1409.html</loc>
-  <lastmod>2014-07-16T15:31:20Z</lastmod>
+  <lastmod>2015-08-11T12:01:04Z</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
@@ -16963,7 +17168,7 @@
  </url>
  <url>
   <loc>http://www.missloopy.com/members/member1415.html</loc>
-  <lastmod>2014-07-16T15:31:20Z</lastmod>
+  <lastmod>2015-08-11T12:01:04Z</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
@@ -17107,6 +17312,11 @@
   <priority>0.5000</priority>
  </url>
  <url>
+  <loc>http://www.missloopy.com/members/member1418.html</loc>
+  <lastmod>2015-08-11T15:01:05Z</lastmod>
+  <priority>0.5000</priority>
+ </url>
+ <url>
   <loc>http://www.missloopy.com/members/member14183.html</loc>
   <lastmod>2015-01-31T01:01:07Z</lastmod>
   <priority>0.5000</priority>
@@ -17128,7 +17338,7 @@
  </url>
  <url>
   <loc>http://www.missloopy.com/members/member1419.html</loc>
-  <lastmod>2014-07-16T15:31:20Z</lastmod>
+  <lastmod>2015-08-11T15:01:05Z</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
@@ -17163,7 +17373,7 @@
  </url>
  <url>
   <loc>http://www.missloopy.com/members/member1420.html</loc>
-  <lastmod>2014-07-16T15:31:20Z</lastmod>
+  <lastmod>2015-08-11T15:01:05Z</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
@@ -17242,6 +17452,11 @@
   <priority>0.5000</priority>
  </url>
  <url>
+  <loc>http://www.missloopy.com/members/member1422.html</loc>
+  <lastmod>2015-08-11T14:01:08Z</lastmod>
+  <priority>0.5000</priority>
+ </url>
+ <url>
   <loc>http://www.missloopy.com/members/member14221.html</loc>
   <lastmod>2015-05-28T19:24:28Z</lastmod>
   <priority>0.5000</priority>
@@ -17283,7 +17498,7 @@
  </url>
  <url>
   <loc>http://www.missloopy.com/members/member1424.html</loc>
-  <lastmod>2014-07-16T15:31:20Z</lastmod>
+  <lastmod>2015-08-11T15:01:05Z</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
@@ -17333,7 +17548,7 @@
  </url>
  <url>
   <loc>http://www.missloopy.com/members/member1425.html</loc>
-  <lastmod>2014-07-16T15:31:20Z</lastmod>
+  <lastmod>2015-08-11T15:01:05Z</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
@@ -17394,6 +17609,11 @@
  <url>
   <loc>http://www.missloopy.com/members/member14269.html</loc>
   <lastmod>2015-02-02T02:01:13Z</lastmod>
+  <priority>0.5000</priority>
+ </url>
+ <url>
+  <loc>http://www.missloopy.com/members/member1427.html</loc>
+  <lastmod>2015-08-11T15:01:05Z</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
@@ -17464,6 +17684,11 @@
  <url>
   <loc>http://www.missloopy.com/members/member14288.html</loc>
   <lastmod>2015-05-28T19:24:33Z</lastmod>
+  <priority>0.5000</priority>
+ </url>
+ <url>
+  <loc>http://www.missloopy.com/members/member1429.html</loc>
+  <lastmod>2015-08-11T20:01:05Z</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
@@ -17632,6 +17857,11 @@
   <priority>0.5000</priority>
  </url>
  <url>
+  <loc>http://www.missloopy.com/members/member1433.html</loc>
+  <lastmod>2015-08-13T07:01:04Z</lastmod>
+  <priority>0.5000</priority>
+ </url>
+ <url>
   <loc>http://www.missloopy.com/members/member14330.html</loc>
   <lastmod>2015-02-04T10:01:05Z</lastmod>
   <priority>0.5000</priority>
@@ -17712,6 +17942,11 @@
   <priority>0.5000</priority>
  </url>
  <url>
+  <loc>http://www.missloopy.com/members/member1435.html</loc>
+  <lastmod>2015-08-12T01:01:04Z</lastmod>
+  <priority>0.5000</priority>
+ </url>
+ <url>
   <loc>http://www.missloopy.com/members/member14350.html</loc>
   <lastmod>2015-05-28T19:24:38Z</lastmod>
   <priority>0.5000</priority>
@@ -17749,6 +17984,11 @@
  <url>
   <loc>http://www.missloopy.com/members/member14357.html</loc>
   <lastmod>2015-05-28T19:24:39Z</lastmod>
+  <priority>0.5000</priority>
+ </url>
+ <url>
+  <loc>http://www.missloopy.com/members/member1436.html</loc>
+  <lastmod>2015-08-12T01:01:04Z</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
@@ -17793,7 +18033,7 @@
  </url>
  <url>
   <loc>http://www.missloopy.com/members/member1437.html</loc>
-  <lastmod>2014-07-16T15:31:20Z</lastmod>
+  <lastmod>2015-08-13T23:01:15Z</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
@@ -17888,7 +18128,7 @@
  </url>
  <url>
   <loc>http://www.missloopy.com/members/member144.html</loc>
-  <lastmod>2015-07-19T03:01:05Z</lastmod>
+  <lastmod>2015-08-05T18:01:23Z</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
@@ -17929,6 +18169,11 @@
  <url>
   <loc>http://www.missloopy.com/members/member14409.html</loc>
   <lastmod>2015-02-05T20:01:07Z</lastmod>
+  <priority>0.5000</priority>
+ </url>
+ <url>
+  <loc>http://www.missloopy.com/members/member1441.html</loc>
+  <lastmod>2015-08-12T04:01:08Z</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
@@ -18017,6 +18262,11 @@
   <priority>0.5000</priority>
  </url>
  <url>
+  <loc>http://www.missloopy.com/members/member1443.html</loc>
+  <lastmod>2015-08-12T12:01:08Z</lastmod>
+  <priority>0.5000</priority>
+ </url>
+ <url>
   <loc>http://www.missloopy.com/members/member14430.html</loc>
   <lastmod>2015-05-28T19:24:44Z</lastmod>
   <priority>0.5000</priority>
@@ -18089,6 +18339,11 @@
  <url>
   <loc>http://www.missloopy.com/members/member14448.html</loc>
   <lastmod>2015-05-28T19:24:46Z</lastmod>
+  <priority>0.5000</priority>
+ </url>
+ <url>
+  <loc>http://www.missloopy.com/members/member1445.html</loc>
+  <lastmod>2015-08-12T08:01:07Z</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
@@ -18292,6 +18547,11 @@
   <priority>0.5000</priority>
  </url>
  <url>
+  <loc>http://www.missloopy.com/members/member1450.html</loc>
+  <lastmod>2015-08-13T22:01:06Z</lastmod>
+  <priority>0.5000</priority>
+ </url>
+ <url>
   <loc>http://www.missloopy.com/members/member14501.html</loc>
   <lastmod>2015-02-08T17:01:07Z</lastmod>
   <priority>0.5000</priority>
@@ -18402,6 +18662,11 @@
   <priority>0.5000</priority>
  </url>
  <url>
+  <loc>http://www.missloopy.com/members/member1453.html</loc>
+  <lastmod>2015-08-13T08:01:05Z</lastmod>
+  <priority>0.5000</priority>
+ </url>
+ <url>
   <loc>http://www.missloopy.com/members/member14530.html</loc>
   <lastmod>2015-02-10T11:01:09Z</lastmod>
   <priority>0.5000</priority>
@@ -18478,7 +18743,7 @@
  </url>
  <url>
   <loc>http://www.missloopy.com/members/member1455.html</loc>
-  <lastmod>2014-07-16T15:31:20Z</lastmod>
+  <lastmod>2015-08-12T10:01:06Z</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
@@ -18542,6 +18807,11 @@
   <priority>0.5000</priority>
  </url>
  <url>
+  <loc>http://www.missloopy.com/members/member1457.html</loc>
+  <lastmod>2015-08-13T19:01:03Z</lastmod>
+  <priority>0.5000</priority>
+ </url>
+ <url>
   <loc>http://www.missloopy.com/members/member14571.html</loc>
   <lastmod>2015-05-28T19:24:58Z</lastmod>
   <priority>0.5000</priority>
@@ -18574,6 +18844,11 @@
  <url>
   <loc>http://www.missloopy.com/members/member14578.html</loc>
   <lastmod>2015-05-28T19:24:59Z</lastmod>
+  <priority>0.5000</priority>
+ </url>
+ <url>
+  <loc>http://www.missloopy.com/members/member1458.html</loc>
+  <lastmod>2015-08-12T12:01:08Z</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
@@ -18813,7 +19088,7 @@
  </url>
  <url>
   <loc>http://www.missloopy.com/members/member1465.html</loc>
-  <lastmod>2014-07-16T15:31:20Z</lastmod>
+  <lastmod>2015-08-12T13:01:07Z</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
@@ -19068,7 +19343,7 @@
  </url>
  <url>
   <loc>http://www.missloopy.com/members/member1471.html</loc>
-  <lastmod>2014-07-16T15:31:20Z</lastmod>
+  <lastmod>2015-08-13T08:01:05Z</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
@@ -19109,6 +19384,11 @@
  <url>
   <loc>http://www.missloopy.com/members/member14718.html</loc>
   <lastmod>2015-05-28T19:25:13Z</lastmod>
+  <priority>0.5000</priority>
+ </url>
+ <url>
+  <loc>http://www.missloopy.com/members/member1472.html</loc>
+  <lastmod>2015-08-12T13:01:07Z</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
@@ -19153,7 +19433,7 @@
  </url>
  <url>
   <loc>http://www.missloopy.com/members/member1473.html</loc>
-  <lastmod>2015-07-06T15:01:04Z</lastmod>
+  <lastmod>2015-08-12T18:01:04Z</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
@@ -19203,7 +19483,7 @@
  </url>
  <url>
   <loc>http://www.missloopy.com/members/member1474.html</loc>
-  <lastmod>2014-07-16T15:31:20Z</lastmod>
+  <lastmod>2015-08-13T11:01:09Z</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
@@ -19318,7 +19598,7 @@
  </url>
  <url>
   <loc>http://www.missloopy.com/members/member1477.html</loc>
-  <lastmod>2014-07-16T15:31:20Z</lastmod>
+  <lastmod>2015-08-12T15:01:10Z</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
@@ -19482,6 +19762,11 @@
   <priority>0.5000</priority>
  </url>
  <url>
+  <loc>http://www.missloopy.com/members/member1481.html</loc>
+  <lastmod>2015-08-12T15:01:10Z</lastmod>
+  <priority>0.5000</priority>
+ </url>
+ <url>
   <loc>http://www.missloopy.com/members/member14811.html</loc>
   <lastmod>2015-05-28T19:25:21Z</lastmod>
   <priority>0.5000</priority>
@@ -19509,6 +19794,11 @@
  <url>
   <loc>http://www.missloopy.com/members/member14819.html</loc>
   <lastmod>2015-06-08T12:01:12Z</lastmod>
+  <priority>0.5000</priority>
+ </url>
+ <url>
+  <loc>http://www.missloopy.com/members/member1482.html</loc>
+  <lastmod>2015-08-13T01:01:04Z</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
@@ -19603,7 +19893,7 @@
  </url>
  <url>
   <loc>http://www.missloopy.com/members/member1485.html</loc>
-  <lastmod>2014-07-16T15:31:20Z</lastmod>
+  <lastmod>2015-08-13T17:01:06Z</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
@@ -19673,7 +19963,7 @@
  </url>
  <url>
   <loc>http://www.missloopy.com/members/member14874.html</loc>
-  <lastmod>2015-05-28T19:25:26Z</lastmod>
+  <lastmod>2015-08-09T21:01:04Z</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
@@ -19703,7 +19993,7 @@
  </url>
  <url>
   <loc>http://www.missloopy.com/members/member1489.html</loc>
-  <lastmod>2015-05-28T19:04:11Z</lastmod>
+  <lastmod>2015-08-12T16:01:05Z</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
@@ -19798,7 +20088,7 @@
  </url>
  <url>
   <loc>http://www.missloopy.com/members/member14920.html</loc>
-  <lastmod>2015-05-28T19:25:29Z</lastmod>
+  <lastmod>2015-08-13T14:01:08Z</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
@@ -20022,6 +20312,11 @@
   <priority>0.5000</priority>
  </url>
  <url>
+  <loc>http://www.missloopy.com/members/member1498.html</loc>
+  <lastmod>2015-08-12T17:01:06Z</lastmod>
+  <priority>0.5000</priority>
+ </url>
+ <url>
   <loc>http://www.missloopy.com/members/member14981.html</loc>
   <lastmod>2015-04-08T16:01:03Z</lastmod>
   <priority>0.5000</priority>
@@ -20177,6 +20472,11 @@
   <priority>0.5000</priority>
  </url>
  <url>
+  <loc>http://www.missloopy.com/members/member1502.html</loc>
+  <lastmod>2015-08-12T17:01:06Z</lastmod>
+  <priority>0.5000</priority>
+ </url>
+ <url>
   <loc>http://www.missloopy.com/members/member15020.html</loc>
   <lastmod>2015-05-28T19:25:37Z</lastmod>
   <priority>0.5000</priority>
@@ -20287,6 +20587,11 @@
   <priority>0.5000</priority>
  </url>
  <url>
+  <loc>http://www.missloopy.com/members/member1505.html</loc>
+  <lastmod>2015-08-12T17:01:06Z</lastmod>
+  <priority>0.5000</priority>
+ </url>
+ <url>
   <loc>http://www.missloopy.com/members/member15050.html</loc>
   <lastmod>2015-05-28T19:25:38Z</lastmod>
   <priority>0.5000</priority>
@@ -20354,6 +20659,11 @@
  <url>
   <loc>http://www.missloopy.com/members/member15068.html</loc>
   <lastmod>2015-04-13T14:01:03Z</lastmod>
+  <priority>0.5000</priority>
+ </url>
+ <url>
+  <loc>http://www.missloopy.com/members/member1507.html</loc>
+  <lastmod>2015-08-12T17:01:06Z</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
@@ -20823,7 +21133,7 @@
  </url>
  <url>
   <loc>http://www.missloopy.com/members/member1519.html</loc>
-  <lastmod>2014-07-16T15:31:20Z</lastmod>
+  <lastmod>2015-08-13T19:01:03Z</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
@@ -20868,7 +21178,7 @@
  </url>
  <url>
   <loc>http://www.missloopy.com/members/member1520.html</loc>
-  <lastmod>2015-04-23T08:01:08Z</lastmod>
+  <lastmod>2015-08-12T20:01:04Z</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
@@ -20898,7 +21208,7 @@
  </url>
  <url>
   <loc>http://www.missloopy.com/members/member15205.html</loc>
-  <lastmod>2015-05-28T19:25:52Z</lastmod>
+  <lastmod>2015-08-05T02:01:08Z</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
@@ -20919,6 +21229,11 @@
  <url>
   <loc>http://www.missloopy.com/members/member15209.html</loc>
   <lastmod>2015-04-15T08:01:03Z</lastmod>
+  <priority>0.5000</priority>
+ </url>
+ <url>
+  <loc>http://www.missloopy.com/members/member1521.html</loc>
+  <lastmod>2015-08-13T08:01:05Z</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
@@ -20949,6 +21264,11 @@
  <url>
   <loc>http://www.missloopy.com/members/member15217.html</loc>
   <lastmod>2015-07-20T11:01:09Z</lastmod>
+  <priority>0.5000</priority>
+ </url>
+ <url>
+  <loc>http://www.missloopy.com/members/member1522.html</loc>
+  <lastmod>2015-08-12T18:01:05Z</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
@@ -21113,7 +21433,7 @@
  </url>
  <url>
   <loc>http://www.missloopy.com/members/member1526.html</loc>
-  <lastmod>2014-07-16T15:31:20Z</lastmod>
+  <lastmod>2015-08-13T13:01:10Z</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
@@ -21302,6 +21622,11 @@
   <priority>0.5000</priority>
  </url>
  <url>
+  <loc>http://www.missloopy.com/members/member1531.html</loc>
+  <lastmod>2015-08-13T20:01:11Z</lastmod>
+  <priority>0.5000</priority>
+ </url>
+ <url>
   <loc>http://www.missloopy.com/members/member15311.html</loc>
   <lastmod>2015-05-28T19:26:02Z</lastmod>
   <priority>0.5000</priority>
@@ -21318,7 +21643,7 @@
  </url>
  <url>
   <loc>http://www.missloopy.com/members/member15314.html</loc>
-  <lastmod>2015-05-28T19:26:03Z</lastmod>
+  <lastmod>2015-08-11T11:01:10Z</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
@@ -21364,6 +21689,11 @@
  <url>
   <loc>http://www.missloopy.com/members/member15329.html</loc>
   <lastmod>2015-04-18T13:01:03Z</lastmod>
+  <priority>0.5000</priority>
+ </url>
+ <url>
+  <loc>http://www.missloopy.com/members/member1533.html</loc>
+  <lastmod>2015-08-13T00:01:05Z</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
@@ -21539,6 +21869,11 @@
  <url>
   <loc>http://www.missloopy.com/members/member15378.html</loc>
   <lastmod>2015-05-28T19:26:09Z</lastmod>
+  <priority>0.5000</priority>
+ </url>
+ <url>
+  <loc>http://www.missloopy.com/members/member1538.html</loc>
+  <lastmod>2015-08-13T03:01:15Z</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
@@ -21742,6 +22077,11 @@
   <priority>0.5000</priority>
  </url>
  <url>
+  <loc>http://www.missloopy.com/members/member1543.html</loc>
+  <lastmod>2015-08-13T04:01:07Z</lastmod>
+  <priority>0.5000</priority>
+ </url>
+ <url>
   <loc>http://www.missloopy.com/members/member15430.html</loc>
   <lastmod>2015-04-19T19:01:03Z</lastmod>
   <priority>0.5000</priority>
@@ -21863,7 +22203,7 @@
  </url>
  <url>
   <loc>http://www.missloopy.com/members/member15462.html</loc>
-  <lastmod>2015-05-28T19:26:16Z</lastmod>
+  <lastmod>2015-08-10T07:01:03Z</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
@@ -22093,7 +22433,7 @@
  </url>
  <url>
   <loc>http://www.missloopy.com/members/member1552.html</loc>
-  <lastmod>2014-07-16T15:31:20Z</lastmod>
+  <lastmod>2015-08-13T04:01:07Z</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
@@ -22134,6 +22474,11 @@
  <url>
   <loc>http://www.missloopy.com/members/member15529.html</loc>
   <lastmod>2015-06-18T18:01:16Z</lastmod>
+  <priority>0.5000</priority>
+ </url>
+ <url>
+  <loc>http://www.missloopy.com/members/member1553.html</loc>
+  <lastmod>2015-08-13T05:01:07Z</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
@@ -22257,6 +22602,11 @@
   <priority>0.5000</priority>
  </url>
  <url>
+  <loc>http://www.missloopy.com/members/member1556.html</loc>
+  <lastmod>2015-08-13T06:01:08Z</lastmod>
+  <priority>0.5000</priority>
+ </url>
+ <url>
   <loc>http://www.missloopy.com/members/member15560.html</loc>
   <lastmod>2015-05-28T19:26:24Z</lastmod>
   <priority>0.5000</priority>
@@ -22298,7 +22648,7 @@
  </url>
  <url>
   <loc>http://www.missloopy.com/members/member1557.html</loc>
-  <lastmod>2014-07-16T15:31:20Z</lastmod>
+  <lastmod>2015-08-13T07:01:04Z</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
@@ -22687,6 +23037,11 @@
   <priority>0.5000</priority>
  </url>
  <url>
+  <loc>http://www.missloopy.com/members/member1567.html</loc>
+  <lastmod>2015-08-13T23:01:15Z</lastmod>
+  <priority>0.5000</priority>
+ </url>
+ <url>
   <loc>http://www.missloopy.com/members/member15670.html</loc>
   <lastmod>2015-04-23T13:01:04Z</lastmod>
   <priority>0.5000</priority>
@@ -22992,6 +23347,11 @@
   <priority>0.5000</priority>
  </url>
  <url>
+  <loc>http://www.missloopy.com/members/member1575.html</loc>
+  <lastmod>2015-08-13T10:01:07Z</lastmod>
+  <priority>0.5000</priority>
+ </url>
+ <url>
   <loc>http://www.missloopy.com/members/member15750.html</loc>
   <lastmod>2015-05-28T19:26:41Z</lastmod>
   <priority>0.5000</priority>
@@ -23072,6 +23432,11 @@
   <priority>0.5000</priority>
  </url>
  <url>
+  <loc>http://www.missloopy.com/members/member1577.html</loc>
+  <lastmod>2015-08-13T18:01:05Z</lastmod>
+  <priority>0.5000</priority>
+ </url>
+ <url>
   <loc>http://www.missloopy.com/members/member15770.html</loc>
   <lastmod>2015-05-28T19:26:44Z</lastmod>
   <priority>0.5000</priority>
@@ -23139,6 +23504,11 @@
  <url>
   <loc>http://www.missloopy.com/members/member15789.html</loc>
   <lastmod>2015-05-28T19:26:45Z</lastmod>
+  <priority>0.5000</priority>
+ </url>
+ <url>
+  <loc>http://www.missloopy.com/members/member1579.html</loc>
+  <lastmod>2015-08-13T11:01:09Z</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
@@ -23219,6 +23589,11 @@
  <url>
   <loc>http://www.missloopy.com/members/member15809.html</loc>
   <lastmod>2015-04-25T10:01:04Z</lastmod>
+  <priority>0.5000</priority>
+ </url>
+ <url>
+  <loc>http://www.missloopy.com/members/member1581.html</loc>
+  <lastmod>2015-08-13T11:01:09Z</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
@@ -23368,7 +23743,7 @@
  </url>
  <url>
   <loc>http://www.missloopy.com/members/member1585.html</loc>
-  <lastmod>2014-04-10T12:01:04Z</lastmod>
+  <lastmod>2015-08-13T14:01:08Z</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
@@ -23838,7 +24213,12 @@
  </url>
  <url>
   <loc>http://www.missloopy.com/members/member15972.html</loc>
-  <lastmod>2015-06-03T09:01:11Z</lastmod>
+  <lastmod>2015-07-31T08:01:05Z</lastmod>
+  <priority>0.5000</priority>
+ </url>
+ <url>
+  <loc>http://www.missloopy.com/members/member15972543.html</loc>
+  <lastmod>2015-08-05T07:01:13Z</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
@@ -23859,6 +24239,11 @@
  <url>
   <loc>http://www.missloopy.com/members/member15979.html</loc>
   <lastmod>2015-04-29T01:01:03Z</lastmod>
+  <priority>0.5000</priority>
+ </url>
+ <url>
+  <loc>http://www.missloopy.com/members/member1598.html</loc>
+  <lastmod>2015-08-13T17:01:05Z</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
@@ -24004,6 +24389,11 @@
  <url>
   <loc>http://www.missloopy.com/members/member16018.html</loc>
   <lastmod>2015-04-29T07:01:02Z</lastmod>
+  <priority>0.5000</priority>
+ </url>
+ <url>
+  <loc>http://www.missloopy.com/members/member1602.html</loc>
+  <lastmod>2015-08-13T13:01:10Z</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
@@ -24172,6 +24562,11 @@
   <priority>0.5000</priority>
  </url>
  <url>
+  <loc>http://www.missloopy.com/members/member1606.html</loc>
+  <lastmod>2015-08-13T14:01:08Z</lastmod>
+  <priority>0.5000</priority>
+ </url>
+ <url>
   <loc>http://www.missloopy.com/members/member16061.html</loc>
   <lastmod>2015-05-28T19:27:13Z</lastmod>
   <priority>0.5000</priority>
@@ -24287,6 +24682,11 @@
   <priority>0.5000</priority>
  </url>
  <url>
+  <loc>http://www.missloopy.com/members/member1609.html</loc>
+  <lastmod>2015-08-13T13:01:10Z</lastmod>
+  <priority>0.5000</priority>
+ </url>
+ <url>
   <loc>http://www.missloopy.com/members/member16091.html</loc>
   <lastmod>2015-05-28T19:27:15Z</lastmod>
   <priority>0.5000</priority>
@@ -24318,7 +24718,7 @@
  </url>
  <url>
   <loc>http://www.missloopy.com/members/member1610.html</loc>
-  <lastmod>2014-07-16T15:31:21Z</lastmod>
+  <lastmod>2015-08-13T15:01:05Z</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
@@ -24328,7 +24728,7 @@
  </url>
  <url>
   <loc>http://www.missloopy.com/members/member16103.html</loc>
-  <lastmod>2015-06-03T16:01:35Z</lastmod>
+  <lastmod>2015-08-11T16:01:10Z</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
@@ -24423,7 +24823,7 @@
  </url>
  <url>
   <loc>http://www.missloopy.com/members/member1613.html</loc>
-  <lastmod>2014-07-16T15:31:21Z</lastmod>
+  <lastmod>2015-08-13T21:01:04Z</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
@@ -24612,6 +25012,11 @@
   <priority>0.5000</priority>
  </url>
  <url>
+  <loc>http://www.missloopy.com/members/member1618.html</loc>
+  <lastmod>2015-08-13T14:01:08Z</lastmod>
+  <priority>0.5000</priority>
+ </url>
+ <url>
   <loc>http://www.missloopy.com/members/member16187.html</loc>
   <lastmod>2015-05-02T10:01:04Z</lastmod>
   <priority>0.5000</priority>
@@ -24628,7 +25033,7 @@
  </url>
  <url>
   <loc>http://www.missloopy.com/members/member1619.html</loc>
-  <lastmod>2014-07-16T15:31:21Z</lastmod>
+  <lastmod>2015-08-13T18:01:05Z</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
@@ -24669,6 +25074,11 @@
  <url>
   <loc>http://www.missloopy.com/members/member162.html</loc>
   <lastmod>2014-07-16T15:31:16Z</lastmod>
+  <priority>0.5000</priority>
+ </url>
+ <url>
+  <loc>http://www.missloopy.com/members/member1620.html</loc>
+  <lastmod>2015-08-13T14:01:08Z</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
@@ -24733,7 +25143,7 @@
  </url>
  <url>
   <loc>http://www.missloopy.com/members/member1622.html</loc>
-  <lastmod>2014-04-09T13:01:03Z</lastmod>
+  <lastmod>2015-08-13T15:01:05Z</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
@@ -24898,7 +25308,7 @@
  </url>
  <url>
   <loc>http://www.missloopy.com/members/member1628.html</loc>
-  <lastmod>2014-07-16T15:31:21Z</lastmod>
+  <lastmod>2015-08-13T15:01:05Z</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
@@ -25027,6 +25437,11 @@
   <priority>0.5000</priority>
  </url>
  <url>
+  <loc>http://www.missloopy.com/members/member1631.html</loc>
+  <lastmod>2015-08-13T16:01:06Z</lastmod>
+  <priority>0.5000</priority>
+ </url>
+ <url>
   <loc>http://www.missloopy.com/members/member16311.html</loc>
   <lastmod>2015-05-04T13:01:03Z</lastmod>
   <priority>0.5000</priority>
@@ -25053,7 +25468,7 @@
  </url>
  <url>
   <loc>http://www.missloopy.com/members/member1632.html</loc>
-  <lastmod>2014-09-12T05:01:03Z</lastmod>
+  <lastmod>2015-08-13T17:01:06Z</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
@@ -25139,6 +25554,11 @@
  <url>
   <loc>http://www.missloopy.com/members/member16339.html</loc>
   <lastmod>2015-05-04T20:01:03Z</lastmod>
+  <priority>0.5000</priority>
+ </url>
+ <url>
+  <loc>http://www.missloopy.com/members/member1634.html</loc>
+  <lastmod>2015-08-14T01:01:09Z</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
@@ -25239,6 +25659,11 @@
  <url>
   <loc>http://www.missloopy.com/members/member16369.html</loc>
   <lastmod>2015-05-28T19:27:36Z</lastmod>
+  <priority>0.5000</priority>
+ </url>
+ <url>
+  <loc>http://www.missloopy.com/members/member1637.html</loc>
+  <lastmod>2015-08-14T02:01:07Z</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
@@ -25348,7 +25773,7 @@
  </url>
  <url>
   <loc>http://www.missloopy.com/members/member164.html</loc>
-  <lastmod>2015-07-19T06:01:05Z</lastmod>
+  <lastmod>2015-08-07T13:01:11Z</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
@@ -25463,7 +25888,7 @@
  </url>
  <url>
   <loc>http://www.missloopy.com/members/member1643.html</loc>
-  <lastmod>2014-07-16T15:31:21Z</lastmod>
+  <lastmod>2015-08-13T20:01:10Z</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
@@ -25559,6 +25984,11 @@
  <url>
   <loc>http://www.missloopy.com/members/member16459.html</loc>
   <lastmod>2015-05-29T11:01:06Z</lastmod>
+  <priority>0.5000</priority>
+ </url>
+ <url>
+  <loc>http://www.missloopy.com/members/member1646.html</loc>
+  <lastmod>2015-08-13T21:01:04Z</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
@@ -25754,6 +26184,11 @@
  <url>
   <loc>http://www.missloopy.com/members/member16518.html</loc>
   <lastmod>2015-05-28T19:27:48Z</lastmod>
+  <priority>0.5000</priority>
+ </url>
+ <url>
+  <loc>http://www.missloopy.com/members/member1652.html</loc>
+  <lastmod>2015-08-14T01:01:09Z</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
@@ -25968,7 +26403,7 @@
  </url>
  <url>
   <loc>http://www.missloopy.com/members/member1658.html</loc>
-  <lastmod>2014-07-16T15:31:21Z</lastmod>
+  <lastmod>2015-08-14T02:01:08Z</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
@@ -26038,7 +26473,7 @@
  </url>
  <url>
   <loc>http://www.missloopy.com/members/member1660.html</loc>
-  <lastmod>2015-05-20T12:13:57Z</lastmod>
+  <lastmod>2015-08-14T04:01:09Z</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
@@ -27133,7 +27568,7 @@
  </url>
  <url>
   <loc>http://www.missloopy.com/members/member169.html</loc>
-  <lastmod>2015-07-21T18:01:06Z</lastmod>
+  <lastmod>2015-08-05T19:01:24Z</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
@@ -27198,7 +27633,7 @@
  </url>
  <url>
   <loc>http://www.missloopy.com/members/member16912.html</loc>
-  <lastmod>2015-07-30T13:01:05Z</lastmod>
+  <lastmod>2015-08-10T09:01:06Z</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
@@ -27363,7 +27798,7 @@
  </url>
  <url>
   <loc>http://www.missloopy.com/members/member1696.html</loc>
-  <lastmod>2015-05-28T19:04:36Z</lastmod>
+  <lastmod>2015-08-07T12:01:07Z</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
@@ -27803,7 +28238,7 @@
  </url>
  <url>
   <loc>http://www.missloopy.com/members/member17082.html</loc>
-  <lastmod>2015-07-13T04:01:08Z</lastmod>
+  <lastmod>2015-08-09T11:01:04Z</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
@@ -29338,12 +29773,12 @@
  </url>
  <url>
   <loc>http://www.missloopy.com/members/member17498.html</loc>
-  <lastmod>2015-07-05T11:01:10Z</lastmod>
+  <lastmod>2015-07-31T20:01:05Z</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
   <loc>http://www.missloopy.com/members/member17499.html</loc>
-  <lastmod>2015-06-29T16:01:07Z</lastmod>
+  <lastmod>2015-08-09T20:01:04Z</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
@@ -29589,6 +30024,16 @@
  <url>
   <loc>http://www.missloopy.com/members/member17624.html</loc>
   <lastmod>2015-06-01T13:32:30Z</lastmod>
+  <priority>0.5000</priority>
+ </url>
+ <url>
+  <loc>http://www.missloopy.com/members/member17624667.html</loc>
+  <lastmod>2015-08-13T17:01:06Z</lastmod>
+  <priority>0.5000</priority>
+ </url>
+ <url>
+  <loc>http://www.missloopy.com/members/member17624668.html</loc>
+  <lastmod>2015-08-05T09:01:13Z</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
@@ -30183,7 +30628,7 @@
  </url>
  <url>
   <loc>http://www.missloopy.com/members/member17818.html</loc>
-  <lastmod>2015-06-27T19:01:08Z</lastmod>
+  <lastmod>2015-08-08T12:01:04Z</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
@@ -30233,7 +30678,7 @@
  </url>
  <url>
   <loc>http://www.missloopy.com/members/member17833.html</loc>
-  <lastmod>2015-06-17T23:01:26Z</lastmod>
+  <lastmod>2015-07-31T21:01:05Z</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
@@ -30503,7 +30948,7 @@
  </url>
  <url>
   <loc>http://www.missloopy.com/members/member17903.html</loc>
-  <lastmod>2015-07-18T14:01:06Z</lastmod>
+  <lastmod>2015-07-31T19:01:05Z</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
@@ -31213,12 +31658,12 @@
  </url>
  <url>
   <loc>http://www.missloopy.com/members/member18102.html</loc>
-  <lastmod>2015-06-20T21:01:04Z</lastmod>
+  <lastmod>2015-08-06T02:01:06Z</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
   <loc>http://www.missloopy.com/members/member18103.html</loc>
-  <lastmod>2015-06-18T14:01:25Z</lastmod>
+  <lastmod>2015-08-10T09:01:06Z</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
@@ -32123,7 +32568,7 @@
  </url>
  <url>
   <loc>http://www.missloopy.com/members/member18358.html</loc>
-  <lastmod>2015-06-21T08:01:05Z</lastmod>
+  <lastmod>2015-08-02T21:01:05Z</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
@@ -32553,7 +32998,7 @@
  </url>
  <url>
   <loc>http://www.missloopy.com/members/member18456.html</loc>
-  <lastmod>2015-06-22T15:01:06Z</lastmod>
+  <lastmod>2015-08-11T22:01:05Z</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
@@ -32873,7 +33318,7 @@
  </url>
  <url>
   <loc>http://www.missloopy.com/members/member18537.html</loc>
-  <lastmod>2015-07-03T10:01:05Z</lastmod>
+  <lastmod>2015-08-11T10:01:07Z</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
@@ -33203,7 +33648,7 @@
  </url>
  <url>
   <loc>http://www.missloopy.com/members/member18612.html</loc>
-  <lastmod>2015-07-05T08:01:05Z</lastmod>
+  <lastmod>2015-07-31T08:01:05Z</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
@@ -33558,7 +34003,7 @@
  </url>
  <url>
   <loc>http://www.missloopy.com/members/member187.html</loc>
-  <lastmod>2015-07-19T09:01:08Z</lastmod>
+  <lastmod>2015-08-05T19:01:24Z</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
@@ -34048,7 +34493,7 @@
  </url>
  <url>
   <loc>http://www.missloopy.com/members/member18830.html</loc>
-  <lastmod>2015-06-27T07:01:06Z</lastmod>
+  <lastmod>2015-08-07T10:01:16Z</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
@@ -34093,7 +34538,7 @@
  </url>
  <url>
   <loc>http://www.missloopy.com/members/member18842.html</loc>
-  <lastmod>2015-07-01T18:01:06Z</lastmod>
+  <lastmod>2015-08-02T14:01:13Z</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
@@ -34773,7 +35218,7 @@
  </url>
  <url>
   <loc>http://www.missloopy.com/members/member19030.html</loc>
-  <lastmod>2015-06-29T21:01:06Z</lastmod>
+  <lastmod>2015-08-06T19:01:09Z</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
@@ -34953,7 +35398,7 @@
  </url>
  <url>
   <loc>http://www.missloopy.com/members/member19074.html</loc>
-  <lastmod>2015-07-18T20:01:06Z</lastmod>
+  <lastmod>2015-08-11T11:01:10Z</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
@@ -35943,7 +36388,7 @@
  </url>
  <url>
   <loc>http://www.missloopy.com/members/member19332.html</loc>
-  <lastmod>2015-07-06T06:01:05Z</lastmod>
+  <lastmod>2015-07-31T15:01:06Z</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
@@ -36378,7 +36823,7 @@
  </url>
  <url>
   <loc>http://www.missloopy.com/members/member19457.html</loc>
-  <lastmod>2015-07-14T16:01:05Z</lastmod>
+  <lastmod>2015-08-08T07:01:05Z</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
@@ -36613,7 +37058,7 @@
  </url>
  <url>
   <loc>http://www.missloopy.com/members/member19516.html</loc>
-  <lastmod>2015-07-16T18:01:14Z</lastmod>
+  <lastmod>2015-08-13T20:01:11Z</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
@@ -36868,7 +37313,7 @@
  </url>
  <url>
   <loc>http://www.missloopy.com/members/member19585.html</loc>
-  <lastmod>2015-07-06T11:01:04Z</lastmod>
+  <lastmod>2015-08-07T16:01:10Z</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
@@ -36878,7 +37323,7 @@
  </url>
  <url>
   <loc>http://www.missloopy.com/members/member19587.html</loc>
-  <lastmod>2015-07-06T16:01:05Z</lastmod>
+  <lastmod>2015-08-07T15:01:07Z</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
@@ -37408,7 +37853,7 @@
  </url>
  <url>
   <loc>http://www.missloopy.com/members/member19719.html</loc>
-  <lastmod>2015-07-29T18:01:05Z</lastmod>
+  <lastmod>2015-08-08T19:01:05Z</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
@@ -37433,7 +37878,7 @@
  </url>
  <url>
   <loc>http://www.missloopy.com/members/member19726.html</loc>
-  <lastmod>2015-07-07T17:01:06Z</lastmod>
+  <lastmod>2015-08-01T17:01:07Z</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
@@ -37674,6 +38119,11 @@
  <url>
   <loc>http://www.missloopy.com/members/member19791.html</loc>
   <lastmod>2015-07-08T12:01:05Z</lastmod>
+  <priority>0.5000</priority>
+ </url>
+ <url>
+  <loc>http://www.missloopy.com/members/member19792.html</loc>
+  <lastmod>2015-07-31T08:01:05Z</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
@@ -38108,7 +38558,7 @@
  </url>
  <url>
   <loc>http://www.missloopy.com/members/member19915.html</loc>
-  <lastmod>2015-07-09T15:01:07Z</lastmod>
+  <lastmod>2015-07-31T19:01:05Z</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
@@ -38213,7 +38663,7 @@
  </url>
  <url>
   <loc>http://www.missloopy.com/members/member19942.html</loc>
-  <lastmod>2015-07-10T06:01:08Z</lastmod>
+  <lastmod>2015-07-31T16:01:06Z</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
@@ -38228,7 +38678,7 @@
  </url>
  <url>
   <loc>http://www.missloopy.com/members/member19946.html</loc>
-  <lastmod>2015-07-10T04:01:05Z</lastmod>
+  <lastmod>2015-08-09T19:01:04Z</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
@@ -38338,7 +38788,7 @@
  </url>
  <url>
   <loc>http://www.missloopy.com/members/member19981.html</loc>
-  <lastmod>2015-07-26T18:01:05Z</lastmod>
+  <lastmod>2015-08-01T23:01:10Z</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
@@ -38733,7 +39183,7 @@
  </url>
  <url>
   <loc>http://www.missloopy.com/members/member20078.html</loc>
-  <lastmod>2015-07-28T11:01:04Z</lastmod>
+  <lastmod>2015-08-12T23:01:16Z</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
@@ -38768,7 +39218,7 @@
  </url>
  <url>
   <loc>http://www.missloopy.com/members/member20090.html</loc>
-  <lastmod>2015-07-30T18:01:05Z</lastmod>
+  <lastmod>2015-08-05T20:01:23Z</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
@@ -39153,7 +39603,7 @@
  </url>
  <url>
   <loc>http://www.missloopy.com/members/member20202.html</loc>
-  <lastmod>2015-07-12T16:01:05Z</lastmod>
+  <lastmod>2015-08-05T15:01:14Z</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
@@ -39163,7 +39613,7 @@
  </url>
  <url>
   <loc>http://www.missloopy.com/members/member20205.html</loc>
-  <lastmod>2015-07-15T07:01:06Z</lastmod>
+  <lastmod>2015-08-07T07:01:07Z</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
@@ -39968,7 +40418,7 @@
  </url>
  <url>
   <loc>http://www.missloopy.com/members/member204.html</loc>
-  <lastmod>2015-07-19T09:01:08Z</lastmod>
+  <lastmod>2015-08-05T20:01:23Z</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
@@ -40258,7 +40708,7 @@
  </url>
  <url>
   <loc>http://www.missloopy.com/members/member20471.html</loc>
-  <lastmod>2015-07-15T13:01:05Z</lastmod>
+  <lastmod>2015-08-03T15:01:07Z</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
@@ -41012,6 +41462,11 @@
   <priority>0.5000</priority>
  </url>
  <url>
+  <loc>http://www.missloopy.com/members/member20667.html</loc>
+  <lastmod>2015-08-02T03:01:07Z</lastmod>
+  <priority>0.5000</priority>
+ </url>
+ <url>
   <loc>http://www.missloopy.com/members/member20668.html</loc>
   <lastmod>2015-07-19T02:01:05Z</lastmod>
   <priority>0.5000</priority>
@@ -41033,12 +41488,12 @@
  </url>
  <url>
   <loc>http://www.missloopy.com/members/member20676.html</loc>
-  <lastmod>2015-07-28T14:01:14Z</lastmod>
+  <lastmod>2015-08-11T20:01:04Z</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
   <loc>http://www.missloopy.com/members/member20678.html</loc>
-  <lastmod>2015-07-17T21:01:05Z</lastmod>
+  <lastmod>2015-08-01T22:01:07Z</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
@@ -41053,7 +41508,7 @@
  </url>
  <url>
   <loc>http://www.missloopy.com/members/member20680.html</loc>
-  <lastmod>2015-07-17T13:01:05Z</lastmod>
+  <lastmod>2015-08-08T14:01:04Z</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
@@ -41108,7 +41563,7 @@
  </url>
  <url>
   <loc>http://www.missloopy.com/members/member20691.html</loc>
-  <lastmod>2015-07-22T07:01:06Z</lastmod>
+  <lastmod>2015-08-12T06:01:05Z</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
@@ -41143,7 +41598,7 @@
  </url>
  <url>
   <loc>http://www.missloopy.com/members/member207.html</loc>
-  <lastmod>2015-07-20T17:01:07Z</lastmod>
+  <lastmod>2015-08-06T00:01:18Z</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
@@ -41198,7 +41653,7 @@
  </url>
  <url>
   <loc>http://www.missloopy.com/members/member20714.html</loc>
-  <lastmod>2015-07-23T13:01:03Z</lastmod>
+  <lastmod>2015-08-08T17:01:07Z</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
@@ -41488,12 +41943,12 @@
  </url>
  <url>
   <loc>http://www.missloopy.com/members/member210.html</loc>
-  <lastmod>2015-07-19T10:01:07Z</lastmod>
+  <lastmod>2015-08-06T00:01:18Z</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
   <loc>http://www.missloopy.com/members/member2100.html</loc>
-  <lastmod>2015-05-28T19:05:28Z</lastmod>
+  <lastmod>2015-08-09T18:01:04Z</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
@@ -42218,7 +42673,7 @@
  </url>
  <url>
   <loc>http://www.missloopy.com/members/member228.html</loc>
-  <lastmod>2015-07-19T12:01:05Z</lastmod>
+  <lastmod>2015-07-31T21:01:05Z</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
@@ -42628,7 +43083,7 @@
  </url>
  <url>
   <loc>http://www.missloopy.com/members/member238.html</loc>
-  <lastmod>2015-07-19T14:01:09Z</lastmod>
+  <lastmod>2015-08-07T13:01:11Z</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
@@ -42753,7 +43208,7 @@
  </url>
  <url>
   <loc>http://www.missloopy.com/members/member241.html</loc>
-  <lastmod>2015-07-19T14:01:10Z</lastmod>
+  <lastmod>2015-08-08T18:01:04Z</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
@@ -42838,7 +43293,7 @@
  </url>
  <url>
   <loc>http://www.missloopy.com/members/member244.html</loc>
-  <lastmod>2015-07-19T14:01:11Z</lastmod>
+  <lastmod>2015-08-07T11:01:07Z</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
@@ -43298,7 +43753,7 @@
  </url>
  <url>
   <loc>http://www.missloopy.com/members/member2590.html</loc>
-  <lastmod>2015-07-10T14:01:06Z</lastmod>
+  <lastmod>2015-08-01T13:01:12Z</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
@@ -43753,12 +44208,12 @@
  </url>
  <url>
   <loc>http://www.missloopy.com/members/member27.html</loc>
-  <lastmod>2015-07-18T13:01:05Z</lastmod>
+  <lastmod>2015-08-09T14:01:04Z</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
   <loc>http://www.missloopy.com/members/member270.html</loc>
-  <lastmod>2015-07-19T15:01:08Z</lastmod>
+  <lastmod>2015-08-07T12:01:06Z</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
@@ -44618,7 +45073,7 @@
  </url>
  <url>
   <loc>http://www.missloopy.com/members/member292.html</loc>
-  <lastmod>2015-07-28T19:01:05Z</lastmod>
+  <lastmod>2015-08-02T21:01:05Z</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
@@ -44928,7 +45383,7 @@
  </url>
  <url>
   <loc>http://www.missloopy.com/members/member30.html</loc>
-  <lastmod>2015-07-18T13:01:05Z</lastmod>
+  <lastmod>2015-08-05T12:01:13Z</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
@@ -45483,7 +45938,7 @@
  </url>
  <url>
   <loc>http://www.missloopy.com/members/member313.html</loc>
-  <lastmod>2015-07-19T18:01:05Z</lastmod>
+  <lastmod>2015-08-07T19:01:07Z</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
@@ -46053,7 +46508,7 @@
  </url>
  <url>
   <loc>http://www.missloopy.com/members/member328.html</loc>
-  <lastmod>2015-07-20T18:01:06Z</lastmod>
+  <lastmod>2015-08-08T08:01:08Z</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
@@ -46288,7 +46743,7 @@
  </url>
  <url>
   <loc>http://www.missloopy.com/members/member335.html</loc>
-  <lastmod>2015-07-20T00:01:07Z</lastmod>
+  <lastmod>2015-08-08T00:01:04Z</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
@@ -46523,7 +46978,7 @@
  </url>
  <url>
   <loc>http://www.missloopy.com/members/member341.html</loc>
-  <lastmod>2015-07-26T01:01:05Z</lastmod>
+  <lastmod>2015-08-13T08:01:05Z</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
@@ -46688,7 +47143,7 @@
  </url>
  <url>
   <loc>http://www.missloopy.com/members/member345.html</loc>
-  <lastmod>2015-07-20T19:01:08Z</lastmod>
+  <lastmod>2015-08-08T05:01:08Z</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
@@ -46918,7 +47373,7 @@
  </url>
  <url>
   <loc>http://www.missloopy.com/members/member352.html</loc>
-  <lastmod>2015-07-20T01:01:06Z</lastmod>
+  <lastmod>2015-08-11T18:01:09Z</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
@@ -47218,7 +47673,7 @@
  </url>
  <url>
   <loc>http://www.missloopy.com/members/member360.html</loc>
-  <lastmod>2015-07-20T03:01:05Z</lastmod>
+  <lastmod>2015-08-08T06:01:08Z</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
@@ -47598,7 +48053,7 @@
  </url>
  <url>
   <loc>http://www.missloopy.com/members/member369.html</loc>
-  <lastmod>2015-07-20T12:01:11Z</lastmod>
+  <lastmod>2015-08-12T01:01:04Z</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
@@ -47883,7 +48338,7 @@
  </url>
  <url>
   <loc>http://www.missloopy.com/members/member376.html</loc>
-  <lastmod>2015-07-20T04:01:05Z</lastmod>
+  <lastmod>2015-08-08T07:01:05Z</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
@@ -48163,7 +48618,7 @@
  </url>
  <url>
   <loc>http://www.missloopy.com/members/member383.html</loc>
-  <lastmod>2015-07-29T18:01:05Z</lastmod>
+  <lastmod>2015-08-13T04:01:08Z</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
@@ -48448,7 +48903,7 @@
  </url>
  <url>
   <loc>http://www.missloopy.com/members/member389.html</loc>
-  <lastmod>2015-07-20T07:01:05Z</lastmod>
+  <lastmod>2015-08-11T16:01:10Z</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
@@ -48493,7 +48948,7 @@
  </url>
  <url>
   <loc>http://www.missloopy.com/members/member390.html</loc>
-  <lastmod>2015-07-20T07:01:05Z</lastmod>
+  <lastmod>2015-08-08T09:01:05Z</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
@@ -48773,7 +49228,7 @@
  </url>
  <url>
   <loc>http://www.missloopy.com/members/member398.html</loc>
-  <lastmod>2015-07-20T09:01:05Z</lastmod>
+  <lastmod>2015-08-03T11:01:06Z</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
@@ -48858,7 +49313,7 @@
  </url>
  <url>
   <loc>http://www.missloopy.com/members/member400.html</loc>
-  <lastmod>2015-07-30T20:01:04Z</lastmod>
+  <lastmod>2015-08-12T11:01:08Z</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
@@ -49233,7 +49688,7 @@
  </url>
  <url>
   <loc>http://www.missloopy.com/members/member41.html</loc>
-  <lastmod>2015-07-20T10:01:05Z</lastmod>
+  <lastmod>2015-08-05T13:01:18Z</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
@@ -49483,7 +49938,7 @@
  </url>
  <url>
   <loc>http://www.missloopy.com/members/member4177.html</loc>
-  <lastmod>2015-05-28T19:09:15Z</lastmod>
+  <lastmod>2015-08-13T16:01:06Z</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
@@ -49713,7 +50168,7 @@
  </url>
  <url>
   <loc>http://www.missloopy.com/members/member424.html</loc>
-  <lastmod>2015-07-20T10:01:05Z</lastmod>
+  <lastmod>2015-08-08T17:01:08Z</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
@@ -50003,7 +50458,7 @@
  </url>
  <url>
   <loc>http://www.missloopy.com/members/member431.html</loc>
-  <lastmod>2015-07-05T09:01:06Z</lastmod>
+  <lastmod>2015-08-08T11:01:09Z</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
@@ -50693,7 +51148,7 @@
  </url>
  <url>
   <loc>http://www.missloopy.com/members/member450.html</loc>
-  <lastmod>2015-07-20T14:01:06Z</lastmod>
+  <lastmod>2015-08-11T11:01:10Z</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
@@ -50703,7 +51158,7 @@
  </url>
  <url>
   <loc>http://www.missloopy.com/members/member4502.html</loc>
-  <lastmod>2015-07-15T03:01:03Z</lastmod>
+  <lastmod>2015-08-03T19:01:06Z</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
@@ -50788,7 +51243,7 @@
  </url>
  <url>
   <loc>http://www.missloopy.com/members/member453.html</loc>
-  <lastmod>2014-07-16T15:31:17Z</lastmod>
+  <lastmod>2015-08-08T13:01:04Z</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
@@ -50883,7 +51338,7 @@
  </url>
  <url>
   <loc>http://www.missloopy.com/members/member456.html</loc>
-  <lastmod>2015-07-23T11:01:07Z</lastmod>
+  <lastmod>2015-08-10T02:01:04Z</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
@@ -51153,7 +51608,7 @@
  </url>
  <url>
   <loc>http://www.missloopy.com/members/member463.html</loc>
-  <lastmod>2015-07-23T01:01:07Z</lastmod>
+  <lastmod>2015-08-01T11:01:05Z</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
@@ -51633,7 +52088,7 @@
  </url>
  <url>
   <loc>http://www.missloopy.com/members/member476.html</loc>
-  <lastmod>2015-07-20T12:01:11Z</lastmod>
+  <lastmod>2015-08-08T15:01:05Z</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
@@ -52488,7 +52943,7 @@
  </url>
  <url>
   <loc>http://www.missloopy.com/members/member4987.html</loc>
-  <lastmod>2015-07-29T21:01:05Z</lastmod>
+  <lastmod>2015-08-13T07:01:04Z</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
@@ -52583,7 +53038,7 @@
  </url>
  <url>
   <loc>http://www.missloopy.com/members/member501.html</loc>
-  <lastmod>2015-07-20T13:01:09Z</lastmod>
+  <lastmod>2015-08-08T15:01:05Z</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
@@ -52878,7 +53333,7 @@
  </url>
  <url>
   <loc>http://www.missloopy.com/members/member509.html</loc>
-  <lastmod>2015-07-21T12:01:05Z</lastmod>
+  <lastmod>2015-08-04T10:01:05Z</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
@@ -53663,7 +54118,7 @@
  </url>
  <url>
   <loc>http://www.missloopy.com/members/member532.html</loc>
-  <lastmod>2015-07-21T11:01:06Z</lastmod>
+  <lastmod>2015-08-08T15:01:05Z</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
@@ -53888,7 +54343,7 @@
  </url>
  <url>
   <loc>http://www.missloopy.com/members/member539.html</loc>
-  <lastmod>2015-07-20T16:01:06Z</lastmod>
+  <lastmod>2015-08-08T16:01:04Z</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
@@ -53958,7 +54413,7 @@
  </url>
  <url>
   <loc>http://www.missloopy.com/members/member541.html</loc>
-  <lastmod>2015-07-22T19:01:05Z</lastmod>
+  <lastmod>2015-08-01T13:01:12Z</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
@@ -54213,7 +54668,7 @@
  </url>
  <url>
   <loc>http://www.missloopy.com/members/member548.html</loc>
-  <lastmod>2015-07-29T19:01:06Z</lastmod>
+  <lastmod>2015-08-01T22:01:07Z</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
@@ -54303,7 +54758,7 @@
  </url>
  <url>
   <loc>http://www.missloopy.com/members/member55.html</loc>
-  <lastmod>2015-07-18T14:01:06Z</lastmod>
+  <lastmod>2015-08-05T13:01:17Z</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
@@ -54508,7 +54963,7 @@
  </url>
  <url>
   <loc>http://www.missloopy.com/members/member555.html</loc>
-  <lastmod>2015-07-20T15:01:07Z</lastmod>
+  <lastmod>2015-08-08T16:01:04Z</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
@@ -54548,7 +55003,7 @@
  </url>
  <url>
   <loc>http://www.missloopy.com/members/member556.html</loc>
-  <lastmod>2015-07-20T16:01:06Z</lastmod>
+  <lastmod>2015-08-10T05:01:04Z</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
@@ -54803,7 +55258,7 @@
  </url>
  <url>
   <loc>http://www.missloopy.com/members/member5626.html</loc>
-  <lastmod>2015-07-22T19:01:05Z</lastmod>
+  <lastmod>2015-08-06T20:01:09Z</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
@@ -55048,7 +55503,7 @@
  </url>
  <url>
   <loc>http://www.missloopy.com/members/member569.html</loc>
-  <lastmod>2014-07-16T15:31:17Z</lastmod>
+  <lastmod>2015-08-13T23:01:15Z</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
@@ -55148,7 +55603,7 @@
  </url>
  <url>
   <loc>http://www.missloopy.com/members/member571.html</loc>
-  <lastmod>2015-07-26T12:01:03Z</lastmod>
+  <lastmod>2015-08-10T07:01:03Z</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
@@ -55188,7 +55643,7 @@
  </url>
  <url>
   <loc>http://www.missloopy.com/members/member572.html</loc>
-  <lastmod>2015-07-23T13:01:03Z</lastmod>
+  <lastmod>2015-08-12T00:01:45Z</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
@@ -55228,7 +55683,7 @@
  </url>
  <url>
   <loc>http://www.missloopy.com/members/member573.html</loc>
-  <lastmod>2015-07-30T04:01:04Z</lastmod>
+  <lastmod>2015-08-08T04:01:07Z</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
@@ -55318,7 +55773,7 @@
  </url>
  <url>
   <loc>http://www.missloopy.com/members/member576.html</loc>
-  <lastmod>2015-07-20T22:01:04Z</lastmod>
+  <lastmod>2015-08-10T07:01:03Z</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
@@ -55388,7 +55843,7 @@
  </url>
  <url>
   <loc>http://www.missloopy.com/members/member578.html</loc>
-  <lastmod>2015-07-29T18:01:05Z</lastmod>
+  <lastmod>2015-08-02T19:01:06Z</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
@@ -56267,6 +56722,11 @@
   <priority>0.5000</priority>
  </url>
  <url>
+  <loc>http://www.missloopy.com/members/member6010113.html</loc>
+  <lastmod>2015-08-09T09:01:09Z</lastmod>
+  <priority>0.5000</priority>
+ </url>
+ <url>
   <loc>http://www.missloopy.com/members/member6011.html</loc>
   <lastmod>2014-07-16T15:31:43Z</lastmod>
   <priority>0.5000</priority>
@@ -56368,7 +56828,7 @@
  </url>
  <url>
   <loc>http://www.missloopy.com/members/member604.html</loc>
-  <lastmod>2015-07-21T00:01:08Z</lastmod>
+  <lastmod>2015-08-08T22:01:04Z</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
@@ -57078,7 +57538,7 @@
  </url>
  <url>
   <loc>http://www.missloopy.com/members/member623.html</loc>
-  <lastmod>2015-07-21T02:01:06Z</lastmod>
+  <lastmod>2015-08-12T11:01:08Z</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
@@ -58103,7 +58563,7 @@
  </url>
  <url>
   <loc>http://www.missloopy.com/members/member65.html</loc>
-  <lastmod>2015-07-18T15:01:05Z</lastmod>
+  <lastmod>2015-08-07T13:01:11Z</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
@@ -58358,7 +58818,7 @@
  </url>
  <url>
   <loc>http://www.missloopy.com/members/member657.html</loc>
-  <lastmod>2015-07-21T06:01:05Z</lastmod>
+  <lastmod>2015-08-10T07:01:03Z</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
@@ -59363,7 +59823,7 @@
  </url>
  <url>
   <loc>http://www.missloopy.com/members/member684.html</loc>
-  <lastmod>2015-07-30T21:01:03Z</lastmod>
+  <lastmod>2015-07-31T10:01:04Z</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
@@ -59958,7 +60418,7 @@
  </url>
  <url>
   <loc>http://www.missloopy.com/members/member70.html</loc>
-  <lastmod>2015-07-18T16:01:05Z</lastmod>
+  <lastmod>2015-08-05T14:01:15Z</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
@@ -60623,7 +61083,7 @@
  </url>
  <url>
   <loc>http://www.missloopy.com/members/member716.html</loc>
-  <lastmod>2015-07-21T10:01:07Z</lastmod>
+  <lastmod>2015-08-10T07:01:04Z</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
@@ -61498,7 +61958,7 @@
  </url>
  <url>
   <loc>http://www.missloopy.com/members/member738.html</loc>
-  <lastmod>2015-07-21T11:01:06Z</lastmod>
+  <lastmod>2015-08-10T08:01:03Z</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
@@ -61888,7 +62348,7 @@
  </url>
  <url>
   <loc>http://www.missloopy.com/members/member749.html</loc>
-  <lastmod>2015-07-21T11:01:06Z</lastmod>
+  <lastmod>2015-08-12T18:01:04Z</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
@@ -62318,7 +62778,7 @@
  </url>
  <url>
   <loc>http://www.missloopy.com/members/member76.html</loc>
-  <lastmod>2015-07-18T16:01:05Z</lastmod>
+  <lastmod>2015-08-05T14:01:15Z</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
@@ -63118,7 +63578,7 @@
  </url>
  <url>
   <loc>http://www.missloopy.com/members/member780.html</loc>
-  <lastmod>2015-07-21T12:01:05Z</lastmod>
+  <lastmod>2015-08-08T19:01:05Z</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
@@ -63363,7 +63823,7 @@
  </url>
  <url>
   <loc>http://www.missloopy.com/members/member786.html</loc>
-  <lastmod>2015-07-21T12:01:05Z</lastmod>
+  <lastmod>2015-08-08T21:01:04Z</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
@@ -63743,7 +64203,7 @@
  </url>
  <url>
   <loc>http://www.missloopy.com/members/member795.html</loc>
-  <lastmod>2015-07-21T13:01:04Z</lastmod>
+  <lastmod>2015-08-10T09:01:06Z</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
@@ -63758,7 +64218,7 @@
  </url>
  <url>
   <loc>http://www.missloopy.com/members/member796.html</loc>
-  <lastmod>2015-07-28T14:01:14Z</lastmod>
+  <lastmod>2015-08-08T21:01:04Z</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
@@ -63863,7 +64323,7 @@
  </url>
  <url>
   <loc>http://www.missloopy.com/members/member798.html</loc>
-  <lastmod>2015-07-21T13:01:04Z</lastmod>
+  <lastmod>2015-08-03T15:01:07Z</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
@@ -63918,12 +64378,12 @@
  </url>
  <url>
   <loc>http://www.missloopy.com/members/member80.html</loc>
-  <lastmod>2015-07-18T16:01:05Z</lastmod>
+  <lastmod>2015-08-11T18:01:08Z</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
   <loc>http://www.missloopy.com/members/member800.html</loc>
-  <lastmod>2015-07-21T13:01:04Z</lastmod>
+  <lastmod>2015-08-12T08:01:07Z</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
@@ -64513,7 +64973,7 @@
  </url>
  <url>
   <loc>http://www.missloopy.com/members/member815.html</loc>
-  <lastmod>2015-07-21T15:01:07Z</lastmod>
+  <lastmod>2015-08-10T08:01:03Z</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
@@ -64698,7 +65158,7 @@
  </url>
  <url>
   <loc>http://www.missloopy.com/members/member82.html</loc>
-  <lastmod>2015-07-19T13:01:05Z</lastmod>
+  <lastmod>2015-08-12T07:01:06Z</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
@@ -64783,7 +65243,7 @@
  </url>
  <url>
   <loc>http://www.missloopy.com/members/member8221.html</loc>
-  <lastmod>2015-07-08T06:01:05Z</lastmod>
+  <lastmod>2015-08-05T08:01:12Z</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
@@ -65738,7 +66198,7 @@
  </url>
  <url>
   <loc>http://www.missloopy.com/members/member846.html</loc>
-  <lastmod>2015-07-21T20:01:04Z</lastmod>
+  <lastmod>2015-08-06T14:01:07Z</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
@@ -65858,7 +66318,7 @@
  </url>
  <url>
   <loc>http://www.missloopy.com/members/member8488.html</loc>
-  <lastmod>2015-05-28T19:16:27Z</lastmod>
+  <lastmod>2015-08-07T12:01:06Z</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
@@ -65968,7 +66428,7 @@
  </url>
  <url>
   <loc>http://www.missloopy.com/members/member852.html</loc>
-  <lastmod>2015-07-21T20:01:04Z</lastmod>
+  <lastmod>2015-08-09T09:01:09Z</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
@@ -66603,7 +67063,7 @@
  </url>
  <url>
   <loc>http://www.missloopy.com/members/member868.html</loc>
-  <lastmod>2015-07-21T21:01:05Z</lastmod>
+  <lastmod>2015-08-12T06:01:04Z</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
@@ -66738,7 +67198,7 @@
  </url>
  <url>
   <loc>http://www.missloopy.com/members/member871.html</loc>
-  <lastmod>2015-07-21T21:01:05Z</lastmod>
+  <lastmod>2015-08-10T10:01:06Z</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
@@ -66903,7 +67363,7 @@
  </url>
  <url>
   <loc>http://www.missloopy.com/members/member8754.html</loc>
-  <lastmod>2015-07-14T10:01:04Z</lastmod>
+  <lastmod>2015-08-08T09:01:05Z</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
@@ -67054,6 +67514,11 @@
  <url>
   <loc>http://www.missloopy.com/members/member8798.html</loc>
   <lastmod>2014-09-12T02:01:03Z</lastmod>
+  <priority>0.5000</priority>
+ </url>
+ <url>
+  <loc>http://www.missloopy.com/members/member88.html</loc>
+  <lastmod>2015-08-10T01:01:05Z</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
@@ -67263,12 +67728,12 @@
  </url>
  <url>
   <loc>http://www.missloopy.com/members/member885.html</loc>
-  <lastmod>2015-07-24T12:01:07Z</lastmod>
+  <lastmod>2015-08-09T09:01:08Z</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
   <loc>http://www.missloopy.com/members/member8850.html</loc>
-  <lastmod>2015-07-30T19:01:06Z</lastmod>
+  <lastmod>2015-08-12T07:01:05Z</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
@@ -68553,7 +69018,7 @@
  </url>
  <url>
   <loc>http://www.missloopy.com/members/member918.html</loc>
-  <lastmod>2015-07-22T03:01:07Z</lastmod>
+  <lastmod>2015-08-10T09:01:06Z</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
@@ -68809,6 +69274,11 @@
  <url>
   <loc>http://www.missloopy.com/members/member9259.html</loc>
   <lastmod>2014-09-24T20:01:07Z</lastmod>
+  <priority>0.5000</priority>
+ </url>
+ <url>
+  <loc>http://www.missloopy.com/members/member926.html</loc>
+  <lastmod>2015-08-10T09:01:06Z</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
@@ -69408,7 +69878,7 @@
  </url>
  <url>
   <loc>http://www.missloopy.com/members/member943.html</loc>
-  <lastmod>2015-07-22T12:01:07Z</lastmod>
+  <lastmod>2015-08-10T09:01:06Z</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
@@ -69618,7 +70088,7 @@
  </url>
  <url>
   <loc>http://www.missloopy.com/members/member948.html</loc>
-  <lastmod>2015-07-22T13:01:04Z</lastmod>
+  <lastmod>2015-08-10T09:01:06Z</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
@@ -69738,7 +70208,7 @@
  </url>
  <url>
   <loc>http://www.missloopy.com/members/member952.html</loc>
-  <lastmod>2015-07-22T16:01:05Z</lastmod>
+  <lastmod>2015-08-10T10:01:06Z</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
@@ -69908,7 +70378,7 @@
  </url>
  <url>
   <loc>http://www.missloopy.com/members/member958.html</loc>
-  <lastmod>2015-07-22T18:01:05Z</lastmod>
+  <lastmod>2015-08-12T16:01:05Z</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
@@ -70233,7 +70703,7 @@
  </url>
  <url>
   <loc>http://www.missloopy.com/members/member9679.html</loc>
-  <lastmod>2015-05-28T21:01:03Z</lastmod>
+  <lastmod>2015-08-08T16:01:04Z</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
@@ -70298,7 +70768,7 @@
  </url>
  <url>
   <loc>http://www.missloopy.com/members/member97.html</loc>
-  <lastmod>2015-07-18T23:01:07Z</lastmod>
+  <lastmod>2015-08-13T10:01:07Z</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
@@ -70338,7 +70808,7 @@
  </url>
  <url>
   <loc>http://www.missloopy.com/members/member971.html</loc>
-  <lastmod>2015-07-22T21:01:04Z</lastmod>
+  <lastmod>2015-08-10T10:01:06Z</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
@@ -70663,7 +71133,7 @@
  </url>
  <url>
   <loc>http://www.missloopy.com/members/member9804.html</loc>
-  <lastmod>2015-05-28T19:18:28Z</lastmod>
+  <lastmod>2015-08-01T20:01:05Z</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
@@ -70903,7 +71373,7 @@
  </url>
  <url>
   <loc>http://www.missloopy.com/members/member987.html</loc>
-  <lastmod>2015-07-22T21:01:04Z</lastmod>
+  <lastmod>2015-08-10T10:01:06Z</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
@@ -71113,7 +71583,7 @@
  </url>
  <url>
   <loc>http://www.missloopy.com/members/member993.html</loc>
-  <lastmod>2015-07-23T00:01:06Z</lastmod>
+  <lastmod>2015-08-11T22:01:05Z</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
@@ -71178,7 +71648,7 @@
  </url>
  <url>
   <loc>http://www.missloopy.com/members/member995.html</loc>
-  <lastmod>2015-07-23T00:01:06Z</lastmod>
+  <lastmod>2015-08-14T03:01:04Z</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
@@ -71367,18 +71837,33 @@
   <priority>0.5000</priority>
  </url>
  <url>
+  <loc>http://www.missloopy.com/ng-templates/</loc>
+  <lastmod>2015-08-12T12:32:22Z</lastmod>
+  <priority>0.5000</priority>
+ </url>
+ <url>
+  <loc>http://www.missloopy.com/ng-templates/member.html</loc>
+  <lastmod>2015-08-12T12:31:23Z</lastmod>
+  <priority>0.5000</priority>
+ </url>
+ <url>
   <loc>http://www.missloopy.com/photos.html</loc>
-  <lastmod>2015-07-27T07:40:15Z</lastmod>
+  <lastmod>2015-08-12T09:21:59Z</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
   <loc>http://www.missloopy.com/photos/</loc>
-  <lastmod>2015-07-30T08:28:48Z</lastmod>
+  <lastmod>2015-08-13T20:11:22Z</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
   <loc>http://www.missloopy.com/photos/dummy.jpg</loc>
   <lastmod>2015-06-01T08:33:21Z</lastmod>
+  <priority>0.5000</priority>
+ </url>
+ <url>
+  <loc>http://www.missloopy.com/photos/img1.jpg</loc>
+  <lastmod>2015-08-10T11:22:16Z</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
@@ -73302,11 +73787,6 @@
   <priority>0.5000</priority>
  </url>
  <url>
-  <loc>http://www.missloopy.com/photos/img10456.jpg</loc>
-  <lastmod>2015-07-06T14:48:08Z</lastmod>
-  <priority>0.5000</priority>
- </url>
- <url>
   <loc>http://www.missloopy.com/photos/img10457.jpg</loc>
   <lastmod>2015-07-06T15:09:46Z</lastmod>
   <priority>0.5000</priority>
@@ -74069,11 +74549,6 @@
  <url>
   <loc>http://www.missloopy.com/photos/img10643.jpg</loc>
   <lastmod>2015-07-09T12:08:37Z</lastmod>
-  <priority>0.5000</priority>
- </url>
- <url>
-  <loc>http://www.missloopy.com/photos/img10647.jpg</loc>
-  <lastmod>2015-07-09T15:22:50Z</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
@@ -75432,6 +75907,11 @@
   <priority>0.5000</priority>
  </url>
  <url>
+  <loc>http://www.missloopy.com/photos/img1134.jpg</loc>
+  <lastmod>2015-08-12T14:46:56Z</lastmod>
+  <priority>0.5000</priority>
+ </url>
+ <url>
   <loc>http://www.missloopy.com/photos/img1135.jpg</loc>
   <lastmod>2015-06-01T08:31:42Z</lastmod>
   <priority>0.5000</priority>
@@ -75439,6 +75919,11 @@
  <url>
   <loc>http://www.missloopy.com/photos/img1136.jpg</loc>
   <lastmod>2015-06-01T08:33:53Z</lastmod>
+  <priority>0.5000</priority>
+ </url>
+ <url>
+  <loc>http://www.missloopy.com/photos/img1137.jpg</loc>
+  <lastmod>2015-08-12T14:47:42Z</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
@@ -75652,8 +76137,18 @@
   <priority>0.5000</priority>
  </url>
  <url>
+  <loc>http://www.missloopy.com/photos/img1176.jpg</loc>
+  <lastmod>2015-08-12T15:31:32Z</lastmod>
+  <priority>0.5000</priority>
+ </url>
+ <url>
   <loc>http://www.missloopy.com/photos/img1177.jpg</loc>
   <lastmod>2015-07-18T13:19:46Z</lastmod>
+  <priority>0.5000</priority>
+ </url>
+ <url>
+  <loc>http://www.missloopy.com/photos/img1178.jpg</loc>
+  <lastmod>2015-08-12T15:32:02Z</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
@@ -75732,6 +76227,11 @@
   <priority>0.5000</priority>
  </url>
  <url>
+  <loc>http://www.missloopy.com/photos/img1192.jpg</loc>
+  <lastmod>2015-08-12T15:32:20Z</lastmod>
+  <priority>0.5000</priority>
+ </url>
+ <url>
   <loc>http://www.missloopy.com/photos/img1193.jpg</loc>
   <lastmod>2015-06-01T08:31:56Z</lastmod>
   <priority>0.5000</priority>
@@ -75804,6 +76304,11 @@
  <url>
   <loc>http://www.missloopy.com/photos/img1205.jpg</loc>
   <lastmod>2015-06-01T08:32:34Z</lastmod>
+  <priority>0.5000</priority>
+ </url>
+ <url>
+  <loc>http://www.missloopy.com/photos/img1206.jpg</loc>
+  <lastmod>2015-08-12T15:32:43Z</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
@@ -76002,28 +76507,8 @@
   <priority>0.5000</priority>
  </url>
  <url>
-  <loc>http://www.missloopy.com/photos/img1244.jpg</loc>
-  <lastmod>2015-06-01T08:33:11Z</lastmod>
-  <priority>0.5000</priority>
- </url>
- <url>
-  <loc>http://www.missloopy.com/photos/img1245.jpg</loc>
-  <lastmod>2015-06-01T08:32:44Z</lastmod>
-  <priority>0.5000</priority>
- </url>
- <url>
-  <loc>http://www.missloopy.com/photos/img1246.jpg</loc>
-  <lastmod>2015-06-01T08:31:52Z</lastmod>
-  <priority>0.5000</priority>
- </url>
- <url>
-  <loc>http://www.missloopy.com/photos/img1247.jpg</loc>
-  <lastmod>2015-06-01T08:33:57Z</lastmod>
-  <priority>0.5000</priority>
- </url>
- <url>
   <loc>http://www.missloopy.com/photos/img1248.jpg</loc>
-  <lastmod>2015-06-01T08:33:53Z</lastmod>
+  <lastmod>2015-08-12T19:26:30Z</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
@@ -76152,6 +76637,11 @@
   <priority>0.5000</priority>
  </url>
  <url>
+  <loc>http://www.missloopy.com/photos/img1271.jpg</loc>
+  <lastmod>2015-08-12T22:38:52Z</lastmod>
+  <priority>0.5000</priority>
+ </url>
+ <url>
   <loc>http://www.missloopy.com/photos/img1272.jpg</loc>
   <lastmod>2015-06-01T08:33:10Z</lastmod>
   <priority>0.5000</priority>
@@ -76264,6 +76754,11 @@
  <url>
   <loc>http://www.missloopy.com/photos/img1292.jpg</loc>
   <lastmod>2015-06-01T08:33:25Z</lastmod>
+  <priority>0.5000</priority>
+ </url>
+ <url>
+  <loc>http://www.missloopy.com/photos/img1293.jpg</loc>
+  <lastmod>2015-08-13T02:09:47Z</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
@@ -76567,8 +77062,23 @@
   <priority>0.5000</priority>
  </url>
  <url>
+  <loc>http://www.missloopy.com/photos/img1348.jpg</loc>
+  <lastmod>2015-08-13T03:43:18Z</lastmod>
+  <priority>0.5000</priority>
+ </url>
+ <url>
+  <loc>http://www.missloopy.com/photos/img1349.jpg</loc>
+  <lastmod>2015-08-13T03:44:08Z</lastmod>
+  <priority>0.5000</priority>
+ </url>
+ <url>
   <loc>http://www.missloopy.com/photos/img135.jpg</loc>
   <lastmod>2015-06-01T08:33:14Z</lastmod>
+  <priority>0.5000</priority>
+ </url>
+ <url>
+  <loc>http://www.missloopy.com/photos/img1350.jpg</loc>
+  <lastmod>2015-08-13T03:54:01Z</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
@@ -76579,6 +77089,16 @@
  <url>
   <loc>http://www.missloopy.com/photos/img1353.jpg</loc>
   <lastmod>2015-06-01T08:33:23Z</lastmod>
+  <priority>0.5000</priority>
+ </url>
+ <url>
+  <loc>http://www.missloopy.com/photos/img1354.jpg</loc>
+  <lastmod>2015-08-13T10:26:45Z</lastmod>
+  <priority>0.5000</priority>
+ </url>
+ <url>
+  <loc>http://www.missloopy.com/photos/img1355.jpg</loc>
+  <lastmod>2015-08-13T11:38:15Z</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
@@ -76599,6 +77119,21 @@
  <url>
   <loc>http://www.missloopy.com/photos/img136.jpg</loc>
   <lastmod>2015-06-01T08:33:00Z</lastmod>
+  <priority>0.5000</priority>
+ </url>
+ <url>
+  <loc>http://www.missloopy.com/photos/img1362.jpg</loc>
+  <lastmod>2015-08-13T11:41:10Z</lastmod>
+  <priority>0.5000</priority>
+ </url>
+ <url>
+  <loc>http://www.missloopy.com/photos/img1363.jpg</loc>
+  <lastmod>2015-08-13T11:41:38Z</lastmod>
+  <priority>0.5000</priority>
+ </url>
+ <url>
+  <loc>http://www.missloopy.com/photos/img1364.jpg</loc>
+  <lastmod>2015-08-13T11:54:23Z</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
@@ -76932,11 +77467,6 @@
   <priority>0.5000</priority>
  </url>
  <url>
-  <loc>http://www.missloopy.com/photos/img1427.jpg</loc>
-  <lastmod>2015-06-01T08:33:39Z</lastmod>
-  <priority>0.5000</priority>
- </url>
- <url>
   <loc>http://www.missloopy.com/photos/img1428.jpg</loc>
   <lastmod>2015-06-01T08:32:27Z</lastmod>
   <priority>0.5000</priority>
@@ -77217,6 +77747,11 @@
   <priority>0.5000</priority>
  </url>
  <url>
+  <loc>http://www.missloopy.com/photos/img1480.jpg</loc>
+  <lastmod>2015-08-13T13:04:08Z</lastmod>
+  <priority>0.5000</priority>
+ </url>
+ <url>
   <loc>http://www.missloopy.com/photos/img1481.jpg</loc>
   <lastmod>2015-06-01T08:32:36Z</lastmod>
   <priority>0.5000</priority>
@@ -77452,6 +77987,11 @@
   <priority>0.5000</priority>
  </url>
  <url>
+  <loc>http://www.missloopy.com/photos/img1523.jpg</loc>
+  <lastmod>2015-08-13T13:04:58Z</lastmod>
+  <priority>0.5000</priority>
+ </url>
+ <url>
   <loc>http://www.missloopy.com/photos/img1524.jpg</loc>
   <lastmod>2015-07-19T00:04:06Z</lastmod>
   <priority>0.5000</priority>
@@ -77652,6 +78192,11 @@
   <priority>0.5000</priority>
  </url>
  <url>
+  <loc>http://www.missloopy.com/photos/img1561.jpg</loc>
+  <lastmod>2015-08-13T13:05:13Z</lastmod>
+  <priority>0.5000</priority>
+ </url>
+ <url>
   <loc>http://www.missloopy.com/photos/img1562.jpg</loc>
   <lastmod>2015-06-01T08:33:57Z</lastmod>
   <priority>0.5000</priority>
@@ -77764,6 +78309,16 @@
  <url>
   <loc>http://www.missloopy.com/photos/img1582.jpg</loc>
   <lastmod>2015-07-19T05:06:20Z</lastmod>
+  <priority>0.5000</priority>
+ </url>
+ <url>
+  <loc>http://www.missloopy.com/photos/img1583.jpg</loc>
+  <lastmod>2015-08-13T13:05:25Z</lastmod>
+  <priority>0.5000</priority>
+ </url>
+ <url>
+  <loc>http://www.missloopy.com/photos/img1584.jpg</loc>
+  <lastmod>2015-08-13T13:05:44Z</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
@@ -77967,6 +78522,16 @@
   <priority>0.5000</priority>
  </url>
  <url>
+  <loc>http://www.missloopy.com/photos/img1620.jpg</loc>
+  <lastmod>2015-08-13T13:36:16Z</lastmod>
+  <priority>0.5000</priority>
+ </url>
+ <url>
+  <loc>http://www.missloopy.com/photos/img1621.jpg</loc>
+  <lastmod>2015-08-13T14:02:11Z</lastmod>
+  <priority>0.5000</priority>
+ </url>
+ <url>
   <loc>http://www.missloopy.com/photos/img1622.jpg</loc>
   <lastmod>2015-06-01T08:31:53Z</lastmod>
   <priority>0.5000</priority>
@@ -78107,6 +78672,11 @@
   <priority>0.5000</priority>
  </url>
  <url>
+  <loc>http://www.missloopy.com/photos/img1648.jpg</loc>
+  <lastmod>2015-08-13T14:02:35Z</lastmod>
+  <priority>0.5000</priority>
+ </url>
+ <url>
   <loc>http://www.missloopy.com/photos/img1649.jpg</loc>
   <lastmod>2015-06-01T08:33:26Z</lastmod>
   <priority>0.5000</priority>
@@ -78223,7 +78793,7 @@
  </url>
  <url>
   <loc>http://www.missloopy.com/photos/img167.jpg</loc>
-  <lastmod>2015-06-01T08:31:10Z</lastmod>
+  <lastmod>2015-08-11T08:46:29Z</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
@@ -78274,11 +78844,6 @@
  <url>
   <loc>http://www.missloopy.com/photos/img1679.jpg</loc>
   <lastmod>2015-06-01T08:32:46Z</lastmod>
-  <priority>0.5000</priority>
- </url>
- <url>
-  <loc>http://www.missloopy.com/photos/img168.jpg</loc>
-  <lastmod>2015-06-01T08:33:23Z</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
@@ -78977,6 +79542,11 @@
   <priority>0.5000</priority>
  </url>
  <url>
+  <loc>http://www.missloopy.com/photos/img1805.jpg</loc>
+  <lastmod>2015-08-13T14:03:16Z</lastmod>
+  <priority>0.5000</priority>
+ </url>
+ <url>
   <loc>http://www.missloopy.com/photos/img1806.jpg</loc>
   <lastmod>2015-06-01T08:33:55Z</lastmod>
   <priority>0.5000</priority>
@@ -79093,7 +79663,7 @@
  </url>
  <url>
   <loc>http://www.missloopy.com/photos/img1827.jpg</loc>
-  <lastmod>2015-06-01T08:32:15Z</lastmod>
+  <lastmod>2015-08-13T14:03:37Z</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
@@ -79353,12 +79923,7 @@
  </url>
  <url>
   <loc>http://www.missloopy.com/photos/img1874.jpg</loc>
-  <lastmod>2015-06-01T08:33:42Z</lastmod>
-  <priority>0.5000</priority>
- </url>
- <url>
-  <loc>http://www.missloopy.com/photos/img1875.jpg</loc>
-  <lastmod>2015-06-01T08:33:09Z</lastmod>
+  <lastmod>2015-08-13T14:03:54Z</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
@@ -79404,6 +79969,21 @@
  <url>
   <loc>http://www.missloopy.com/photos/img1883.jpg</loc>
   <lastmod>2015-06-01T08:30:59Z</lastmod>
+  <priority>0.5000</priority>
+ </url>
+ <url>
+  <loc>http://www.missloopy.com/photos/img1884.jpg</loc>
+  <lastmod>2015-08-13T14:44:02Z</lastmod>
+  <priority>0.5000</priority>
+ </url>
+ <url>
+  <loc>http://www.missloopy.com/photos/img1885.jpg</loc>
+  <lastmod>2015-08-13T15:34:28Z</lastmod>
+  <priority>0.5000</priority>
+ </url>
+ <url>
+  <loc>http://www.missloopy.com/photos/img1886.jpg</loc>
+  <lastmod>2015-08-13T16:40:28Z</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
@@ -79682,6 +80262,11 @@
   <priority>0.5000</priority>
  </url>
  <url>
+  <loc>http://www.missloopy.com/photos/img1936.jpg</loc>
+  <lastmod>2015-08-13T17:05:56Z</lastmod>
+  <priority>0.5000</priority>
+ </url>
+ <url>
   <loc>http://www.missloopy.com/photos/img1937.jpg</loc>
   <lastmod>2015-06-01T08:32:14Z</lastmod>
   <priority>0.5000</priority>
@@ -79788,7 +80373,7 @@
  </url>
  <url>
   <loc>http://www.missloopy.com/photos/img1956.jpg</loc>
-  <lastmod>2015-06-01T08:32:42Z</lastmod>
+  <lastmod>2015-08-13T18:17:37Z</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
@@ -80027,6 +80612,11 @@
   <priority>0.5000</priority>
  </url>
  <url>
+  <loc>http://www.missloopy.com/photos/img2.jpg</loc>
+  <lastmod>2015-08-10T12:50:23Z</lastmod>
+  <priority>0.5000</priority>
+ </url>
+ <url>
   <loc>http://www.missloopy.com/photos/img20.jpg</loc>
   <lastmod>2015-06-01T08:33:11Z</lastmod>
   <priority>0.5000</priority>
@@ -80229,6 +80819,11 @@
  <url>
   <loc>http://www.missloopy.com/photos/img2035.jpg</loc>
   <lastmod>2015-06-01T08:33:48Z</lastmod>
+  <priority>0.5000</priority>
+ </url>
+ <url>
+  <loc>http://www.missloopy.com/photos/img2036.jpg</loc>
+  <lastmod>2015-08-13T19:03:00Z</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
@@ -80632,11 +81227,6 @@
   <priority>0.5000</priority>
  </url>
  <url>
-  <loc>http://www.missloopy.com/photos/img20542.jpg</loc>
-  <lastmod>2015-07-16T14:50:32Z</lastmod>
-  <priority>0.5000</priority>
- </url>
- <url>
   <loc>http://www.missloopy.com/photos/img20543.jpg</loc>
   <lastmod>2015-07-16T14:59:52Z</lastmod>
   <priority>0.5000</priority>
@@ -80699,21 +81289,6 @@
  <url>
   <loc>http://www.missloopy.com/photos/img20564.jpg</loc>
   <lastmod>2015-07-16T20:08:59Z</lastmod>
-  <priority>0.5000</priority>
- </url>
- <url>
-  <loc>http://www.missloopy.com/photos/img20565.jpg</loc>
-  <lastmod>2015-07-16T20:36:45Z</lastmod>
-  <priority>0.5000</priority>
- </url>
- <url>
-  <loc>http://www.missloopy.com/photos/img20566.jpg</loc>
-  <lastmod>2015-07-16T20:36:46Z</lastmod>
-  <priority>0.5000</priority>
- </url>
- <url>
-  <loc>http://www.missloopy.com/photos/img20567.jpg</loc>
-  <lastmod>2015-07-16T20:36:47Z</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
@@ -80824,6 +81399,11 @@
  <url>
   <loc>http://www.missloopy.com/photos/img2065.jpg</loc>
   <lastmod>2015-07-19T10:49:53Z</lastmod>
+  <priority>0.5000</priority>
+ </url>
+ <url>
+  <loc>http://www.missloopy.com/photos/img2066.jpg</loc>
+  <lastmod>2015-08-13T19:18:32Z</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
@@ -81069,6 +81649,21 @@
  <url>
   <loc>http://www.missloopy.com/photos/img211.jpg</loc>
   <lastmod>2015-06-01T08:33:32Z</lastmod>
+  <priority>0.5000</priority>
+ </url>
+ <url>
+  <loc>http://www.missloopy.com/photos/img2110.jpg</loc>
+  <lastmod>2015-08-13T20:00:44Z</lastmod>
+  <priority>0.5000</priority>
+ </url>
+ <url>
+  <loc>http://www.missloopy.com/photos/img2111.jpg</loc>
+  <lastmod>2015-08-13T20:00:56Z</lastmod>
+  <priority>0.5000</priority>
+ </url>
+ <url>
+  <loc>http://www.missloopy.com/photos/img2112.jpg</loc>
+  <lastmod>2015-08-13T20:11:22Z</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
@@ -82187,16 +82782,6 @@
   <priority>0.5000</priority>
  </url>
  <url>
-  <loc>http://www.missloopy.com/photos/img2325.jpg</loc>
-  <lastmod>2015-06-01T08:32:48Z</lastmod>
-  <priority>0.5000</priority>
- </url>
- <url>
-  <loc>http://www.missloopy.com/photos/img2326.jpg</loc>
-  <lastmod>2015-06-01T08:33:38Z</lastmod>
-  <priority>0.5000</priority>
- </url>
- <url>
   <loc>http://www.missloopy.com/photos/img2327.jpg</loc>
   <lastmod>2015-06-01T08:33:21Z</lastmod>
   <priority>0.5000</priority>
@@ -82309,11 +82894,6 @@
  <url>
   <loc>http://www.missloopy.com/photos/img2347.jpg</loc>
   <lastmod>2015-06-01T08:32:07Z</lastmod>
-  <priority>0.5000</priority>
- </url>
- <url>
-  <loc>http://www.missloopy.com/photos/img2348.jpg</loc>
-  <lastmod>2015-06-01T08:32:00Z</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
@@ -84427,6 +85007,11 @@
   <priority>0.5000</priority>
  </url>
  <url>
+  <loc>http://www.missloopy.com/photos/img275.jpg</loc>
+  <lastmod>2015-08-11T09:06:53Z</lastmod>
+  <priority>0.5000</priority>
+ </url>
+ <url>
   <loc>http://www.missloopy.com/photos/img2750.jpg</loc>
   <lastmod>2015-06-01T08:32:42Z</lastmod>
   <priority>0.5000</priority>
@@ -84588,7 +85173,7 @@
  </url>
  <url>
   <loc>http://www.missloopy.com/photos/img278.jpg</loc>
-  <lastmod>2015-06-01T08:33:58Z</lastmod>
+  <lastmod>2015-08-11T09:24:47Z</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
@@ -84643,7 +85228,7 @@
  </url>
  <url>
   <loc>http://www.missloopy.com/photos/img279.jpg</loc>
-  <lastmod>2015-06-01T08:33:37Z</lastmod>
+  <lastmod>2015-08-11T09:32:01Z</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
@@ -85157,11 +85742,6 @@
   <priority>0.5000</priority>
  </url>
  <url>
-  <loc>http://www.missloopy.com/photos/img2886.jpg</loc>
-  <lastmod>2015-06-01T08:32:25Z</lastmod>
-  <priority>0.5000</priority>
- </url>
- <url>
   <loc>http://www.missloopy.com/photos/img2887.jpg</loc>
   <lastmod>2015-06-01T08:32:30Z</lastmod>
   <priority>0.5000</priority>
@@ -85559,6 +86139,11 @@
  <url>
   <loc>http://www.missloopy.com/photos/img2959.jpg</loc>
   <lastmod>2015-06-01T08:32:17Z</lastmod>
+  <priority>0.5000</priority>
+ </url>
+ <url>
+  <loc>http://www.missloopy.com/photos/img296.jpg</loc>
+  <lastmod>2015-08-11T10:09:17Z</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
@@ -88992,21 +89577,6 @@
   <priority>0.5000</priority>
  </url>
  <url>
-  <loc>http://www.missloopy.com/photos/img3596.jpg</loc>
-  <lastmod>2015-06-01T08:32:02Z</lastmod>
-  <priority>0.5000</priority>
- </url>
- <url>
-  <loc>http://www.missloopy.com/photos/img3597.jpg</loc>
-  <lastmod>2015-06-01T08:33:09Z</lastmod>
-  <priority>0.5000</priority>
- </url>
- <url>
-  <loc>http://www.missloopy.com/photos/img3598.jpg</loc>
-  <lastmod>2015-06-01T08:33:54Z</lastmod>
-  <priority>0.5000</priority>
- </url>
- <url>
   <loc>http://www.missloopy.com/photos/img3599.jpg</loc>
   <lastmod>2015-06-01T08:33:57Z</lastmod>
   <priority>0.5000</priority>
@@ -89238,7 +89808,7 @@
  </url>
  <url>
   <loc>http://www.missloopy.com/photos/img364.jpg</loc>
-  <lastmod>2015-06-01T08:32:57Z</lastmod>
+  <lastmod>2015-08-11T11:13:11Z</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
@@ -89293,7 +89863,7 @@
  </url>
  <url>
   <loc>http://www.missloopy.com/photos/img365.jpg</loc>
-  <lastmod>2015-06-01T08:33:48Z</lastmod>
+  <lastmod>2015-08-11T11:14:02Z</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
@@ -89424,11 +89994,6 @@
  <url>
   <loc>http://www.missloopy.com/photos/img3674.jpg</loc>
   <lastmod>2015-06-01T08:32:29Z</lastmod>
-  <priority>0.5000</priority>
- </url>
- <url>
-  <loc>http://www.missloopy.com/photos/img3675.jpg</loc>
-  <lastmod>2015-06-01T08:32:27Z</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
@@ -91203,7 +91768,7 @@
  </url>
  <url>
   <loc>http://www.missloopy.com/photos/img4.jpg</loc>
-  <lastmod>2015-07-17T10:38:09Z</lastmod>
+  <lastmod>2015-08-10T14:15:32Z</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
@@ -91702,6 +92267,11 @@
   <priority>0.5000</priority>
  </url>
  <url>
+  <loc>http://www.missloopy.com/photos/img409.jpg</loc>
+  <lastmod>2015-08-11T11:14:57Z</lastmod>
+  <priority>0.5000</priority>
+ </url>
+ <url>
   <loc>http://www.missloopy.com/photos/img4090.jpg</loc>
   <lastmod>2015-06-01T08:32:57Z</lastmod>
   <priority>0.5000</priority>
@@ -92027,6 +92597,11 @@
   <priority>0.5000</priority>
  </url>
  <url>
+  <loc>http://www.missloopy.com/photos/img415.jpg</loc>
+  <lastmod>2015-08-11T11:16:26Z</lastmod>
+  <priority>0.5000</priority>
+ </url>
+ <url>
   <loc>http://www.missloopy.com/photos/img4150.jpg</loc>
   <lastmod>2015-06-01T08:32:42Z</lastmod>
   <priority>0.5000</priority>
@@ -92129,6 +92704,11 @@
  <url>
   <loc>http://www.missloopy.com/photos/img4169.jpg</loc>
   <lastmod>2015-06-01T08:32:59Z</lastmod>
+  <priority>0.5000</priority>
+ </url>
+ <url>
+  <loc>http://www.missloopy.com/photos/img417.jpg</loc>
+  <lastmod>2015-08-11T11:17:00Z</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
@@ -94502,16 +95082,6 @@
   <priority>0.5000</priority>
  </url>
  <url>
-  <loc>http://www.missloopy.com/photos/img4611.jpg</loc>
-  <lastmod>2015-06-01T08:33:12Z</lastmod>
-  <priority>0.5000</priority>
- </url>
- <url>
-  <loc>http://www.missloopy.com/photos/img4612.jpg</loc>
-  <lastmod>2015-06-01T08:32:57Z</lastmod>
-  <priority>0.5000</priority>
- </url>
- <url>
   <loc>http://www.missloopy.com/photos/img4613.jpg</loc>
   <lastmod>2015-06-01T08:32:40Z</lastmod>
   <priority>0.5000</priority>
@@ -94544,11 +95114,6 @@
  <url>
   <loc>http://www.missloopy.com/photos/img4619.jpg</loc>
   <lastmod>2015-06-01T08:32:43Z</lastmod>
-  <priority>0.5000</priority>
- </url>
- <url>
-  <loc>http://www.missloopy.com/photos/img462.jpg</loc>
-  <lastmod>2015-06-01T08:31:52Z</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
@@ -94603,7 +95168,7 @@
  </url>
  <url>
   <loc>http://www.missloopy.com/photos/img463.jpg</loc>
-  <lastmod>2015-06-01T08:32:42Z</lastmod>
+  <lastmod>2015-08-11T13:15:22Z</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
@@ -94658,7 +95223,7 @@
  </url>
  <url>
   <loc>http://www.missloopy.com/photos/img464.jpg</loc>
-  <lastmod>2015-06-01T08:31:08Z</lastmod>
+  <lastmod>2015-08-11T13:23:25Z</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
@@ -94713,7 +95278,7 @@
  </url>
  <url>
   <loc>http://www.missloopy.com/photos/img465.jpg</loc>
-  <lastmod>2015-06-01T08:31:48Z</lastmod>
+  <lastmod>2015-08-11T13:23:35Z</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
@@ -94759,11 +95324,6 @@
  <url>
   <loc>http://www.missloopy.com/photos/img4659.jpg</loc>
   <lastmod>2015-06-01T08:33:31Z</lastmod>
-  <priority>0.5000</priority>
- </url>
- <url>
-  <loc>http://www.missloopy.com/photos/img466.jpg</loc>
-  <lastmod>2015-06-01T08:33:30Z</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
@@ -95317,11 +95877,6 @@
   <priority>0.5000</priority>
  </url>
  <url>
-  <loc>http://www.missloopy.com/photos/img476.jpg</loc>
-  <lastmod>2015-06-01T08:33:49Z</lastmod>
-  <priority>0.5000</priority>
- </url>
- <url>
   <loc>http://www.missloopy.com/photos/img4760.jpg</loc>
   <lastmod>2015-06-01T08:31:30Z</lastmod>
   <priority>0.5000</priority>
@@ -95542,11 +96097,6 @@
   <priority>0.5000</priority>
  </url>
  <url>
-  <loc>http://www.missloopy.com/photos/img480.jpg</loc>
-  <lastmod>2015-06-01T08:32:38Z</lastmod>
-  <priority>0.5000</priority>
- </url>
- <url>
   <loc>http://www.missloopy.com/photos/img4800.jpg</loc>
   <lastmod>2015-06-01T08:33:34Z</lastmod>
   <priority>0.5000</priority>
@@ -95594,11 +96144,6 @@
  <url>
   <loc>http://www.missloopy.com/photos/img4809.jpg</loc>
   <lastmod>2015-06-01T08:32:30Z</lastmod>
-  <priority>0.5000</priority>
- </url>
- <url>
-  <loc>http://www.missloopy.com/photos/img481.jpg</loc>
-  <lastmod>2015-06-01T08:31:38Z</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
@@ -96359,6 +96904,11 @@
  <url>
   <loc>http://www.missloopy.com/photos/img4949.jpg</loc>
   <lastmod>2015-06-01T08:33:12Z</lastmod>
+  <priority>0.5000</priority>
+ </url>
+ <url>
+  <loc>http://www.missloopy.com/photos/img495.jpg</loc>
+  <lastmod>2015-08-11T14:11:15Z</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
@@ -97527,26 +98077,6 @@
   <priority>0.5000</priority>
  </url>
  <url>
-  <loc>http://www.missloopy.com/photos/img5164.jpg</loc>
-  <lastmod>2015-06-01T08:33:17Z</lastmod>
-  <priority>0.5000</priority>
- </url>
- <url>
-  <loc>http://www.missloopy.com/photos/img5165.jpg</loc>
-  <lastmod>2015-06-01T08:33:21Z</lastmod>
-  <priority>0.5000</priority>
- </url>
- <url>
-  <loc>http://www.missloopy.com/photos/img5166.jpg</loc>
-  <lastmod>2015-06-01T08:31:38Z</lastmod>
-  <priority>0.5000</priority>
- </url>
- <url>
-  <loc>http://www.missloopy.com/photos/img5167.jpg</loc>
-  <lastmod>2015-06-01T08:32:36Z</lastmod>
-  <priority>0.5000</priority>
- </url>
- <url>
   <loc>http://www.missloopy.com/photos/img5168.jpg</loc>
   <lastmod>2015-06-01T08:33:02Z</lastmod>
   <priority>0.5000</priority>
@@ -98054,11 +98584,6 @@
  <url>
   <loc>http://www.missloopy.com/photos/img5259.jpg</loc>
   <lastmod>2015-06-01T08:31:14Z</lastmod>
-  <priority>0.5000</priority>
- </url>
- <url>
-  <loc>http://www.missloopy.com/photos/img526.jpg</loc>
-  <lastmod>2015-06-01T08:31:56Z</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
@@ -98577,21 +99102,6 @@
   <priority>0.5000</priority>
  </url>
  <url>
-  <loc>http://www.missloopy.com/photos/img5353.jpg</loc>
-  <lastmod>2015-06-01T08:33:41Z</lastmod>
-  <priority>0.5000</priority>
- </url>
- <url>
-  <loc>http://www.missloopy.com/photos/img5354.jpg</loc>
-  <lastmod>2015-06-01T08:33:37Z</lastmod>
-  <priority>0.5000</priority>
- </url>
- <url>
-  <loc>http://www.missloopy.com/photos/img5355.jpg</loc>
-  <lastmod>2015-06-01T08:33:06Z</lastmod>
-  <priority>0.5000</priority>
- </url>
- <url>
   <loc>http://www.missloopy.com/photos/img5356.jpg</loc>
   <lastmod>2015-06-01T08:32:34Z</lastmod>
   <priority>0.5000</priority>
@@ -99089,6 +99599,11 @@
  <url>
   <loc>http://www.missloopy.com/photos/img5449.jpg</loc>
   <lastmod>2015-06-01T08:33:45Z</lastmod>
+  <priority>0.5000</priority>
+ </url>
+ <url>
+  <loc>http://www.missloopy.com/photos/img545.jpg</loc>
+  <lastmod>2015-08-11T14:11:21Z</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
@@ -100612,11 +101127,6 @@
   <priority>0.5000</priority>
  </url>
  <url>
-  <loc>http://www.missloopy.com/photos/img5729.jpg</loc>
-  <lastmod>2015-07-30T08:28:10Z</lastmod>
-  <priority>0.5000</priority>
- </url>
- <url>
   <loc>http://www.missloopy.com/photos/img573.jpg</loc>
   <lastmod>2015-06-01T08:33:13Z</lastmod>
   <priority>0.5000</priority>
@@ -100639,11 +101149,6 @@
  <url>
   <loc>http://www.missloopy.com/photos/img5733.jpg</loc>
   <lastmod>2015-06-01T08:31:53Z</lastmod>
-  <priority>0.5000</priority>
- </url>
- <url>
-  <loc>http://www.missloopy.com/photos/img5734.jpg</loc>
-  <lastmod>2015-07-30T08:28:25Z</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
@@ -100852,11 +101357,6 @@
   <priority>0.5000</priority>
  </url>
  <url>
-  <loc>http://www.missloopy.com/photos/img5772.jpg</loc>
-  <lastmod>2015-07-30T08:28:48Z</lastmod>
-  <priority>0.5000</priority>
- </url>
- <url>
   <loc>http://www.missloopy.com/photos/img5773.jpg</loc>
   <lastmod>2015-06-01T08:32:59Z</lastmod>
   <priority>0.5000</priority>
@@ -100889,11 +101389,6 @@
  <url>
   <loc>http://www.missloopy.com/photos/img5779.jpg</loc>
   <lastmod>2015-06-01T08:33:27Z</lastmod>
-  <priority>0.5000</priority>
- </url>
- <url>
-  <loc>http://www.missloopy.com/photos/img578.jpg</loc>
-  <lastmod>2015-06-01T08:31:54Z</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
@@ -101034,6 +101529,11 @@
  <url>
   <loc>http://www.missloopy.com/photos/img5804.jpg</loc>
   <lastmod>2015-06-01T08:33:17Z</lastmod>
+  <priority>0.5000</priority>
+ </url>
+ <url>
+  <loc>http://www.missloopy.com/photos/img5805.jpg</loc>
+  <lastmod>2015-07-31T18:00:13Z</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
@@ -101202,6 +101702,11 @@
   <priority>0.5000</priority>
  </url>
  <url>
+  <loc>http://www.missloopy.com/photos/img5836.jpg</loc>
+  <lastmod>2015-07-31T18:15:22Z</lastmod>
+  <priority>0.5000</priority>
+ </url>
+ <url>
   <loc>http://www.missloopy.com/photos/img5837.jpg</loc>
   <lastmod>2015-06-01T08:31:33Z</lastmod>
   <priority>0.5000</priority>
@@ -101214,11 +101719,6 @@
  <url>
   <loc>http://www.missloopy.com/photos/img5839.jpg</loc>
   <lastmod>2015-06-01T08:31:46Z</lastmod>
-  <priority>0.5000</priority>
- </url>
- <url>
-  <loc>http://www.missloopy.com/photos/img584.jpg</loc>
-  <lastmod>2015-06-01T08:32:29Z</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
@@ -101269,11 +101769,6 @@
  <url>
   <loc>http://www.missloopy.com/photos/img5849.jpg</loc>
   <lastmod>2015-06-01T08:30:58Z</lastmod>
-  <priority>0.5000</priority>
- </url>
- <url>
-  <loc>http://www.missloopy.com/photos/img585.jpg</loc>
-  <lastmod>2015-06-01T08:32:24Z</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
@@ -101389,6 +101884,11 @@
  <url>
   <loc>http://www.missloopy.com/photos/img5870.jpg</loc>
   <lastmod>2015-06-01T08:32:17Z</lastmod>
+  <priority>0.5000</priority>
+ </url>
+ <url>
+  <loc>http://www.missloopy.com/photos/img5871.jpg</loc>
+  <lastmod>2015-07-31T18:16:17Z</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
@@ -101609,6 +102109,16 @@
  <url>
   <loc>http://www.missloopy.com/photos/img5911.jpg</loc>
   <lastmod>2015-06-01T08:31:17Z</lastmod>
+  <priority>0.5000</priority>
+ </url>
+ <url>
+  <loc>http://www.missloopy.com/photos/img5912.jpg</loc>
+  <lastmod>2015-08-01T13:01:00Z</lastmod>
+  <priority>0.5000</priority>
+ </url>
+ <url>
+  <loc>http://www.missloopy.com/photos/img5913.jpg</loc>
+  <lastmod>2015-08-02T07:02:09Z</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
@@ -102777,6 +103287,11 @@
   <priority>0.5000</priority>
  </url>
  <url>
+  <loc>http://www.missloopy.com/photos/img6131.jpg</loc>
+  <lastmod>2015-08-03T10:12:34Z</lastmod>
+  <priority>0.5000</priority>
+ </url>
+ <url>
   <loc>http://www.missloopy.com/photos/img6132.jpg</loc>
   <lastmod>2015-06-01T08:32:52Z</lastmod>
   <priority>0.5000</priority>
@@ -102964,6 +103479,11 @@
  <url>
   <loc>http://www.missloopy.com/photos/img6166.jpg</loc>
   <lastmod>2015-06-01T08:33:37Z</lastmod>
+  <priority>0.5000</priority>
+ </url>
+ <url>
+  <loc>http://www.missloopy.com/photos/img6167.jpg</loc>
+  <lastmod>2015-08-04T03:31:40Z</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
@@ -103612,6 +104132,11 @@
   <priority>0.5000</priority>
  </url>
  <url>
+  <loc>http://www.missloopy.com/photos/img6287.jpg</loc>
+  <lastmod>2015-08-04T13:22:17Z</lastmod>
+  <priority>0.5000</priority>
+ </url>
+ <url>
   <loc>http://www.missloopy.com/photos/img6288.jpg</loc>
   <lastmod>2015-06-01T08:33:17Z</lastmod>
   <priority>0.5000</priority>
@@ -103722,6 +104247,11 @@
   <priority>0.5000</priority>
  </url>
  <url>
+  <loc>http://www.missloopy.com/photos/img6307.jpg</loc>
+  <lastmod>2015-08-04T14:13:45Z</lastmod>
+  <priority>0.5000</priority>
+ </url>
+ <url>
   <loc>http://www.missloopy.com/photos/img6309.jpg</loc>
   <lastmod>2015-06-01T08:33:44Z</lastmod>
   <priority>0.5000</priority>
@@ -103809,6 +104339,21 @@
  <url>
   <loc>http://www.missloopy.com/photos/img6324.jpg</loc>
   <lastmod>2015-06-01T08:32:21Z</lastmod>
+  <priority>0.5000</priority>
+ </url>
+ <url>
+  <loc>http://www.missloopy.com/photos/img6325.jpg</loc>
+  <lastmod>2015-08-04T16:51:05Z</lastmod>
+  <priority>0.5000</priority>
+ </url>
+ <url>
+  <loc>http://www.missloopy.com/photos/img6327.jpg</loc>
+  <lastmod>2015-08-04T18:12:32Z</lastmod>
+  <priority>0.5000</priority>
+ </url>
+ <url>
+  <loc>http://www.missloopy.com/photos/img6328.jpg</loc>
+  <lastmod>2015-08-04T18:53:11Z</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
@@ -103932,6 +104477,11 @@
   <priority>0.5000</priority>
  </url>
  <url>
+  <loc>http://www.missloopy.com/photos/img6350.jpg</loc>
+  <lastmod>2015-08-04T18:53:29Z</lastmod>
+  <priority>0.5000</priority>
+ </url>
+ <url>
   <loc>http://www.missloopy.com/photos/img6351.jpg</loc>
   <lastmod>2015-06-01T08:33:49Z</lastmod>
   <priority>0.5000</priority>
@@ -103954,6 +104504,11 @@
  <url>
   <loc>http://www.missloopy.com/photos/img6355.jpg</loc>
   <lastmod>2015-06-01T08:33:26Z</lastmod>
+  <priority>0.5000</priority>
+ </url>
+ <url>
+  <loc>http://www.missloopy.com/photos/img6356.jpg</loc>
+  <lastmod>2015-08-04T22:28:34Z</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
@@ -104627,6 +105182,11 @@
   <priority>0.5000</priority>
  </url>
  <url>
+  <loc>http://www.missloopy.com/photos/img6481.jpg</loc>
+  <lastmod>2015-08-05T01:08:02Z</lastmod>
+  <priority>0.5000</priority>
+ </url>
+ <url>
   <loc>http://www.missloopy.com/photos/img6482.jpg</loc>
   <lastmod>2015-06-01T08:32:47Z</lastmod>
   <priority>0.5000</priority>
@@ -105127,11 +105687,6 @@
   <priority>0.5000</priority>
  </url>
  <url>
-  <loc>http://www.missloopy.com/photos/img6586.jpg</loc>
-  <lastmod>2015-06-01T08:31:50Z</lastmod>
-  <priority>0.5000</priority>
- </url>
- <url>
   <loc>http://www.missloopy.com/photos/img6587.jpg</loc>
   <lastmod>2015-06-01T08:33:41Z</lastmod>
   <priority>0.5000</priority>
@@ -105337,6 +105892,11 @@
   <priority>0.5000</priority>
  </url>
  <url>
+  <loc>http://www.missloopy.com/photos/img6624.jpg</loc>
+  <lastmod>2015-08-05T06:28:51Z</lastmod>
+  <priority>0.5000</priority>
+ </url>
+ <url>
   <loc>http://www.missloopy.com/photos/img6625.jpg</loc>
   <lastmod>2015-06-01T08:32:55Z</lastmod>
   <priority>0.5000</priority>
@@ -105369,6 +105929,16 @@
  <url>
   <loc>http://www.missloopy.com/photos/img6630.jpg</loc>
   <lastmod>2015-06-01T08:33:41Z</lastmod>
+  <priority>0.5000</priority>
+ </url>
+ <url>
+  <loc>http://www.missloopy.com/photos/img6631.jpg</loc>
+  <lastmod>2015-08-05T12:22:06Z</lastmod>
+  <priority>0.5000</priority>
+ </url>
+ <url>
+  <loc>http://www.missloopy.com/photos/img6632.jpg</loc>
+  <lastmod>2015-08-05T12:22:32Z</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
@@ -105509,6 +106079,11 @@
  <url>
   <loc>http://www.missloopy.com/photos/img6658.jpg</loc>
   <lastmod>2015-06-01T08:32:23Z</lastmod>
+  <priority>0.5000</priority>
+ </url>
+ <url>
+  <loc>http://www.missloopy.com/photos/img6659.jpg</loc>
+  <lastmod>2015-08-05T12:23:05Z</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
@@ -105749,6 +106324,11 @@
  <url>
   <loc>http://www.missloopy.com/photos/img6701.jpg</loc>
   <lastmod>2015-06-01T08:32:18Z</lastmod>
+  <priority>0.5000</priority>
+ </url>
+ <url>
+  <loc>http://www.missloopy.com/photos/img6702.jpg</loc>
+  <lastmod>2015-08-05T13:22:18Z</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
@@ -106527,11 +107107,6 @@
   <priority>0.5000</priority>
  </url>
  <url>
-  <loc>http://www.missloopy.com/photos/img6845.jpg</loc>
-  <lastmod>2015-06-01T08:32:48Z</lastmod>
-  <priority>0.5000</priority>
- </url>
- <url>
   <loc>http://www.missloopy.com/photos/img6846.jpg</loc>
   <lastmod>2015-06-01T08:31:10Z</lastmod>
   <priority>0.5000</priority>
@@ -106787,6 +107362,11 @@
   <priority>0.5000</priority>
  </url>
  <url>
+  <loc>http://www.missloopy.com/photos/img6896.jpg</loc>
+  <lastmod>2015-08-05T19:03:05Z</lastmod>
+  <priority>0.5000</priority>
+ </url>
+ <url>
   <loc>http://www.missloopy.com/photos/img6897.jpg</loc>
   <lastmod>2015-06-01T08:33:20Z</lastmod>
   <priority>0.5000</priority>
@@ -106839,11 +107419,6 @@
  <url>
   <loc>http://www.missloopy.com/photos/img6905.jpg</loc>
   <lastmod>2015-06-01T08:33:49Z</lastmod>
-  <priority>0.5000</priority>
- </url>
- <url>
-  <loc>http://www.missloopy.com/photos/img6906.jpg</loc>
-  <lastmod>2015-05-30T10:07:29Z</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
@@ -107127,6 +107702,11 @@
   <priority>0.5000</priority>
  </url>
  <url>
+  <loc>http://www.missloopy.com/photos/img6959.jpg</loc>
+  <lastmod>2015-08-05T23:27:07Z</lastmod>
+  <priority>0.5000</priority>
+ </url>
+ <url>
   <loc>http://www.missloopy.com/photos/img696.jpg</loc>
   <lastmod>2015-06-01T08:32:01Z</lastmod>
   <priority>0.5000</priority>
@@ -107154,6 +107734,26 @@
  <url>
   <loc>http://www.missloopy.com/photos/img6964.jpg</loc>
   <lastmod>2015-06-01T08:33:47Z</lastmod>
+  <priority>0.5000</priority>
+ </url>
+ <url>
+  <loc>http://www.missloopy.com/photos/img6965.jpg</loc>
+  <lastmod>2015-08-05T23:28:36Z</lastmod>
+  <priority>0.5000</priority>
+ </url>
+ <url>
+  <loc>http://www.missloopy.com/photos/img6966.jpg</loc>
+  <lastmod>2015-08-07T11:05:13Z</lastmod>
+  <priority>0.5000</priority>
+ </url>
+ <url>
+  <loc>http://www.missloopy.com/photos/img6968.jpg</loc>
+  <lastmod>2015-08-07T14:41:30Z</lastmod>
+  <priority>0.5000</priority>
+ </url>
+ <url>
+  <loc>http://www.missloopy.com/photos/img6969.jpg</loc>
+  <lastmod>2015-08-07T21:30:54Z</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
@@ -107189,6 +107789,16 @@
  <url>
   <loc>http://www.missloopy.com/photos/img6975.jpg</loc>
   <lastmod>2015-06-01T08:32:32Z</lastmod>
+  <priority>0.5000</priority>
+ </url>
+ <url>
+  <loc>http://www.missloopy.com/photos/img6977.jpg</loc>
+  <lastmod>2015-08-08T02:21:56Z</lastmod>
+  <priority>0.5000</priority>
+ </url>
+ <url>
+  <loc>http://www.missloopy.com/photos/img6978.jpg</loc>
+  <lastmod>2015-08-08T10:41:08Z</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
@@ -107367,6 +107977,11 @@
   <priority>0.5000</priority>
  </url>
  <url>
+  <loc>http://www.missloopy.com/photos/img7009.jpg</loc>
+  <lastmod>2015-08-08T11:27:18Z</lastmod>
+  <priority>0.5000</priority>
+ </url>
+ <url>
   <loc>http://www.missloopy.com/photos/img701.jpg</loc>
   <lastmod>2015-06-01T08:33:42Z</lastmod>
   <priority>0.5000</priority>
@@ -107492,6 +108107,11 @@
   <priority>0.5000</priority>
  </url>
  <url>
+  <loc>http://www.missloopy.com/photos/img7032.jpg</loc>
+  <lastmod>2015-08-08T11:28:30Z</lastmod>
+  <priority>0.5000</priority>
+ </url>
+ <url>
   <loc>http://www.missloopy.com/photos/img7033.jpg</loc>
   <lastmod>2015-06-01T08:32:04Z</lastmod>
   <priority>0.5000</priority>
@@ -107573,7 +108193,7 @@
  </url>
  <url>
   <loc>http://www.missloopy.com/photos/img7048.jpg</loc>
-  <lastmod>2015-06-01T08:33:30Z</lastmod>
+  <lastmod>2015-08-08T11:29:33Z</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
@@ -107779,6 +108399,11 @@
  <url>
   <loc>http://www.missloopy.com/photos/img7087.jpg</loc>
   <lastmod>2015-06-01T08:31:38Z</lastmod>
+  <priority>0.5000</priority>
+ </url>
+ <url>
+  <loc>http://www.missloopy.com/photos/img7088.jpg</loc>
+  <lastmod>2015-08-08T12:19:28Z</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
@@ -108012,8 +108637,18 @@
   <priority>0.5000</priority>
  </url>
  <url>
+  <loc>http://www.missloopy.com/photos/img7130.jpg</loc>
+  <lastmod>2015-08-08T15:13:10Z</lastmod>
+  <priority>0.5000</priority>
+ </url>
+ <url>
   <loc>http://www.missloopy.com/photos/img7132.jpg</loc>
   <lastmod>2015-06-01T08:33:52Z</lastmod>
+  <priority>0.5000</priority>
+ </url>
+ <url>
+  <loc>http://www.missloopy.com/photos/img7133.jpg</loc>
+  <lastmod>2015-08-08T15:28:01Z</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
@@ -109152,6 +109787,11 @@
   <priority>0.5000</priority>
  </url>
  <url>
+  <loc>http://www.missloopy.com/photos/img735.jpg</loc>
+  <lastmod>2015-08-11T14:11:57Z</lastmod>
+  <priority>0.5000</priority>
+ </url>
+ <url>
   <loc>http://www.missloopy.com/photos/img7350.jpg</loc>
   <lastmod>2015-06-01T08:31:35Z</lastmod>
   <priority>0.5000</priority>
@@ -109187,6 +109827,11 @@
   <priority>0.5000</priority>
  </url>
  <url>
+  <loc>http://www.missloopy.com/photos/img7357.jpg</loc>
+  <lastmod>2015-08-08T16:08:24Z</lastmod>
+  <priority>0.5000</priority>
+ </url>
+ <url>
   <loc>http://www.missloopy.com/photos/img7358.jpg</loc>
   <lastmod>2015-06-01T08:33:11Z</lastmod>
   <priority>0.5000</priority>
@@ -109194,6 +109839,11 @@
  <url>
   <loc>http://www.missloopy.com/photos/img7359.jpg</loc>
   <lastmod>2015-06-01T08:32:28Z</lastmod>
+  <priority>0.5000</priority>
+ </url>
+ <url>
+  <loc>http://www.missloopy.com/photos/img736.jpg</loc>
+  <lastmod>2015-08-11T14:29:17Z</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
@@ -110147,6 +110797,11 @@
   <priority>0.5000</priority>
  </url>
  <url>
+  <loc>http://www.missloopy.com/photos/img7538.jpg</loc>
+  <lastmod>2015-08-08T18:45:47Z</lastmod>
+  <priority>0.5000</priority>
+ </url>
+ <url>
   <loc>http://www.missloopy.com/photos/img7539.jpg</loc>
   <lastmod>2015-06-01T08:32:21Z</lastmod>
   <priority>0.5000</priority>
@@ -110234,6 +110889,11 @@
  <url>
   <loc>http://www.missloopy.com/photos/img7554.jpg</loc>
   <lastmod>2015-06-01T08:32:47Z</lastmod>
+  <priority>0.5000</priority>
+ </url>
+ <url>
+  <loc>http://www.missloopy.com/photos/img7555.jpg</loc>
+  <lastmod>2015-08-08T18:46:04Z</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
@@ -110827,6 +111487,11 @@
   <priority>0.5000</priority>
  </url>
  <url>
+  <loc>http://www.missloopy.com/photos/img7669.jpg</loc>
+  <lastmod>2015-08-08T20:05:32Z</lastmod>
+  <priority>0.5000</priority>
+ </url>
+ <url>
   <loc>http://www.missloopy.com/photos/img767.jpg</loc>
   <lastmod>2015-06-01T08:31:41Z</lastmod>
   <priority>0.5000</priority>
@@ -111167,6 +111832,11 @@
   <priority>0.5000</priority>
  </url>
  <url>
+  <loc>http://www.missloopy.com/photos/img7734.jpg</loc>
+  <lastmod>2015-08-08T20:23:42Z</lastmod>
+  <priority>0.5000</priority>
+ </url>
+ <url>
   <loc>http://www.missloopy.com/photos/img7735.jpg</loc>
   <lastmod>2015-06-01T08:33:08Z</lastmod>
   <priority>0.5000</priority>
@@ -111204,6 +111874,11 @@
  <url>
   <loc>http://www.missloopy.com/photos/img7741.jpg</loc>
   <lastmod>2015-06-01T08:33:51Z</lastmod>
+  <priority>0.5000</priority>
+ </url>
+ <url>
+  <loc>http://www.missloopy.com/photos/img7742.jpg</loc>
+  <lastmod>2015-08-08T20:31:49Z</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
@@ -111492,6 +112167,11 @@
   <priority>0.5000</priority>
  </url>
  <url>
+  <loc>http://www.missloopy.com/photos/img7798.jpg</loc>
+  <lastmod>2015-08-09T05:09:46Z</lastmod>
+  <priority>0.5000</priority>
+ </url>
+ <url>
   <loc>http://www.missloopy.com/photos/img7799.jpg</loc>
   <lastmod>2015-06-01T08:31:26Z</lastmod>
   <priority>0.5000</priority>
@@ -111687,11 +112367,6 @@
   <priority>0.5000</priority>
  </url>
  <url>
-  <loc>http://www.missloopy.com/photos/img7834.jpg</loc>
-  <lastmod>2015-05-30T10:07:30Z</lastmod>
-  <priority>0.5000</priority>
- </url>
- <url>
   <loc>http://www.missloopy.com/photos/img7835.jpg</loc>
   <lastmod>2015-06-01T08:33:50Z</lastmod>
   <priority>0.5000</priority>
@@ -111714,6 +112389,11 @@
  <url>
   <loc>http://www.missloopy.com/photos/img7839.jpg</loc>
   <lastmod>2015-06-01T08:33:16Z</lastmod>
+  <priority>0.5000</priority>
+ </url>
+ <url>
+  <loc>http://www.missloopy.com/photos/img784.jpg</loc>
+  <lastmod>2015-08-11T23:53:26Z</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
@@ -111764,6 +112444,11 @@
  <url>
   <loc>http://www.missloopy.com/photos/img7849.jpg</loc>
   <lastmod>2015-06-01T08:31:51Z</lastmod>
+  <priority>0.5000</priority>
+ </url>
+ <url>
+  <loc>http://www.missloopy.com/photos/img785.jpg</loc>
+  <lastmod>2015-08-12T07:45:22Z</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
@@ -111902,6 +112587,11 @@
   <priority>0.5000</priority>
  </url>
  <url>
+  <loc>http://www.missloopy.com/photos/img7876.jpg</loc>
+  <lastmod>2015-08-09T07:39:45Z</lastmod>
+  <priority>0.5000</priority>
+ </url>
+ <url>
   <loc>http://www.missloopy.com/photos/img7877.jpg</loc>
   <lastmod>2015-06-01T08:33:55Z</lastmod>
   <priority>0.5000</priority>
@@ -111949,6 +112639,11 @@
  <url>
   <loc>http://www.missloopy.com/photos/img7885.jpg</loc>
   <lastmod>2015-06-01T08:33:03Z</lastmod>
+  <priority>0.5000</priority>
+ </url>
+ <url>
+  <loc>http://www.missloopy.com/photos/img7887.jpg</loc>
+  <lastmod>2015-08-09T07:41:00Z</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
@@ -112017,6 +112712,11 @@
   <priority>0.5000</priority>
  </url>
  <url>
+  <loc>http://www.missloopy.com/photos/img79.jpg</loc>
+  <lastmod>2015-08-10T23:25:04Z</lastmod>
+  <priority>0.5000</priority>
+ </url>
+ <url>
   <loc>http://www.missloopy.com/photos/img790.jpg</loc>
   <lastmod>2015-06-01T08:32:27Z</lastmod>
   <priority>0.5000</priority>
@@ -112074,6 +112774,11 @@
  <url>
   <loc>http://www.missloopy.com/photos/img791.jpg</loc>
   <lastmod>2015-06-01T08:32:57Z</lastmod>
+  <priority>0.5000</priority>
+ </url>
+ <url>
+  <loc>http://www.missloopy.com/photos/img7910.jpg</loc>
+  <lastmod>2015-08-09T07:41:24Z</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
@@ -112209,6 +112914,11 @@
  <url>
   <loc>http://www.missloopy.com/photos/img7935.jpg</loc>
   <lastmod>2015-06-01T08:32:52Z</lastmod>
+  <priority>0.5000</priority>
+ </url>
+ <url>
+  <loc>http://www.missloopy.com/photos/img7936.jpg</loc>
+  <lastmod>2015-08-09T07:41:42Z</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
@@ -112427,6 +113137,11 @@
   <priority>0.5000</priority>
  </url>
  <url>
+  <loc>http://www.missloopy.com/photos/img7976.jpg</loc>
+  <lastmod>2015-08-09T07:42:06Z</lastmod>
+  <priority>0.5000</priority>
+ </url>
+ <url>
   <loc>http://www.missloopy.com/photos/img7977.jpg</loc>
   <lastmod>2015-06-01T08:32:08Z</lastmod>
   <priority>0.5000</priority>
@@ -112528,22 +113243,17 @@
  </url>
  <url>
   <loc>http://www.missloopy.com/photos/img7995.jpg</loc>
-  <lastmod>2015-06-01T08:33:15Z</lastmod>
+  <lastmod>2015-08-09T10:44:40Z</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
   <loc>http://www.missloopy.com/photos/img7996.jpg</loc>
-  <lastmod>2015-06-01T08:33:09Z</lastmod>
+  <lastmod>2015-08-09T10:45:31Z</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
   <loc>http://www.missloopy.com/photos/img7997.jpg</loc>
-  <lastmod>2015-06-01T08:32:38Z</lastmod>
-  <priority>0.5000</priority>
- </url>
- <url>
-  <loc>http://www.missloopy.com/photos/img7998.jpg</loc>
-  <lastmod>2015-06-01T08:33:26Z</lastmod>
+  <lastmod>2015-08-10T01:41:44Z</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
@@ -112812,6 +113522,11 @@
   <priority>0.5000</priority>
  </url>
  <url>
+  <loc>http://www.missloopy.com/photos/img8046.jpg</loc>
+  <lastmod>2015-08-10T06:21:00Z</lastmod>
+  <priority>0.5000</priority>
+ </url>
+ <url>
   <loc>http://www.missloopy.com/photos/img8047.jpg</loc>
   <lastmod>2015-06-01T08:33:14Z</lastmod>
   <priority>0.5000</priority>
@@ -112829,6 +113544,11 @@
  <url>
   <loc>http://www.missloopy.com/photos/img805.jpg</loc>
   <lastmod>2015-06-01T08:31:51Z</lastmod>
+  <priority>0.5000</priority>
+ </url>
+ <url>
+  <loc>http://www.missloopy.com/photos/img8050.jpg</loc>
+  <lastmod>2015-08-10T06:26:53Z</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
@@ -113014,11 +113734,6 @@
  <url>
   <loc>http://www.missloopy.com/photos/img8084.jpg</loc>
   <lastmod>2015-06-01T08:31:25Z</lastmod>
-  <priority>0.5000</priority>
- </url>
- <url>
-  <loc>http://www.missloopy.com/photos/img8085.jpg</loc>
-  <lastmod>2015-06-01T08:31:26Z</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
@@ -113267,6 +113982,11 @@
   <priority>0.5000</priority>
  </url>
  <url>
+  <loc>http://www.missloopy.com/photos/img8131.jpg</loc>
+  <lastmod>2015-08-10T06:27:22Z</lastmod>
+  <priority>0.5000</priority>
+ </url>
+ <url>
   <loc>http://www.missloopy.com/photos/img8132.jpg</loc>
   <lastmod>2015-06-01T08:32:54Z</lastmod>
   <priority>0.5000</priority>
@@ -113512,11 +114232,6 @@
   <priority>0.5000</priority>
  </url>
  <url>
-  <loc>http://www.missloopy.com/photos/img8177.jpg</loc>
-  <lastmod>2015-05-30T10:07:20Z</lastmod>
-  <priority>0.5000</priority>
- </url>
- <url>
   <loc>http://www.missloopy.com/photos/img8178.jpg</loc>
   <lastmod>2015-06-01T08:31:54Z</lastmod>
   <priority>0.5000</priority>
@@ -113614,6 +114329,11 @@
  <url>
   <loc>http://www.missloopy.com/photos/img8195.jpg</loc>
   <lastmod>2015-06-01T08:33:37Z</lastmod>
+  <priority>0.5000</priority>
+ </url>
+ <url>
+  <loc>http://www.missloopy.com/photos/img8196.jpg</loc>
+  <lastmod>2015-08-10T06:39:41Z</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
@@ -113807,6 +114527,11 @@
   <priority>0.5000</priority>
  </url>
  <url>
+  <loc>http://www.missloopy.com/photos/img8231.jpg</loc>
+  <lastmod>2015-08-10T06:42:49Z</lastmod>
+  <priority>0.5000</priority>
+ </url>
+ <url>
   <loc>http://www.missloopy.com/photos/img8232.jpg</loc>
   <lastmod>2015-06-01T08:33:53Z</lastmod>
   <priority>0.5000</priority>
@@ -113879,6 +114604,16 @@
  <url>
   <loc>http://www.missloopy.com/photos/img8245.jpg</loc>
   <lastmod>2015-06-01T08:33:57Z</lastmod>
+  <priority>0.5000</priority>
+ </url>
+ <url>
+  <loc>http://www.missloopy.com/photos/img8246.jpg</loc>
+  <lastmod>2015-08-10T06:43:56Z</lastmod>
+  <priority>0.5000</priority>
+ </url>
+ <url>
+  <loc>http://www.missloopy.com/photos/img8247.jpg</loc>
+  <lastmod>2015-08-10T06:45:57Z</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
@@ -114067,6 +114802,16 @@
   <priority>0.5000</priority>
  </url>
  <url>
+  <loc>http://www.missloopy.com/photos/img8281.jpg</loc>
+  <lastmod>2015-08-10T07:54:38Z</lastmod>
+  <priority>0.5000</priority>
+ </url>
+ <url>
+  <loc>http://www.missloopy.com/photos/img8282.jpg</loc>
+  <lastmod>2015-08-10T08:24:40Z</lastmod>
+  <priority>0.5000</priority>
+ </url>
+ <url>
   <loc>http://www.missloopy.com/photos/img8284.jpg</loc>
   <lastmod>2015-06-01T08:31:41Z</lastmod>
   <priority>0.5000</priority>
@@ -114122,6 +114867,16 @@
   <priority>0.5000</priority>
  </url>
  <url>
+  <loc>http://www.missloopy.com/photos/img8294.jpg</loc>
+  <lastmod>2015-08-10T08:30:47Z</lastmod>
+  <priority>0.5000</priority>
+ </url>
+ <url>
+  <loc>http://www.missloopy.com/photos/img8295.jpg</loc>
+  <lastmod>2015-08-10T08:42:25Z</lastmod>
+  <priority>0.5000</priority>
+ </url>
+ <url>
   <loc>http://www.missloopy.com/photos/img8296.jpg</loc>
   <lastmod>2015-06-01T08:33:55Z</lastmod>
   <priority>0.5000</priority>
@@ -114174,6 +114929,11 @@
  <url>
   <loc>http://www.missloopy.com/photos/img8304.jpg</loc>
   <lastmod>2015-06-01T08:32:11Z</lastmod>
+  <priority>0.5000</priority>
+ </url>
+ <url>
+  <loc>http://www.missloopy.com/photos/img8305.jpg</loc>
+  <lastmod>2015-08-10T08:52:37Z</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
@@ -114279,6 +115039,16 @@
  <url>
   <loc>http://www.missloopy.com/photos/img8324.jpg</loc>
   <lastmod>2015-06-01T08:32:23Z</lastmod>
+  <priority>0.5000</priority>
+ </url>
+ <url>
+  <loc>http://www.missloopy.com/photos/img8325.jpg</loc>
+  <lastmod>2015-08-10T08:56:12Z</lastmod>
+  <priority>0.5000</priority>
+ </url>
+ <url>
+  <loc>http://www.missloopy.com/photos/img8326.jpg</loc>
+  <lastmod>2015-08-10T09:06:22Z</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
@@ -114467,6 +115237,11 @@
   <priority>0.5000</priority>
  </url>
  <url>
+  <loc>http://www.missloopy.com/photos/img8360.jpg</loc>
+  <lastmod>2015-08-10T09:28:16Z</lastmod>
+  <priority>0.5000</priority>
+ </url>
+ <url>
   <loc>http://www.missloopy.com/photos/img8361.jpg</loc>
   <lastmod>2015-06-01T08:31:15Z</lastmod>
   <priority>0.5000</priority>
@@ -114577,6 +115352,11 @@
   <priority>0.5000</priority>
  </url>
  <url>
+  <loc>http://www.missloopy.com/photos/img8381.jpg</loc>
+  <lastmod>2015-08-10T09:38:15Z</lastmod>
+  <priority>0.5000</priority>
+ </url>
+ <url>
   <loc>http://www.missloopy.com/photos/img8382.jpg</loc>
   <lastmod>2015-06-01T08:31:16Z</lastmod>
   <priority>0.5000</priority>
@@ -114642,6 +115422,11 @@
   <priority>0.5000</priority>
  </url>
  <url>
+  <loc>http://www.missloopy.com/photos/img8394.jpg</loc>
+  <lastmod>2015-08-10T09:40:43Z</lastmod>
+  <priority>0.5000</priority>
+ </url>
+ <url>
   <loc>http://www.missloopy.com/photos/img8395.jpg</loc>
   <lastmod>2015-06-01T08:31:40Z</lastmod>
   <priority>0.5000</priority>
@@ -114692,6 +115477,11 @@
   <priority>0.5000</priority>
  </url>
  <url>
+  <loc>http://www.missloopy.com/photos/img8403.jpg</loc>
+  <lastmod>2015-08-10T09:40:58Z</lastmod>
+  <priority>0.5000</priority>
+ </url>
+ <url>
   <loc>http://www.missloopy.com/photos/img8404.jpg</loc>
   <lastmod>2015-06-01T08:32:01Z</lastmod>
   <priority>0.5000</priority>
@@ -114704,6 +115494,11 @@
  <url>
   <loc>http://www.missloopy.com/photos/img8406.jpg</loc>
   <lastmod>2015-06-01T08:32:13Z</lastmod>
+  <priority>0.5000</priority>
+ </url>
+ <url>
+  <loc>http://www.missloopy.com/photos/img8407.jpg</loc>
+  <lastmod>2015-08-10T09:53:52Z</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
@@ -114749,6 +115544,11 @@
  <url>
   <loc>http://www.missloopy.com/photos/img8415.jpg</loc>
   <lastmod>2015-06-01T08:33:28Z</lastmod>
+  <priority>0.5000</priority>
+ </url>
+ <url>
+  <loc>http://www.missloopy.com/photos/img8416.jpg</loc>
+  <lastmod>2015-08-10T09:54:05Z</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
@@ -115019,6 +115819,11 @@
  <url>
   <loc>http://www.missloopy.com/photos/img8465.jpg</loc>
   <lastmod>2015-06-01T08:32:24Z</lastmod>
+  <priority>0.5000</priority>
+ </url>
+ <url>
+  <loc>http://www.missloopy.com/photos/img8466.jpg</loc>
+  <lastmod>2015-08-10T09:54:21Z</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
@@ -116237,6 +117042,11 @@
   <priority>0.5000</priority>
  </url>
  <url>
+  <loc>http://www.missloopy.com/photos/img87.jpg</loc>
+  <lastmod>2015-08-11T07:00:03Z</lastmod>
+  <priority>0.5000</priority>
+ </url>
+ <url>
   <loc>http://www.missloopy.com/photos/img870.jpg</loc>
   <lastmod>2015-06-01T08:33:53Z</lastmod>
   <priority>0.5000</priority>
@@ -116597,11 +117407,6 @@
   <priority>0.5000</priority>
  </url>
  <url>
-  <loc>http://www.missloopy.com/photos/img8767.jpg</loc>
-  <lastmod>2015-06-01T08:32:34Z</lastmod>
-  <priority>0.5000</priority>
- </url>
- <url>
   <loc>http://www.missloopy.com/photos/img8768.jpg</loc>
   <lastmod>2015-06-01T08:32:23Z</lastmod>
   <priority>0.5000</priority>
@@ -116759,6 +117564,11 @@
  <url>
   <loc>http://www.missloopy.com/photos/img8799.jpg</loc>
   <lastmod>2015-06-01T08:32:45Z</lastmod>
+  <priority>0.5000</priority>
+ </url>
+ <url>
+  <loc>http://www.missloopy.com/photos/img88.jpg</loc>
+  <lastmod>2015-08-11T07:35:55Z</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
@@ -117244,6 +118054,11 @@
  <url>
   <loc>http://www.missloopy.com/photos/img8899.jpg</loc>
   <lastmod>2015-06-01T08:32:04Z</lastmod>
+  <priority>0.5000</priority>
+ </url>
+ <url>
+  <loc>http://www.missloopy.com/photos/img89.jpg</loc>
+  <lastmod>2015-08-11T07:48:23Z</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
@@ -118272,16 +119087,6 @@
   <priority>0.5000</priority>
  </url>
  <url>
-  <loc>http://www.missloopy.com/photos/img9140.jpg</loc>
-  <lastmod>2015-06-01T08:32:43Z</lastmod>
-  <priority>0.5000</priority>
- </url>
- <url>
-  <loc>http://www.missloopy.com/photos/img9141.jpg</loc>
-  <lastmod>2015-06-01T08:33:39Z</lastmod>
-  <priority>0.5000</priority>
- </url>
- <url>
   <loc>http://www.missloopy.com/photos/img9142.jpg</loc>
   <lastmod>2015-06-01T08:33:12Z</lastmod>
   <priority>0.5000</priority>
@@ -118368,11 +119173,6 @@
  </url>
  <url>
   <loc>http://www.missloopy.com/photos/img9164.jpg</loc>
-  <lastmod>2015-06-01T08:33:23Z</lastmod>
-  <priority>0.5000</priority>
- </url>
- <url>
-  <loc>http://www.missloopy.com/photos/img9165.jpg</loc>
   <lastmod>2015-06-01T08:33:23Z</lastmod>
   <priority>0.5000</priority>
  </url>
@@ -119742,11 +120542,6 @@
   <priority>0.5000</priority>
  </url>
  <url>
-  <loc>http://www.missloopy.com/photos/img9534.jpg</loc>
-  <lastmod>2015-06-05T09:10:10Z</lastmod>
-  <priority>0.5000</priority>
- </url>
- <url>
   <loc>http://www.missloopy.com/photos/img9535.jpg</loc>
   <lastmod>2015-06-05T09:29:48Z</lastmod>
   <priority>0.5000</priority>
@@ -119859,6 +120654,11 @@
  <url>
   <loc>http://www.missloopy.com/photos/img9569.jpg</loc>
   <lastmod>2015-06-06T10:46:43Z</lastmod>
+  <priority>0.5000</priority>
+ </url>
+ <url>
+  <loc>http://www.missloopy.com/photos/img957.jpg</loc>
+  <lastmod>2015-08-12T14:17:12Z</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
@@ -120467,6 +121267,11 @@
   <priority>0.5000</priority>
  </url>
  <url>
+  <loc>http://www.missloopy.com/photos/img972.jpg</loc>
+  <lastmod>2015-08-12T14:33:44Z</lastmod>
+  <priority>0.5000</priority>
+ </url>
+ <url>
   <loc>http://www.missloopy.com/photos/img9720.jpg</loc>
   <lastmod>2015-06-20T13:29:36Z</lastmod>
   <priority>0.5000</priority>
@@ -120634,11 +121439,6 @@
  <url>
   <loc>http://www.missloopy.com/photos/img9761.jpg</loc>
   <lastmod>2015-06-21T05:30:53Z</lastmod>
-  <priority>0.5000</priority>
- </url>
- <url>
-  <loc>http://www.missloopy.com/photos/img9763.jpg</loc>
-  <lastmod>2015-06-21T07:17:45Z</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
@@ -120897,63 +121697,8 @@
   <priority>0.5000</priority>
  </url>
  <url>
-  <loc>http://www.missloopy.com/photos/img9833.jpg</loc>
-  <lastmod>2015-06-22T16:37:43Z</lastmod>
-  <priority>0.5000</priority>
- </url>
- <url>
-  <loc>http://www.missloopy.com/photos/img9834.jpg</loc>
-  <lastmod>2015-06-22T16:37:57Z</lastmod>
-  <priority>0.5000</priority>
- </url>
- <url>
-  <loc>http://www.missloopy.com/photos/img9835.jpg</loc>
-  <lastmod>2015-06-22T16:38:06Z</lastmod>
-  <priority>0.5000</priority>
- </url>
- <url>
-  <loc>http://www.missloopy.com/photos/img9836.jpg</loc>
-  <lastmod>2015-06-22T20:21:27Z</lastmod>
-  <priority>0.5000</priority>
- </url>
- <url>
-  <loc>http://www.missloopy.com/photos/img9837.jpg</loc>
-  <lastmod>2015-06-22T20:29:51Z</lastmod>
-  <priority>0.5000</priority>
- </url>
- <url>
-  <loc>http://www.missloopy.com/photos/img9838.jpg</loc>
-  <lastmod>2015-06-22T20:30:14Z</lastmod>
-  <priority>0.5000</priority>
- </url>
- <url>
-  <loc>http://www.missloopy.com/photos/img9839.jpg</loc>
-  <lastmod>2015-06-22T20:30:32Z</lastmod>
-  <priority>0.5000</priority>
- </url>
- <url>
   <loc>http://www.missloopy.com/photos/img984.jpg</loc>
   <lastmod>2015-06-01T08:33:20Z</lastmod>
-  <priority>0.5000</priority>
- </url>
- <url>
-  <loc>http://www.missloopy.com/photos/img9840.jpg</loc>
-  <lastmod>2015-06-22T20:31:30Z</lastmod>
-  <priority>0.5000</priority>
- </url>
- <url>
-  <loc>http://www.missloopy.com/photos/img9841.jpg</loc>
-  <lastmod>2015-06-22T20:31:51Z</lastmod>
-  <priority>0.5000</priority>
- </url>
- <url>
-  <loc>http://www.missloopy.com/photos/img9842.jpg</loc>
-  <lastmod>2015-06-22T20:32:17Z</lastmod>
-  <priority>0.5000</priority>
- </url>
- <url>
-  <loc>http://www.missloopy.com/photos/img9843.jpg</loc>
-  <lastmod>2015-06-22T20:34:23Z</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>

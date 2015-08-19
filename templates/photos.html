@@ -6,7 +6,7 @@
 {% set perc = 100/cols %}
 
 {% block panel %}
-  <table cols={{ cols }} id="container" border=0 style="width:100%;border-spacing:5px;border-collapse:separate" ng-init="chunked=mkgrid({{ pids }}); master={{ master }}">
+  <table cols={{ cols }} id="container" border=0 style="width:100%;border-spacing:5px;border-collapse:separate">
     <tr ng-repeat="chunk in chunked">
       <td ng-repeat="pid in chunk track by $index" style="padding:5px;width:{{ perc }}%" ng-class="{master:master && pid==master, selected:sels.indexOf(pid)>=0}" align="center" valign="middle">
         <img ng-if="pid!=0" ng-src="{{ url_for('static', filename='photos/') }}{% raw %}{{imgfn(pid)}}{% endraw %}.jpg" id="{% raw %}{{pid}}{% endraw %}" style="width:100%" ng-click="select(pid)">
@@ -36,9 +36,9 @@
       <div class="span">
         <br>
         <button type="submit" class="btn btn-primary" ng-click="upload()">Upload</button>
-        <button type="button" class="btn btn-info col-xs-offset-3" id="default" ng-click="default()" ng-disabled="!(sels.length==1)">Make Default</button>
-        <button type="button" class="btn btn-info" id="remove" ng-click="remove()" ng-disabled="!(sels.length>0)">Remove</button>
-        <button type="button" class="btn btn-default" id="clear" ng-click="clear()" ng-disabled="!(sels.length>0)">Clear</button>
+        <button type="button" class="btn btn-info col-xs-offset-3" ng-click="default()" ng-disabled="!(sels.length==1)">Make Default</button>
+        <button type="button" class="btn btn-info" ng-click="remove()" ng-disabled="!(sels.length>0)">Remove</button>
+        <button type="button" class="btn btn-default" ng-click="clear()" ng-disabled="!(sels.length>0)">Clear</button>
       </div>
     </form>
   </div>
@@ -69,6 +69,7 @@
       }
 
       $scope.pids = {{ pids|safe }};
+      $scope.chunked = $scope.mkgrid($scope.pids);
       $scope.master = {{ master }};
       $scope.sels = [];
 

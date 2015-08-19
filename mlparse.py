@@ -26,7 +26,7 @@ def ParseAge(dict,key):
   if v is not None:
     dict[key] = str(min(max(int(v),AGE_MIN),AGE_MAX))
     return
-  logger.error('Did not understand age: %s' % (dict[key]))
+  logger.error('ERROR: Did not understand age: %s' % (dict[key]))
   del dict[key]
 
 def ParseHeight(dict,key):
@@ -57,7 +57,7 @@ def ParseHeight(dict,key):
       v = (v1*12+v2)*2.54
       dict[key] = str(min(max(int(v),HEIGHT_MIN),HEIGHT_MAX))
       return
-  logger.error('Did not understand height: %s' % (dict[key]))
+  logger.error('ERROR: Did not understand height: %s' % (dict[key]))
   del dict[key]
 
 def ParseRange(dict,kmin,kmax):
@@ -72,16 +72,14 @@ def ParseRange(dict,kmin,kmax):
 def ParseDob(dob):
   s = re.sub('[\W_]+', ' ', dob).strip()
   formats = [
-    '%Y %m %d',
-    '%Y %d %m',
-    '%m %d %Y',
-    '%d %m %Y',
+    '%Y %m %d', '%Y%m%d',
+    '%Y %d %m', '%Y%d%m',
+    '%m %d %Y', '%m%d%Y',
+    '%d %m %Y', '%d%m%Y',
     '%d %B %Y', '%d %b %Y', '%d%B %Y', '%d%b %Y',
     '%B %d %Y', '%b %d %Y', '%B%d %Y', '%b%d %Y',
     '%Y %B %d', '%Y %b %d', '%Y%B %d', '%Y%b %d', '%Y %B%d', '%Y %b%d', '%Y%B%d', '%Y%b%d',
     '%Y %d %B', '%Y %d %b', '%Y %d%B', '%Y %d%b',
-    '%m %d %y',
-    '%d %m %y',
   ]
   for f in formats:
     try:
@@ -89,3 +87,6 @@ def ParseDob(dob):
     except:
       pass
   return None
+
+def ParseEmail(email):
+  return re.search('^[\w\*\-\.#=%\?\$\'!/{}~]+@[\w\-]+(\.[\w\-]+)+$', email)
