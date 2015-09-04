@@ -373,6 +373,9 @@ def handle_mlsendemail(entry,values,files):
   y        = entry[COL_Y]
   tz       = entry[COL_TZ]
 
+  if not values.get('message'):
+    return {'error': 'No message specified.'}
+
   id_to   = int(values['id'])
   message = values['message']
 

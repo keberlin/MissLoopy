@@ -322,7 +322,7 @@ def Login(email,password):
   db.execute('SELECT * FROM profiles WHERE email ILIKE %s LIMIT 1' % (Quote(email)))
   entry = db.fetchone()
   if not entry:
-    return {'error': 'Email address not found.'}
+    return {'error': 'Email Address not found.'}
   if entry[COL_PASSWORD] != password:
     return {'error': 'Password does not match.'}
   if not entry[COL_VERIFIED]:

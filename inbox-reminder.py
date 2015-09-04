@@ -12,7 +12,7 @@ db = database.Database(MISS_LOOPY_DB)
 now = datetime.datetime.utcnow()
 since = now-datetime.timedelta(days=14)
 
-db.execute('SELECT DISTINCT(p.id) FROM profiles AS p INNER JOIN emails AS e WHERE e.id_to=p.id AND e.viewed=0 AND e.sent<%s' % (Quote(str(since))))
+db.execute('SELECT DISTINCT(p.id) FROM profiles AS p INNER JOIN emails AS e ON p.id=e.id_to WHERE NOT e.viewed AND e.sent<%s' % (Quote(str(since))))
 ids = map(lambda(x):int(x[0]), db.fetchall())
 
 for id in ids:

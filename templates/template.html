@@ -63,6 +63,8 @@
     <script src="{{ url_for('static', filename='js/bootstrap-typeahead.min.js') }}"></script>
     <!-- Include Bootstrap datepicker plugin -->
     <script src="{{ url_for('static', filename='js/bootstrap-datepicker.min.js') }}"></script>
+
+    {% include 'cookies.html' %}
   </head>
 
   <body ng-app="app" ng-controller="ctrl">

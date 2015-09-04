@@ -539,7 +539,7 @@ def handle_verify(entry,values):
   db.execute('SELECT id FROM profiles WHERE email ILIKE %s LIMIT 1' % (Quote(email)))
   entry = db.fetchone()
   if not entry:
-    return {'error': 'Email address not found'}
+    return {'error': 'Email Address not found'}
   if entry[0] != id:
     return {'error': 'Id does not match'}
 
