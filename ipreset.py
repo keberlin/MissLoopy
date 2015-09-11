@@ -15,8 +15,8 @@ db = database.Database(IP_ADDRESS_DB)
 
 db.execute('DROP TABLE IF EXISTS tmp')
 db.execute('CREATE TABLE tmp (lower BIGINT NOT NULL, upper BIGINT NOT NULL, country VARCHAR)')
-db.execute('DROP INDEX idx1')
-db.execute('CREATE UNIQUE INDEX idx1 ON tmp (lower, upper)')
+#db.execute('DROP INDEX idx1')
+#db.execute('CREATE UNIQUE INDEX idx1 ON tmp (lower, upper)')
 db.commit()
 
 # Load the country code data
@@ -33,7 +33,7 @@ countries['Asia'] = 'Asia'
 # Load the ip/geo data
 
 for file in args.file:
-  print 'Processing', file,
+  print 'Processing %s..' % (file)
   count = 0
   with open(file,'rb') as csvfile:
     reader = csv.reader(csvfile, delimiter=',', skipinitialspace=True)
@@ -49,7 +49,7 @@ for file in args.file:
         print str(e), row
         db.rollback()
         pass
-  print 'added', count, 'entries'
+  print '  added', count, 'entries'
 
 # Rename table
 

@@ -1,4 +1,4 @@
-import os, re, datetime, io, cStringIO, base64, psycopg2
+import os, re, datetime, io, cStringIO, base64, psycopg2, time
 
 from PIL import Image
 
@@ -540,6 +540,9 @@ def handle_mluploadphoto(entry,values,files):
 
   # Create a photo file using pid and copy data into it
   filename = os.path.join(BASE_DIR, 'static', PhotoFilename(pid))
+  if os.path.isfile(filename):
+    logger.error('ERROR: Photo file %s already exists!' % (filename))
+    os.remove(filename)
   im.save(filename, 'JPEG')
 
   EmailNewPhoto(pid, id)

@@ -19,6 +19,12 @@ def debug(str):
 def info(str):
   logger.info(request.remote_addr + ' ' + str)
 
+class MyFlask(Flask):
+  def get_send_file_max_age(self, name):
+    if re.search('\.(js|css|png|jpg|ico|woff|ttf|eof|svg)$', name.lower()):
+      return 28*24*60*60 # 28 days
+    return Flask.get_send_file_max_age(self, name)
+
 # Jinja filters
 def bitcompare(a,b):
   return a & b
@@ -32,7 +38,7 @@ def login_required(f):
   return decorated_function
 
 # Flask application
-application = Flask(__name__)
+application = MyFlask(__name__)
 application.debug = True
 
 application.jinja_env.filters['bitcompare'] = bitcompare
