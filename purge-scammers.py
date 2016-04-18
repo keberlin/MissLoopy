@@ -26,4 +26,4 @@ with open('listed_email_365.txt', 'rb') as csvfile:
 for id, email in ids:
   DeleteMember(id)
   EmailKickedStopForumSpam(email)
-  logger.info('Kicked %d %s' % (id, email))
+  logger.info('Kicked due to banned email address %d %s' % (id, email))

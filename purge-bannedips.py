@@ -20,9 +20,9 @@ with open('bannedips.txt','r') as file:
     if ip in ips:
       db.execute('SELECT id, email FROM profiles WHERE last_ip=%s' % (Quote(ip)))
       for entry in db.fetchall():
-        ids.append((entry[0], entry[1]))
+        ids.append((entry[0], entry[1], ip))
 
-for id, email in ids:
+for id, email, ip in ids:
   DeleteMember(id)
   EmailKickedStopForumSpam(email)
-  logger.info('Kicked %d %s' % (id, email))
+  logger.info('Kicked due to banned IP address %s %d %s' % (Quote(ip), id, email))

@@ -37,6 +37,9 @@ def handle_closestnames(entry,values,files):
   return {'matches': closest}
 
 def handle_mlaccount(entry,values,files):
+  if not values.get('password'):
+    return {'error': 'No Password specified.'}
+
   id = entry[COL_ID]
 
   # TODO Find a mechanism for updating a member's email address too..

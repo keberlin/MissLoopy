@@ -72,7 +72,7 @@ with open(args.o[0], 'wb') as output:
           if row[11]=='GLA': # Special handling for Greater London Area
             if row[6]=='A' and row[7]=='ADM3':
               OutputRow(row)
-            elif row[6]=='P' and row[7]=='PPLC':
+            elif row[6]=='P' and row[7] in ['PPLC','PPLX']:
               OutputRow(row)
           elif row[6]=='P' and row[7].startswith('PPL') and row[7]!='PPLX' and int(row[14])>MIN_POPULATION:
             OutputRow(row)

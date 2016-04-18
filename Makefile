@@ -1,13 +1,12 @@
-MSGS = $(wildcard ../scammers/*.msg)
-HTMLS = $(MSGS:.msg=.html)
+MSGS = $(notdir $(wildcard ../scammers/*.msg))
+SCAMMERS = $(addprefix static/scammers/, $(MSGS:.msg=.html))
 
-all: static/photos.html static/images.html spamkeywords.py $(HTMLS) gazetteer ipaddress
+all: static/photos.html static/images.html spamkeywords.py $(SCAMMERS) gazetteer ipaddress
 
 # Scammers
 
-%.html: %.msg scammer-html.py templates/scammer.html templates/template-panel.html templates/template.html templates/header.html templates/footer.html templates/social.html
+static/scammers/%.html: ../scammers/%.msg scammer-html.py templates/scammer.html templates/template-panel.html templates/template.html templates/header.html templates/footer.html templates/social.html
 	cat $< | ./scammer-html.py > $@
-	cp $@ static/scammers
 
 # Photos
 
