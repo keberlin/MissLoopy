@@ -182,6 +182,7 @@ def handle_mlprofile(entry,values,files):
     if not tuple:
       return {'matches': GazClosestMatches(values['location'], MAX_MATCHES)}
     attrs['location'] = Quote(values['location'])
+    attrs['country'] = Quote(GazCountry(values['location']))
     attrs['x'] = str(tuple[0])
     attrs['y'] = str(tuple[1])
     attrs['tz'] = Quote(tuple[2])
@@ -253,6 +254,7 @@ def handle_mlregister(entry,values,files):
     if not tuple:
       return {'matches': GazClosestMatches(values['location'], MAX_MATCHES)}
     attrs['location'] = Quote(values['location'])
+    attrs['country'] = Quote(GazCountry(values['location']))
     attrs['x'] = str(tuple[0])
     attrs['y'] = str(tuple[1])
     attrs['tz'] = Quote(tuple[2])
