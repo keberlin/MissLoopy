@@ -25,12 +25,20 @@ def search2(distance,order,id,x,y,tz,gender,age,ethnicity,height,weight,gender_c
   if age_min:
     now = datetime.datetime.utcnow()
     ref = Datetime(now, tz)
-    dob = datetime.date(ref.year-age_min,ref.month,ref.day)
+    try:
+      dob = datetime.date(ref.year-age_min,ref.month,ref.day)
+    except ValueError:
+      # cater for leap year
+      dob = datetime.date(ref.year-age_min,ref.month,ref.day-1)
     rules.append('dob <= %s' % (Quote(str(dob))))
   if age_max:
     now = datetime.datetime.utcnow()
     ref = Datetime(now, tz)
-    dob = datetime.date(ref.year-age_max-1,ref.month,ref.day)
+    try:
+      dob = datetime.date(ref.year-age_max-1,ref.month,ref.day)
+    except ValueError:
+      # cater for leap year
+      dob = datetime.date(ref.year-age_max-1,ref.month,ref.day-1)
     rules.append('dob > %s' % (Quote(str(dob))))
   if ethnicity_choice:
     rules.append('(ethnicity & %d)!=0' % (ethnicity_choice))

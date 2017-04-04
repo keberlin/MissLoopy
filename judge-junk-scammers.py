@@ -11,16 +11,6 @@ from emails import *
 
 from logger import *
 
-def StopForumSpamAdd(username,email,ip,evidence):
-  data = {
-    'username': username,
-    'email': email,
-    'ip': ip,
-    'api_key': 'dejcsw8ph7iu5n',
-    'evidence': evidence
-  }
-  requests.post('http://www.stopforumspam.com/add',data)
-
 ids = set()
 with open('junk-auto.log', 'r') as file:
   for line in file.readlines():
@@ -69,6 +59,6 @@ for id in ids:
     StopForumSpamAdd(name,email,ip,message)
     DeleteMember(id)
     EmailKicked(email)
-    logger.info('Kicked due to spamming %d %s' % (id, email))
+    logger.info('Kicked due to spamming %s %d %s' % (Quote(ip), id, email))
   elif kick=='q':
     break

@@ -3,6 +3,8 @@ SCAMMERS = $(addprefix static/scammers/, $(MSGS:.msg=.html))
 
 all: static/photos.html static/images.html spamkeywords.py $(SCAMMERS) gazetteer ipaddress
 
+.FORCE:
+
 # Scammers
 
 static/scammers/%.html: ../scammers/%.msg scammer-html.py templates/scammer.html templates/template-panel.html templates/template.html templates/header.html templates/footer.html templates/social.html
@@ -44,5 +46,5 @@ ipaddress: ipreset.py geolite2.txt dbip.txt
 spamkeywords.py: junk-auto.log junk-reported.log
 	./analyse-junk.sh
 
-run_tests:
+tests: .FORCE
 	nosetests --with-coverage
