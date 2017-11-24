@@ -16,6 +16,6 @@ BASE_DIR = os.path.dirname(__file__)
 
 db = database.Database(MISS_LOOPY_DB)
 
-db.execute("SELECT id, pid FROM photos ORDER BY pid DESC LIMIT 200")
+db.execute("SELECT id, pid FROM photos ORDER BY created DESC LIMIT 200")
 for entry in db.fetchall():
   print entry[0], PhotoFilename(entry[1])

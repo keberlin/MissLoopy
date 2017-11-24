@@ -48,7 +48,7 @@ db.execute('''CREATE TABLE profiles (
     )''')
 db.execute('CREATE INDEX idx1 ON profiles (email COLLATE NOCASE)')
 
-db.execute('CREATE TABLE photos (pid INTEGER PRIMARY KEY, id INTEGER, offset INTEGER, master BIT DEFAULT 0)')
+db.execute('CREATE TABLE photos (pid INTEGER PRIMARY KEY, id INTEGER, offset INTEGER, master BIT DEFAULT 0, created TIMESTAMP)')
 db.execute('CREATE INDEX idx2 ON photos (id)')
 
 db.execute('CREATE TABLE emails (id_from INTEGER, id_to INTEGER, message VARCHAR, sent TIMESTAMP, viewed BIT DEFAULT 0)')

@@ -47,4 +47,4 @@ spamkeywords.py: junk-auto.log junk-reported.log
 	./analyse-junk.sh
 
 tests: .FORCE
-	nosetests --with-coverage
+	nosetests #--with-coverage

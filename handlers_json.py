@@ -536,7 +536,8 @@ def handle_mluploadphoto(entry,values,files):
 
   while True:
     try:
-      db.execute('INSERT INTO photos (id) VALUES (%d)' % (id))
+      now = datetime.datetime.utcnow()
+      db.execute('INSERT INTO photos (id,created) VALUES (%d,%s)' % (id,Quote(str(now))))
       pid = db.lastval()
       db.commit()
       break
