@@ -41,5 +41,5 @@ if recipient:
     file.write(recipient+'\n')
 else:
   server = smtplib.SMTP('localhost')
-  server.sendmail(msg.get('From'), 'admin', msg.as_string())
+  server.sendmail(msg.get('From'), 'scammer', msg.as_string())
   server.quit()
