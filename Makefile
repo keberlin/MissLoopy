@@ -12,13 +12,13 @@ static/scammers/%.html: ../scammers/%.msg scammer-html.py templates/scammer.html
 
 # Photos
 
-static/photos.html: templates/template.html templates/static.html static.cgi .FORCE
-	python list-new-photos.py | awk 'BEGIN {printf "<table>\n";} {if (n++%12==0) {printf "<tr>\n";} printf "<td align=\"center\"><a href=\"member?id=%s\"><img width=\"100px\" src=\"static/%s\"><br>%s</a></td>\n",$$1,$$2,$$1;} END {printf "</table>";}' | ./static.cgi -s 'Photos' > $@
+static/photos.html: templates/template.html templates/static.html static.py .FORCE
+	python list-new-photos.py | awk 'BEGIN {printf "<table>\n";} {if (n++%12==0) {printf "<tr>\n";} printf "<td align=\"center\"><a href=\"member?id=%s\"><img width=\"100px\" src=\"static/%s\"><br>%s</a></td>\n",$$1,$$2,$$1;} END {printf "</table>";}' | python static.py -s 'Photos' > $@
 
 # Images
 
-static/images.html: templates/template.html templates/static.html static.cgi .FORCE
-	python list-new-images.py | awk 'BEGIN {printf "<table>\n";} {if (n++%12==0) {printf "<tr>\n";} printf "<td align=\"center\"><img width=\"100px\" src=\"%s\"><br>%s</td>\n",$$2,$$1;} END {printf "</table>";}' | ./static.cgi -s 'Images' > $@
+static/images.html: templates/template.html templates/static.html static.py .FORCE
+	python list-new-images.py | awk 'BEGIN {printf "<table>\n";} {if (n++%12==0) {printf "<tr>\n";} printf "<td align=\"center\"><img width=\"100px\" src=\"%s\"><br>%s</td>\n",$$2,$$1;} END {printf "</table>";}' | python static.py -s 'Images' > $@
 
 # Gazetteer DB
 
