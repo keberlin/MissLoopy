@@ -66,4 +66,35 @@ db.execute('CREATE INDEX idx6 ON results (id, id_search)')
 db.execute('CREATE TABLE admin (last_new_member_search TIMESTAMP, last_dump_member_search TIMESTAMP)')
 db.execute('INSERT INTO admin (last_new_member_search,last_dump_member_search) VALUES("2014-01-01 00:00:00","2014-01-01 00:00:00")')
 
+db.execute('''CREATE TABLE reports (
+    logged TIMESTAMP, 
+    verified INTEGER, 
+    unverified INTEGER, 
+    males INTEGER, 
+    females INTEGER, 
+    men INTEGER,
+    women INTEGER,
+    sugar_pups INTEGER, 
+    sugar_babies INTEGER, 
+    sugar_daddies INTEGER, 
+    sugar_mommas INTEGER, 
+    avg_age_males FLOAT, 
+    avg_age_females FLOAT, 
+    avg_age_men FLOAT, 
+    avg_age_women FLOAT, 
+    avg_age_sugar_pups FLOAT, 
+    avg_age_sugar_babies FLOAT, 
+    avg_age_sugar_daddies FLOAT, 
+    avg_age_sugar_mommas FLOAT, 
+    white INTEGER, 
+    black INTEGER, 
+    latino INTEGER, 
+    indian INTEGER, 
+    asian INTEGER, 
+    mixed INTEGER, 
+    other INTEGER, 
+    active INTEGER, 
+    messages INTEGER
+    )''')
+
 db.commit()

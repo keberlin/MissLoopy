@@ -549,6 +549,9 @@ def handle_mluploadphoto(entry,values,files):
   if os.path.isfile(filename):
     logger.error('ERROR: Photo file %s already exists!' % (filename))
     os.remove(filename)
+
+  # Save the modified photo
+  im = im.convert('RGB')
   im.save(filename, 'JPEG')
 
   EmailNewPhoto(pid, id)
