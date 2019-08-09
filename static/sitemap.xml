@@ -80,17 +80,17 @@
  </url>
  <url>
   <loc>http://www.missloopy.com/css/bootstrap-datepicker.css</loc>
-  <lastmod>2018-08-06T14:08:27Z</lastmod>
+  <lastmod>2019-08-08T11:05:05Z</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
   <loc>http://www.missloopy.com/css/bootstrap-datepicker.css.map</loc>
-  <lastmod>2018-08-06T14:08:27Z</lastmod>
+  <lastmod>2019-08-08T11:05:05Z</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
   <loc>http://www.missloopy.com/css/bootstrap-datepicker.min.css</loc>
-  <lastmod>2018-08-06T14:08:27Z</lastmod>
+  <lastmod>2019-08-08T11:05:05Z</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
@@ -100,17 +100,17 @@
  </url>
  <url>
   <loc>http://www.missloopy.com/css/bootstrap-datepicker.standalone.css</loc>
-  <lastmod>2018-08-06T14:08:27Z</lastmod>
+  <lastmod>2019-08-08T11:05:05Z</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
   <loc>http://www.missloopy.com/css/bootstrap-datepicker.standalone.css.map</loc>
-  <lastmod>2018-08-06T14:08:27Z</lastmod>
+  <lastmod>2019-08-08T11:05:05Z</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
   <loc>http://www.missloopy.com/css/bootstrap-datepicker.standalone.min.css</loc>
-  <lastmod>2018-08-06T14:08:27Z</lastmod>
+  <lastmod>2019-08-08T11:05:05Z</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
@@ -120,17 +120,17 @@
  </url>
  <url>
   <loc>http://www.missloopy.com/css/bootstrap-datepicker3.css</loc>
-  <lastmod>2018-08-06T14:08:27Z</lastmod>
+  <lastmod>2019-08-08T11:05:05Z</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
   <loc>http://www.missloopy.com/css/bootstrap-datepicker3.css.map</loc>
-  <lastmod>2018-08-06T14:08:27Z</lastmod>
+  <lastmod>2019-08-08T11:05:05Z</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
   <loc>http://www.missloopy.com/css/bootstrap-datepicker3.min.css</loc>
-  <lastmod>2018-08-06T14:08:27Z</lastmod>
+  <lastmod>2019-08-08T11:05:05Z</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
@@ -140,17 +140,17 @@
  </url>
  <url>
   <loc>http://www.missloopy.com/css/bootstrap-datepicker3.standalone.css</loc>
-  <lastmod>2018-08-06T14:08:27Z</lastmod>
+  <lastmod>2019-08-08T11:05:05Z</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
   <loc>http://www.missloopy.com/css/bootstrap-datepicker3.standalone.css.map</loc>
-  <lastmod>2018-08-06T14:08:27Z</lastmod>
+  <lastmod>2019-08-08T11:05:05Z</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
   <loc>http://www.missloopy.com/css/bootstrap-datepicker3.standalone.min.css</loc>
-  <lastmod>2018-08-06T14:08:27Z</lastmod>
+  <lastmod>2019-08-08T11:05:05Z</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
@@ -330,7 +330,7 @@
  </url>
  <url>
   <loc>http://www.missloopy.com/images.html</loc>
-  <lastmod>2019-08-02T03:01:16Z</lastmod>
+  <lastmod>2019-08-09T03:01:13Z</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
@@ -504,12 +504,12 @@
  </url>
  <url>
   <loc>http://www.missloopy.com/js/bootstrap-datepicker.js</loc>
-  <lastmod>2018-08-06T14:08:27Z</lastmod>
+  <lastmod>2019-08-08T11:05:05Z</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
   <loc>http://www.missloopy.com/js/bootstrap-datepicker.min.js</loc>
-  <lastmod>2018-08-06T14:08:27Z</lastmod>
+  <lastmod>2019-08-08T11:05:05Z</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
@@ -1199,267 +1199,272 @@
  </url>
  <url>
   <loc>http://www.missloopy.com/locales/</loc>
-  <lastmod>2018-08-06T14:08:28Z</lastmod>
+  <lastmod>2019-08-08T11:05:05Z</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
   <loc>http://www.missloopy.com/locales/bootstrap-datepicker-en-CA.min.js</loc>
-  <lastmod>2018-08-06T14:08:28Z</lastmod>
+  <lastmod>2019-08-08T11:05:05Z</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
   <loc>http://www.missloopy.com/locales/bootstrap-datepicker.ar-tn.min.js</loc>
-  <lastmod>2018-08-06T14:08:28Z</lastmod>
+  <lastmod>2019-08-08T11:05:05Z</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
   <loc>http://www.missloopy.com/locales/bootstrap-datepicker.ar.min.js</loc>
-  <lastmod>2018-08-06T14:08:28Z</lastmod>
+  <lastmod>2019-08-08T11:05:05Z</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
   <loc>http://www.missloopy.com/locales/bootstrap-datepicker.az.min.js</loc>
-  <lastmod>2018-08-06T14:08:28Z</lastmod>
+  <lastmod>2019-08-08T11:05:05Z</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
   <loc>http://www.missloopy.com/locales/bootstrap-datepicker.bg.min.js</loc>
-  <lastmod>2018-08-06T14:08:28Z</lastmod>
+  <lastmod>2019-08-08T11:05:05Z</lastmod>
+  <priority>0.5000</priority>
+ </url>
+ <url>
+  <loc>http://www.missloopy.com/locales/bootstrap-datepicker.bm.min.js</loc>
+  <lastmod>2019-08-08T11:05:05Z</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
   <loc>http://www.missloopy.com/locales/bootstrap-datepicker.bn.min.js</loc>
-  <lastmod>2018-08-06T14:08:28Z</lastmod>
+  <lastmod>2019-08-08T11:05:05Z</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
   <loc>http://www.missloopy.com/locales/bootstrap-datepicker.br.min.js</loc>
-  <lastmod>2018-08-06T14:08:28Z</lastmod>
+  <lastmod>2019-08-08T11:05:05Z</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
   <loc>http://www.missloopy.com/locales/bootstrap-datepicker.bs.min.js</loc>
-  <lastmod>2018-08-06T14:08:28Z</lastmod>
+  <lastmod>2019-08-08T11:05:05Z</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
   <loc>http://www.missloopy.com/locales/bootstrap-datepicker.ca.min.js</loc>
-  <lastmod>2018-08-06T14:08:28Z</lastmod>
+  <lastmod>2019-08-08T11:05:05Z</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
   <loc>http://www.missloopy.com/locales/bootstrap-datepicker.cs.min.js</loc>
-  <lastmod>2018-08-06T14:08:28Z</lastmod>
+  <lastmod>2019-08-08T11:05:05Z</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
   <loc>http://www.missloopy.com/locales/bootstrap-datepicker.cy.min.js</loc>
-  <lastmod>2018-08-06T14:08:28Z</lastmod>
+  <lastmod>2019-08-08T11:05:05Z</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
   <loc>http://www.missloopy.com/locales/bootstrap-datepicker.da.min.js</loc>
-  <lastmod>2018-08-06T14:08:28Z</lastmod>
+  <lastmod>2019-08-08T11:05:05Z</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
   <loc>http://www.missloopy.com/locales/bootstrap-datepicker.de.min.js</loc>
-  <lastmod>2018-08-06T14:08:28Z</lastmod>
+  <lastmod>2019-08-08T11:05:05Z</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
   <loc>http://www.missloopy.com/locales/bootstrap-datepicker.el.min.js</loc>
-  <lastmod>2018-08-06T14:08:28Z</lastmod>
+  <lastmod>2019-08-08T11:05:05Z</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
   <loc>http://www.missloopy.com/locales/bootstrap-datepicker.en-AU.min.js</loc>
-  <lastmod>2018-08-06T14:08:28Z</lastmod>
+  <lastmod>2019-08-08T11:05:05Z</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
   <loc>http://www.missloopy.com/locales/bootstrap-datepicker.en-CA.min.js</loc>
-  <lastmod>2018-08-06T14:08:28Z</lastmod>
+  <lastmod>2019-08-08T11:05:05Z</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
   <loc>http://www.missloopy.com/locales/bootstrap-datepicker.en-GB.min.js</loc>
-  <lastmod>2018-08-06T14:08:28Z</lastmod>
+  <lastmod>2019-08-08T11:05:05Z</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
   <loc>http://www.missloopy.com/locales/bootstrap-datepicker.en-IE.min.js</loc>
-  <lastmod>2018-08-06T14:08:28Z</lastmod>
+  <lastmod>2019-08-08T11:05:05Z</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
   <loc>http://www.missloopy.com/locales/bootstrap-datepicker.en-NZ.min.js</loc>
-  <lastmod>2018-08-06T14:08:28Z</lastmod>
+  <lastmod>2019-08-08T11:05:05Z</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
   <loc>http://www.missloopy.com/locales/bootstrap-datepicker.en-ZA.min.js</loc>
-  <lastmod>2018-08-06T14:08:28Z</lastmod>
+  <lastmod>2019-08-08T11:05:05Z</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
   <loc>http://www.missloopy.com/locales/bootstrap-datepicker.eo.min.js</loc>
-  <lastmod>2018-08-06T14:08:28Z</lastmod>
+  <lastmod>2019-08-08T11:05:05Z</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
   <loc>http://www.missloopy.com/locales/bootstrap-datepicker.es.min.js</loc>
-  <lastmod>2018-08-06T14:08:28Z</lastmod>
+  <lastmod>2019-08-08T11:05:05Z</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
   <loc>http://www.missloopy.com/locales/bootstrap-datepicker.et.min.js</loc>
-  <lastmod>2018-08-06T14:08:28Z</lastmod>
+  <lastmod>2019-08-08T11:05:05Z</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
   <loc>http://www.missloopy.com/locales/bootstrap-datepicker.eu.min.js</loc>
-  <lastmod>2018-08-06T14:08:28Z</lastmod>
+  <lastmod>2019-08-08T11:05:05Z</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
   <loc>http://www.missloopy.com/locales/bootstrap-datepicker.fa.min.js</loc>
-  <lastmod>2018-08-06T14:08:28Z</lastmod>
+  <lastmod>2019-08-08T11:05:05Z</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
   <loc>http://www.missloopy.com/locales/bootstrap-datepicker.fi.min.js</loc>
-  <lastmod>2018-08-06T14:08:28Z</lastmod>
+  <lastmod>2019-08-08T11:05:05Z</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
   <loc>http://www.missloopy.com/locales/bootstrap-datepicker.fo.min.js</loc>
-  <lastmod>2018-08-06T14:08:28Z</lastmod>
+  <lastmod>2019-08-08T11:05:05Z</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
   <loc>http://www.missloopy.com/locales/bootstrap-datepicker.fr-CH.min.js</loc>
-  <lastmod>2018-08-06T14:08:28Z</lastmod>
+  <lastmod>2019-08-08T11:05:05Z</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
   <loc>http://www.missloopy.com/locales/bootstrap-datepicker.fr.min.js</loc>
-  <lastmod>2018-08-06T14:08:28Z</lastmod>
+  <lastmod>2019-08-08T11:05:05Z</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
   <loc>http://www.missloopy.com/locales/bootstrap-datepicker.gl.min.js</loc>
-  <lastmod>2018-08-06T14:08:28Z</lastmod>
+  <lastmod>2019-08-08T11:05:05Z</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
   <loc>http://www.missloopy.com/locales/bootstrap-datepicker.he.min.js</loc>
-  <lastmod>2018-08-06T14:08:28Z</lastmod>
+  <lastmod>2019-08-08T11:05:05Z</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
   <loc>http://www.missloopy.com/locales/bootstrap-datepicker.hi.min.js</loc>
-  <lastmod>2018-08-06T14:08:28Z</lastmod>
+  <lastmod>2019-08-08T11:05:05Z</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
   <loc>http://www.missloopy.com/locales/bootstrap-datepicker.hr.min.js</loc>
-  <lastmod>2018-08-06T14:08:28Z</lastmod>
+  <lastmod>2019-08-08T11:05:05Z</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
   <loc>http://www.missloopy.com/locales/bootstrap-datepicker.hu.min.js</loc>
-  <lastmod>2018-08-06T14:08:28Z</lastmod>
+  <lastmod>2019-08-08T11:05:05Z</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
   <loc>http://www.missloopy.com/locales/bootstrap-datepicker.hy.min.js</loc>
-  <lastmod>2018-08-06T14:08:28Z</lastmod>
+  <lastmod>2019-08-08T11:05:05Z</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
   <loc>http://www.missloopy.com/locales/bootstrap-datepicker.id.min.js</loc>
-  <lastmod>2018-08-06T14:08:28Z</lastmod>
+  <lastmod>2019-08-08T11:05:05Z</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
   <loc>http://www.missloopy.com/locales/bootstrap-datepicker.is.min.js</loc>
-  <lastmod>2018-08-06T14:08:28Z</lastmod>
+  <lastmod>2019-08-08T11:05:05Z</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
   <loc>http://www.missloopy.com/locales/bootstrap-datepicker.it-CH.min.js</loc>
-  <lastmod>2018-08-06T14:08:28Z</lastmod>
+  <lastmod>2019-08-08T11:05:05Z</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
   <loc>http://www.missloopy.com/locales/bootstrap-datepicker.it.min.js</loc>
-  <lastmod>2018-08-06T14:08:28Z</lastmod>
+  <lastmod>2019-08-08T11:05:05Z</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
   <loc>http://www.missloopy.com/locales/bootstrap-datepicker.ja.min.js</loc>
-  <lastmod>2018-08-06T14:08:28Z</lastmod>
+  <lastmod>2019-08-08T11:05:05Z</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
   <loc>http://www.missloopy.com/locales/bootstrap-datepicker.ka.min.js</loc>
-  <lastmod>2018-08-06T14:08:28Z</lastmod>
+  <lastmod>2019-08-08T11:05:05Z</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
   <loc>http://www.missloopy.com/locales/bootstrap-datepicker.kh.min.js</loc>
-  <lastmod>2018-08-06T14:08:28Z</lastmod>
+  <lastmod>2019-08-08T11:05:05Z</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
   <loc>http://www.missloopy.com/locales/bootstrap-datepicker.kk.min.js</loc>
-  <lastmod>2018-08-06T14:08:28Z</lastmod>
+  <lastmod>2019-08-08T11:05:05Z</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
   <loc>http://www.missloopy.com/locales/bootstrap-datepicker.km.min.js</loc>
-  <lastmod>2018-08-06T14:08:28Z</lastmod>
+  <lastmod>2019-08-08T11:05:05Z</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
   <loc>http://www.missloopy.com/locales/bootstrap-datepicker.ko.min.js</loc>
-  <lastmod>2018-08-06T14:08:28Z</lastmod>
+  <lastmod>2019-08-08T11:05:05Z</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
   <loc>http://www.missloopy.com/locales/bootstrap-datepicker.kr.min.js</loc>
-  <lastmod>2018-08-06T14:08:28Z</lastmod>
+  <lastmod>2019-08-08T11:05:05Z</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
   <loc>http://www.missloopy.com/locales/bootstrap-datepicker.lt.min.js</loc>
-  <lastmod>2018-08-06T14:08:28Z</lastmod>
+  <lastmod>2019-08-08T11:05:05Z</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
   <loc>http://www.missloopy.com/locales/bootstrap-datepicker.lv.min.js</loc>
-  <lastmod>2018-08-06T14:08:28Z</lastmod>
+  <lastmod>2019-08-08T11:05:05Z</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
   <loc>http://www.missloopy.com/locales/bootstrap-datepicker.me.min.js</loc>
-  <lastmod>2018-08-06T14:08:28Z</lastmod>
+  <lastmod>2019-08-08T11:05:05Z</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
   <loc>http://www.missloopy.com/locales/bootstrap-datepicker.mk.min.js</loc>
-  <lastmod>2018-08-06T14:08:28Z</lastmod>
+  <lastmod>2019-08-08T11:05:05Z</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
   <loc>http://www.missloopy.com/locales/bootstrap-datepicker.mn.min.js</loc>
-  <lastmod>2018-08-06T14:08:28Z</lastmod>
+  <lastmod>2019-08-08T11:05:05Z</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
   <loc>http://www.missloopy.com/locales/bootstrap-datepicker.ms.min.js</loc>
-  <lastmod>2018-08-06T14:08:28Z</lastmod>
+  <lastmod>2019-08-08T11:05:05Z</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
@@ -1469,152 +1474,152 @@
  </url>
  <url>
   <loc>http://www.missloopy.com/locales/bootstrap-datepicker.nl-BE.min.js</loc>
-  <lastmod>2018-08-06T14:08:28Z</lastmod>
+  <lastmod>2019-08-08T11:05:05Z</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
   <loc>http://www.missloopy.com/locales/bootstrap-datepicker.nl.min.js</loc>
-  <lastmod>2018-08-06T14:08:28Z</lastmod>
+  <lastmod>2019-08-08T11:05:05Z</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
   <loc>http://www.missloopy.com/locales/bootstrap-datepicker.no.min.js</loc>
-  <lastmod>2018-08-06T14:08:28Z</lastmod>
+  <lastmod>2019-08-08T11:05:05Z</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
   <loc>http://www.missloopy.com/locales/bootstrap-datepicker.oc.min.js</loc>
-  <lastmod>2018-08-06T14:08:28Z</lastmod>
+  <lastmod>2019-08-08T11:05:05Z</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
   <loc>http://www.missloopy.com/locales/bootstrap-datepicker.pl.min.js</loc>
-  <lastmod>2018-08-06T14:08:28Z</lastmod>
+  <lastmod>2019-08-08T11:05:05Z</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
   <loc>http://www.missloopy.com/locales/bootstrap-datepicker.pt-BR.min.js</loc>
-  <lastmod>2018-08-06T14:08:28Z</lastmod>
+  <lastmod>2019-08-08T11:05:05Z</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
   <loc>http://www.missloopy.com/locales/bootstrap-datepicker.pt.min.js</loc>
-  <lastmod>2018-08-06T14:08:28Z</lastmod>
+  <lastmod>2019-08-08T11:05:05Z</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
   <loc>http://www.missloopy.com/locales/bootstrap-datepicker.ro.min.js</loc>
-  <lastmod>2018-08-06T14:08:28Z</lastmod>
+  <lastmod>2019-08-08T11:05:05Z</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
   <loc>http://www.missloopy.com/locales/bootstrap-datepicker.rs-latin.min.js</loc>
-  <lastmod>2018-08-06T14:08:28Z</lastmod>
+  <lastmod>2019-08-08T11:05:05Z</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
   <loc>http://www.missloopy.com/locales/bootstrap-datepicker.rs.min.js</loc>
-  <lastmod>2018-08-06T14:08:28Z</lastmod>
+  <lastmod>2019-08-08T11:05:05Z</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
   <loc>http://www.missloopy.com/locales/bootstrap-datepicker.ru.min.js</loc>
-  <lastmod>2018-08-06T14:08:28Z</lastmod>
+  <lastmod>2019-08-08T11:05:05Z</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
   <loc>http://www.missloopy.com/locales/bootstrap-datepicker.si.min.js</loc>
-  <lastmod>2018-08-06T14:08:28Z</lastmod>
+  <lastmod>2019-08-08T11:05:05Z</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
   <loc>http://www.missloopy.com/locales/bootstrap-datepicker.sk.min.js</loc>
-  <lastmod>2018-08-06T14:08:28Z</lastmod>
+  <lastmod>2019-08-08T11:05:05Z</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
   <loc>http://www.missloopy.com/locales/bootstrap-datepicker.sl.min.js</loc>
-  <lastmod>2018-08-06T14:08:28Z</lastmod>
+  <lastmod>2019-08-08T11:05:05Z</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
   <loc>http://www.missloopy.com/locales/bootstrap-datepicker.sq.min.js</loc>
-  <lastmod>2018-08-06T14:08:28Z</lastmod>
+  <lastmod>2019-08-08T11:05:05Z</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
   <loc>http://www.missloopy.com/locales/bootstrap-datepicker.sr-latin.min.js</loc>
-  <lastmod>2018-08-06T14:08:28Z</lastmod>
+  <lastmod>2019-08-08T11:05:05Z</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
   <loc>http://www.missloopy.com/locales/bootstrap-datepicker.sr.min.js</loc>
-  <lastmod>2018-08-06T14:08:28Z</lastmod>
+  <lastmod>2019-08-08T11:05:05Z</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
   <loc>http://www.missloopy.com/locales/bootstrap-datepicker.sv.min.js</loc>
-  <lastmod>2018-08-06T14:08:28Z</lastmod>
+  <lastmod>2019-08-08T11:05:05Z</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
   <loc>http://www.missloopy.com/locales/bootstrap-datepicker.sw.min.js</loc>
-  <lastmod>2018-08-06T14:08:28Z</lastmod>
+  <lastmod>2019-08-08T11:05:05Z</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
   <loc>http://www.missloopy.com/locales/bootstrap-datepicker.ta.min.js</loc>
-  <lastmod>2018-08-06T14:08:28Z</lastmod>
+  <lastmod>2019-08-08T11:05:05Z</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
   <loc>http://www.missloopy.com/locales/bootstrap-datepicker.tg.min.js</loc>
-  <lastmod>2018-08-06T14:08:28Z</lastmod>
+  <lastmod>2019-08-08T11:05:05Z</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
   <loc>http://www.missloopy.com/locales/bootstrap-datepicker.th.min.js</loc>
-  <lastmod>2018-08-06T14:08:28Z</lastmod>
+  <lastmod>2019-08-08T11:05:05Z</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
   <loc>http://www.missloopy.com/locales/bootstrap-datepicker.tk.min.js</loc>
-  <lastmod>2018-08-06T14:08:28Z</lastmod>
+  <lastmod>2019-08-08T11:05:05Z</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
   <loc>http://www.missloopy.com/locales/bootstrap-datepicker.tr.min.js</loc>
-  <lastmod>2018-08-06T14:08:28Z</lastmod>
+  <lastmod>2019-08-08T11:05:05Z</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
   <loc>http://www.missloopy.com/locales/bootstrap-datepicker.uk.min.js</loc>
-  <lastmod>2018-08-06T14:08:28Z</lastmod>
+  <lastmod>2019-08-08T11:05:05Z</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
   <loc>http://www.missloopy.com/locales/bootstrap-datepicker.uz-cyrl.min.js</loc>
-  <lastmod>2018-08-06T14:08:28Z</lastmod>
+  <lastmod>2019-08-08T11:05:05Z</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
   <loc>http://www.missloopy.com/locales/bootstrap-datepicker.uz-latn.min.js</loc>
-  <lastmod>2018-08-06T14:08:28Z</lastmod>
+  <lastmod>2019-08-08T11:05:05Z</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
   <loc>http://www.missloopy.com/locales/bootstrap-datepicker.vi.min.js</loc>
-  <lastmod>2018-08-06T14:08:28Z</lastmod>
+  <lastmod>2019-08-08T11:05:05Z</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
   <loc>http://www.missloopy.com/locales/bootstrap-datepicker.zh-CN.min.js</loc>
-  <lastmod>2018-08-06T14:08:28Z</lastmod>
+  <lastmod>2019-08-08T11:05:05Z</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
   <loc>http://www.missloopy.com/locales/bootstrap-datepicker.zh-TW.min.js</loc>
-  <lastmod>2018-08-06T14:08:28Z</lastmod>
+  <lastmod>2019-08-08T11:05:05Z</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
@@ -1628,7 +1633,7 @@
  </url>
  <url>
   <loc>http://www.missloopy.com/members/</loc>
-  <lastmod>2019-07-31T04:01:10Z</lastmod>
+  <lastmod>2019-08-08T15:51:17Z</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
@@ -69587,6 +69592,11 @@
   <priority>0.5000</priority>
  </url>
  <url>
+  <loc>http://www.missloopy.com/members/member7641.html</loc>
+  <lastmod>2019-08-08T15:51:17Z</lastmod>
+  <priority>0.5000</priority>
+ </url>
+ <url>
   <loc>http://www.missloopy.com/members/member7642.html</loc>
   <lastmod>2014-08-08T13:01:03Z</lastmod>
   <priority>0.5000</priority>
@@ -78508,12 +78518,12 @@
  </url>
  <url>
   <loc>http://www.missloopy.com/photos.html</loc>
-  <lastmod>2019-08-02T03:01:15Z</lastmod>
+  <lastmod>2019-08-09T03:01:13Z</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
   <loc>http://www.missloopy.com/photos/</loc>
-  <lastmod>2019-07-27T20:21:46Z</lastmod>
+  <lastmod>2019-08-08T15:45:41Z</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
@@ -85457,33 +85467,8 @@
   <priority>0.5000</priority>
  </url>
  <url>
-  <loc>http://www.missloopy.com/photos/img11977.jpg</loc>
-  <lastmod>2017-11-06T03:32:21Z</lastmod>
-  <priority>0.5000</priority>
- </url>
- <url>
-  <loc>http://www.missloopy.com/photos/img11978.jpg</loc>
-  <lastmod>2017-11-06T03:32:38Z</lastmod>
-  <priority>0.5000</priority>
- </url>
- <url>
-  <loc>http://www.missloopy.com/photos/img11979.jpg</loc>
-  <lastmod>2017-11-06T03:33:03Z</lastmod>
-  <priority>0.5000</priority>
- </url>
- <url>
   <loc>http://www.missloopy.com/photos/img1198.jpg</loc>
   <lastmod>2015-06-01T08:32:32Z</lastmod>
-  <priority>0.5000</priority>
- </url>
- <url>
-  <loc>http://www.missloopy.com/photos/img11980.jpg</loc>
-  <lastmod>2017-11-06T03:33:22Z</lastmod>
-  <priority>0.5000</priority>
- </url>
- <url>
-  <loc>http://www.missloopy.com/photos/img11981.jpg</loc>
-  <lastmod>2017-11-06T03:33:32Z</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
@@ -87457,11 +87442,6 @@
   <priority>0.5000</priority>
  </url>
  <url>
-  <loc>http://www.missloopy.com/photos/img157.jpg</loc>
-  <lastmod>2015-06-01T08:31:15Z</lastmod>
-  <priority>0.5000</priority>
- </url>
- <url>
   <loc>http://www.missloopy.com/photos/img1570.jpg</loc>
   <lastmod>2015-06-01T08:32:48Z</lastmod>
   <priority>0.5000</priority>
@@ -87499,11 +87479,6 @@
  <url>
   <loc>http://www.missloopy.com/photos/img1579.jpg</loc>
   <lastmod>2015-06-01T08:32:58Z</lastmod>
-  <priority>0.5000</priority>
- </url>
- <url>
-  <loc>http://www.missloopy.com/photos/img158.jpg</loc>
-  <lastmod>2015-06-01T08:33:47Z</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
@@ -87549,11 +87524,6 @@
  <url>
   <loc>http://www.missloopy.com/photos/img1589.jpg</loc>
   <lastmod>2015-06-01T08:33:15Z</lastmod>
-  <priority>0.5000</priority>
- </url>
- <url>
-  <loc>http://www.missloopy.com/photos/img159.jpg</loc>
-  <lastmod>2015-06-01T08:31:45Z</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
@@ -92772,11 +92742,6 @@
   <priority>0.5000</priority>
  </url>
  <url>
-  <loc>http://www.missloopy.com/photos/img2702.jpg</loc>
-  <lastmod>2015-06-01T08:33:53Z</lastmod>
-  <priority>0.5000</priority>
- </url>
- <url>
   <loc>http://www.missloopy.com/photos/img2704.jpg</loc>
   <lastmod>2015-08-15T19:41:09Z</lastmod>
   <priority>0.5000</priority>
@@ -92834,11 +92799,6 @@
  <url>
   <loc>http://www.missloopy.com/photos/img2715.jpg</loc>
   <lastmod>2015-06-01T08:33:52Z</lastmod>
-  <priority>0.5000</priority>
- </url>
- <url>
-  <loc>http://www.missloopy.com/photos/img2716.jpg</loc>
-  <lastmod>2015-06-01T08:31:27Z</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
@@ -114177,11 +114137,6 @@
   <priority>0.5000</priority>
  </url>
  <url>
-  <loc>http://www.missloopy.com/photos/img712.jpg</loc>
-  <lastmod>2015-06-01T08:31:55Z</lastmod>
-  <priority>0.5000</priority>
- </url>
- <url>
   <loc>http://www.missloopy.com/photos/img7120.jpg</loc>
   <lastmod>2015-06-01T08:32:14Z</lastmod>
   <priority>0.5000</priority>
@@ -127677,7 +127632,7 @@
  </url>
  <url>
   <loc>http://www.missloopy.com/scammers/</loc>
-  <lastmod>2019-08-01T12:01:15Z</lastmod>
+  <lastmod>2019-08-09T03:01:14Z</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
@@ -129951,6 +129906,11 @@
   <priority>0.5000</priority>
  </url>
  <url>
+  <loc>http://www.missloopy.com/scammers/scammer-RfHFFS.html</loc>
+  <lastmod>2019-08-02T09:01:16Z</lastmod>
+  <priority>0.5000</priority>
+ </url>
+ <url>
   <loc>http://www.missloopy.com/scammers/scammer-RmpSt1.html</loc>
   <lastmod>2018-04-13T11:04:12Z</lastmod>
   <priority>0.5000</priority>
@@ -130113,6 +130073,11 @@
  <url>
   <loc>http://www.missloopy.com/scammers/scammer-UQiwkm.html</loc>
   <lastmod>2018-04-13T11:04:23Z</lastmod>
+  <priority>0.5000</priority>
+ </url>
+ <url>
+  <loc>http://www.missloopy.com/scammers/scammer-URmU6j.html</loc>
+  <lastmod>2019-08-09T03:01:15Z</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
@@ -131923,6 +131888,11 @@
  <url>
   <loc>http://www.missloopy.com/scammers/scammer-yaTEq3.html</loc>
   <lastmod>2018-04-13T11:06:29Z</lastmod>
+  <priority>0.5000</priority>
+ </url>
+ <url>
+  <loc>http://www.missloopy.com/scammers/scammer-ydia5M.html</loc>
+  <lastmod>2019-08-06T09:01:16Z</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>

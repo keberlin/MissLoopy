@@ -1,0 +1,43 @@
+{% extends 'template.html' %}
+
+{% block canvas %}
+  <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+  <script type="text/javascript">
+  google.charts.load('current', {'packages':['corechart']}); google.charts.setOnLoadCallback(drawChart1); function drawChart1() {
+    var data = google.visualization.arrayToDataTable([ ['Date', 'Verified', 'Unverified', 'Males', 'Females'],
+    {% for entry in reports %}
+      ['{{entry.logged}}', {{entry.verified}}, {{entry.unverified}}, {{entry.males}}, {{entry.females}}],
+    {% endfor %}
+    ]);
+    var options = { title: 'Members', curveType: 'function', legend: { position: 'bottom' } };
+    var chart = new google.visualization.LineChart(document.getElementById('members')); chart.draw(data, options); }
+  google.charts.load('current', {'packages':['corechart']}); google.charts.setOnLoadCallback(drawChart2); function drawChart2() {
+    var data = google.visualization.arrayToDataTable([ ['Date', 'Men', 'Women', 'Sugar Pups', 'Sugar Babies', 'Sugar Daddies', 'Sugar Mommas'],
+    {% for entry in reports %}
+      ['{{entry.logged}}', {{entry.men}}, {{entry.women}}, {{entry.sugar_pups}}, {{entry.sugar_babies}}, {{entry.sugar_daddies}}, {{entry.sugar_mommas}}],
+    {% endfor %}
+    ]);
+    var options = { title: 'Categories', curveType: 'function', legend: { position: 'bottom' } };
+    var chart = new google.visualization.LineChart(document.getElementById('categories')); chart.draw(data, options); }
+  google.charts.load('current', {'packages':['corechart']}); google.charts.setOnLoadCallback(drawChart3); function drawChart3() {
+    var data = google.visualization.arrayToDataTable([ ['Date', 'Verified', 'Unverified', 'Men', 'Women'],
+    {% for entry in reports %}
+      ['{{entry.logged}}', {{entry.verified}}, {{entry.unverified}}, {{entry.men}}, {{entry.women}}],
+    {% endfor %}
+    ]);
+    var options = { title: 'Percentages', curveType: 'function', legend: { position: 'bottom' } };
+    var chart = new google.visualization.LineChart(document.getElementById('percentages')); chart.draw(data, options); }
+  google.charts.load('current', {'packages':['corechart']}); google.charts.setOnLoadCallback(drawChart4); function drawChart4() {
+    var data = google.visualization.arrayToDataTable([ ['Date', 'Verified', 'Unverified', 'Men', 'Women'],
+    {% for entry in reports %}
+      ['{{entry.logged}}', {{entry.verified}}, {{entry.unverified}}, {{entry.men}}, {{entry.women}}],
+    {% endfor %}
+    ]);
+    var options = { title: 'Ethnicities', curveType: 'function', legend: { position: 'bottom' } };
+    var chart = new google.visualization.LineChart(document.getElementById('ethnicities')); chart.draw(data, options); }
+  </script>
+  <div id="members" style="width: 900px; height: 500px"></div>
+  <div id="categories" style="width: 900px; height: 500px"></div>
+  <div id="percentages" style="width: 900px; height: 500px"></div>
+  <div id="ethnicities" style="width: 900px; height: 500px"></div>
+{% endblock %}
