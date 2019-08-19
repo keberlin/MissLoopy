@@ -24,7 +24,7 @@ sql = """
   SELECT * from reports
 """
 db.execute(sql)
-reports = [ReportStruct(report[0].strftime('%Y-%m'),*report[1:]) for report in db.fetchall()]
+reports = [ReportStruct(report[0].strftime('%Y-%m-%d'),*report[1:]) for report in db.fetchall()]
 
 d = {'reports':reports}
 

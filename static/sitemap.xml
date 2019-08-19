@@ -6,7 +6,7 @@
                       http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
  <url>
   <loc>http://www.missloopy.com/</loc>
-  <lastmod>2018-11-27T10:06:06Z</lastmod>
+  <lastmod>2019-08-09T14:16:57Z</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
@@ -330,7 +330,7 @@
  </url>
  <url>
   <loc>http://www.missloopy.com/images.html</loc>
-  <lastmod>2019-08-09T03:01:13Z</lastmod>
+  <lastmod>2019-08-16T03:01:50Z</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
@@ -1643,7 +1643,7 @@
  </url>
  <url>
   <loc>http://www.missloopy.com/members/member1.html</loc>
-  <lastmod>2018-12-26T15:01:11Z</lastmod>
+  <lastmod>2019-08-15T10:01:46Z</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
@@ -78518,12 +78518,12 @@
  </url>
  <url>
   <loc>http://www.missloopy.com/photos.html</loc>
-  <lastmod>2019-08-09T03:01:13Z</lastmod>
+  <lastmod>2019-08-16T03:01:49Z</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
   <loc>http://www.missloopy.com/photos/</loc>
-  <lastmod>2019-08-08T15:45:41Z</lastmod>
+  <lastmod>2019-08-14T13:01:15Z</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
@@ -131963,6 +131963,11 @@
  <url>
   <loc>http://www.missloopy.com/star.png</loc>
   <lastmod>2015-01-26T15:59:08Z</lastmod>
+  <priority>0.5000</priority>
+ </url>
+ <url>
+  <loc>http://www.missloopy.com/stats.html</loc>
+  <lastmod>2019-08-09T14:59:16Z</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
