@@ -26,6 +26,6 @@ sql = """
 db.execute(sql)
 reports = [ReportStruct(report[0].strftime('%Y-%m-%d'),*report[1:]) for report in db.fetchall()]
 
-d = {'reports':reports}
+d = {'title':'Statistics', 'reports':reports}
 
 print RenderY('stats.html', d)

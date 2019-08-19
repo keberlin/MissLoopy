@@ -2,7 +2,7 @@
 
 import os
 
-import database, mask
+import database
 
 from utils import *
 from units import *
@@ -17,5 +17,8 @@ BASE_DIR = os.path.dirname(__file__)
 db = database.Database(MISS_LOOPY_DB)
 
 db.execute("SELECT id, pid FROM photos ORDER BY created DESC LIMIT 200")
-for entry in db.fetchall():
-  print entry[0], PhotoFilename(entry[1])
+photos = [(entry[0], PhotoFilename(entry[1])) for entry in db.fetchall()]
+
+d = {'title':'New Photos', 'photos':photos}
+
+print RenderY('new-photos.html', d)

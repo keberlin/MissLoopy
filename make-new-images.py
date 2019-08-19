@@ -2,7 +2,7 @@
 
 import os
 
-import database, mask
+import database
 
 from utils import *
 from units import *
@@ -17,5 +17,8 @@ BASE_DIR = os.path.dirname(__file__)
 db = database.Database(MISS_LOOPY_DB)
 
 db.execute("SELECT id_from, message FROM emails WHERE message LIKE 'data:image/%%' ORDER BY sent DESC LIMIT 200")
-for entry in db.fetchall():
-  print entry[0], entry[1]
+images = [(entry[0], entry[1]) for entry in db.fetchall()]
+
+d = {'title':'New Images', 'images':images}
+
+print RenderY('new-images.html', d)
