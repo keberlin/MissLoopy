@@ -1,3 +1,3 @@
 #!/bin/bash
 
-mllog 10000 | fgrep mlregister | fgrep dob | sed -e "s/.*dob': u.//" -e "s/., 'gender.*//" | sort -u | ./check-dob.py
+mllog 10000 | fgrep mlregister | fgrep dob | sed -e "s/.*dob': u.//" -e "s/., 'gender.*//" | sort -u | /usr/local/bin/python2.7 check-dob.py

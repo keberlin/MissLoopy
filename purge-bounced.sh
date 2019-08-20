@@ -1,6 +1,6 @@
 #!/bin/bash
 
-./purge-bounced.py
+/usr/local/bin/python2.7 purge-bounced.py
 ./purge-scammers.sh
 
 > bounced.log

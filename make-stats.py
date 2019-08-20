@@ -21,7 +21,7 @@ BASE_DIR = os.path.dirname(__file__)
 db = database.Database(MISS_LOOPY_DB)
 
 sql = """
-  SELECT * from reports
+  SELECT * from reports ORDER BY logged
 """
 db.execute(sql)
 reports = [ReportStruct(report[0].strftime('%Y-%m-%d'),*report[1:]) for report in db.fetchall()]

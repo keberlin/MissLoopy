@@ -1,3 +1,3 @@
 #!/bin/bash
 
-./purge-scammers.py
+/usr/local/bin/python2.7 purge-scammers.py
