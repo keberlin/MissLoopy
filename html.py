@@ -1,4 +1,4 @@
-import datetime, re, urllib, random
+import re, datetime, urllib, random
 
 from detectmobilebrowser import *
 
@@ -6,21 +6,21 @@ TITLE    = 'Miss Loopy'
 SUBTITLE = '100% Free Online Dating Site'
 YEAR     = datetime.date.today().year
 
-DOMAIN   = 'MissLoopy.com'
-URL      = 'www.' + DOMAIN.lower()
-WWW      = 'http://' + URL
-CGI      = 'http://' + URL + '/cgi-bin' # TODO change to https://
+HOST = 'missloopy'
 
 PROMO    = '100% Free Online Dating Site'
 
 #PUBLISHERS = ['bannerplay','amazon-us-1','amazon-us-2','amazon-us-3','revenuehits']
 PUBLISHERS = ['google']
 
-def html_defaults(user_agent=None):
+def html_defaults(host,user_agent=None):
+  DOMAIN   = re.search('%s.*'%HOST,host,re.IGNORECASE).group()
+  URL      = 'www.' + DOMAIN.lower()
+  WWW      = 'http://' + URL
+
   return {
     'domain':    DOMAIN,
     'www':       WWW,
-    'cgi':       CGI,
     'title':     TITLE,
     'subtitle':  SUBTITLE,
     'year':      YEAR,

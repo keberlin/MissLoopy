@@ -6,6 +6,8 @@ from mlutils import *
 from mllist import *
 from mlemail import *
 
+DOMAIN = 'missloopy.com'
+
 FROM = TITLE + '<noreply@' + DOMAIN + '>'
 
 def EmailNewPhoto(pid,id):

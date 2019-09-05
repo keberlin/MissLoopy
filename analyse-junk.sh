@@ -10,4 +10,4 @@ cmp -s $JUNK_AUTO $JUNK_TEMP || (mv $JUNK_TEMP $JUNK_AUTO; chmod 666 $JUNK_AUTO)
 uniq $JUNK_REPORTED | tail -5000 > $JUNK_TEMP
 cmp -s $JUNK_REPORTED $JUNK_TEMP || (mv $JUNK_TEMP $JUNK_REPORTED; chmod 666 $JUNK_REPORTED)
 # Analyse its contents and create spam keyword list
-/usr/local/bin/python2.7 analyse-junk.py $JUNK_AUTO $JUNK_REPORTED
+python analyse-junk.py $JUNK_AUTO $JUNK_REPORTED
