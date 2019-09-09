@@ -218,8 +218,9 @@
 
       // Handle Send Message button
       $scope.send = function(e) {
-        $http.post('/mlsendemail', {message: $scope.message, id:{{ id }}}).
-          success(function(data, status, headers, config) {
+        $http.post('/mlsendemail', {message: $scope.message, id:{{ id }}}).then(
+          function(response) {
+            var data=response.data;
             if (data.error)
               jsShowError(data.error);
             else if (data.message) {
@@ -231,8 +232,8 @@
               $("#reply_panel").show();
               $("#send_text_panel").hide();
             }
-          }).
-          error(function(data, status, headers, config) {
+          },
+          function(response) {
             jsShowError("There's a problem with your Internet connection.");
           });
       }
@@ -249,9 +250,6 @@
           url: '/mlsendphoto',
           type: 'POST',
           data: data,
-          error: function(jqXHR, textStatus, errorThrown) {
-            jsShowError("There's a problem with your Internet connection.");
-          },
           success: function(data) {
             if (data.error)
               jsShowError(data.error);
@@ -267,6 +265,9 @@
               // Need to tell Angular about this change..
               $scope.$apply();
             }
+          },
+          error: function(jqXHR, textStatus, errorThrown) {
+            jsShowError("There's a problem with your Internet connection.");
           },
           cache: false,
           contentType: false,
@@ -334,9 +335,6 @@
         url: '/mladdfavorite',
         type: 'POST',
         data: 'id={{ id }}',
-        error: function(jqXHR, textStatus, errorThrown) {
-          jsShowError("There's a problem with your Internet connection.");
-        },
         success: function(data) {
           if (data.error)
             jsShowError(data.error);
@@ -344,6 +342,9 @@
             jsShowMessage(data.message);
             $("#favorite").prop('disabled',true);
           }
+        },
+        error: function(jqXHR, textStatus, errorThrown) {
+          jsShowError("There's a problem with your Internet connection.");
         }
       });
       return false;
@@ -354,9 +355,6 @@
         url: '/mlblock',
         type: 'POST',
         data: 'id={{ id }}',
-        error: function(jqXHR, textStatus, errorThrown) {
-          jsShowError("There's a problem with your Internet connection.");
-        },
         success: function(data) {
           if (data.error)
             jsShowError(data.error);
@@ -364,6 +362,9 @@
             jsShowMessage(data.message);
             $("#block").prop('disabled',true);
           }
+        },
+        error: function(jqXHR, textStatus, errorThrown) {
+          jsShowError("There's a problem with your Internet connection.");
         }
       });
       return false;
@@ -374,9 +375,6 @@
         url: '/mlspam',
         type: 'POST',
         data: 'id={{ id }}',
-        error: function(jqXHR, textStatus, errorThrown) {
-          jsShowError("There's a problem with your Internet connection.");
-        },
         success: function(data) {
           if (data.error)
             jsShowError(data.error);
@@ -384,6 +382,9 @@
             jsShowMessage(data.message);
             $("#spam").prop('disabled',true);
           }
+        },
+        error: function(jqXHR, textStatus, errorThrown) {
+          jsShowError("There's a problem with your Internet connection.");
         }
       });
       return false;

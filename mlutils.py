@@ -2,6 +2,8 @@ import os, cgi, datetime, cStringIO, base64
 
 import database
 
+import logger
+
 from PIL import Image
 
 from utils import *
@@ -381,7 +383,10 @@ def DeletePhoto(pid):
   db.execute('DELETE FROM photos WHERE pid=%d' % (pid))
   db.commit()
   filename = os.path.join(BASE_DIR, 'static', PhotoFilename(pid))
-  os.remove(filename)
+  try:
+    os.remove(filename)
+  except:
+    logger.error('ERROR: os.remove(%s) failed!' % filename)
 
 def DeletePhotos(pids):
   for pid in pids:

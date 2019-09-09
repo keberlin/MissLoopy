@@ -125,9 +125,17 @@ def handle_mldeletephoto(entry,values,files):
 
   DeletePhotos(pids)
 
-  master = MasterPhoto(id)
+  deleted = pids
 
-  if len(pids) == 1:
+  pids = []
+  master = 0
+  db.execute('SELECT pid,master FROM photos WHERE id=%d' % (id))
+  for entry in db.fetchall():
+    pids.append(entry[0])
+    if entry[1]:
+      master = entry[0]
+
+  if len(deleted) == 1:
     return {'message': 'This photo has been deleted.', 'pids': pids, 'master': master}
   else:
     return {'message': 'These photos have been deleted.', 'pids': pids, 'master': master}
@@ -151,7 +159,15 @@ def handle_mlmasterphoto(entry,values,files):
   db.execute('UPDATE photos SET master=true WHERE pid=%d' % (pid))
   db.commit()
 
-  return {'message': 'This photo has been set to your main profile photo.', 'master': pid}
+  pids = []
+  master = 0
+  db.execute('SELECT pid,master FROM photos WHERE id=%d' % (id))
+  for entry in db.fetchall():
+    pids.append(entry[0])
+    if entry[1]:
+      master = entry[0]
+
+  return {'message': 'This photo has been set to your main profile photo.', 'pids': pids, 'master': master}
 
 def handle_mlpassword(entry,values,files):
   email = values['email']
@@ -556,7 +572,15 @@ def handle_mluploadphoto(entry,values,files):
 
   EmailNewPhoto(pid, id)
 
-  return {'message': 'Photo uploaded successfully.', 'pid': pid}
+  pids = []
+  master = 0
+  db.execute('SELECT pid,master FROM photos WHERE id=%d' % (id))
+  for entry in db.fetchall():
+    pids.append(entry[0])
+    if entry[1]:
+      master = entry[0]
+
+  return {'message': 'Photo uploaded successfully.', 'pids': pids, 'master': master}
 
 def handle_mlwink(entry,values,files):
   id       = entry[COL_ID]

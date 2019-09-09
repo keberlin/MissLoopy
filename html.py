@@ -6,18 +6,16 @@ TITLE    = 'Miss Loopy'
 SUBTITLE = '100% Free Online Dating Site'
 YEAR     = datetime.date.today().year
 
-HOST = 'missloopy'
+DOMAIN   = 'MissLoopy.com'
+URL      = 'www.' + DOMAIN.lower()
+WWW      = 'http://' + URL
 
 PROMO    = '100% Free Online Dating Site'
 
 #PUBLISHERS = ['bannerplay','amazon-us-1','amazon-us-2','amazon-us-3','revenuehits']
 PUBLISHERS = ['google']
 
-def html_defaults(host,user_agent=None):
-  DOMAIN   = re.search('%s.*'%HOST,host,re.IGNORECASE).group()
-  URL      = 'www.' + DOMAIN.lower()
-  WWW      = 'http://' + URL
-
+def html_defaults(user_agent=None):
   return {
     'domain':    DOMAIN,
     'www':       WWW,

@@ -63,7 +63,7 @@ def logged_out_html():
 
   info('%s: %s' % (page, values))
 
-  attrs = html_defaults(request.host, request.user_agent.string)
+  attrs = html_defaults(request.user_agent.string)
   attrs.update(values)
   func = globals().get("handle_%s" % page)
   if func: attrs.update(func(None,values))
@@ -92,7 +92,7 @@ def logged_out_html():
 @login_required
 def logged_in_html():
   if not g.entry:
-    attrs = html_defaults(request.host, request.user_agent.string)
+    attrs = html_defaults(request.user_agent.string)
     attrs['redirect'] = request.url
     return render_template('login.html', **attrs)
 
@@ -106,7 +106,7 @@ def logged_in_html():
 
   info('%s: id:%d %s' % (page, id, values))
 
-  attrs = html_defaults(request.host, request.user_agent.string)
+  attrs = html_defaults(request.user_agent.string)
   attrs.update(values)
   if not 'nav' in attrs: attrs['nav'] = page
   attrs['user']   = user

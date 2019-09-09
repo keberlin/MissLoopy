@@ -19,7 +19,7 @@ def Redirect(url):
   sys.exit(0)
 
 def RenderY(template,dict=None):
-  d = html_defaults('www.missloopy.com')
+  d = html_defaults()
   if dict: d.update(dict)
   template = env.get_template(template)
   return template.render(**d).encode('utf-8')

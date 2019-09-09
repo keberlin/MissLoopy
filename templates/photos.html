@@ -84,44 +84,45 @@
       // Handle Make Default button
       $scope.default = function(e) {
         var pid = $scope.sels[0];
-        $http.post('/mlmasterphoto', {pid: pid}).
-          success(function(data, status, headers, config) {
+        $http.post('/mlmasterphoto', {pid: pid}).then(
+          function(response) {
+            var data = response.data;
             if (data.error)
               jsShowError(data.error);
             else if (data.message) {
               jsShowMessage(data.message);
+              $scope.pids = data.pids;
+              $scope.chunked = $scope.mkgrid($scope.pids);
               $scope.master = data.master;
               $scope.sels = [];
             }
-          }).
-          error(function(data, status, headers, config) {
-            jsShowError("There's a problem with your Internet connection.");
-          });
+          },
+          function(response) {
+            jsShowError("There's a problem with your Internet connection.")
+          }
+        );
       }
 
       // Handle Remove button
       $scope.remove = function(e) {
         var pids = $scope.sels;
-        $http.post('/mldeletephoto', {pids: pids}).
-          success(function(data, status, headers, config) {
+        $http.post('/mldeletephoto', {pids: pids}).then(
+          function(response) {
+            var data = response.data;
             if (data.error)
               jsShowError(data.error);
             else if (data.message) {
               jsShowMessage(data.message);
-              for (var i in data.pids) {
-                var pid = data.pids[i];
-                var idx = $scope.pids.indexOf(pid);
-                if (idx >= 0)
-                  $scope.pids.splice(idx, 1);
-              }
+              $scope.pids = data.pids;
               $scope.chunked = $scope.mkgrid($scope.pids);
               $scope.master = data.master;
               $scope.sels = [];
             }
-          }).
-          error(function(data, status, headers, config) {
-            jsShowError("There's a problem with your Internet connection.");
-          });
+          },
+          function(response) {
+            jsShowError("There's a problem with your Internet connection.")
+          }
+        );
       }
 
       // Handle Clear button
@@ -140,9 +141,6 @@
           url: '/mluploadphoto',
           type: 'POST',
           data: data,
-          error: function(jqXHR, textStatus, errorThrown) {
-            jsShowError("There's a problem with your Internet connection.");
-          },
           xhr: function() {
             // get the native XmlHttpRequest object
             var xhr = $.ajaxSettings.xhr();
@@ -162,11 +160,15 @@
               $("#file").replaceWith($("#file").clone());
               jsShowMessage(data.message);
               $('#progress').attr('style', 'width:0%');
-              $scope.pids.push(data.pid);
+              $scope.pids = data.pids;
               $scope.chunked = $scope.mkgrid($scope.pids);
+              $scope.master = data.master;
               // Need to tell Angular about this change..
               $scope.$apply();
             }
+          },
+          error: function(jqXHR, textStatus, errorThrown) {
+            jsShowError("There's a problem with your Internet connection.");
           },
           cache: false,
           contentType: false,
@@ -177,17 +179,19 @@
         var data = new FormData();
         var file = elem.files[0];
         data.append('file', file);
-        $http.post('/mluploadphoto', data, { withCredentials: true, headers: {'Content-Type': undefined }, transformRequest: angular.identity }).
-          success(function(data, status, headers, config) {
+        $http.post('/mluploadphoto', data, { withCredentials: true, headers: {'Content-Type': undefined }, transformRequest: angular.identity }).then(
+          function(response) {
+            var data=response.data;
             if (data.error)
               jsShowError(data.error);
             else if (data.message) {
               jsShowMessage(data.message);
-              $scope.pids.push(data.pid);
+              $scope.pids = data.pids;
               $scope.chunked = $scope.mkgrid($scope.pids);
+              $scope.master = data.master;
             }
-          }).
-          error(function(data, status, headers, config) {
+          },
+          function(response) {
             jsShowError("There's a problem with your Internet connection.");
           });
         */
