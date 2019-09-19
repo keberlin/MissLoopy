@@ -1,0 +1,11 @@
+#!/bin/sh
+
+RELEASE=/var/www/missloopy/
+
+echo 'Copying Python files..'
+# Shouldn't be copying spamkeywords.py!
+cp -u *.py $RELEASE
+echo 'Copying templates directory..'
+cp -ru templates $RELEASE
+echo 'Copying static directory..'
+cp -ru static $RELEASE

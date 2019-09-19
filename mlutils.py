@@ -1,4 +1,4 @@
-import os, cgi, datetime, cStringIO, base64
+import os, datetime, cStringIO, base64
 
 import database
 

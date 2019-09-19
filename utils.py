@@ -95,4 +95,4 @@ def StopForumSpamAdd(username,email,ip,evidence):
     'api_key': 'dejcsw8ph7iu5n',
     'evidence': evidence
   }
-  print requests.post('http://www.stopforumspam.com/add',data)
+  requests.post('http://www.stopforumspam.com/add',data)

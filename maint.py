@@ -1,15 +1,15 @@
 #!/usr/bin/python
 
-import database, re
+import database, re, hashlib
 
 from utils import *
-from gazetteer import *
 from mlutils import *
 
 db = database.Database(MISS_LOOPY_DB)
 
-db.execute('SELECT * FROM profiles')
+db.execute('SELECT * FROM profiles WHERE id=1')
 for entry in db.fetchall():
-  db.execute('UPDATE profiles SET country=%s WHERE id=%d' % (Quote(GazCountry(entry[COL_LOCATION])), entry[COL_ID]))
+  print(entry[COL_PASSWORD], entry[COL_PASSWORD].encode(), hashlib.md5(entry[COL_PASSWORD].encode()).hexdigest())
+  #db.execute('UPDATE profiles SET password=%s WHERE id=%d' % (Quote(hashlib.md5(entry[COL_PASSWORD].encode()).hexdigest()), entry[COL_ID]))
 
 db.commit()

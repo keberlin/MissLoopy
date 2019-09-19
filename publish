@@ -1,0 +1,7 @@
+#!/bin/sh
+
+cp -Ruv bower_components/jquery/dist/* static/js/
+cp -Ruv bower_components/bootstrap/dist/* static/
+cp -Ruv bower_components/bootstrap-datepicker/dist/* static/
+cp -Ruv bower_components/bs-typeahead/js/*.js static/js/
+cp -Ruv bower_components/angularjs/*.js static/js/
