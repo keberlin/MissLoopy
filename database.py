@@ -3,18 +3,16 @@ import psycopg2
 #psycopg2.extensions.register_type(psycopg2.extensions.UNICODE)
 #psycopg2.extensions.register_type(psycopg2.extensions.UNICODEARRAY)
 
-databases = {}
-
 class Database():
+  databases = {}
+
   def __init__(self, name):
-    global databases
-    if name not in databases:
+    if name not in self.databases:
       conn = psycopg2.connect(database=name, user='postgres')
       cursor = conn.cursor()
-      databases[name] = (conn, cursor)
-    self.conn, self.cursor = databases[name]
+      self.databases[name] = (conn, cursor)
+    self.conn, self.cursor = self.databases[name]
   def __del__(self):
-    global databases
     if False:
       cursor.close()
       cursor = None

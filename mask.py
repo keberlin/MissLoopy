@@ -2,7 +2,7 @@ import re
 
 DOMAIN    = r'[a-z0-9][a-z0-9-]+(\.[a-z]{2,5}){1,2}'
 
-EMAIL_REGULAR = r'([a-z0-9][a-z0-9_\.-]*)@'+DOMAIN
+EMAIL_REGULAR = r'[a-z0-9][a-z0-9_\.-]*@'+DOMAIN
 EMAIL_PATTERN = EMAIL_REGULAR
 
 def MaskEmailAddresses(text):

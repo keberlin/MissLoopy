@@ -97,4 +97,6 @@ db.execute('''CREATE TABLE reports (
     messages INTEGER
     )''')
 
+db.execute('CREATE TABLE spam (str VARCHAR, cost FLOAT)')
+
 db.commit()

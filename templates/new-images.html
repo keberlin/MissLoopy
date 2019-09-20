@@ -6,7 +6,7 @@
     {% if (loop.index%12==0) %}
       <tr>
     {% endif %}
-    <td align="center"><img width="100px" src="{{entry[1]}}"><br>{{entry[0]}}</a></td>
+    <td align="center"><a href="member?id={{entry[0]}}"><img width="100px" src="{{entry[1]}}"><br>{{entry[0]}}</a></td>
   {% endfor %}
   </table>
 {% endblock canvas %}

@@ -2,7 +2,10 @@
 
 import sys
 
+from mlutils import *
 from utils import *
+
+import database
 
 MANDATORY = ['western union', 'proposal', 'money', 'usd', 'solicitor', 'lawyer', 'barrister', 'lottery', 'lotto', 'sweepstake',
              'transaction', 'bank', 'winner', 'official', 'payout', 'winning', 'orphan', 'cancer', 'moneygram', 'civil war',
@@ -14,6 +17,8 @@ MANDATORY = ['western union', 'proposal', 'money', 'usd', 'solicitor', 'lawyer',
 
 EXCLUSIONS = ['hello', 'wink']
 
+db = database.Database(MISS_LOOPY_DB)
+
 message_count = 0
 keywords = {}
 
@@ -24,7 +29,8 @@ def Process(file,count=1):
     for line in f.readlines():
       if len(line) == 0:
         continue
-      junk = line.decode('utf-8','ignore').lower()
+      #junk = line.decode('utf-8','ignore').lower()
+      junk = line.lower()
       messages.add(re.sub(r'\W+',r' ',junk))
     message_count += len(messages)
     # Put in single words first
@@ -80,10 +86,14 @@ for item,count in keywords.iteritems():
     continue
   if item in EXCLUSIONS:
     continue
-  spam[item.replace(r' ',r'\W+')] = count/float(message_count)
+  spam[item] = count/float(message_count)
 for item in MANDATORY:
   if item in keywords:
     continue
-  spam[item.replace(r' ',r'\W+')] = 0.75
-with open('spamkeywords.py','w') as f:
-  f.write('SPAM_KEYWORDS = '+str(spam)+'\n')
+  spam[item] = 0.75
+
+sql = 'TRUNCATE spam'
+db.execute(sql)
+sql = 'INSERT INTO spam (str,cost) VALUES %s'%(','.join([("(%s,%s)"%(tosql(str),tosql(cost))) for str,cost in spam.iteritems()]))
+db.execute(sql)
+db.commit()

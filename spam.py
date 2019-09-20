@@ -17,12 +17,13 @@ def AnalyseSpammer(id):
   frequency = (td.days*24*60*60 + td.seconds)/count
   return (members, frequency)
 
-from spamkeywords import *
-
 def AnalyseSpam(text):
   score = 0
   hits = []
-  for str,cost in SPAM_KEYWORDS.iteritems():
+  sql = 'SELECT * FROM spam'
+  db.execute(sql)
+  for str,cost in db.fetchall():
+    str = re.sub(r' +',r'\W+',str) # Treat all whitespace the same
     matches = re.findall(str, text, re.IGNORECASE)
     if matches:
       score += cost*len(matches)
