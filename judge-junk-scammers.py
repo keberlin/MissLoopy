@@ -1,5 +1,3 @@
-#!/usr/bin/python
-
 import csv, requests
 
 import database
@@ -16,20 +14,17 @@ with open('junk-auto.log', 'r') as file:
   for line in file.readlines():
     line = line.decode('utf-8','ignore')
     words = line.split()
-    ids.add(int(words[0]))
+    ids.add(words[0])
 with open('junk-reported.log', 'r') as file:
   for line in file.readlines():
     line = line.decode('utf-8','ignore')
     words = line.split()
-    try:
-      ids.add(int(words[0]))
-    except:
-      pass
+    ids.add(words[0])
 
 db = database.Database(MISS_LOOPY_DB)
 
-db.execute('SELECT id_from,MAX(sent) FROM emails WHERE id_from IN (%s) GROUP BY id_from ORDER BY MAX(sent) DESC' % (','.join(map(lambda x:str(x), ids))))
-ids = map(lambda x:x[0], db.fetchall())
+db.execute('SELECT id_from,MAX(sent) FROM emails WHERE id_from IN (%s) GROUP BY id_from ORDER BY MAX(sent) DESC' % (','.join(list(ids))))
+ids = [x[0] for x in db.fetchall()]
 
 for id in ids:
   db.execute('SELECT * FROM profiles WHERE id=%d LIMIT 1' % (id))

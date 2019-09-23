@@ -23,21 +23,16 @@ def AnalyseSpam(text):
   sql = 'SELECT * FROM spam'
   db.execute(sql)
   for str,cost in db.fetchall():
-    str = re.sub(r' +',r'\W+',str) # Treat all whitespace the same
-    matches = re.findall(str, text, re.IGNORECASE)
+    matches = re.findall(re.sub(r' +',r'\W+',str), text, re.IGNORECASE) # Treat all whitespace the same
     if matches:
       score += cost*len(matches)
-      hits.append(re.sub(r'[^a-z]+',r' ',str))
+      hits.append(str)
   density = len(text)/float(score) if score else 0
   return (score, density, hits)
 
 def IsSpamFactored(tuple,spammer,mult=1):
-  # tuple = (score, density, hits)
-  # spammer = (members, frequency)
-  score     = tuple[0]
-  density   = tuple[1]
-  members   = spammer[0]
-  frequency = spammer[1]
+  score, density, hits = tuple
+  members, frequency = spammer
   hours = frequency/(60*60)
   if hours < 1:
     factor = .25

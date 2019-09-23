@@ -412,7 +412,7 @@ def handle_mlsendemail(entry,values,files):
 
   tuple   = spam.AnalyseSpam(message)
   spammer = spam.AnalyseSpammer(id)
-  if spam.IsSpamFactored(tuple, spammer, 2):
+  if spam.IsSpamFactored(tuple, spammer, 3):
     message = re.sub('[\r\n]+',' ',message)
     with open(os.path.join(BASE_DIR, 'junk-auto.log'), 'a') as f:
       f.write('%d %s\n' % (id, message.encode('utf-8')))
