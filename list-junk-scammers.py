@@ -36,7 +36,7 @@ for id in ids:
   name = entry[COL_NAME]
   country = GazCountry(entry[COL_LOCATION])
   last_login_country = entry[COL_LAST_IP_COUNTRY]
-  db.execute("SELECT message FROM emails WHERE id_from=%d AND message NOT LIKE 'data:image/%%' ORDER BY LENGTH(message) DESC LIMIT 1" % (id))
+  db.execute("SELECT message FROM emails WHERE id_from=%d ORDER BY LENGTH(message) DESC LIMIT 1" % (id))
   entry = db.fetchone()
   if not entry:
     continue

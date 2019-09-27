@@ -25,7 +25,7 @@ for id in args.id:
   ip = entry[COL_LAST_IP]
   email = entry[COL_EMAIL]
   name = entry[COL_NAME]
-  db.execute("SELECT message, sent FROM emails WHERE id_from=%d AND message NOT LIKE 'data:image/%%' ORDER BY sent DESC LIMIT 1" % (id))
+  db.execute("SELECT message, sent FROM emails WHERE id_from=%d ORDER BY sent DESC LIMIT 1" % (id))
   entry = db.fetchone()
   if not entry:
     continue

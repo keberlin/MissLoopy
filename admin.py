@@ -28,11 +28,11 @@ def command(cmd):
     cmds = cmd.split()
     reverse = True
   elif cmds[0] == 'EMAILS':
-    cmd = "SELECT id_from,message FROM (SELECT DISTINCT id_from,message,MAX(sent) FROM emails WHERE message NOT LIKE 'data:image/%%' GROUP BY id_from,message ORDER BY MAX(sent)) sub LIMIT %d" % (50)
+    cmd = "SELECT id_from,message FROM (SELECT DISTINCT id_from,message,MAX(sent) FROM emails GROUP BY id_from,message ORDER BY MAX(sent)) sub LIMIT %d" % (50)
     cmds = cmd.split()
     reverse = True
   elif cmds[0].startswith('CONV'):
-    cmd = "SELECT * FROM emails WHERE ((id_from=%d AND id_to=%d) OR (id_from=%d AND id_to=%d)) AND message NOT LIKE 'data:image/%%' ORDER BY sent" % (int(cmds[1]), int(cmds[2]), int(cmds[2]), int(cmds[1]))
+    cmd = "SELECT id_from,id_to,message FROM emails WHERE ((id_from=%d AND id_to=%d) OR (id_from=%d AND id_to=%d)) ORDER BY sent" % (int(cmds[1]), int(cmds[2]), int(cmds[2]), int(cmds[1]))
     cmds = cmd.split()
   try:
     if cmds[0] == 'SELECT':

@@ -16,7 +16,7 @@ BASE_DIR = os.path.dirname(__file__)
 
 db = database.Database(MISS_LOOPY_DB)
 
-db.execute("SELECT id_from, message FROM emails WHERE message LIKE 'data:image/%%' ORDER BY sent DESC LIMIT 200")
+db.execute("SELECT id_from, image FROM emails ORDER BY sent DESC LIMIT 200")
 images = [(entry[0], entry[1]) for entry in db.fetchall()]
 
 d = {'title':'New Images', 'images':images}

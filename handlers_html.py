@@ -384,10 +384,10 @@ def handle_emailthread(entry,values):
     d = {}
     d['sent']     = entry[COL4_ID_FROM] == id
     d['message']  = entry[COL4_MESSAGE]
-    d['is_image'] = d['message'].startswith('data:image/')
+    d['image']    = entry[COL4_IMAGE]
     d['time']     = Since(entry[COL4_SENT], False)
     d['viewed']   = entry[COL4_VIEWED]
-    if not d['sent'] and not d['is_image']:
+    if d['message'] and not d['sent']:
       d['spam']   = spam.IsSpamFactored(spam.AnalyseSpam(d['message']), spammer, 2)
     emails.append(d)
   dict['entries'] = emails

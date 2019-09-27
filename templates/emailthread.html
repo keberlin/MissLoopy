@@ -52,9 +52,9 @@
     <strong><span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span> No messages found.</strong>
   </div>
   <div ng-repeat="chunk in chunked" ng-show="page==$index">
-    <div ng-repeat="message in chunk">
+    <div ng-repeat="email in chunk">
       <!-- Image Sent -->
-      <table ng-cloak ng-if="message.sent && message.is_image" class="col-xs-12" border=0 style="width:100%;border-spacing:5px 0px;border-collapse:separate">
+      <table ng-cloak ng-if="email.sent && email.image" class="col-xs-12" border=0 style="width:100%;border-spacing:5px 0px;border-collapse:separate">
         <tr>
           <td width="40%">
             <br>
@@ -65,15 +65,15 @@
                 <table border=0 style="width:100%;border-spacing:5px 0px;border-collapse:separate">
                 <tr>
                   <td width="100%" colspan=2 align="right" valign="top">
-                    <img ng-src="{% raw %}{{message.message}}{% endraw %}">
+                    <img ng-src="{% raw %}{{email.image}}{% endraw %}">
                   </td>
                 </tr>
                 <tr>
-                  <td ng-if="message.viewed" align="left">
+                  <td ng-if="email.viewed" align="left">
                     <img src="{{ url_for('static', filename='tick2.jpg') }}" width="15px" height="10px">
                   </td>
                   <td align="right">
-                    <em><small>{% raw %}{{message.time}}{% endraw %}</small></em>
+                    <em><small>{% raw %}{{email.time}}{% endraw %}</small></em>
                   </td>
                 </tr>
                 </table>
@@ -83,7 +83,7 @@
         </tr>
       </table>
       <!-- Message Sent -->
-      <table ng-cloak ng-if="message.sent && !message.is_image" class="col-xs-12" border=0 style="width:100%;border-spacing:5px 0px;border-collapse:separate">
+      <table ng-cloak ng-if="email.sent && !email.image" class="col-xs-12" border=0 style="width:100%;border-spacing:5px 0px;border-collapse:separate">
         <tr>
           <td width="40%">
             <br>
@@ -94,14 +94,14 @@
                 <table border=0 style="width:100%;border-spacing:5px 0px;border-collapse:separate">
                 <tr>
                   <td width="100%" colspan=2 align="right" valign="top">
-                    <strong>{% raw %}{{message.message}}{% endraw %}</strong>
+                    <strong>{% raw %}{{email.message}}{% endraw %}</strong>
                   </td>
                 <tr>
-                  <td ng-if="message.viewed" align="left">
+                  <td ng-if="email.viewed" align="left">
                     <img src="{{ url_for('static', filename='tick2.jpg') }}" width="15px" height="10px">
                   </td>
                   <td align="right">
-                    <em><small>{% raw %}{{message.time}}{% endraw %}</small></em>
+                    <em><small>{% raw %}{{email.time}}{% endraw %}</small></em>
                   </td>
                 </table>
               </div>
@@ -110,7 +110,7 @@
         </tr>
       </table>
       <!-- Image Received -->
-      <table ng-cloak ng-if="!message.sent && message.is_image" class="col-xs-12" border=0 style="width:100%;border-spacing:5px 0px;border-collapse:separate">
+      <table ng-cloak ng-if="!email.sent && email.image" class="col-xs-12" border=0 style="width:100%;border-spacing:5px 0px;border-collapse:separate">
         <tr>
           <td width="70%" valign="top">
             <div class="panel panel-info">
@@ -118,12 +118,12 @@
                 <table border=0 style="width:100%;border-spacing:5px 0px;border-collapse:separate">
                 <tr>
                   <td width="100%" align="left" valign="top">
-                    <img ng-src="{% raw %}{{message.message}}{% endraw %}">
+                    <img ng-src="{% raw %}{{email.image}}{% endraw %}">
                   </td>
                 </tr>
                 <tr>
                   <td align="left">
-                    <em><small>{% raw %}{{message.time}}{% endraw %}</small></em>
+                    <em><small>{% raw %}{{email.time}}{% endraw %}</small></em>
                   </td>
                 </tr>
                 </table>
@@ -136,7 +136,7 @@
         </tr>
       </table>
       <!-- Message Received -->
-      <table ng-cloak ng-if="!message.sent && !message.is_image" class="col-xs-12" border=0 style="width:100%;border-spacing:5px 0px;border-collapse:separate">
+      <table ng-cloak ng-if="!email.sent && !email.image" class="col-xs-12" border=0 style="width:100%;border-spacing:5px 0px;border-collapse:separate">
         <tr>
           <td width="70%" valign="top">
             <div class="panel panel-info">
@@ -147,18 +147,18 @@
                     <a href="/member?nav={{ nav }}&id={{ entry.id }}"><img src="{{ url_for('static', filename=entry.image) }}" width="100%" style="min-width:50px"></a>
                   </td>
                   <td width="90%" colspan=2 align="left" valign="top">
-                    <strong>{% raw %}{{message.message}}{% endraw %}</strong>
+                    <strong>{% raw %}{{email.message}}{% endraw %}</strong>
                   </td>
                 <tr>
                   <td align="left">
-                    <em><small>{% raw %}{{message.time}}{% endraw %}</small></em>
+                    <em><small>{% raw %}{{email.time}}{% endraw %}</small></em>
                   </td>
                 </table>
               </div>
             </div>
           </td>
           <td width="30%" align="center">
-            <div ng-if="message.spam">
+            <div ng-if="email.spam">
               <span class="label label-danger">Potential spam!</span><br><br>
               <a href="http://images.google.com/searchbyimage?image_url={{ www }}{{ url_for('static', filename=entry.image) }}" target="_blank"><small>Search Google for this member</small></a>
             </div>
@@ -225,7 +225,7 @@
               jsShowError(data.error);
             else if (data.message) {
               jsShowMessage(data.message);
-              // Add this sent message into the entries list
+              // Add this sent email into the entries list
               $scope.entries.splice(0,0,data.entry);
               $scope.chunked = $scope.mkgrid($scope.entries);
               $scope.num_pages = $scope.chunked.length;

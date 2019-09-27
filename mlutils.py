@@ -70,6 +70,7 @@ COL4_ID_TO   = 1
 COL4_MESSAGE = 2
 COL4_SENT    = 3
 COL4_VIEWED  = 4
+COL4_IMAGE   = 5
 
 # Columns in blocked
 COL6_ID       = 0

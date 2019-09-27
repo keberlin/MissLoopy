@@ -413,9 +413,8 @@ def handle_mlsendemail(entry,values,files):
   tuple   = spam.AnalyseSpam(message)
   spammer = spam.AnalyseSpammer(id)
   if spam.IsSpamFactored(tuple, spammer, 3):
-    message = re.sub('[\r\n]+',' ',message)
     with open(os.path.join(BASE_DIR, 'junk-auto.log'), 'a') as f:
-      f.write('%d %s\n' % (id, message.encode('utf-8')))
+      f.write('%d %s\n' % (id, re.sub('[\r\n]+',' ',message).encode('utf-8')))
 
   db.execute('SELECT email, notifications FROM profiles WHERE verified AND id=%d LIMIT 1' % (id_to))
   entry = db.fetchone()
@@ -435,7 +434,7 @@ def handle_mlsendemail(entry,values,files):
   d = {}
   d['sent']     = True
   d['message']  = message
-  d['is_image'] = False
+  d['image']    = None
   d['time']     = Since(now, False)
   d['viewed']   = False
 
@@ -468,7 +467,7 @@ def handle_mlsendphoto(entry,values,files):
   im.thumbnail((IMAGE_MAX_SIZE,IMAGE_MAX_SIZE), Image.ANTIALIAS)
   data = cStringIO.StringIO()
   im.save(data, 'JPEG')
-  message = 'data:image/jpg;base64,' + base64.b64encode(data.getvalue())
+  image = 'data:image/jpg;base64,' + base64.b64encode(data.getvalue())
 
   db.execute('SELECT email FROM profiles WHERE verified AND id=%d LIMIT 1' % (id_to))
   entry = db.fetchone()
@@ -478,15 +477,15 @@ def handle_mlsendphoto(entry,values,files):
   email = entry[0]
 
   now = datetime.datetime.utcnow()
-  db.execute('INSERT INTO emails (id_from,id_to,message,sent) VALUES (%d,%d,%s,%s)' % (id, id_to, Quote(message), Quote(str(now))))
+  db.execute('INSERT INTO emails (id_from,id_to,image,sent) VALUES (%d,%d,%s,%s)' % (id, id_to, Quote(image), Quote(str(now))))
   db.commit()
 
   EmailNotify(email, id, x, y, tz, unit_distance)
 
   d = {}
   d['sent']     = True
-  d['message']  = message
-  d['is_image'] = True
+  d['message']  = None
+  d['image']    = image
   d['time']     = Since(now, False)
   d['viewed']   = False
 
@@ -497,11 +496,10 @@ def handle_mlspam(entry,values,files):
 
   id_spam = int(values['id'])
 
-  db.execute("SELECT DISTINCT message FROM emails WHERE id_from=%d AND id_to=%d AND message NOT LIKE 'data:image/%%'" % (id_spam, id))
-  for entry in db.fetchall():
-    message = re.sub('[\r\n]+',' ',entry[0])
-    with open(os.path.join(BASE_DIR, 'junk-reported.log'), 'a') as f:
-      f.write('%d %s\n' % (id_spam, message.encode('utf-8')))
+  with open(os.path.join(BASE_DIR, 'junk-reported.log'), 'a') as f:
+    db.execute("SELECT DISTINCT message FROM emails WHERE id_from=%d AND id_to=%d" % (id_spam, id))
+    for entry in db.fetchall():
+      f.write('%d %s\n' % (id_spam, re.sub('[\r\n]+',' ',entry[0]).encode('utf-8')))
 
   return {'message': 'Thank you for reporting this member...'}
 

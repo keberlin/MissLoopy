@@ -41,7 +41,7 @@ def Quote(str):
 
 def TimeDiff(td):
   def Format(unit,n):
-    return '%d %s%s' % (n, unit, 's' if n > 1 else '')
+    return '%d %s%s ago' % (n, unit, 's' if n > 1 else '')
   if td.days/365:
     return Format('year', td.days/365)
   if td.days/30:
@@ -56,7 +56,7 @@ def TimeDiff(td):
     return Format('minute', td.seconds/60)
   if td.seconds:
     return Format('second', td.seconds)
-  return None
+  return 'just now'
 
 def Since(time,recently=True):
   if not time:
@@ -65,7 +65,7 @@ def Since(time,recently=True):
   td = now - time
   if recently and td.days == 0 and td.seconds < 60:
     return 'online now'
-  return '%s ago' % (TimeDiff(td))
+  return TimeDiff(td)
 
 def FetchCookies():
   if not 'HTTP_COOKIE' in os.environ:
