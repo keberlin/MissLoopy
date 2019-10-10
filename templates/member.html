@@ -6,23 +6,21 @@
   <table class="col-xs-12" cols=2 border=0 style="width:100%;border-spacing:5px;border-collapse:separate">
     <tr>
       <td width="25%" valign="top">
-        <table cols=2 id="images" border=0 style="width:100%;border-spacing:1px;border-collapse:separate">
+        {% set cols = 2 %}
+        {% set perc = 100/cols %}
+        <table cols={{cols}} id="images" border=0 style="width:100%;border-spacing:1px;border-collapse:separate">
           <tr>
-            <td colspan=2>
+            <td colspan={{cols}}>
               <img src="{{ url_for('static', filename=image) }}" id="master" width="100%" style="min-width:150px">
             </td>
           </tr>
-          {% set cols = 2 %}
-          {% set col = 0 %}
-          {% set perc = 100/cols %}
           {% for image in images %}
-            {% if col == 0 %}
+            {% if (loop.index-1)%cols == 0 %}
               <tr>
             {% endif %}
             <td style="width:{{ perc }}%" align="center" valign="middle"><img src="{{ url_for('static',  filename=image) }}" style="width:100%"></td>
-            {% set col = (col+1)%cols %}
           {% endfor %}
-          {% for i in range(cols-col) %}
+          {% for i in range(cols-(images|length)%cols) %}
             <td style="width:{{ perc }}%"></td>
           {% endfor %}
         </table>

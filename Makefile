@@ -1,7 +1,7 @@
 MSGS = $(notdir $(wildcard ../scammers/*.msg))
 SCAMMERS = $(addprefix static/scammers/, $(MSGS:.msg=.html))
 
-all: static/new-photos.html static/new-images.html static/stats.html spamkeywords.py $(SCAMMERS) gazetteer ipaddress
+all: static/new-photos.html static/new-images.html static/stats.html .gazetteer .ipaddress .spam
 
 .FORCE:
 
@@ -30,7 +30,7 @@ static/stats.html: templates/template.html templates/stats.html make-stats.py .F
 %.geo: %.txt geoconv.py admin1CodesASCII.txt admin2Codes.txt CountryCodes.csv
 	python geoconv.py $< -o $@
 
-gazetteer: gazreset.py allCountries.geo
+.gazetteer: gazreset.py allCountries.geo
 	python gazreset.py allCountries.geo
 	@touch $@
 
@@ -42,14 +42,15 @@ geolite2.txt: ip-geolite2.py GeoLite2-Country-Locations.csv GeoLite2-Country-Blo
 dbip.txt: ip-dbip.py dbip-country-lite.csv
 	python ip-dbip.py dbip-country-lite.csv -o $@
 
-ipaddress: ipreset.py geolite2.txt dbip.txt
+.ipaddress: ipreset.py geolite2.txt dbip.txt
 	python ipreset.py geolite2.txt dbip.txt
 	@touch $@
 
-# Spam Keywords
+# Spam keywords
 
-spamkeywords.py: junk-auto.log junk-reported.log
+.spam: junk-auto.log junk-reported.log
 	./analyse-junk.sh
+	@touch $@
 
 tests: .FORCE
 	nosetests tests #--with-coverage

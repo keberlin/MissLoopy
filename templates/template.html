@@ -66,7 +66,7 @@
 
     {% include 'cookies.html' %}
 
-    {% include 'publishers/google-mobile.htm' %}
+    {% include 'publishers/google.html' %}
   </head>
 
   <body ng-app="app" ng-controller="ctrl">
@@ -85,7 +85,6 @@
         <tr><td>
           <table border=0 style="width:100%;border-spacing:10px 0px;border-collapse:separate" id="canvas">
             <tr>
-              {% if advert %}
                 <td width="120px" valign="top">
                   <ul class="nav nav-pills nav-stacked">
                     <li id="dashboard" {% if nav == "dashboard" %}class="active"{% endif %}><a href="/dashboard">Home</a></li>
@@ -101,17 +100,10 @@
                     <li id="account"   {% if nav == "account"   %}class="active"{% endif %}><a href="/account"  >Account</a></li>
                   </ul>
                 </td>
-              {% endif %}
               <td wwidth="100%" valign="top">
                 {% block canvas %}
                 {% endblock %}
               </td>
-              {% if advert and not is_mobile %}
-                <td width="160px" valign="top">
-                  {% set ad = 'publishers/' + publisher + '.htm' %}
-                  {% include ad %}
-                </td>
-              {% endif %}
             </tr>
             <tr>
               <td>
