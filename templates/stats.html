@@ -3,44 +3,84 @@
 {% block canvas %}
   <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
   <script type="text/javascript">
-  google.charts.load('current', {'packages':['corechart']}); google.charts.setOnLoadCallback(drawChart1); function drawChart1() {
-    var data = google.visualization.arrayToDataTable([ ['Date', 'Verified', 'Unverified', 'Males', 'Females'],
-    {% for entry in reports %}
-      [new Date('{{entry.logged}}'), {{entry.verified}}, {{entry.unverified}}, {{entry.males}}, {{entry.females}}],
-    {% endfor %}
-    ]);
-    var options = { title: 'Members', curveType: 'function', legend: { position: 'bottom' } };
-    var chart = new google.visualization.LineChart(document.getElementById('members')); chart.draw(data, options); }
+  google.charts.load('current', {'packages':['corechart']}); 
 
-  google.charts.load('current', {'packages':['corechart']}); google.charts.setOnLoadCallback(drawChart2); function drawChart2() {
-    var data = google.visualization.arrayToDataTable([ ['Date', 'Men', 'Women', 'Sugar Pups', 'Sugar Babies', 'Sugar Daddies', 'Sugar Mommas'],
-    {% for entry in reports %}
-      [new Date('{{entry.logged}}'), {{entry.men}}*100/{{entry.verified}}, {{entry.women}}*100/{{entry.verified}}, {{entry.sugar_pups}}*100/{{entry.verified}}, {{entry.sugar_babies}}*100/{{entry.verified}}, {{entry.sugar_daddies}}*100/{{entry.verified}}, {{entry.sugar_mommas}}*100/{{entry.verified}}],
-    {% endfor %}
-    ]);
-    var options = { title: 'Categories', curveType: 'function', legend: { position: 'bottom' } };
-    var chart = new google.visualization.LineChart(document.getElementById('categories')); chart.draw(data, options); }
+  {% for year,reports in years.iteritems() %}
 
-  google.charts.load('current', {'packages':['corechart']}); google.charts.setOnLoadCallback(drawChart3); function drawChart3() {
-    var data = google.visualization.arrayToDataTable([ ['Date', 'Men', 'Women', 'Sugar Pups', 'Sugar Babies', 'Sugar Daddies', 'Sugar Mommas'],
-    {% for entry in reports %}
-      [new Date('{{entry.logged}}'), {{entry.avg_age_men}}, {{entry.avg_age_women}}, {{entry.avg_age_sugar_pups}}, {{entry.avg_age_sugar_babies}}, {{entry.avg_age_sugar_daddies}}, {{entry.avg_age_sugar_mommas}}],
-    {% endfor %}
-    ]);
-    var options = { title: 'Average Ages', curveType: 'function', legend: { position: 'bottom' } };
-    var chart = new google.visualization.LineChart(document.getElementById('avg_ages')); chart.draw(data, options); }
+    function drawChart1_y{{year}}() {
+      var data = google.visualization.arrayToDataTable([ ['Date', 'Verified', 'Unverified', 'Males', 'Females'],
+        {% for entry in reports %}
+          [new Date('{{entry.logged}}'), {{entry.verified}}, {{entry.unverified}}, {{entry.males}}, {{entry.females}}],
+        {% endfor %}
+      ]);
+      var options = { title: 'Members', curveType: 'function', legend: { position: 'bottom' } };
+      var chart = new google.visualization.LineChart(document.getElementById('members_y{{year}}')); chart.draw(data, options); 
+    }
+    google.charts.setOnLoadCallback(drawChart1_y{{year}});
 
-  google.charts.load('current', {'packages':['corechart']}); google.charts.setOnLoadCallback(drawChart4); function drawChart4() {
-    var data = google.visualization.arrayToDataTable([ ['Date', 'White', 'Black', 'Latino', 'Indian', 'Asian', 'Mixed', 'Other'],
-    {% for entry in reports %}
-      [new Date('{{entry.logged}}'), {{entry.white}}*100/{{entry.verified}}, {{entry.black}}*100/{{entry.verified}}, {{entry.latino}}*100/{{entry.verified}}, {{entry.indian}}*100/{{entry.verified}}, {{entry.asian}}*100/{{entry.verified}}, {{entry.mixed}}*100/{{entry.verified}}, {{entry.other}}*100/{{entry.verified}}],
+    function drawChart2_y{{year}}() {
+      var data = google.visualization.arrayToDataTable([ ['Date', 'Men', 'Women', 'Sugar Pups', 'Sugar Babies', 'Sugar Daddies', 'Sugar Mommas'],
+        {% for entry in reports %}
+          [new Date('{{entry.logged}}'), {{entry.men}}*100/{{entry.verified}}, {{entry.women}}*100/{{entry.verified}}, {{entry.sugar_pups}}*100/{{entry.verified}}, {{entry.sugar_babies}}*100/{{entry.verified}}, {{entry.sugar_daddies}}*100/{{entry.verified}}, {{entry.sugar_mommas}}*100/{{entry.verified}}],
+        {% endfor %}
+      ]);
+      var options = { title: 'Categories', curveType: 'function', legend: { position: 'bottom' } };
+      var chart = new google.visualization.LineChart(document.getElementById('categories_y{{year}}')); chart.draw(data, options); 
+    }
+    google.charts.setOnLoadCallback(drawChart2_y{{year}});
+
+    function drawChart3_y{{year}}() {
+      var data = google.visualization.arrayToDataTable([ ['Date', 'Men', 'Women', 'Sugar Pups', 'Sugar Babies', 'Sugar Daddies', 'Sugar Mommas'],
+        {% for entry in reports %}
+          [new Date('{{entry.logged}}'), {{entry.avg_age_men}}, {{entry.avg_age_women}}, {{entry.avg_age_sugar_pups}}, {{entry.avg_age_sugar_babies}}, {{entry.avg_age_sugar_daddies}}, {{entry.avg_age_sugar_mommas}}],
+        {% endfor %}
+      ]);
+      var options = { title: 'Average Ages', curveType: 'function', legend: { position: 'bottom' } };
+      var chart = new google.visualization.LineChart(document.getElementById('avg_ages_y{{year}}')); chart.draw(data, options); 
+    }
+    google.charts.setOnLoadCallback(drawChart3_y{{year}});
+
+    function drawChart4_y{{year}}() {
+      var data = google.visualization.arrayToDataTable([ ['Date', 'White', 'Black', 'Latino', 'Indian', 'Asian', 'Mixed', 'Other'],
+        {% for entry in reports %}
+          [new Date('{{entry.logged}}'), {{entry.white}}*100/{{entry.verified}}, {{entry.black}}*100/{{entry.verified}}, {{entry.latino}}*100/{{entry.verified}}, {{entry.indian}}*100/{{entry.verified}}, {{entry.asian}}*100/{{entry.verified}}, {{entry.mixed}}*100/{{entry.verified}}, {{entry.other}}*100/{{entry.verified}}],
+        {% endfor %}
+      ]);
+      var options = { title: 'Ethnicities', curveType: 'function', legend: { position: 'bottom' } };
+      var chart = new google.visualization.LineChart(document.getElementById('ethnicities_y{{year}}')); chart.draw(data, options); 
+    }
+    google.charts.setOnLoadCallback(drawChart4_y{{year}});
+
     {% endfor %}
-    ]);
-    var options = { title: 'Ethnicities', curveType: 'function', legend: { position: 'bottom' } };
-    var chart = new google.visualization.LineChart(document.getElementById('ethnicities')); chart.draw(data, options); }
   </script>
-  <div id="members" style="width: 100%; height: 500px"></div>
-  <div id="categories" style="width: 100%; height: 500px"></div>
-  <div id="avg_ages" style="width: 100%; height: 500px"></div>
-  <div id="ethnicities" style="width: 100%; height: 500px"></div>
+
+  <!-- Nav tabs -->
+    <ul class="nav nav-tabs" id="mytabs">
+      {% for year in years %}
+        <li class="{% if not loop.index0 %}active{% endif %}"><a href="#tab_details_y{{year}}" data-toggle="tab" name="y{{year}}">{{year}} Years</a></li>
+      {% endfor %}
+    </ul>
+
+  <!-- Tab panes -->
+  <div class="tab-content">
+    {% for year in years %}
+      <div class="tab-pane {% if not loop.index0 %}active{% endif %}" id="tab_details_y{{year}}">
+        <div id="members_y{{year}}" style="width: 100%; height: 500px" onresize="drawChart1_y{{year}}()"></div>
+        <div id="categories_y{{year}}" style="width: 100%; height: 500px"></div>
+        <div id="avg_ages_y{{year}}" style="width: 100%; height: 500px"></div>
+        <div id="ethnicities_y{{year}}" style="width: 100%; height: 500px"></div>
+      </div>
+    {% endfor %}
+  </div>
+
+  <script>
+    $('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {                                                                                                                
+      {% for year in years %}
+        drawChart1_y{{year}}();
+        drawChart2_y{{year}}();
+        drawChart3_y{{year}}();
+        drawChart4_y{{year}}();
+      {% endfor %}
+    }); 
+  </script>
 {% endblock %}

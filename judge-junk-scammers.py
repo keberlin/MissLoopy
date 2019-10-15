@@ -45,9 +45,20 @@ for id in ids:
   entry = db.fetchone()
   members = entry[0]
   out = '%d: %d, %s, %s, "%s", %s, (%s), "%s"' % (id, members, ip, email, name, country, last_login_country, message)
+  db.execute('SELECT DISTINCT id_to FROM emails WHERE id_from=%d' % (id))
+  entry = db.fetchall()
+  id_tos = [v[0] for v in entry]
+  tos = []
+  for id_to in id_tos[:10]:
+    db.execute('SELECT * FROM profiles WHERE id=%d LIMIT 1' % (id_to))
+    entry = db.fetchone()
+    to = '%d: "%s", %s' % (id_to, entry[COL_NAME], GazCountry(entry[COL_LOCATION]))
+    tos.append(to)
   print
   print
   print out.encode('utf-8')
+  for to in tos:
+    print '  ', to.encode('utf-8')
   print
   kick = raw_input('Kick? ')
   if kick=='y':

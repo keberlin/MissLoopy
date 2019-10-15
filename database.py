@@ -18,8 +18,8 @@ class Database():
       cursor = None
       conn.close()
       conn = None
-  def execute(self,sql):
-    self.cursor.execute(sql.encode('utf-8'))
+  def execute(self,sql,*nargs):
+    self.cursor.execute(sql.encode('utf-8'),*nargs)
   def lastval(self):
       self.execute('SELECT LASTVAL()')
       return self.fetchone()[0]

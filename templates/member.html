@@ -15,7 +15,7 @@
             </td>
           </tr>
           {% for image in images %}
-            {% if (loop.index-1)%cols == 0 %}
+            {% if loop.index0%cols == 0 %}
               <tr>
             {% endif %}
             <td style="width:{{ perc }}%" align="center" valign="middle"><img src="{{ url_for('static',  filename=image) }}" style="width:100%"></td>
