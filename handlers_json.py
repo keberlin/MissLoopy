@@ -416,20 +416,19 @@ def handle_mlsendemail(entry,values,files):
     with open(os.path.join(BASE_DIR, 'junk-auto.log'), 'a') as f:
       f.write('%d %s\n' % (id, re.sub('[\r\n]+',' ',message).encode('utf-8')))
 
-  db.execute('SELECT email, notifications FROM profiles WHERE verified AND id=%d LIMIT 1' % (id_to))
-  entry = db.fetchone()
-  if not entry:
+  db.execute('SELECT * FROM profiles WHERE verified AND id=%d LIMIT 1' % (id_to))
+  entry_to = db.fetchone()
+  if not entry_to:
     return {'error': 'This member cannot be found.'}
 
-  email         = entry[0]
-  notifications = entry[1]
+  notifications = entry_to[COL_NOTIFICATIONS]
 
   now = datetime.datetime.utcnow()
   db.execute('INSERT INTO emails (id_from,id_to,message,sent) VALUES (%d,%d,%s,%s)' % (id, id_to, Quote(message), Quote(str(now))))
   db.commit()
 
   if not notifications & NOT_NEW_MESSAGE:
-    EmailNotify(email, id, x, y, tz, unit_distance)
+    EmailNotify(entry_to, entry)
 
   d = {}
   d['sent']     = True
@@ -469,18 +468,19 @@ def handle_mlsendphoto(entry,values,files):
   im.save(data, 'JPEG')
   image = 'data:image/jpg;base64,' + base64.b64encode(data.getvalue())
 
-  db.execute('SELECT email FROM profiles WHERE verified AND id=%d LIMIT 1' % (id_to))
-  entry = db.fetchone()
-  if not entry:
+  db.execute('SELECT * FROM profiles WHERE verified AND id=%d LIMIT 1' % (id_to))
+  entry_to = db.fetchone()
+  if not entry_to:
     return {'error': 'This member cannot be found.'}
 
-  email = entry[0]
+  notifications = entry_to[COL_NOTIFICATIONS]
 
   now = datetime.datetime.utcnow()
   db.execute('INSERT INTO emails (id_from,id_to,image,sent) VALUES (%d,%d,%s,%s)' % (id, id_to, Quote(image), Quote(str(now))))
   db.commit()
 
-  EmailNotify(email, id, x, y, tz, unit_distance)
+  if not notifications & NOT_NEW_MESSAGE:
+    EmailNotify(entry_to, entry)
 
   d = {}
   d['sent']     = True
@@ -597,18 +597,20 @@ def handle_mlwink(entry,values,files):
 
   unit_distance, unit_height = Units(country)
 
-  db.execute('SELECT email FROM profiles WHERE verified AND id=%d LIMIT 1' % (id_to))
-  entry = db.fetchone()
-  if not entry:
+  db.execute('SELECT * FROM profiles WHERE verified AND id=%d LIMIT 1' % (id_to))
+  entry_to = db.fetchone()
+  if not entry_to:
     return {'error': 'This member cannot be found.'}
 
-  email   = entry[0]
+  notifications = entry_to[COL_NOTIFICATIONS]
+
   message = 'Wink!'
 
   now = datetime.datetime.utcnow()
   db.execute('INSERT INTO emails (id_from,id_to,message,sent) VALUES (%d,%d,%s,%s)' % (id, id_to, Quote(message), Quote(str(now))))
   db.commit()
 
-  EmailWink(email, id, x, y, tz, unit_distance)
+  if not notifications & NOT_NEW_MESSAGE:
+    EmailWink(entry_to, entry)
 
   return {'message': 'Your Wink! has been sent.'}

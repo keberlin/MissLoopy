@@ -1,5 +1,6 @@
 #!/usr/bin/python
 
+from localization import *
 from html import *
 from mlhtml import *
 from mlutils import *
@@ -52,32 +53,37 @@ def EmailPhotoDeleted(email):
   html = RenderY('email-photo-deleted.html', dict)
   Email2(FROM, [email], 'Photo Removal Alert', html)
 
-def EmailWink(email,id,x,y,tz,unit_distance):
-  db = database.Database(MISS_LOOPY_DB)
+def EmailWink(entry,entry_from):
+  email    = entry[COL_EMAIL]
+  location = entry[COL_LOCATION]
+  country  = GazCountry(location)
+  tz       = entry[COL_TZ]
+  adjust = GazLatAdjust(entry_from[COL_Y])
+  dx = abs(entry_from[COL_X]-entry[COL_X])*adjust/1000
+  dy = abs(entry_from[COL_Y]-entry[COL_Y])/1000
+  distance = math.sqrt((dx*dx)+(dy*dy))
+
+  SetLocale(country)
+
+  unit_distance, unit_height = Units(country)
+
   dict = {}
   dict['action']     = 'emailthread'
   dict['navigation'] = 'inbox'
-  db.execute('SELECT * FROM profiles WHERE id=%d LIMIT 1' % (id))
-  entry = db.fetchone()
-  if not entry:
-    return
-  adjust = GazLatAdjust(y)
-  dx = abs(x-entry[COL_X])*adjust/1000
-  dy = abs(y-entry[COL_Y])/1000
-  distance = math.sqrt((dx*dx)+(dy*dy))
+
   member = {}
-  member['id']            = id
-  member['image']         = PhotoFilename(MasterPhoto(entry[COL_ID]))
-  member['name']          = mask.MaskEverything(entry[COL_NAME])
-  member['gender']        = Gender(entry[COL_GENDER])
-  member['age']           = Age(entry[COL_DOB])
-  member['starsign']      = Starsign(entry[COL_DOB])
-  member['ethnicity']     = Ethnicity(entry[COL_ETHNICITY])
-  member['location']      = entry[COL_LOCATION]
-  member['summary']       = mask.MaskEverything(entry[COL_SUMMARY])
-  member['last_login']    = Since(entry[COL_LAST_LOGIN])
-  member['login_country'] = entry[COL_LAST_IP_COUNTRY]
-  member['created']       = Datetime(entry[COL_CREATED2], tz).strftime('%x')
+  member['id']            = entry_from[COL_ID]
+  member['image']         = PhotoFilename(MasterPhoto(entry_from[COL_ID]))
+  member['name']          = mask.MaskEverything(entry_from[COL_NAME])
+  member['gender']        = Gender(entry_from[COL_GENDER])
+  member['age']           = Age(entry_from[COL_DOB])
+  member['starsign']      = Starsign(entry_from[COL_DOB])
+  member['ethnicity']     = Ethnicity(entry_from[COL_ETHNICITY])
+  member['location']      = entry_from[COL_LOCATION]
+  member['summary']       = mask.MaskEverything(entry_from[COL_SUMMARY])
+  member['last_login']    = Since(entry_from[COL_LAST_LOGIN])
+  member['login_country'] = entry_from[COL_LAST_IP_COUNTRY]
+  member['created']       = Datetime(entry_from[COL_CREATED2], tz).strftime('%x')
   member['distance']      = Distance(distance, unit_distance)
   member['active']        = False
   dict['entry'] = member
@@ -85,32 +91,37 @@ def EmailWink(email,id,x,y,tz,unit_distance):
   html = RenderY('email-wink.html', dict)
   Email2(FROM, [email], 'New Wink! Received', html)
 
-def EmailNotify(email,id,x,y,tz,unit_distance):
-  db = database.Database(MISS_LOOPY_DB)
+def EmailNotify(entry,entry_from):
+  email    = entry[COL_EMAIL]
+  location = entry[COL_LOCATION]
+  country  = GazCountry(location)
+  tz       = entry[COL_TZ]
+  adjust = GazLatAdjust(entry_from[COL_Y])
+  dx = abs(entry_from[COL_X]-entry[COL_X])*adjust/1000
+  dy = abs(entry_from[COL_Y]-entry[COL_Y])/1000
+  distance = math.sqrt((dx*dx)+(dy*dy))
+
+  SetLocale(country)
+
+  unit_distance, unit_height = Units(country)
+
   dict = {}
   dict['action']     = 'emailthread'
   dict['navigation'] = 'inbox'
-  db.execute('SELECT * FROM profiles WHERE id=%d LIMIT 1' % (id))
-  entry = db.fetchone()
-  if not entry:
-    return
-  adjust = GazLatAdjust(y)
-  dx = abs(x-entry[COL_X])*adjust/1000
-  dy = abs(y-entry[COL_Y])/1000
-  distance = math.sqrt((dx*dx)+(dy*dy))
+
   member = {}
-  member['id']            = id
-  member['image']         = PhotoFilename(MasterPhoto(entry[COL_ID]))
-  member['name']          = mask.MaskEverything(entry[COL_NAME])
-  member['gender']        = Gender(entry[COL_GENDER])
-  member['age']           = Age(entry[COL_DOB])
-  member['starsign']      = Starsign(entry[COL_DOB])
-  member['ethnicity']     = Ethnicity(entry[COL_ETHNICITY])
-  member['location']      = entry[COL_LOCATION]
-  member['summary']       = mask.MaskEverything(entry[COL_SUMMARY])
-  member['last_login']    = Since(entry[COL_LAST_LOGIN])
-  member['login_country'] = entry[COL_LAST_IP_COUNTRY]
-  member['created']       = Datetime(entry[COL_CREATED2], tz).strftime('%x')
+  member['id']            = entry_from[COL_ID]
+  member['image']         = PhotoFilename(MasterPhoto(entry_from[COL_ID]))
+  member['name']          = mask.MaskEverything(entry_from[COL_NAME])
+  member['gender']        = Gender(entry_from[COL_GENDER])
+  member['age']           = Age(entry_from[COL_DOB])
+  member['starsign']      = Starsign(entry_from[COL_DOB])
+  member['ethnicity']     = Ethnicity(entry_from[COL_ETHNICITY])
+  member['location']      = entry_from[COL_LOCATION]
+  member['summary']       = mask.MaskEverything(entry_from[COL_SUMMARY])
+  member['last_login']    = Since(entry_from[COL_LAST_LOGIN])
+  member['login_country'] = entry_from[COL_LAST_IP_COUNTRY]
+  member['created']       = Datetime(entry_from[COL_CREATED2], tz).strftime('%x')
   member['distance']      = Distance(distance, unit_distance)
   member['active']        = False
   dict['entry'] = member
@@ -118,8 +129,18 @@ def EmailNotify(email,id,x,y,tz,unit_distance):
   html = RenderY('email-notify.html', dict)
   Email2(FROM, [email], 'New Message Received', html)
 
-def EmailNewMembers(email,ids,location,x,y,tz,unit_distance):
-  db = database.Database(MISS_LOOPY_DB)
+def EmailNewMembers(entry,ids):
+  email    = entry[COL_EMAIL]
+  location = entry[COL_LOCATION]
+  country  = GazCountry(location)
+  x        = entry[COL_X]
+  y        = entry[COL_Y]
+  tz       = entry[COL_TZ]
+
+  SetLocale(country)
+
+  unit_distance, unit_height = Units(country)
+
   dict = {}
   dict['action']     = 'member'
   dict['navigation'] = 'matches'

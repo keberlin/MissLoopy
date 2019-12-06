@@ -53,17 +53,9 @@ for id in results.keys():
   entry = db.fetchone()
   if not entry:
     continue
-  email         = entry[COL_EMAIL]
-  location      = entry[COL_LOCATION]
-  country       = GazCountry(location)
-  x             = entry[COL_X]
-  y             = entry[COL_Y]
-  tz            = entry[COL_TZ]
   notifications = entry[COL_NOTIFICATIONS]
   if not notifications & NOT_NEW_MEMBERS:
-    SetLocale(country)
-    unit_distance, unit_height = Units(country)
-    EmailNewMembers(email, results[id], location, x, y, tz, unit_distance)
+    EmailNewMembers(entry, results[id])
 
 db.execute('UPDATE admin SET last_new_member_search=%s' % (Quote(str(now))))
 db.commit()

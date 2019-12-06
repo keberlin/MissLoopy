@@ -1,7 +1,9 @@
 MSGS = $(notdir $(wildcard ../scammers/*.msg))
 SCAMMERS = $(addprefix static/scammers/, $(MSGS:.msg=.html))
 
-all: static/new-photos.html static/new-images.html static/stats.html .gazetteer .ipaddress .spam
+all: html .gazetteer .ipaddress .spam
+
+html: static/new-photos.html static/new-images.html static/stats.html
 
 .FORCE:
 
