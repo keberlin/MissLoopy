@@ -35,6 +35,13 @@ def MaskSites(text):
     return None
   return re.sub(SITE_PATTERN, '<blocked website>', text, re.IGNORECASE)
 
+TEL_PATTERN = r'[0-9][0-9\- ][0-9\- ]+[0-9]'
+
+def MaskTelNumbers(text):
+  if not text:
+    return None
+  return re.sub(TEL_PATTERN, '<blocked number>', text, re.IGNORECASE)
+
 def MaskEverything(text):
   if not text:
     return None
@@ -46,6 +53,7 @@ def MaskEverything(text):
   text = MaskEmailAddresses(text)
   text = MaskUrls(text)
   text = MaskSites(text)
+  text = MaskTelNumbers(text)
   # Convert all NLs back into newlines
   text = re.sub('('+NL+')+','\n',text)
   # Remove any leading newline
