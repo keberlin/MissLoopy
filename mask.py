@@ -35,7 +35,7 @@ def MaskSites(text):
     return None
   return re.sub(SITE_PATTERN, '<blocked website>', text, re.IGNORECASE)
 
-TEL_PATTERN = r'[0-9][0-9\- ][0-9\- ]+[0-9]'
+TEL_PATTERN = r'[0-9][0-9\- ][0-9\- ][0-9\- ]+[0-9]'
 
 def MaskTelNumbers(text):
   if not text:

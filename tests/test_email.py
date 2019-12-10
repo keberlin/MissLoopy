@@ -11,3 +11,8 @@ class TestCases(unittest.TestCase):
     result = MaskEmailAddresses('keith.hollis@gmail.co.in')
     answer = '<blocked email>'
     self.assertEqual(answer, result)
+
+  def test_email_with_spaces(self):
+    result = MaskEmailAddresses('N o o d l e a n g e l  @ y a h o o . c o m')
+    answer = '<blocked email>'
+    self.assertEqual(answer, result)

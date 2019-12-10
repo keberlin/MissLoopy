@@ -568,7 +568,7 @@ def handle_mluploadphoto(entry,values,files):
   im = im.convert('RGB')
   im.save(filename, 'JPEG')
 
-  EmailNewPhoto(pid, id)
+  EmailNewPhoto(filename, pid, id)
 
   pids = []
   master = 0

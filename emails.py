@@ -7,22 +7,20 @@ from mlutils import *
 from mllist import *
 from mlemail import *
 
-DOMAIN = 'missloopy.com'
-
 FROM = TITLE + '<noreply@' + DOMAIN + '>'
 
-def EmailNewPhoto(pid,id):
+def EmailNewPhoto(filename,pid,id):
   dict = {}
-  dict['id']  = id
-  dict['pid'] = pid
+  dict['id']    = id
+  #dict['image'] = ImageData(filename)
+  dict['filename'] = filename
 
-  #html = RenderY('email-verify.html', dict)
-  #Email2(FROM, [email], 'Verify Registration', html, 1)
-  Email2(FROM, ['keith.hollis@gmail.com'], 'New Photo Uploaded (%d)' % (pid), HtmlLink(HtmlImage('%s/%s' % (WWW,PhotoFilename(pid)), 'width="300px"'), '%s/member?id=%d' % (WWW,id)))
+  html = RenderY('email-new-photo.html', dict)
+  Email2(FROM, ['keith.hollis@gmail.com'], 'New Photo Uploaded (%d)' % (pid), html, 10)
 
 def EmailVerify(email,id):
   dict = {}
-  dict['id'] = id
+  dict['id']    = id
   dict['email'] = email
 
   html = RenderY('email-verify.html', dict)
