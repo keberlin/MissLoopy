@@ -13,12 +13,14 @@ db = database.Database(MISS_LOOPY_DB)
 def ListMember(id,active,location,x,y,tz,unit_distance):
   db.execute('SELECT * FROM profiles WHERE id=%d LIMIT 1' % (id))
   entry = db.fetchone()
+  db.commit()
   if not entry:
     return None
   adjust = GazLatAdjust(y)
   dx = abs(x-entry[COL_X])*adjust/1000
   dy = abs(y-entry[COL_Y])/1000
   distance = math.sqrt((dx*dx)+(dy*dy))
+
   member = {}
   member['id']            = id
   member['image']         = PhotoFilename(MasterPhoto(entry[COL_ID]))
@@ -35,6 +37,7 @@ def ListMember(id,active,location,x,y,tz,unit_distance):
   member['created']       = Datetime(entry[COL_CREATED2], tz).strftime('%x')
   member['distance']      = Distance(distance, unit_distance)
   member['active']        = active
+
   return member
 
 def ListMembers(ids,counts,location,x,y,tz,unit_distance):

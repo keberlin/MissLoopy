@@ -21,6 +21,7 @@ def IpCountry(ip):
   n = IpNumber(ip)
   db.execute('SELECT country FROM ranges WHERE lower<=%d AND %d<=upper LIMIT 1' % (n, n))
   entry = db.fetchone()
+  db.commit()
   if not entry:
     return 'Unknown'
   return entry[0]

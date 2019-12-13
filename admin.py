@@ -44,7 +44,7 @@ def command(cmd):
         print ss.encode('utf-8')
     else:
       db.execute(cmd)
-      db.commit()
+    db.commit()
   except Exception as e:
     print 'Error:', repr(e), 'executing:', cmd
 

@@ -313,9 +313,11 @@ def PhotoFilename(pid):
 def MasterPhoto(id):
   db.execute('SELECT pid FROM photos WHERE id=%d AND master LIMIT 1' % (id))
   entry = db.fetchone()
+  db.commit()
   if not entry:
     db.execute('SELECT pid FROM photos WHERE id=%d LIMIT 1' % (id))
     entry = db.fetchone()
+    db.commit()
     if not entry:
       return 0
   return entry[0]
@@ -324,6 +326,7 @@ def Login(email,password):
   # Authenticate
   db.execute('SELECT * FROM profiles WHERE email ILIKE %s LIMIT 1' % (Quote(email)))
   entry = db.fetchone()
+  db.commit()
   if not entry:
     return {'error': 'Email Address not found.'}
   if entry[COL_PASSWORD] != password:
@@ -355,6 +358,7 @@ def Authenticate(cookies=None,remote_addr=None):
   # Authenticate
   db.execute('SELECT * FROM profiles WHERE id=%d AND email ILIKE %s AND password=%s LIMIT 1' % (id, Quote(email), Quote(password)))
   entry = db.fetchone()
+  db.commit()
   if not entry:
     return None
 
@@ -372,11 +376,13 @@ def Authenticate(cookies=None,remote_addr=None):
 def Blocked(id,id_with):
   db.execute('SELECT COUNT(*) FROM blocked WHERE id=%d AND id_block=%d' % (id, id_with))
   entry = db.fetchone()
+  db.commit()
   return (entry[0] > 0)
 
 def BlockedMutually(id,id_with):
   db.execute('SELECT COUNT(*) FROM blocked WHERE (id=%d AND id_block=%d) OR (id=%d AND id_block=%d)' % (id, id_with, id_with, id))
   entry = db.fetchone()
+  db.commit()
   return (entry[0] > 0)
 
 def DeletePhoto(pid):
@@ -408,11 +414,13 @@ def DeleteMember(id):
 def InboxCount(id):
   db.execute('SELECT COUNT(*) FROM emails WHERE id_to=%d AND not viewed AND id_from NOT IN (SELECT id_block FROM blocked WHERE id=id_to) AND id_to NOT IN (SELECT id_block FROM blocked WHERE id=id_from)' % (id))
   entry = db.fetchone()
+  db.commit()
   return entry[0]
 
 def OutboxCount(id):
   db.execute('SELECT COUNT(*) FROM emails WHERE id_from=%d AND not viewed AND id_from NOT IN (SELECT id_block FROM blocked WHERE id=id_to) AND id_to NOT IN (SELECT id_block FROM blocked WHERE id=id_from)' % (id))
   entry = db.fetchone()
+  db.commit()
   return entry[0]
 
 def SaveResults(id,results):
@@ -427,6 +435,7 @@ def SaveResults(id,results):
 def PreviousResult(id,id_search):
   db.execute('SELECT id_previous FROM results WHERE id=%d AND id_search=%d LIMIT 1' % (id, id_search))
   entry = db.fetchone()
+  db.commit()
   if not entry:
     return 0
   return entry[0]
@@ -434,6 +443,7 @@ def PreviousResult(id,id_search):
 def NextResult(id,id_search):
   db.execute('SELECT id_next FROM results WHERE id=%d AND id_search=%d LIMIT 1' % (id, id_search))
   entry = db.fetchone()
+  db.commit()
   if not entry:
     return 0
   return entry[0]

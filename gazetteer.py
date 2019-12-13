@@ -16,7 +16,9 @@ def GazLocation(location):
   db = database.Database(GAZETTEER_DB)
 
   db.execute('SELECT x,y,tz FROM locations WHERE location=%s LIMIT 1' % (Quote(location)))
-  return db.fetchone()
+  ret = db.fetchone()
+  db.commit()
+  return ret
 
 def Alias(query):
   str = re.sub(r'\W',r'',query).lower()
@@ -46,6 +48,8 @@ def GazClosestMatchesQuick(query,max):
     for entry in db.fetchall():
       if entry[0] not in closest:
         closest.append(entry[0])
+
+  db.commit()
 
   return closest[:max]
 
@@ -81,6 +85,8 @@ def GazClosestMatches(query,max):
     for entry in db.fetchall():
       if entry[0] not in closest:
         closest.append(entry[0])
+
+  db.commit()
 
   return closest[:max]
 

@@ -84,4 +84,6 @@ def search2(distance,order,id,x,y,tz,gender,age,ethnicity,height,weight,gender_c
   if order == 'distance':
     list.sort(cmp=lambda a,b:int(a[1]-b[1])) # TODO
 
+  db.commit()
+
   return map(lambda x:x[0], list)

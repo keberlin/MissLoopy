@@ -135,6 +135,8 @@ def handle_mldeletephoto(entry,values,files):
     if entry[1]:
       master = entry[0]
 
+  db.commit()
+
   if len(deleted) == 1:
     return {'message': 'This photo has been deleted.', 'pids': pids, 'master': master}
   else:

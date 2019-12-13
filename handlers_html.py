@@ -38,6 +38,8 @@ def handle_index(entry,values):
     d['country'] = GazCountry(entry[2])
     entries.append(d)
 
+  db.commit()
+
   dict = {}
   dict['entries'] = entries
 
@@ -84,6 +86,8 @@ def handle_photos(entry,values):
     pids.append(entry[0])
     if entry[1]:
       master = entry[0]
+
+  db.commit()
 
   dict = {}
   dict['id']     = id
@@ -297,6 +301,20 @@ def handle_member(entry,values):
 
   location = entry[COL_LOCATION]
 
+  master = MasterPhoto(id_view)
+  image = PhotoFilename(master)
+  pids = []
+  db.execute('SELECT pid FROM photos WHERE id=%d' % (id_view))
+  for entry in db.fetchall():
+    pid = entry[0]
+    if pid != master:
+      pids.append(pid)
+  images = []
+  for pid in pids:
+    images.append(PhotoFilename(pid))
+
+  db.commit()
+
   dict['mylat']          = y*360.0/CIRCUM_Y
   dict['mylng']          = x*360.0/CIRCUM_X
   # About me
@@ -324,18 +342,9 @@ def handle_member(entry,values):
   dict['gender_choice']  = GenderList(entry[COL_GENDER_CHOICE])
   dict['age_range']      = Range(entry[COL_AGE_MIN], entry[COL_AGE_MAX])
   dict['looking_for']    = mask.MaskEverything(entry[COL_LOOKING_FOR])
-
-  master = MasterPhoto(id_view)
-  dict['image'] = PhotoFilename(master)
-  pids = []
-  db.execute('SELECT pid FROM photos WHERE id=%d' % (id_view))
-  for entry in db.fetchall():
-    pid = entry[0]
-    if pid != master:
-      pids.append(pid)
-  dict['images'] = []
-  for pid in pids:
-    dict['images'].append(PhotoFilename(pid))
+  # Photos
+  dict['image'] = image
+  dict['images'] = images
 
   return dict
 
@@ -419,6 +428,8 @@ def handle_inbox(entry,values):
     entry = db.fetchone()
     counts.append(entry[0])
 
+  db.commit()
+
   SetLocale(country)
 
   unit_distance, unit_height = Units(country)
@@ -451,6 +462,8 @@ def handle_outbox(entry,values):
     db.execute('SELECT COUNT(*) FROM emails WHERE id_from=%d and id_to=%d and not viewed' % (id, id_to))
     entry = db.fetchone()
     counts.append(entry[0])
+
+  db.commit()
 
   SetLocale(country)
 

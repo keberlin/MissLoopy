@@ -7,6 +7,7 @@ def AnalyseSpammer(id):
 
   db.execute('SELECT COUNT(DISTINCT id_to),COUNT(*),MIN(sent) FROM emails WHERE id_from=%d' % (id))
   entry = db.fetchone()
+  db.commit()
   members = entry[0]
   count = entry[1]
   if count == 0:
@@ -27,6 +28,7 @@ def AnalyseSpam(text):
     if matches:
       score += cost*len(matches)
       hits.append(str)
+  db.commit()
   density = len(text)/float(score) if score else 0
   return (score, density, hits)
 
