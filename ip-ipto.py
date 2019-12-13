@@ -1,5 +1,3 @@
-#!/usr/bin/python
-
 import argparse, csv
 
 parser = argparse.ArgumentParser(description='Convert ip-to IP Address csv File.')

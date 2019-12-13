@@ -1,5 +1,3 @@
-#!/usr/bin/python
-
 import argparse, csv
 
 parser = argparse.ArgumentParser(description='Convert dbip IP Address csv File.')

@@ -1,5 +1,3 @@
-#!/usr/bin/python
-
 import sys, re, email
 from bs4 import BeautifulSoup
 from xml.sax.saxutils import escape

@@ -1,5 +1,3 @@
-#!/usr/bin/python
-
 import sys, email, re
 
 from logger import *

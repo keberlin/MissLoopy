@@ -1,5 +1,3 @@
-#!/usr/bin/python
-
 import argparse, csv
 
 from gazetteer import *

@@ -1,5 +1,3 @@
-#!/usr/bin/python
-
 import SocketServer, threading, logging
 import dbserverinfo
 

@@ -1,5 +1,3 @@
-#!/usr/bin/python
-
 import sys, database
 
 from utils import *

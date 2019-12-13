@@ -1,5 +1,3 @@
-#!/usr/bin/python
-
 from mlutils import *
 
 import database

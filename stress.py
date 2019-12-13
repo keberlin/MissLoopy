@@ -1,5 +1,3 @@
-#!/usr/bin/python
-
 import random, database
 
 from utils import *

@@ -1,5 +1,3 @@
-#!/usr/bin/python
-
 import sys
 
 from functools import wraps
@@ -79,15 +77,10 @@ def logged_out_html():
 @application.route("/results")
 @application.route("/member")
 @application.route("/emailthread")
-@application.route("/emailthread2")
 @application.route("/inbox")
-@application.route("/inbox2")
 @application.route("/outbox")
-@application.route("/outbox2")
 @application.route("/favorites")
-@application.route("/favorites2")
 @application.route("/blocked")
-@application.route("/blocked2")
 @application.route("/account")
 @login_required
 def logged_in_html():
@@ -113,7 +106,7 @@ def logged_in_html():
   attrs['advert'] = True
   attrs['inbox']  = InboxCount(id)
   attrs['outbox'] = OutboxCount(id)
-  func = globals().get("handle_%s" % (page[:-1] if page.endswith('2') else page))
+  func = globals().get("handle_%s" % (page))
   if func: attrs.update(func(g.entry,values))
   attrs['per_page']  = PAGE_SIZE
   return render_template(page+'.html', **attrs)

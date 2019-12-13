@@ -1,5 +1,3 @@
-#!/usr/bin/python
-
 import sys, re, database, spam
 
 from mlutils import *

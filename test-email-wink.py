@@ -1,5 +1,3 @@
-#!/usr/bin/python
-
 import database
 
 from localization import *

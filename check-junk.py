@@ -1,5 +1,3 @@
-#!/usr/bin/python
-
 import fileinput, spam
 
 MAX_LENGTH = 100

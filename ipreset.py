@@ -1,5 +1,4 @@
-#!/usr/bin/python
-
+import datetime
 import argparse, csv, psycopg2
 
 import database
@@ -15,8 +14,6 @@ db = database.Database(IP_ADDRESS_DB)
 
 db.execute('DROP TABLE IF EXISTS tmp')
 db.execute('CREATE TABLE tmp (lower BIGINT NOT NULL, upper BIGINT NOT NULL, country VARCHAR)')
-#db.execute('DROP INDEX idx1')
-#db.execute('CREATE UNIQUE INDEX idx1 ON tmp (lower, upper)')
 db.commit()
 
 # Load the country code data
@@ -53,8 +50,11 @@ for file in args.file:
 
 # Rename table
 
+db.execute('BEGIN')
+db.execute('DROP INDEX IF EXISTS idx1')
+db.execute('DROP INDEX IF EXISTS idx2')
 db.execute('DROP TABLE ranges')
 db.execute('ALTER TABLE tmp RENAME TO ranges')
-db.execute('CREATE INDEX idx2 ON ranges (lower)')
-db.execute('CREATE INDEX idx3 ON ranges (upper)')
+db.execute('CREATE INDEX idx1 ON ranges (lower)')
+db.execute('CREATE INDEX idx2 ON ranges (upper)')
 db.commit()

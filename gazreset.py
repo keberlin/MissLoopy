@@ -1,5 +1,4 @@
-#!/usr/bin/python
-
+import datetime
 import argparse, csv, psycopg2
 
 import database
@@ -40,6 +39,9 @@ print 'Locations : %5d' % (locations)
 
 # Rename table
 
+db.execute('BEGIN')
+db.execute('DROP INDEX IF EXISTS idx1')
 db.execute('DROP TABLE locations')
 db.execute('ALTER TABLE tmp RENAME TO locations')
+db.execute('CREATE INDEX idx1 ON locations (location)')
 db.commit()

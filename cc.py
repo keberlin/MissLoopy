@@ -1,5 +1,3 @@
-#!/usr/bin/python
-
 import csv
 
 with open('CountryCodes.csv','wb') as csvfile:

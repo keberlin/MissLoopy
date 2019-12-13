@@ -1,5 +1,3 @@
-#!/usr/bin/python
-
 import sys
 
 from mlutils import *

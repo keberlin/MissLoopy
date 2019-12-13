@@ -31,15 +31,15 @@ data = sys.stdin.read()
 
 msg = email.message_from_string(data)
 
-recipient = parse(msg)
-if recipient:
+bounced = parse(msg)
+if bounced:
   with open(os.path.join(BASE_DIR, 'bounced.log'), 'a') as file:
-    if recipient[0] == '<':
-      recipient = recipient[1:]
-    if recipient[-1] == '>':
-      recipient = recipient[:-1]
-    file.write(recipient+'\n')
+    if bounced[0] == '<':
+      bounced = bounced[1:]
+    if bounced[-1] == '>':
+      bounced = bounced[:-1]
+    file.write(bounced+'\n')
 else:
   server = smtplib.SMTP('localhost')
-  server.sendmail(msg.get('From'), 'scammer', msg.as_string())
+  server.sendmail(msg.get('From'), 'admin', msg.as_string())
   server.quit()

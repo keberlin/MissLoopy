@@ -1,5 +1,3 @@
-#!/usr/bin/python
-
 import os, socket, time
 import dbserverinfo
 

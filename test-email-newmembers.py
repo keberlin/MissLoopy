@@ -1,5 +1,3 @@
-#!/usr/bin/python
-
 from localization import *
 from mlutils import *
 from emails import *

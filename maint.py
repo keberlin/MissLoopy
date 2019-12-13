@@ -1,5 +1,3 @@
-#!/usr/bin/python
-
 import database, re, hashlib
 
 from utils import *

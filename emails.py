@@ -1,5 +1,3 @@
-#!/usr/bin/python
-
 from localization import *
 from html import *
 from mlhtml import *
@@ -13,7 +11,7 @@ def EmailNewPhoto(filename,pid,id):
   dict = {}
   dict['id']    = id
   #dict['image'] = ImageData(filename)
-  dict['filename'] = filename
+  dict['filename'] = PhotoFilename(pid)
 
   html = RenderY('email-new-photo.html', dict)
   Email2(FROM, ['keith.hollis@gmail.com'], 'New Photo Uploaded (%d)' % (pid), html, 10)

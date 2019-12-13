@@ -1,5 +1,3 @@
-#!/usr/bin/python
-
 import time, datetime, database
 
 from utils import *

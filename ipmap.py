@@ -1,5 +1,3 @@
-#!/usr/bin/python
-
 import fileinput, re
 from iputils import *
 

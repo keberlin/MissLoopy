@@ -1,5 +1,3 @@
-#!/usr/bin/python
-
 import database
 
 db = database.Database('missloopy')
