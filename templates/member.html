@@ -1,8 +1,8 @@
-{% extends 'template-panel.html' %}
+{% extends 'base-panel.html' %}
 
 {% set heading = name or '' %}
 
-{% block panel %}
+{% block canvas %}
   <table class="col-xs-12" cols=2 border=0 style="width:100%;border-spacing:5px;border-collapse:separate">
     <tr>
       <td width="25%" valign="top">
@@ -202,7 +202,7 @@
   </table>
 {% endblock %}
 
-{% block actions %}
+{% block buttons %}
   <div class="col-xs-12">
     <br>
     <button class="btn btn-info" id="wink">Wink!</button>

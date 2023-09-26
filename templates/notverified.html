@@ -1,10 +1,10 @@
-{% extends 'template-panel.html' %}
+{% extends 'base-panel.html' %}
 
 {% set partial = 8 %}
 
 {% set heading = 'Account Not Verified' %}
 
-{% block panel %}
+{% block canvas %}
   <div class="col-xs-12 alert alert-info">
     <h4>Your account has not been verified yet.</h4>
   </div>
@@ -16,7 +16,7 @@
   </div>
 {% endblock %}
 
-{% block actions %}
+{% block buttons %}
   <div class="col-xs-12">
     <br>
     <button class="btn btn-primary" id="login" autofocus>Login</button>

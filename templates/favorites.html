@@ -1,4 +1,4 @@
-{% extends 'template-panel.html' %}
+{% extends 'base-panel.html' %}
 
 {% set heading = 'Favorite Members' %}
 
@@ -17,7 +17,7 @@
   </div>
 {% endblock %}
 
-{% block actions %}
+{% block buttons %}
   <div class="col-xs-12">
     <br>
     <button type="button" class="btn btn-info" ng-click="remove()" ng-disabled="!(sels.length>0)">Remove</button>

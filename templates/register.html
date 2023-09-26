@@ -1,11 +1,11 @@
-{% extends 'template-panel.html' %}
+{% extends 'base-panel.html' %}
 
 {% set partial = 8 %}
 
 {% set heading = 'Register new member' %}
 {% set heading2 = 'Confirm your location' %}
 
-{% block panel %}
+{% block canvas %}
   <form class="form-horizontal" id="form" role="form" method="post">
     <div class="form-group">
       <label class="col-xs-3 control-label" for="email">Email Address</label>
@@ -87,19 +87,19 @@
   </form>
 {% endblock %}
 
+{% block buttons %}
+  <div class="col-xs-12">
+    <br>
+    <a href="/login">Already have an account?</a>
+  </div>
+{% endblock %}
+
 {% block panel2 %}
   <ul class="nav nav-pills nav-stacked" id="locations">
   </ul>
   <div class="col-xs-12">
     <br>
     <button type="button" class="btn btn-default" id="cancel">Cancel</button>
-  </div>
-{% endblock %}
-
-{% block actions %}
-  <div class="col-xs-12">
-    <br>
-    <a id="login">Already have an account?</a>
   </div>
 {% endblock %}
 
@@ -189,11 +189,6 @@
       e.preventDefault();
       $("#location").val($(this).text());
       $("#form").submit();
-      return false;
-    });
-    // Handle login button
-    $("#login").click(function(e) {
-      window.location = "/login";
       return false;
     });
   </script>

@@ -1,11 +1,11 @@
-{% extends 'template-panel.html' %}
+{% extends 'base-panel.html' %}
 
 {% set heading = 'Photos' %}
 
 {% set cols = 5 %}
 {% set perc = 100/cols %}
 
-{% block panel %}
+{% block canvas %}
   <table cols={{ cols }} id="container" border=0 style="width:100%;border-spacing:5px;border-collapse:separate">
     <tr ng-repeat="chunk in chunked">
       <td ng-repeat="pid in chunk track by $index" style="padding:5px;width:{{ perc }}%" ng-class="{master:master && pid==master, selected:sels.indexOf(pid)>=0}" align="center" valign="middle">
@@ -14,9 +14,7 @@
       </td>
     </tr>
   </table>
-{% endblock %}
 
-{% block actions %}
   <div class="col-xs-12">
     <br>
     <form class="form-horizontal col-xs-10" id="upload" role="form" enctype="multipart/form-data">

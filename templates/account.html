@@ -1,8 +1,8 @@
-{% extends 'template-panel.html' %}
+{% extends 'base-panel.html' %}
 
 {% set heading = 'Account' %}
 
-{% block panel %}
+{% block canvas %}
   <form class="form-horizontal" id="form" role="form">
     <div class="form-group">
       <label class="col-xs-3 control-label" for="email">Email Address</label>
@@ -29,7 +29,7 @@
   </form>
 {% endblock %}
 
-{% block actions %}
+{% block buttons %}
   <div class="col-xs-12">
     <br>
     <button type="button" class="btn btn-danger btn-sm" id="cancel">Cancel Membership</button>

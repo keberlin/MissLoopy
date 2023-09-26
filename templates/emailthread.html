@@ -1,4 +1,4 @@
-{% extends 'template-panel.html' %}
+{% extends 'base-panel.html' %}
 
 {% set heading = 'Conversation with ' + (name or '') %}
 
@@ -47,7 +47,7 @@
   </div>
 {% endblock %}
 
-{% block panel %}
+{% block canvas %}
   <div ng-cloak ng-if="num_pages==0" class="col-xs-12 alert alert-warning" align="left">
     <strong><span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span> No messages found.</strong>
   </div>
@@ -176,7 +176,7 @@
   </div>
 {% endblock %}
 
-{% block actions %}
+{% block buttons %}
   <div class="col-xs-12">
     <br>
     <button class="btn btn-info" id="favorite">Add to Favorites</button>

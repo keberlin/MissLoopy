@@ -1,13 +1,19 @@
 import csv, requests
-
-import database
+from sqlalchemy import create_engine
+from sqlalchemy.orm import sessionmaker
 
 from utils import *
 from gazetteer import *
 from mlutils import *
 from emails import *
+from database import MISSLOOPY_DB_URI, db
+from model import *
 
 from logger import *
+
+engine = create_engine(MISSLOOPY_DB_URI)
+Session = sessionmaker(bind=engine)
+db.session = Session()
 
 ids = set()
 with open('junk-auto.log', 'r') as file:
@@ -21,38 +27,31 @@ with open('junk-reported.log', 'r') as file:
     words = line.split()
     ids.add(words[0])
 
-db = database.Database(MISS_LOOPY_DB)
-
-db.execute('SELECT id_from,MAX(sent) FROM emails WHERE id_from IN (%s) GROUP BY id_from ORDER BY MAX(sent) DESC' % (','.join(list(ids))))
-ids = [x[0] for x in db.fetchall()]
+entries = db.session.query(EmailsModel.id_from,func.max(EmailsModel.sent)).filter(EmailsModel.id_from.in_(ids)).group_by(EmailsModel.id_from).order_by(func.max(EmailsModel.sent).desc()).all()
+ids = [x.id_from for x in entries]
 
 for id in ids:
-  db.execute('SELECT * FROM profiles WHERE id=%d LIMIT 1' % (id))
-  entry = db.fetchone()
+  entry = db.session.query(ProfilesModel).filter(ProfilesModel.id==id).one_or_none()
   if not entry:
     continue
-  ip = entry[COL_LAST_IP]
-  email = entry[COL_EMAIL]
-  name = entry[COL_NAME]
-  country = GazCountry(entry[COL_LOCATION])
-  last_login_country = entry[COL_LAST_IP_COUNTRY]
-  db.execute("SELECT message, sent FROM emails WHERE id_from=%d AND NOT message IS NULL ORDER BY LENGTH(message) DESC LIMIT 1" % (id))
-  entry = db.fetchone()
+  ip = entry.last_ip
+  email = entry.email
+  name = entry.name
+  country = GazCountry(entry.location)
+  last_login_country = entry.last_ip_country
+  entry = db.session.query(EmailsModel.message).filter(EmailsModel.id_from==id).filter(EmailsModel.message.is_not(None)).order_by(func.length(EmailsModel.message).desc()).first()
+  #db.execute("SELECT message, sent FROM emails WHERE id_from=%d AND NOT message IS NULL ORDER BY LENGTH(message) DESC LIMIT 1" % (id))
   if not entry:
     continue
-  message = entry[0]
-  db.execute('SELECT COUNT(DISTINCT id_to) FROM emails WHERE id_from=%d' % (id))
-  entry = db.fetchone()
-  members = entry[0]
+  message = entry.message
+  members = db.session.query(func.count(EmailsModel.id_to.distinct())).filter(EmailsModel.id_from==id).scalar()
   out = '%d: %d, %s, %s, "%s", %s, (%s), "%s"' % (id, members, ip, email, name, country, last_login_country, message)
-  db.execute('SELECT DISTINCT id_to FROM emails WHERE id_from=%d' % (id))
-  entry = db.fetchall()
-  id_tos = [v[0] for v in entry]
+  entries = db.session.query(EmailsModel.id_to.distinct()).filter(EmailsModel.id_from==id).all()
+  id_tos = [entry[0] for entry in entries]
   tos = []
   for id_to in id_tos[:10]:
-    db.execute('SELECT * FROM profiles WHERE id=%d LIMIT 1' % (id_to))
-    entry = db.fetchone()
-    to = '%d: "%s", %s' % (id_to, entry[COL_NAME], GazCountry(entry[COL_LOCATION]))
+    entry = db.session.query(ProfilesModel).filter(ProfilesModel.id==id_to).one()
+    to = '%d: "%s", %s' % (id_to, entry.name, GazCountry(entry.location))
     tos.append(to)
   print
   print

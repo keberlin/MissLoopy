@@ -1,11 +1,15 @@
 import csv
-
-import database
+from sqlalchemy import create_engine
+from sqlalchemy.orm import sessionmaker
 
 from utils import *
 from mlutils import *
+from database import MISSLOOPY_DB_URI, db
+from model import *
 
-db = database.Database('missloopy')
+engine = create_engine(MISSLOOPY_DB_URI)
+Session = sessionmaker(bind=engine)
+db.session = Session()
 
 def Null(v):
   if v: return Quote(v)

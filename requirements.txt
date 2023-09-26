@@ -1,9 +1,0 @@
-argparse
-beautifulsoup4
-coverage
-Flask
-Jinja2
-nose
-Pillow
-psycopg2
-pytz

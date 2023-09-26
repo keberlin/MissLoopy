@@ -4,6 +4,8 @@ RELEASE=/var/www/missloopy/
 
 echo 'Copying Python files..'
 cp -u *.py $RELEASE
+echo 'Copying csv files..'
+cp -u *.csv $RELEASE
 echo 'Copying Shell files..'
 cp -u *.sh $RELEASE
 echo 'Copying templates directory..'

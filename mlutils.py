@@ -1,6 +1,9 @@
 import os, datetime, cStringIO, base64
+from sqlalchemy.sql.expression import func, and_, or_
+from sqlalchemy.orm import aliased
 
-import database
+from database import db
+from model import *
 
 import logger
 
@@ -142,8 +145,6 @@ NOT_NEW_MESSAGE = 1<<1
 PHOTOS_DIR   = 'photos'
 MEMBERS_DIR  = 'members'
 SCAMMERS_DIR = 'scammers'
-
-db = database.Database(MISS_LOOPY_DB)
 
 def Range(min,max):
   if min and max:
@@ -311,30 +312,24 @@ def PhotoFilename(pid):
   return os.path.join(PHOTOS_DIR, name + '.jpg')
 
 def MasterPhoto(id):
-  db.execute('SELECT pid FROM photos WHERE id=%d AND master LIMIT 1' % (id))
-  entry = db.fetchone()
-  db.commit()
+  entry = db.session.query(PhotosModel.pid).filter(PhotosModel.id==id, PhotosModel.master.is_(True)).one_or_none()
   if not entry:
-    db.execute('SELECT pid FROM photos WHERE id=%d LIMIT 1' % (id))
-    entry = db.fetchone()
-    db.commit()
+    entry = db.session.query(PhotosModel.pid).filter(PhotosModel.id==id).first()
     if not entry:
       return 0
-  return entry[0]
+  return entry.pid
 
 def Login(email,password):
   # Authenticate
-  db.execute('SELECT * FROM profiles WHERE email ILIKE %s LIMIT 1' % (Quote(email)))
-  entry = db.fetchone()
-  db.commit()
+  entry = db.session.query(ProfilesModel).filter(ProfilesModel.email==email).one_or_none()
   if not entry:
     return {'error': 'Email Address not found.'}
-  if entry[COL_PASSWORD] != password:
+  if entry.password != password:
     return {'error': 'Password does not match.'}
-  if not entry[COL_VERIFIED]:
+  if not entry.verified:
     return {'code': 1001}
 
-  id = entry[COL_ID]
+  id = entry.id
 
   return {'id': id}
 
@@ -352,43 +347,37 @@ def Authenticate(cookies=None,remote_addr=None):
     return None
 
   id       = int(cookies['id'])
-  email    = cookies['email']
+  email    = cookies['email'].lower()
   password = cookies['password']
 
   # Authenticate
-  db.execute('SELECT * FROM profiles WHERE id=%d AND email ILIKE %s AND password=%s LIMIT 1' % (id, Quote(email), Quote(password)))
-  entry = db.fetchone()
-  db.commit()
+  entry = db.session.query(ProfilesModel).filter(ProfilesModel.id==id, ProfilesModel.email==email, ProfilesModel.password==password).one_or_none()
   if not entry:
     return None
 
   now = datetime.datetime.utcnow()
-  db.execute('UPDATE profiles SET last_login=%s WHERE id=%d' % (Quote(str(now)), id))
-  db.commit()
+  entry.last_login = now
   if not remote_addr:
     remote_addr = FetchRemoteAddr()
-  if remote_addr and entry[COL_LAST_IP] != remote_addr:
-    db.execute('UPDATE profiles SET last_ip=%s,last_ip_country=%s WHERE id=%d' % (Quote(remote_addr), Quote(IpCountry(remote_addr)), id))
-    db.commit()
+  if remote_addr and entry.last_ip != remote_addr:
+    entry.last_ip = remote_addr
+    entry.last_ip_country = IpCountry(remote_addr)
+  db.session.commit()
 
   return entry
 
 def Blocked(id,id_with):
-  db.execute('SELECT COUNT(*) FROM blocked WHERE id=%d AND id_block=%d' % (id, id_with))
-  entry = db.fetchone()
-  db.commit()
-  return (entry[0] > 0)
+  count = db.session.query(func.count()).select_from(BlockedModel).filter(BlockedModel.id==id, BlockedModel.id_block==id_with).scalar()
+  return (count > 0)
 
 def BlockedMutually(id,id_with):
-  db.execute('SELECT COUNT(*) FROM blocked WHERE (id=%d AND id_block=%d) OR (id=%d AND id_block=%d)' % (id, id_with, id_with, id))
-  entry = db.fetchone()
-  db.commit()
-  return (entry[0] > 0)
+  count = db.session.query(func.count()).select_from(BlockedModel).filter(or_(and_(BlockedModel.id==id, BlockedModel.id_block==id_with), and_(BlockedModel.id==id_with, BlockedModel.id_block==id))).scalar()
+  return (count > 0)
 
 def DeletePhoto(pid):
   # Remove photo file using pid
-  db.execute('DELETE FROM photos WHERE pid=%d' % (pid))
-  db.commit()
+  db.session.query(PhotosModel).filter(PhotosModel.pid==pid).delete()
+  db.session.commit()
   filename = os.path.join(BASE_DIR, 'static', PhotoFilename(pid))
   try:
     os.remove(filename)
@@ -400,62 +389,70 @@ def DeletePhotos(pids):
     DeletePhoto(pid)
 
 def DeleteMember(id):
-  db.execute('DELETE FROM profiles WHERE id=%d' % (id))
-  db.execute('SELECT pid FROM photos WHERE id=%d' % (id))
-  pids = [(entry[0]) for entry in db.fetchall()]
+  db.session.query(ProfilesModel).filter(ProfilesModel.id==id).delete()
+  entries = db.session.query(PhotosModel.pid).filter(PhotosModel.id==id).all()
+  pids = [entry.pid for entry in entries]
   DeletePhotos(pids)
-  db.execute('DELETE FROM favorites WHERE id=%d OR id_favorite=%d' % (id, id))
-  db.execute('DELETE FROM blocked WHERE id=%d OR id_block=%d' % (id, id))
-  db.execute('DELETE FROM emails WHERE id_from=%d OR id_to=%d' % (id, id))
-  db.execute('DELETE FROM results WHERE id=%d' % (id))
+  db.session.query(FavoritesModel).filter(or_(FavoritesModel.id==id, FavoritesModel.id_favorite==id)).delete()
+  db.session.query(BlockedModel).filter(or_(BlockedModel.id==id, BlockedModel.id_block==id)).delete()
+  db.session.query(EmailsModel).filter(or_(EmailsModel.id_from==id, EmailsModel.id_to==id)).delete()
+  db.session.query(ResultsModel).filter(ResultsModel.id==id).delete()
   #PurgeResults(id)
-  db.commit()
+  db.session.commit()
 
 def InboxCount(id):
-  db.execute('SELECT COUNT(*) FROM emails WHERE id_to=%d AND not viewed AND id_from NOT IN (SELECT id_block FROM blocked WHERE id=id_to) AND id_to NOT IN (SELECT id_block FROM blocked WHERE id=id_from)' % (id))
-  entry = db.fetchone()
-  db.commit()
-  return entry[0]
+  blocked_by_me = aliased(BlockedModel)
+  blocked_by_them = aliased(BlockedModel)
+  count = db.session.query(func.count(EmailsModel.id_from.distinct())).\
+    outerjoin(blocked_by_me,and_(blocked_by_me.id==EmailsModel.id_from,blocked_by_me.id_block==EmailsModel.id_to)).\
+    outerjoin(blocked_by_them,and_(blocked_by_them.id_block==EmailsModel.id_to,blocked_by_them.id==EmailsModel.id_from)).\
+    filter(blocked_by_me.id.is_(None)).\
+    filter(blocked_by_them.id.is_(None)).\
+    filter(EmailsModel.id_to==id, EmailsModel.viewed.is_(False)).\
+    scalar()
+  return count
 
 def OutboxCount(id):
-  db.execute('SELECT COUNT(*) FROM emails WHERE id_from=%d AND not viewed AND id_from NOT IN (SELECT id_block FROM blocked WHERE id=id_to) AND id_to NOT IN (SELECT id_block FROM blocked WHERE id=id_from)' % (id))
-  entry = db.fetchone()
-  db.commit()
-  return entry[0]
+  blocked_by_me = aliased(BlockedModel)
+  blocked_by_them = aliased(BlockedModel)
+  count = db.session.query(func.count(EmailsModel.id_to.distinct())).\
+    outerjoin(blocked_by_me,and_(blocked_by_me.id==EmailsModel.id_from,blocked_by_me.id_block==EmailsModel.id_to)).\
+    outerjoin(blocked_by_them,and_(blocked_by_them.id_block==EmailsModel.id_to,blocked_by_them.id==EmailsModel.id_from)).\
+    filter(blocked_by_me.id.is_(None)).\
+    filter(blocked_by_them.id.is_(None)).\
+    filter(EmailsModel.id_from==id, EmailsModel.viewed.is_(False)).\
+    scalar()
+  return count
 
 def SaveResults(id,results):
-  db.execute('DELETE FROM results WHERE id=%d' % (id))
+  db.session.query(ResultsModel).filter(ResultsModel.id==id).delete()
   for i in range(len(results)):
     id_previous = results[i-1] if i > 0 else 0
     id_search = results[i]
     id_next = results[i+1] if i < len(results)-1 else 0
-    db.execute('INSERT INTO results (id, id_search, id_previous, id_next) VALUES (%d,%d,%d,%d)' % (id, id_search, id_previous, id_next))
-  db.commit()
+    db.session.add(ResultsModel(id=id, id_search=id_search, id_previous=id_previous, id_next=id_next))
+    db.session.commit()
 
 def PreviousResult(id,id_search):
-  db.execute('SELECT id_previous FROM results WHERE id=%d AND id_search=%d LIMIT 1' % (id, id_search))
-  entry = db.fetchone()
-  db.commit()
+  entry = db.session.query(ResultsModel.id_previous).filter(ResultsModel.id==id, ResultsModel.id_search==id_search).one_or_none()
   if not entry:
     return 0
-  return entry[0]
+  return entry.id_previous
 
 def NextResult(id,id_search):
-  db.execute('SELECT id_next FROM results WHERE id=%d AND id_search=%d LIMIT 1' % (id, id_search))
-  entry = db.fetchone()
-  db.commit()
+  entry = db.session.query(ResultsModel.id_next).filter(ResultsModel.id==id, ResultsModel.id_search==id_search).one_or_none()
   if not entry:
     return 0
-  return entry[0]
+  return entry.id_next
 
 def PurgeResults(id_search):
-  db.execute('SELECT * FROM results WHERE id_search=%d' % (id_search))
-  for entry in db.fetchall():
+  entries = db.session.query(ResultsModel).filter(ResultsModel.id_search==id_search).all()
+  for entry in entries:
     id          = entry[COL5_ID]
     id_previous = entry[COL5_ID_PREVIOUS]
     id_next     = entry[COL5_ID_NEXT]
     if id_previous:
-      db.execute('UPDATE results SET id_next=%d WHERE id=%d AND id_search=%d' % (id_next, id, id_previous))
+      db.session.query(ResultsModel).filter(ResultsModel.id==id, ResultsModel.id_search==id_previous).update({"id_next":id_next},synchronize_session=False)
     if id_next:
-      db.execute('UPDATE results SET id_previous=%d WHERE id=%d AND id_search=%d' % (id_previous, id, id_next))
-  db.commit()
+      db.session.query(ResultsModel).filter(ResultsModel.id==id, ResultsModel.id_search==id_next).update({"id_previous":id_previous},synchronize_session=False)
+    db.session.commit()

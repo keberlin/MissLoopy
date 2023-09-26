@@ -1,9 +1,6 @@
-{% extends 'template.html' %}
+{% extends 'base.html' %}
 
 {% block canvas %}
-  {% if partial %}
-    <div class="col-md-{{ partial }} col-md-offset-{{ ((12-partial)/2)|int }} col-xs-12">
-  {% endif %}
   <div class="panel panel-{{ heading_type or 'default' }}" id="panel1">
     <div class="panel-heading">
       <table border=0 style="width:100%;border-spacing:0px 0px;border-collapse:separate">
@@ -38,10 +35,10 @@
 
     {% block list %}
     {% endblock %}
-
-    {% block actions %}
-    {% endblock %}
   </div><!-- panel -->
+
+  {% block buttons %}
+  {% endblock %}
 
   <div ng-cloak ng-if="num_pages>1" align="center" id="pagetabs">
     <ul class="pagination">
@@ -51,9 +48,6 @@
     </ul>
   </div>
 
-  {% if partial %}
-    </div>
-  {% endif %}
 
   {% if heading2 %}
     {% if partial %}

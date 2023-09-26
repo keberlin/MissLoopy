@@ -1,10 +1,10 @@
-{% extends 'template-panel.html' %}
+{% extends 'base-panel.html' %}
 
 {% import 'macros.html' as macros %}
 
 {% set heading = 'Matches around ' + around %}
 
-{% block panel %}
+{% block canvas %}
   <div class="col-xs-12 alert alert-info" align="left">
     Filter: {{ criteria|e }}
   </div>

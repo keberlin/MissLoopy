@@ -1,11 +1,16 @@
-import database
+from sqlalchemy import create_engine
+from sqlalchemy.orm import sessionmaker
 
 from mlutils import *
 from emails import *
+from database import MISSLOOPY_DB_URI, db
+from model import *
 
-db = database.Database(MISS_LOOPY_DB)
+engine = create_engine(MISSLOOPY_DB_URI)
+Session = sessionmaker(bind=engine)
+db.session = Session()
 
-db.execute('SELECT email,id FROM profiles WHERE not verified')
-for entry in db.fetchall():
-  print entry[0].encode('utf-8'), entry[1]
-  EmailVerify(entry[0], entry[1])
+entries = db.session.query(ProfilesModel.id,ProfilesModel.email).filter(ProfilesModel.verified.is_(False)).all()
+for entry in entries:
+  print entry.email.encode('utf-8'), entry.id
+  EmailVerify(entry.email, entry.id)

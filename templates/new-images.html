@@ -1,6 +1,6 @@
-{% extends 'template.html' %}
+{% extends 'base.html' %}
 
-{% block canvas %}
+{% block base %}
   <table>
   {% for entry in images %}
     {% if (loop.index%12==0) %}

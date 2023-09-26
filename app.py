@@ -6,6 +6,8 @@ from flask import Flask, redirect, render_template, request, send_from_directory
 from html import *
 from handlers_html import *
 from handlers_json import *
+from database import db, MISSLOOPY_DB_URI
+from model import *
 
 from logger import *
 
@@ -36,23 +38,35 @@ def login_required(f):
   return decorated_function
 
 # Flask application
-application = MyFlask(__name__)
-application.debug = True
+def create_app():
+  app = MyFlask(__name__)
+  app.config['DEBUG'] = True
+  # Databases
+  app.config['SQLALCHEMY_ECHO'] = True
+  app.config['SQLALCHEMY_DATABASE_URI'] = MISSLOOPY_DB_URI
+  app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
-application.jinja_env.filters['bitcompare'] = bitcompare
+  app.jinja_env.filters['bitcompare'] = bitcompare
 
-@application.route("/")
+  db.init_app(app)
+
+  return app
+
+app = create_app()
+
+@app.route("/")
 def top():
   return redirect('index')
 
-@application.route("/index")
-@application.route("/about")
-@application.route("/register")
-@application.route("/registered")
-@application.route("/login")
-@application.route("/logout")
-@application.route("/notverified")
-@application.route("/verify")
+@app.route("/index")
+@app.route("/about")
+@app.route("/register")
+@app.route("/registered")
+@app.route("/login")
+@app.route("/resetpassword")
+@app.route("/logout")
+@app.route("/notverified")
+@app.route("/verify")
 def logged_out_html():
   page = request.path[1:]
   values = dict([(x,'|'.join(request.values.getlist(x))) for x in request.values.keys()])
@@ -67,21 +81,21 @@ def logged_out_html():
   if func: attrs.update(func(None,values))
   return render_template(page+'.html', **attrs)
 
-@application.route("/cancelled")
-@application.route("/dashboard")
-@application.route("/profile")
-@application.route("/photos")
-@application.route("/seeking")
-@application.route("/matches")
-@application.route("/search")
-@application.route("/results")
-@application.route("/member")
-@application.route("/emailthread")
-@application.route("/inbox")
-@application.route("/outbox")
-@application.route("/favorites")
-@application.route("/blocked")
-@application.route("/account")
+@app.route("/cancelled")
+@app.route("/dashboard")
+@app.route("/profile")
+@app.route("/photos")
+@app.route("/seeking")
+@app.route("/matches")
+@app.route("/search")
+@app.route("/results")
+@app.route("/member")
+@app.route("/emailthread")
+@app.route("/inbox")
+@app.route("/outbox")
+@app.route("/favorites")
+@app.route("/blocked")
+@app.route("/account")
 @login_required
 def logged_in_html():
   if not g.entry:
@@ -94,8 +108,8 @@ def logged_in_html():
   json = request.get_json()
   if json: values.update(json)
 
-  id   = g.entry[COL_ID]
-  user = g.entry[COL_NAME]
+  id   = g.entry.id
+  user = g.entry.name
 
   info('%s: id:%d %s' % (page, id, values))
 
@@ -108,10 +122,10 @@ def logged_in_html():
   attrs['outbox'] = OutboxCount(id)
   func = globals().get("handle_%s" % (page))
   if func: attrs.update(func(g.entry,values))
-  attrs['per_page']  = PAGE_SIZE
+  attrs['per_page'] = PAGE_SIZE
   return render_template(page+'.html', **attrs)
 
-@application.route('/mllogin')
+@app.route('/mllogin')
 def mllogin():
   page = request.path[1:]
 
@@ -131,10 +145,10 @@ def mllogin():
 
   return jsonify(data)
 
-@application.route('/closestnames', methods=['GET', 'POST'])
-@application.route('/mlpassword', methods=['POST'])
-@application.route('/mlregister', methods=['POST'])
-@application.route('/mlresend', methods=['POST'])
+@app.route('/closestnames', methods=['GET', 'POST'])
+@app.route('/mlpassword', methods=['POST'])
+@app.route('/mlregister', methods=['POST'])
+@app.route('/mlresend', methods=['POST'])
 def logged_out_json():
   page = request.path[1:]
   values = dict([(x,'|'.join(request.values.getlist(x))) for x in request.values.keys()])
@@ -148,22 +162,22 @@ def logged_out_json():
   info('%s: %s' % (page, data))
   return jsonify(data)
 
-@application.route('/mlaccount', methods=['POST'])
-@application.route('/mladdfavorite', methods=['POST'])
-@application.route('/mlblock', methods=['POST'])
-@application.route('/mldeletefavorite', methods=['POST'])
-@application.route('/mldeletephoto', methods=['POST'])
-@application.route('/mlmasterphoto', methods=['POST'])
-@application.route('/mlpassword', methods=['POST'])
-@application.route('/mlprofile', methods=['POST'])
-@application.route('/mlsearch', methods=['POST'])
-@application.route('/mlseeking', methods=['POST'])
-@application.route('/mlsendemail', methods=['POST'])
-@application.route('/mlsendphoto', methods=['POST'])
-@application.route('/mlspam', methods=['POST'])
-@application.route('/mlunblock', methods=['POST'])
-@application.route('/mluploadphoto', methods=['POST'])
-@application.route('/mlwink', methods=['POST'])
+@app.route('/mlaccount', methods=['POST'])
+@app.route('/mladdfavorite', methods=['POST'])
+@app.route('/mlblock', methods=['POST'])
+@app.route('/mldeletefavorite', methods=['POST'])
+@app.route('/mldeletephoto', methods=['POST'])
+@app.route('/mlmasterphoto', methods=['POST'])
+@app.route('/mlpassword', methods=['POST'])
+@app.route('/mlprofile', methods=['POST'])
+@app.route('/mlsearch', methods=['POST'])
+@app.route('/mlseeking', methods=['POST'])
+@app.route('/mlsendemail', methods=['POST'])
+@app.route('/mlsendphoto', methods=['POST'])
+@app.route('/mlspam', methods=['POST'])
+@app.route('/mlunblock', methods=['POST'])
+@app.route('/mluploadphoto', methods=['POST'])
+@app.route('/mlwink', methods=['POST'])
 @login_required
 def logged_in_json():
   if not g.entry:
@@ -174,7 +188,7 @@ def logged_in_json():
   json = request.get_json()
   if json: values.update(json)
 
-  id = g.entry[COL_ID]
+  id = g.entry.id
 
   info('%s: id:%d %s' % (page, id, values))
 
@@ -183,11 +197,11 @@ def logged_in_json():
   info('%s: %s' % (page, data))
   return jsonify(data)
 
-@application.route("/<path:path>")
+@app.route("/<path:path>")
 def the_rest(path):
   info(path)
 
-  return send_from_directory(application.static_folder, path.encode('utf-8'))
+  return send_from_directory(app.static_folder, path.encode('utf-8'))
 
 if __name__ == "__main__":
-  application.run()
+  app.run()

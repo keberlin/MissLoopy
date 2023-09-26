@@ -1,13 +1,14 @@
-import re, datetime, time, database
+import re, datetime, time
+from sqlalchemy.sql.expression import func
 
 from mlutils import *
 
-def AnalyseSpammer(id):
-  db = database.Database(MISS_LOOPY_DB)
+from database import db
+from model import *
 
-  db.execute('SELECT COUNT(DISTINCT id_to),COUNT(*),MIN(sent) FROM emails WHERE id_from=%d' % (id))
-  entry = db.fetchone()
-  db.commit()
+def AnalyseSpammer(id):
+  entry = db.session.query(func.count(EmailsModel.id_to.distinct()),func.count(),func.min(EmailsModel.sent)).filter(EmailsModel.id_from==id).one()
+  #db.execute('SELECT COUNT(DISTINCT id_to),COUNT(*),MIN(sent) FROM emails WHERE id_from=%d' % (id))
   members = entry[0]
   count = entry[1]
   if count == 0:
@@ -21,14 +22,12 @@ def AnalyseSpammer(id):
 def AnalyseSpam(text):
   score = 0
   hits = []
-  sql = 'SELECT * FROM spam'
-  db.execute(sql)
-  for str,cost in db.fetchall():
-    matches = re.findall(re.sub(r' +',r'\W+',str), text, re.IGNORECASE) # Treat all whitespace the same
+  entries = db.session.query(SpamModel).all()
+  for entry in entries:
+    matches = re.findall(re.sub(r' +',r'\W+',entry.str), text, re.IGNORECASE) # Treat all whitespace the same
     if matches:
-      score += cost*len(matches)
-      hits.append(str)
-  db.commit()
+      score += entry.cost*len(matches)
+      hits.append(entry.str)
   density = len(text)/float(score) if score else 0
   return (score, density, hits)
 

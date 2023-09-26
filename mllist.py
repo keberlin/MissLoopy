@@ -1,40 +1,38 @@
 import math, itertools
 
-import database, mask
+import mask
 
 from utils import *
 from units import *
 from tzone import *
 from gazetteer import *
 from mlutils import *
-
-db = database.Database(MISS_LOOPY_DB)
+from database import db
+from model import *
 
 def ListMember(id,active,location,x,y,tz,unit_distance):
-  db.execute('SELECT * FROM profiles WHERE id=%d LIMIT 1' % (id))
-  entry = db.fetchone()
-  db.commit()
+  entry = db.session.query(ProfilesModel).filter(ProfilesModel.id==id).one_or_none()
   if not entry:
     return None
   adjust = GazLatAdjust(y)
-  dx = abs(x-entry[COL_X])*adjust/1000
-  dy = abs(y-entry[COL_Y])/1000
+  dx = abs(x-entry.x)*adjust/1000
+  dy = abs(y-entry.y)/1000
   distance = math.sqrt((dx*dx)+(dy*dy))
 
   member = {}
   member['id']            = id
-  member['image']         = PhotoFilename(MasterPhoto(entry[COL_ID]))
-  member['name']          = mask.MaskEverything(entry[COL_NAME])
-  member['gender']        = Gender(entry[COL_GENDER])
-  member['age']           = Age(entry[COL_DOB])
-  member['starsign']      = Starsign(entry[COL_DOB])
-  member['ethnicity']     = Ethnicity(entry[COL_ETHNICITY])
-  member['location']      = GazPlacename(entry[COL_LOCATION], location)
-  member['country']       = GazCountry(entry[COL_LOCATION])
-  member['summary']       = mask.MaskEverything(entry[COL_SUMMARY])
-  member['last_login']    = Since(entry[COL_LAST_LOGIN])
-  member['login_country'] = entry[COL_LAST_IP_COUNTRY]
-  member['created']       = Datetime(entry[COL_CREATED2], tz).strftime('%x')
+  member['image']         = PhotoFilename(MasterPhoto(entry.id))
+  member['name']          = mask.MaskEverything(entry.name)
+  member['gender']        = Gender(entry.gender)
+  member['age']           = Age(entry.dob)
+  member['starsign']      = Starsign(entry.dob)
+  member['ethnicity']     = Ethnicity(entry.ethnicity)
+  member['location']      = GazPlacename(entry.location, location)
+  member['country']       = GazCountry(entry.location)
+  member['summary']       = mask.MaskEverything(entry.summary)
+  member['last_login']    = Since(entry.last_login)
+  member['login_country'] = entry.last_ip_country
+  member['created']       = Datetime(entry.created2, tz).strftime('%x')
   member['distance']      = Distance(distance, unit_distance)
   member['active']        = active
 

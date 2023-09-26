@@ -1,26 +1,31 @@
-import datetime, database
+import datetime
+from sqlalchemy import create_engine
+from sqlalchemy.orm import sessionmaker
 
 from utils import *
 from mlutils import *
+from database import MISSLOOPY_DB_URI, db
+from model import *
 
-db = database.Database(MISS_LOOPY_DB)
+engine = create_engine(MISSLOOPY_DB_URI)
+Session = sessionmaker(bind=engine)
+db.session = Session()
 
-db.execute('SELECT last_new_member_search FROM admin LIMIT 1')
-since = db.fetchone()[0]
+since = db.session.query(AdminModel.last_new_member_search).scalar()
 
 now = datetime.datetime.utcnow()
 
 count = 0
-db.execute('SELECT * FROM profiles WHERE verified AND created2>=%s AND created2<%s' % (Quote(str(since)), Quote(str(now))))
-for entry in db.fetchall():
-  id              = entry[COL_ID]
-  name            = entry[COL_NAME]
-  dob             = entry[COL_DOB]
-  location        = entry[COL_LOCATION]
-  gender          = entry[COL_GENDER]
-  ethnicity       = entry[COL_ETHNICITY]
-  last_ip         = entry[COL_LAST_IP]
-  last_ip_country = entry[COL_LAST_IP_COUNTRY]
+entries = db.session.query(ProfilesModel).filter(ProfilesModel.verified.is_(True)).filter(ProfilesModel.created2>=since).all()
+for entry in entries:
+  id              = entry.id
+  name            = entry.name
+  dob             = entry.dob
+  location        = entry.location
+  gender          = entry.gender
+  ethnicity       = entry.ethnicity
+  last_ip         = entry.last_ip
+  last_ip_country = entry.last_ip_country
 
   out = u'id:%d (%s) %s %d (%s) %s (%s)' % (id, name, Gender(gender), Age(dob), dob, location, last_ip_country)
   print out.encode('utf-8')

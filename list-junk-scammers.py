@@ -1,8 +1,16 @@
-import csv, database
+import csv
+from sqlalchemy import create_engine
+from sqlalchemy.orm import sessionmaker
 
 from utils import *
 from gazetteer import *
 from mlutils import *
+from database import MISSLOOPY_DB_URI, db
+from model import *
+
+engine = create_engine(MISSLOOPY_DB_URI)
+Session = sessionmaker(bind=engine)
+db.session = Session()
 
 ids = set()
 with open('junk-auto.log', 'r') as file:
@@ -19,28 +27,22 @@ with open('junk-reported.log', 'r') as file:
     except:
       pass
 
-db = database.Database(MISS_LOOPY_DB)
-
 ids = list(ids)
 ids.sort()
 ids.reverse()
 for id in ids:
-  db.execute('SELECT * FROM profiles WHERE id=%d LIMIT 1' % (id))
-  entry = db.fetchone()
+  entry = db.session.query(ProfilesModel).filter(ProfilesModel.id==id).one_or_none()
   if not entry:
     continue
-  ip = entry[COL_LAST_IP]
-  email = entry[COL_EMAIL]
-  name = entry[COL_NAME]
-  country = GazCountry(entry[COL_LOCATION])
-  last_login_country = entry[COL_LAST_IP_COUNTRY]
-  db.execute("SELECT message FROM emails WHERE id_from=%d ORDER BY LENGTH(message) DESC LIMIT 1" % (id))
-  entry = db.fetchone()
+  ip = entry.last_ip
+  email = entry.email
+  name = entry.name
+  country = GazCountry(entry.location)
+  last_login_country = entry.last_ip_country
+  entry = db.session.query(EmailsModel.message).filter(EmailsModel.id_from==id).order_by(func.length(EmailsModel.message).desc()).first()
   if not entry:
     continue
-  message = entry[0]
-  db.execute('SELECT COUNT(DISTINCT id_to) FROM emails WHERE id_from=%d' % (id))
-  entry = db.fetchone()
-  members = entry[0]
+  message = entry.message
+  members = db.session.query(func.count(EmailsModel.id_to.distinct())).filter(EmailsModel.id_from==id).scalar()
   out = '%d: %d, %s, %s, "%s", %s, (%s), "%s"' % (id, members, ip, email, name, country, last_login_country, message)
   print out.encode('utf-8')

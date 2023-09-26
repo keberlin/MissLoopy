@@ -1,22 +1,25 @@
 import argparse
-
-import database
+from sqlalchemy import create_engine
+from sqlalchemy.orm import sessionmaker
 
 from mlutils import *
 from emails import *
+from database import MISSLOOPY_DB_URI, db
+from model import *
+
+engine = create_engine(MISSLOOPY_DB_URI)
+Session = sessionmaker(bind=engine)
+db.session = Session()
 
 parser = argparse.ArgumentParser(description='Delete Photos.')
 parser.add_argument('pid', nargs='+', help='photo ids to be deleted')
 args = parser.parse_args()
 
-db = database.Database(MISS_LOOPY_DB)
-
 for pid in args.pid:
-  db.execute('SELECT id FROM photos WHERE pid=%d' % int(pid))
-  entry = db.fetchone()
-  id = int(entry[0])
-  db.execute('SELECT * FROM profiles WHERE id=%d' % (id))
-  entry = db.fetchone()
-  email = entry[COL_EMAIL]
-  DeletePhoto(int(pid))
+  pid = int(pid)
+  entry = db.session.query(PhotosModel.id).filter(PhotosModel.pid==pid).one()
+  id = entry.id
+  entry = db.session.query(ProfilesModel.email).filter(ProfilesModel.id==id).one()
+  email = entry.email
+  DeletePhoto(pid)
   EmailPhotoDeleted(email)

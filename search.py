@@ -1,27 +1,29 @@
 import os, math, database
+from sqlalchemy.sql.expression import or_
 
 from utils import *
 from tzone import *
 from gazetteer import *
 from mlutils import *
 
+from database import db
+from model import *
+
 MAX_MATCHES = 300
 
 def search2(distance,order,id,x,y,tz,gender,age,ethnicity,height,weight,gender_choice,age_min,age_max,ethnicity_choice,height_min,height_max,weight_choice):
-  db = database.Database(MISS_LOOPY_DB)
-
   adjust = GazLatAdjust(y)
 
-  rules = []
-  rules.append('verified')
-  rules.append('last_ip_country = country')
+  query = db.session.query(ProfilesModel).filter(ProfilesModel.verified.is_(True))
+  #rules.append('last_ip_country = country')
   # Only list profiles which match this person's selection criteria
   if distance:
     dx = distance*1000/adjust # Distance is stored in the db as metres so *1000
     dy = distance*1000
-    rules.append('x BETWEEN %d AND %d' % (x-dx, x+dx))
-    rules.append('y BETWEEN %d AND %d' % (y-dy, y+dy))
-  rules.append('(gender & %d)!=0' % (gender_choice))
+    query = query.filter(x-dx<=ProfilesModel.x,ProfilesModel.x<=x+dx)
+    query = query.filter(y-dy<=ProfilesModel.y,ProfilesModel.y<=y+dy)
+  if gender_choice:
+    query = query.filter(ProfilesModel.gender.op('&')(gender_choice)!=0)
   if age_min:
     now = datetime.datetime.utcnow()
     ref = Datetime(now, tz)
@@ -30,7 +32,7 @@ def search2(distance,order,id,x,y,tz,gender,age,ethnicity,height,weight,gender_c
     except ValueError:
       # cater for leap year
       dob = datetime.date(ref.year-age_min,ref.month,ref.day-1)
-    rules.append('dob <= %s' % (Quote(str(dob))))
+    query = query.filter(ProfilesModel.dob <= dob)
   if age_max:
     now = datetime.datetime.utcnow()
     ref = Datetime(now, tz)
@@ -39,51 +41,46 @@ def search2(distance,order,id,x,y,tz,gender,age,ethnicity,height,weight,gender_c
     except ValueError:
       # cater for leap year
       dob = datetime.date(ref.year-age_max-1,ref.month,ref.day-1)
-    rules.append('dob > %s' % (Quote(str(dob))))
+    query = query.filter(ProfilesModel.dob > dob)
   if ethnicity_choice:
-    rules.append('(ethnicity & %d)!=0' % (ethnicity_choice))
+    query = query.filter(ProfilesModel.ethnicity.op('&')(ethnicity_choice)!=0)
   if height_min:
-    rules.append('(height IS NULL OR height >= %d)' % (height_min))
+    query = query.filter(or_(ProfilesModel.height.is_(None),ProfilesModel.height >= height_min))
   if height_max:
-    rules.append('(height IS NULL OR height <= %d)' % (height_max))
+    query = query.filter(or_(ProfilesModel.height.is_(None),ProfilesModel.height <= height_max))
   if weight_choice:
-    rules.append('(weight IS NULL OR (weight & %d)!=0)' % (weight_choice))
+    query = query.filter(or_(ProfilesModel.weight.is_(None),ProfilesModel.weight.op('&')(weight_choice) != 0))
   # Only list profiles which match the other member's selection criteria
-  rules.append('(gender_choice IS NULL OR (gender_choice & %d)!=0)' % (gender))
-  rules.append('(age_min IS NULL OR age_min <= %d)' % (age))
-  rules.append('(age_max IS NULL OR age_max >= %d)' % (age))
+  query = query.filter(or_(ProfilesModel.gender_choice.is_(None),ProfilesModel.gender_choice.op('&')(gender)!=0))
+  query = query.filter(or_(ProfilesModel.age_min.is_(None),ProfilesModel.age_min <= age))
+  query = query.filter(or_(ProfilesModel.age_max.is_(None),ProfilesModel.age_max >= age))
   if ethnicity:
-    rules.append('(ethnicity_choice IS NULL OR (ethnicity_choice & %d)!=0)' % (ethnicity))
+    query = query.filter(or_(ProfilesModel.ethnicity_choice.is_(None),ProfilesModel.ethnicity_choice.op('&')(ethnicity)!=0))
   if height:
-    rules.append('(height_min IS NULL OR height_min <= %d)' % (height))
-    rules.append('(height_max IS NULL OR height_max >= %d)' % (height))
+    query = query.filter(or_(ProfilesModel.height_min.is_(None),ProfilesModel.height_min <= height))
+    query = query.filter(or_(ProfilesModel.height_max.is_(None),ProfilesModel.height_max >= height))
   if weight:
-    rules.append('(weight_choice IS NULL OR (weight_choice & %d)!=0)' % (weight))
-  criteria = ' AND '.join(rules)
-  order_by = ''
+    query = query.filter(or_(ProfilesModel.weight_choice.is_(None),ProfilesModel.weight_choice.op('&')(weight)!=0))
   if order:
     if order == 'age':
-      order_by = 'ORDER BY dob DESC'
+      query = query.order_by(ProfilesModel.dob.desc())
     elif order == 'login':
-      order_by = 'ORDER BY last_login DESC'
+      query = query.order_by(ProfilesModel.last_login.desc())
     elif order == 'created':
-      order_by = 'ORDER BY created2 DESC'
+      query = query.order_by(ProfilesModel.created2.desc())
     else:
       pass # Order must be by distance
-
+  entries = query.limit(MAX_MATCHES).all()
   list = []
-  db.execute('SELECT * FROM profiles WHERE %s %s LIMIT %d' % (criteria, order_by, MAX_MATCHES))
-  for entry in db.fetchall():
-    i = entry[COL_ID]
-    dx = abs(x-entry[COL_X])*adjust/1000
-    dy = abs(y-entry[COL_Y])/1000
+  for entry in entries:
+    id = entry.id
+    dx = abs(x-entry.x)*adjust/1000
+    dy = abs(y-entry.y)/1000
     d = math.sqrt((dx*dx)+(dy*dy))
     if distance and d > distance:
       continue
-    list.append((i,d))
+    list.append((id,d))
   if order == 'distance':
     list.sort(cmp=lambda a,b:int(a[1]-b[1])) # TODO
-
-  db.commit()
 
   return map(lambda x:x[0], list)

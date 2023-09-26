@@ -1,10 +1,10 @@
-{% extends 'template-panel.html' %}
+{% extends 'base-panel.html' %}
 
 {% set partial = 8 %}
 
 {% set heading = 'Registration successful' %}
 
-{% block panel %}
+{% block canvas %}
   <div class="col-xs-12 alert alert-success">
     <h4>You have successfully registered on the {{ title }} website.</h4>
   </div>
@@ -16,9 +16,7 @@
   </div>
 
   {% include 'conversion.html' %}
-{% endblock %}
 
-{% block actions %}
   <div class="col-xs-12">
     <br>
     <button class="btn btn-primary" id="login" autofocus>Login</button>

@@ -50,13 +50,13 @@ def EmailPhotoDeleted(email):
   Email2(FROM, [email], 'Photo Removal Alert', html)
 
 def EmailWink(entry,entry_from):
-  email    = entry[COL_EMAIL]
-  location = entry[COL_LOCATION]
+  email    = entry.email
+  location = entry.location
   country  = GazCountry(location)
-  tz       = entry[COL_TZ]
-  adjust = GazLatAdjust(entry_from[COL_Y])
-  dx = abs(entry_from[COL_X]-entry[COL_X])*adjust/1000
-  dy = abs(entry_from[COL_Y]-entry[COL_Y])/1000
+  tz       = entry.tz
+  adjust = GazLatAdjust(entry_from.y)
+  dx = abs(entry_from.x-entry.x)*adjust/1000
+  dy = abs(entry_from.y-entry.y)/1000
   distance = math.sqrt((dx*dx)+(dy*dy))
 
   SetLocale(country)
@@ -68,18 +68,18 @@ def EmailWink(entry,entry_from):
   dict['navigation'] = 'inbox'
 
   member = {}
-  member['id']            = entry_from[COL_ID]
-  member['image']         = PhotoFilename(MasterPhoto(entry_from[COL_ID]))
-  member['name']          = mask.MaskEverything(entry_from[COL_NAME])
-  member['gender']        = Gender(entry_from[COL_GENDER])
-  member['age']           = Age(entry_from[COL_DOB])
-  member['starsign']      = Starsign(entry_from[COL_DOB])
-  member['ethnicity']     = Ethnicity(entry_from[COL_ETHNICITY])
-  member['location']      = entry_from[COL_LOCATION]
-  member['summary']       = mask.MaskEverything(entry_from[COL_SUMMARY])
-  member['last_login']    = Since(entry_from[COL_LAST_LOGIN])
-  member['login_country'] = entry_from[COL_LAST_IP_COUNTRY]
-  member['created']       = Datetime(entry_from[COL_CREATED2], tz).strftime('%x')
+  member['id']            = entry_from.id
+  member['image']         = PhotoFilename(MasterPhoto(entry_from.id))
+  member['name']          = mask.MaskEverything(entry_from.name)
+  member['gender']        = Gender(entry_from.gender)
+  member['age']           = Age(entry_from.dob)
+  member['starsign']      = Starsign(entry_from.dob)
+  member['ethnicity']     = Ethnicity(entry_from.ethnicity)
+  member['location']      = entry_from.location
+  member['summary']       = mask.MaskEverything(entry_from.summary)
+  member['last_login']    = Since(entry_from.last_login)
+  member['login_country'] = entry_from.last_ip_country
+  member['created']       = Datetime(entry_from.created2, tz).strftime('%x')
   member['distance']      = Distance(distance, unit_distance)
   member['active']        = False
   dict['entry'] = member
@@ -88,13 +88,13 @@ def EmailWink(entry,entry_from):
   Email2(FROM, [email], 'New Wink! Received', html)
 
 def EmailNotify(entry,entry_from):
-  email    = entry[COL_EMAIL]
-  location = entry[COL_LOCATION]
+  email    = entry.email
+  location = entry.location
   country  = GazCountry(location)
-  tz       = entry[COL_TZ]
-  adjust = GazLatAdjust(entry_from[COL_Y])
-  dx = abs(entry_from[COL_X]-entry[COL_X])*adjust/1000
-  dy = abs(entry_from[COL_Y]-entry[COL_Y])/1000
+  tz       = entry.tz
+  adjust = GazLatAdjust(entry_from.y)
+  dx = abs(entry_from.x-entry.x)*adjust/1000
+  dy = abs(entry_from.y-entry.y)/1000
   distance = math.sqrt((dx*dx)+(dy*dy))
 
   SetLocale(country)
@@ -106,18 +106,18 @@ def EmailNotify(entry,entry_from):
   dict['navigation'] = 'inbox'
 
   member = {}
-  member['id']            = entry_from[COL_ID]
-  member['image']         = PhotoFilename(MasterPhoto(entry_from[COL_ID]))
-  member['name']          = mask.MaskEverything(entry_from[COL_NAME])
-  member['gender']        = Gender(entry_from[COL_GENDER])
-  member['age']           = Age(entry_from[COL_DOB])
-  member['starsign']      = Starsign(entry_from[COL_DOB])
-  member['ethnicity']     = Ethnicity(entry_from[COL_ETHNICITY])
-  member['location']      = entry_from[COL_LOCATION]
-  member['summary']       = mask.MaskEverything(entry_from[COL_SUMMARY])
-  member['last_login']    = Since(entry_from[COL_LAST_LOGIN])
-  member['login_country'] = entry_from[COL_LAST_IP_COUNTRY]
-  member['created']       = Datetime(entry_from[COL_CREATED2], tz).strftime('%x')
+  member['id']            = entry_from.id
+  member['image']         = PhotoFilename(MasterPhoto(entry_from.id))
+  member['name']          = mask.MaskEverything(entry_from.name)
+  member['gender']        = Gender(entry_from.gender)
+  member['age']           = Age(entry_from.dob)
+  member['starsign']      = Starsign(entry_from.dob)
+  member['ethnicity']     = Ethnicity(entry_from.ethnicity)
+  member['location']      = entry_from.location
+  member['summary']       = mask.MaskEverything(entry_from.summary)
+  member['last_login']    = Since(entry_from.last_login)
+  member['login_country'] = entry_from.last_ip_country
+  member['created']       = Datetime(entry_from.created2, tz).strftime('%x')
   member['distance']      = Distance(distance, unit_distance)
   member['active']        = False
   dict['entry'] = member
@@ -126,12 +126,12 @@ def EmailNotify(entry,entry_from):
   Email2(FROM, [email], 'New Message Received', html)
 
 def EmailNewMembers(entry,ids):
-  email    = entry[COL_EMAIL]
-  location = entry[COL_LOCATION]
+  email    = entry.email
+  location = entry.location
   country  = GazCountry(location)
-  x        = entry[COL_X]
-  y        = entry[COL_Y]
-  tz       = entry[COL_TZ]
+  x        = entry.x
+  y        = entry.y
+  tz       = entry.tz
 
   SetLocale(country)
 

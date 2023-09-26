@@ -1,15 +1,20 @@
-import database
+from sqlalchemy import create_engine
+from sqlalchemy.orm import sessionmaker
 
 from utils import *
 from mlutils import *
+from database import MISSLOOPY_DB_URI, db
+from model import *
+
+engine = create_engine(MISSLOOPY_DB_URI)
+Session = sessionmaker(bind=engine)
+db.session = Session()
 
 def Bit(enum):
   b = 0
   while not enum&(1<<b):
     b += 1
   return b
-
-db = database.Database(MISS_LOOPY_DB)
 
 now = datetime.datetime.utcnow()
 
@@ -19,15 +24,15 @@ genders     = [0,0,0,0,0,0]
 ages        = [0,0,0,0,0,0]
 ethnicities = [0,0,0,0,0,0,0]
 
-db.execute('SELECT * FROM profiles')
-for entry in db.fetchall():
-  if not entry[COL_VERIFIED]:
+entries = db.session.query(ProfilesModel).all()
+for entry in entries:
+  if not entry.verified:
     unverified += 1
     continue
   verified += 1
-  genders[Bit(entry[COL_GENDER])] += 1
-  ages[Bit(entry[COL_GENDER])] += Age(entry[COL_DOB])
-  ethnicities[Bit(entry[COL_ETHNICITY])] += 1
+  genders[Bit(entry.gender)] += 1
+  ages[Bit(entry.gender)] += Age(entry.dob)
+  ethnicities[Bit(entry.ethnicity)] += 1
 
 men = genders[Bit(GEN_MAN)]
 women = genders[Bit(GEN_WOMAN)]
@@ -59,61 +64,24 @@ mixed = ethnicities[Bit(ETH_MIXED)]
 other = ethnicities[Bit(ETH_OTHER)]
 
 # Get number of active profiles (logged in within the last month)
-db.execute('SELECT COUNT(*) FROM profiles WHERE verified AND last_login>=%s' % (Quote(str(now-datetime.timedelta(days=30)))))
-entry = db.fetchone()
-active = entry[0]
+active = db.session.query(func.count()).select_from(ProfilesModel).filter(ProfilesModel.verified.is_(True)).filter(ProfilesModel.last_login>=now-datetime.timedelta(days=30)).scalar()
 
 # Get number of sent messages (within the last month)
-db.execute('SELECT COUNT(*) FROM emails WHERE sent>=%s' % (Quote(str(now-datetime.timedelta(days=30)))))
-entry = db.fetchone()
-messages = entry[0]
+messages = db.session.query(func.count()).select_from(EmailsModel).filter(EmailsModel.sent>=now-datetime.timedelta(days=30)).scalar()
 
 # Get most blocked members
-db.execute('SELECT id_block,COUNT(DISTINCT id) FROM blocked GROUP BY id_block ORDER BY COUNT(DISTINCT id) DESC LIMIT 10')
-most_blocked = [(entry[0]) for entry in db.fetchall()]
+entries = db.session.query(BlockedModel.id_block,func.count(BlockedModel.id.distinct())).group_by(BlockedModel.id_block).order_by(func.count(BlockedModel.id.distinct()).desc()).limit(10).all()
+most_blocked = [(entry.id_block) for entry in entries]
 
 # Get most favorite members
-db.execute('SELECT id_favorite,COUNT(DISTINCT id) FROM favorites GROUP BY id_favorite ORDER BY COUNT(DISTINCT id) DESC LIMIT 10')
-most_favorite = [(entry[0]) for entry in db.fetchall()]
+entries = db.session.query(FavoritesModel.id_favorite,func.count(FavoritesModel.id.distinct())).group_by(FavoritesModel.id_favorite).order_by(func.count(FavoritesModel.id.distinct()).desc()).limit(10).all()
+most_favorite = [(entry.id_favorite) for entry in entries]
 
-sql = """
-INSERT INTO reports ( logged, verified, unverified, males, females, men, women, sugar_pups, sugar_babies, sugar_daddies, sugar_mommas, avg_age_males, avg_age_females,
-  avg_age_men, avg_age_women, avg_age_sugar_pups, avg_age_sugar_babies, avg_age_sugar_daddies, avg_age_sugar_mommas, white, black, latino, indian, asian, mixed, other,
-  active, messages) VALUES ( '{logged}', {verified}, {unverified}, {males}, {females}, {men}, {women}, {sugar_pups}, {sugar_babies}, {sugar_daddies}, {sugar_mommas},
-  {avg_age_males}, {avg_age_females}, {avg_age_men}, {avg_age_women}, {avg_age_sugar_pups}, {avg_age_sugar_babies}, {avg_age_sugar_daddies}, {avg_age_sugar_mommas}, {white},
-  {black}, {latino}, {indian}, {asian}, {mixed}, {other}, {active}, {messages})
-""".format(
-    logged=now,
-    verified=verified,
-    unverified=unverified,
-    males=males,
-    females=females,
-    men=men,
-    women=women,
-    sugar_pups=sugar_pups,
-    sugar_babies=sugar_babies,
-    sugar_daddies=sugar_daddies,
-    sugar_mommas=sugar_mommas,
-    avg_age_males=avg_age_males,
-    avg_age_females=avg_age_females,
-    avg_age_men=avg_age_men,
-    avg_age_women=avg_age_women,
-    avg_age_sugar_pups=avg_age_sugar_pups,
-    avg_age_sugar_babies=avg_age_sugar_babies,
-    avg_age_sugar_daddies=avg_age_sugar_daddies,
-    avg_age_sugar_mommas=avg_age_sugar_mommas,
-    white=white,
-    black=black,
-    latino=latino,
-    indian=indian,
-    asian=asian,
-    mixed=mixed,
-    other=other,
-    active=active,
-    messages=messages,
-    )
-db.execute(sql)
-db.commit()
+stats = ReportsModel(logged=now, verified=verified, unverified=unverified, males=males, females=females, men=men, women=women, sugar_pups=sugar_pups, sugar_babies=sugar_babies, sugar_daddies=sugar_daddies, sugar_mommas=sugar_mommas, avg_age_males=avg_age_males, avg_age_females=avg_age_females,
+  avg_age_men=avg_age_men, avg_age_women=avg_age_women, avg_age_sugar_pups=avg_age_sugar_pups, avg_age_sugar_babies=avg_age_sugar_babies, avg_age_sugar_daddies=avg_age_sugar_daddies, avg_age_sugar_mommas=avg_age_sugar_mommas, white=white, black=black, latino=latino, indian=indian, asian=asian, mixed=mixed, other=other,
+  active=active, messages=messages) 
+db.session.add(stats)
+db.session.commit()
 
 if __name__ == '__main__':
   print 'Number of verified profiles    : %6d' % (verified)

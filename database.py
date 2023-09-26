@@ -1,7 +1,11 @@
+from flask_sqlalchemy import SQLAlchemy
+
 import psycopg2
 
 #psycopg2.extensions.register_type(psycopg2.extensions.UNICODE)
 #psycopg2.extensions.register_type(psycopg2.extensions.UNICODEARRAY)
+
+MISSLOOPY_DB_URI = "postgresql://postgres:postgres@localhost:5432/missloopy?client_encoding=utf8"
 
 class Database():
   databases = {}
@@ -37,3 +41,5 @@ class Database():
     return self.conn.rollback()
   def commit(self):
     return self.conn.commit()
+
+db = SQLAlchemy()

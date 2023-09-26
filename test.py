@@ -1,18 +1,17 @@
+import psycopg2
 from mlutils import *
 
 import database
 
-db = database.Database(MISS_LOOPY_DB)
+def check_if_user_exists(conn):
+  cursor = conn.cursor()
+  cursor.execute('SELECT email from profiles WHERE id=1')
+  return cursor.fetchone() is not None
 
-i = 0
-while True:
-  try:
-    i += 1
-    print 'trying to insert (%d)..' % (i)
-    db.execute('INSERT INTO photos (id) VALUES (1)')
-    print 'worked'
-    db.execute('SELECT LASTVAL()')
-    print db.fetchone()
-    break
-  except:
-    print '..didn''t work'
+conn = psycopg2.connect(database=MISS_LOOPY_DB, user='postgres')
+cursor = conn.cursor()
+
+print check_if_user_exists(conn)
+
+cursor.execute('SELECT email from profiles WHERE id=1')
+print cursor.fetchone()

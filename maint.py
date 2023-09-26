@@ -1,13 +1,18 @@
-import database, re, hashlib
+import re, hashlib
+from sqlalchemy import create_engine
+from sqlalchemy.orm import sessionmaker
 
 from utils import *
 from mlutils import *
+from database import MISSLOOPY_DB_URI, db
+from model import *
 
-db = database.Database(MISS_LOOPY_DB)
+engine = create_engine(MISSLOOPY_DB_URI)
+Session = sessionmaker(bind=engine)
+db.session = Session()
 
-db.execute('SELECT * FROM profiles WHERE id=1')
-for entry in db.fetchall():
-  print(entry[COL_PASSWORD], entry[COL_PASSWORD].encode(), hashlib.md5(entry[COL_PASSWORD].encode()).hexdigest())
-  #db.execute('UPDATE profiles SET password=%s WHERE id=%d' % (Quote(hashlib.md5(entry[COL_PASSWORD].encode()).hexdigest()), entry[COL_ID]))
-
-db.commit()
+entries = db.session.query(ProfilesModel).limit(10).all() # TODO Remove the limit
+for entry in entries:
+  print(entry.password, hashlib.md5(entry.password.encode()).hexdigest())
+  #db.session.query(ProfilesModel).filter(ProfilesModel.id==id).update({"password":hashlib.md5(entry.password.encode()).hexdigest()},synchronize_session=False)
+db.session.commit()

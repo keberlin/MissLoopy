@@ -1,10 +1,10 @@
-{% extends 'template-panel.html' %}
+{% extends 'base-panel.html' %}
 
 {% set partial = 8 %}
 
 {% set heading = 'Existing members login here' %}
 
-{% block panel %}
+{% block canvas %}
   <form class="form-horizontal" id="form" role="form">
     <div class="form-group">
       <label class="col-xs-3 control-label" for="email">Email Address</label>
@@ -25,14 +25,14 @@
   </form>
 {% endblock %}
 
-{% block actions %}
+{% block buttons %}
   <div class="col-xs-12">
     <br>
-    <a id="reminder">Forgotten password?</a>
+    <a href="/resetpassword">Forgotten password?</a>
   </div>
   <div class="col-xs-12">
     <br>
-    <a id="register">Not registered yet?</a>
+    <a href="/register">Not registered yet?</a>
   </div>
 {% endblock %}
 
@@ -82,31 +82,6 @@
         },
         async: false
       });
-      return false;
-    });
-    // Handle password reminder button
-    $("#reminder").click( function(e) {
-      e.preventDefault();
-      $.ajax({
-        url: '/mlpassword',
-        type: 'POST',
-        data: ({'email':$("#email").val()}),
-        error: function(jqXHR, textStatus, errorThrown) {
-          jsShowError("There's a problem with your Internet connection.");
-        },
-        success: function(data) {
-          if (data.error)
-            jsShowError(data.error);
-          else if (data.message)
-            jsShowMessage(data.message);
-        }
-      });
-      return false;
-    });
-    // Handle register button
-    $("#register").click( function(e) {
-      e.preventDefault();
-      window.location = "/register";
       return false;
     });
   </script>

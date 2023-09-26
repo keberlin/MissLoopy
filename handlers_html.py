@@ -1,5 +1,7 @@
 import datetime, json
-import database, search, spam, mask
+import search, spam, mask
+from sqlalchemy.sql.expression import func, and_
+from sqlalchemy.orm import aliased
 
 from utils import *
 from units import *
@@ -11,34 +13,33 @@ from mllist import *
 
 from logger import *
 
-db = database.Database(MISS_LOOPY_DB)
+from database import db
 
 # HTML Pages
 
 def handle_index(entry,values):
   # Get most favorite male members
-  db.execute('SELECT f.id_favorite,COUNT(DISTINCT f.id) FROM favorites AS f INNER JOIN profiles AS p ON f.id_favorite=p.id WHERE p.gender=1 GROUP BY f.id_favorite ORDER BY COUNT(DISTINCT f.id) DESC LIMIT 2')
-  male = map(lambda x:x[0], db.fetchall())
+  entries = db.session.query(FavoritesModel.id_favorite,func.count(FavoritesModel.id.distinct())).filter(ProfilesModel.gender==1).join(ProfilesModel,FavoritesModel.id_favorite==ProfilesModel.id).group_by(FavoritesModel.id_favorite,FavoritesModel.id).order_by(FavoritesModel.id).limit(2).all()
+  male = [entry.id_favorite for entry in entries]
 
   # Get most favorite female members
-  db.execute('SELECT f.id_favorite,COUNT(DISTINCT f.id) FROM favorites AS f INNER JOIN profiles AS p ON f.id_favorite=p.id WHERE p.gender=2 GROUP BY f.id_favorite ORDER BY COUNT(DISTINCT f.id) DESC LIMIT 2')
-  female = map(lambda x:x[0], db.fetchall())
+  entries = db.session.query(FavoritesModel.id_favorite,func.count(FavoritesModel.id.distinct())).filter(ProfilesModel.gender==2).join(ProfilesModel,FavoritesModel.id_favorite==ProfilesModel.id).group_by(FavoritesModel.id_favorite,FavoritesModel.id).order_by(FavoritesModel.id).limit(2).all()
+  female = [entry.id_favorite for entry in entries]
 
   ids = [female[0], male[0], female[1], male[1]]
 
   entries = []
-  db.execute('SELECT id, name, location FROM profiles WHERE id IN (%s)' % (','.join(map(lambda x:str(x), ids))))
-  for entry in db.fetchall():
+  for id in ids:
+    print('id:',id)
+    entry = db.session.query(ProfilesModel.name, ProfilesModel.location).filter(ProfilesModel.id==id).one()
     d = {}
-    d['id']      = entry[0]
-    d['image']   = PhotoFilename(MasterPhoto(entry[0]))
+    d['id']      = id
+    d['image']   = PhotoFilename(MasterPhoto(id))
     filename = os.path.join(BASE_DIR, 'static', d['image'])
     d['size']    = ImageDimensions(filename)
-    d['name']    = entry[1]
-    d['country'] = GazCountry(entry[2])
+    d['name']    = entry.name
+    d['country'] = GazCountry(entry.location)
     entries.append(d)
-
-  db.commit()
 
   dict = {}
   dict['entries'] = entries
@@ -53,41 +54,39 @@ def handle_register(entry,values):
   return dict
 
 def handle_profile(entry,values):
-  id       = entry[COL_ID]
-  location = entry[COL_LOCATION]
+  id       = entry.id
+  location = entry.location
   country  = GazCountry(location)
 
   unit_distance, unit_height = Units(country)
 
   dict = {}
-  dict['name']        = entry[COL_NAME]
-  dict['location']    = entry[COL_LOCATION]
-  dict['gender']      = entry[COL_GENDER]
-  dict['ethnicity']   = entry[COL_ETHNICITY]
-  dict['height']      = Height(entry[COL_HEIGHT],unit_height,2)
-  dict['weight']      = entry[COL_WEIGHT] or 0
-  dict['education']   = entry[COL_EDUCATION] or 0
-  dict['status']      = entry[COL_STATUS] or 0
-  dict['smoking']     = entry[COL_SMOKING] or 0
-  dict['drinking']    = entry[COL_DRINKING] or 0
-  dict['occupation']  = entry[COL_OCCUPATION]
-  dict['summary']     = entry[COL_SUMMARY]
-  dict['description'] = entry[COL_DESCRIPTION]
+  dict['name']        = entry.name
+  dict['location']    = entry.location
+  dict['gender']      = entry.gender
+  dict['ethnicity']   = entry.ethnicity
+  dict['height']      = Height(entry.height,unit_height,2)
+  dict['weight']      = entry.weight or 0
+  dict['education']   = entry.education or 0
+  dict['status']      = entry.status or 0
+  dict['smoking']     = entry.smoking or 0
+  dict['drinking']    = entry.drinking or 0
+  dict['occupation']  = entry.occupation
+  dict['summary']     = entry.summary
+  dict['description'] = entry.description
 
   return dict
 
 def handle_photos(entry,values):
-  id       = entry[COL_ID]
+  id       = entry.id
 
   pids = []
   master = 0
-  db.execute('SELECT pid,master FROM photos WHERE id=%d' % (id))
-  for entry in db.fetchall():
-    pids.append(entry[0])
-    if entry[1]:
-      master = entry[0]
-
-  db.commit()
+  entries = db.session.query(PhotosModel.pid, PhotosModel.master).filter(PhotosModel.id==id).all()
+  for entry in entries:
+    pids.append(entry.pid)
+    if entry.master:
+      master = entry.pid
 
   dict = {}
   dict['id']     = id
@@ -97,45 +96,45 @@ def handle_photos(entry,values):
   return dict
 
 def handle_seeking(entry,values):
-  id       = entry[COL_ID]
-  location = entry[COL_LOCATION]
+  id       = entry.id
+  location = entry.location
   country  = GazCountry(location)
 
   unit_distance, unit_height = Units(country)
 
   dict = {}
-  dict['gender_choice']    = entry[COL_GENDER_CHOICE] or 0
-  dict['ethnicity_choice'] = entry[COL_ETHNICITY_CHOICE] or 0
-  dict['weight_choice']    = entry[COL_WEIGHT_CHOICE] or 0
-  dict['age_min']          = entry[COL_AGE_MIN]
-  dict['age_max']          = entry[COL_AGE_MAX]
-  dict['height_min']       = Height(entry[COL_HEIGHT_MIN],unit_height,2)
-  dict['height_max']       = Height(entry[COL_HEIGHT_MAX],unit_height,2)
-  dict['looking_for']      = entry[COL_LOOKING_FOR]
+  dict['gender_choice']    = entry.gender_choice or 0
+  dict['ethnicity_choice'] = entry.ethnicity_choice or 0
+  dict['weight_choice']    = entry.weight_choice or 0
+  dict['age_min']          = entry.age_min
+  dict['age_max']          = entry.age_max
+  dict['height_min']       = Height(entry.height_min,unit_height,2)
+  dict['height_max']       = Height(entry.height_max,unit_height,2)
+  dict['looking_for']      = entry.looking_for
 
   return dict
 
 def handle_matches(entry,values):
   MAX_MATCHES = 100
 
-  id               = entry[COL_ID]
-  location         = entry[COL_LOCATION]
+  id               = entry.id
+  location         = entry.location
   country          = GazCountry(location)
-  x                = entry[COL_X]
-  y                = entry[COL_Y]
-  tz               = entry[COL_TZ]
-  gender           = entry[COL_GENDER]
-  age              = Age(entry[COL_DOB])
-  ethnicity        = entry[COL_ETHNICITY]
-  height           = entry[COL_HEIGHT]
-  weight           = entry[COL_WEIGHT]
-  gender_choice    = entry[COL_GENDER_CHOICE]
-  age_min          = entry[COL_AGE_MIN]
-  age_max          = entry[COL_AGE_MAX]
-  ethnicity_choice = entry[COL_ETHNICITY_CHOICE]
-  height_min       = entry[COL_HEIGHT_MIN]
-  height_max       = entry[COL_HEIGHT_MAX]
-  weight_choice    = entry[COL_WEIGHT_CHOICE]
+  x                = entry.x
+  y                = entry.y
+  tz               = entry.tz
+  gender           = entry.gender
+  age              = Age(entry.dob)
+  ethnicity        = entry.ethnicity
+  height           = entry.height
+  weight           = entry.weight
+  gender_choice    = entry.gender_choice
+  age_min          = entry.age_min
+  age_max          = entry.age_max
+  ethnicity_choice = entry.ethnicity_choice
+  height_min       = entry.height_min
+  height_max       = entry.height_max
+  weight_choice    = entry.weight_choice
 
   ids = search.search2(300,'distance',id,x,y,tz,gender,age,ethnicity,height,weight,gender_choice,age_min,age_max,ethnicity_choice,height_min,height_max,weight_choice)[:MAX_MATCHES]
 
@@ -167,8 +166,8 @@ def handle_matches(entry,values):
   return dict
 
 def handle_search(entry,values):
-  id       = entry[COL_ID]
-  location = entry[COL_LOCATION]
+  id       = entry.id
+  location = entry.location
   country  = GazCountry(location)
 
   unit_distance, unit_height = Units(country)
@@ -182,24 +181,24 @@ def handle_search(entry,values):
 def handle_results(entry,values):
   MAX_MATCHES = 200
 
-  id               = entry[COL_ID]
-  location         = entry[COL_LOCATION]
+  id               = entry.id
+  location         = entry.location
   country          = GazCountry(location)
-  x                = entry[COL_X]
-  y                = entry[COL_Y]
-  tz               = entry[COL_TZ]
-  gender           = entry[COL_GENDER]
-  age              = Age(entry[COL_DOB])
-  ethnicity        = entry[COL_ETHNICITY]
-  height           = entry[COL_HEIGHT]
-  weight           = entry[COL_WEIGHT]
-  gender_choice    = entry[COL_GENDER_CHOICE]
-  age_min          = entry[COL_AGE_MIN]
-  age_max          = entry[COL_AGE_MAX]
-  ethnicity_choice = entry[COL_ETHNICITY_CHOICE]
-  height_min       = entry[COL_HEIGHT_MIN]
-  height_max       = entry[COL_HEIGHT_MAX]
-  weight_choice    = entry[COL_WEIGHT_CHOICE]
+  x                = entry.x
+  y                = entry.y
+  tz               = entry.tz
+  gender           = entry.gender
+  age              = Age(entry.dob)
+  ethnicity        = entry.ethnicity
+  height           = entry.height
+  weight           = entry.weight
+  gender_choice    = entry.gender_choice
+  age_min          = entry.age_min
+  age_max          = entry.age_max
+  ethnicity_choice = entry.ethnicity_choice
+  height_min       = entry.height_min
+  height_max       = entry.height_max
+  weight_choice    = entry.weight_choice
 
   ParseAge(values, 'age_min')
   ParseAge(values, 'age_max')
@@ -271,25 +270,24 @@ def handle_member(entry,values):
 
   id_view = int(values['id'])
 
-  id       = entry[COL_ID]
-  location = entry[COL_LOCATION]
+  id       = entry.id
+  location = entry.location
   country  = GazCountry(location)
-  x        = entry[COL_X]
-  y        = entry[COL_Y]
-  tz       = entry[COL_TZ]
+  x        = entry.x
+  y        = entry.y
+  tz       = entry.tz
 
   dict = {}
   dict['id']          = id_view
   dict['id_previous'] = PreviousResult(id, id_view)
   dict['id_next']     = NextResult(id, id_view)
 
-  db.execute('SELECT * FROM profiles WHERE verified AND id=%d LIMIT 1' % (id_view))
-  entry = db.fetchone()
+  entry = db.session.query(ProfilesModel).filter(ProfilesModel.id==id_view, ProfilesModel.verified.is_(True)).one_or_none()
   if not entry:
     dict['error'] = 'This member does not exist or has removed their account.'
     return dict
 
-  dict['name'] = mask.MaskEverything(entry[COL_NAME])
+  dict['name'] = mask.MaskEverything(entry.name)
 
   if Blocked(id_view, id):
     dict['error'] = 'This member has blocked you.'
@@ -299,49 +297,47 @@ def handle_member(entry,values):
 
   unit_distance, unit_height = Units(country)
 
-  location = entry[COL_LOCATION]
+  location = entry.location
 
   master = MasterPhoto(id_view)
   image = PhotoFilename(master)
   pids = []
-  db.execute('SELECT pid FROM photos WHERE id=%d' % (id_view))
-  for entry in db.fetchall():
-    pid = entry[0]
+  entries = db.session.query(PhotosModel.pid).filter(PhotosModel.id==id_view).all()
+  for entry2 in entries:
+    pid = entry2.pid
     if pid != master:
       pids.append(pid)
   images = []
   for pid in pids:
     images.append(PhotoFilename(pid))
 
-  db.commit()
-
   dict['mylat']          = y*360.0/CIRCUM_Y
   dict['mylng']          = x*360.0/CIRCUM_X
   # About me
-  dict['gender']         = Gender(entry[COL_GENDER])
-  dict['age']            = Age(entry[COL_DOB])
-  dict['starsign']       = Starsign(entry[COL_DOB])
-  dict['ethnicity']      = Ethnicity(entry[COL_ETHNICITY])
-  dict['location']       = entry[COL_LOCATION]
-  dict['country']        = GazCountry(entry[COL_LOCATION])
-  dict['lat']            = entry[COL_Y]*360.0/CIRCUM_Y
-  dict['lng']            = entry[COL_X]*360.0/CIRCUM_X
-  dict['height']         = Height(entry[COL_HEIGHT],unit_height,2)
-  dict['weight']         = Weight(entry[COL_WEIGHT])
-  dict['education']      = Education(entry[COL_EDUCATION])
-  dict['status']         = Status(entry[COL_STATUS])
-  dict['smoking']        = Smoking(entry[COL_SMOKING])
-  dict['drinking']       = Drinking(entry[COL_DRINKING])
-  dict['summary']        = mask.MaskEverything(entry[COL_SUMMARY])
-  dict['occupation']     = mask.MaskEverything(entry[COL_OCCUPATION])
-  dict['description']    = mask.MaskEverything(entry[COL_DESCRIPTION])
-  dict['last_login']     = Since(entry[COL_LAST_LOGIN])
-  dict['login_country']  = entry[COL_LAST_IP_COUNTRY]
-  dict['created']        = Datetime(entry[COL_CREATED2],tz).strftime('%x')
+  dict['gender']         = Gender(entry.gender)
+  dict['age']            = Age(entry.dob)
+  dict['starsign']       = Starsign(entry.dob)
+  dict['ethnicity']      = Ethnicity(entry.ethnicity)
+  dict['location']       = entry.location
+  dict['country']        = GazCountry(entry.location)
+  dict['lat']            = entry.y*360.0/CIRCUM_Y
+  dict['lng']            = entry.x*360.0/CIRCUM_X
+  dict['height']         = Height(entry.height,unit_height,2)
+  dict['weight']         = Weight(entry.weight)
+  dict['education']      = Education(entry.education)
+  dict['status']         = Status(entry.status)
+  dict['smoking']        = Smoking(entry.smoking)
+  dict['drinking']       = Drinking(entry.drinking)
+  dict['summary']        = mask.MaskEverything(entry.summary)
+  dict['occupation']     = mask.MaskEverything(entry.occupation)
+  dict['description']    = mask.MaskEverything(entry.description)
+  dict['last_login']     = Since(entry.last_login)
+  dict['login_country']  = entry.last_ip_country
+  dict['created']        = Datetime(entry.created2,tz).strftime('%x')
   # Seeking
-  dict['gender_choice']  = GenderList(entry[COL_GENDER_CHOICE])
-  dict['age_range']      = Range(entry[COL_AGE_MIN], entry[COL_AGE_MAX])
-  dict['looking_for']    = mask.MaskEverything(entry[COL_LOOKING_FOR])
+  dict['gender_choice']  = GenderList(entry.gender_choice)
+  dict['age_range']      = Range(entry.age_min, entry.age_max)
+  dict['looking_for']    = mask.MaskEverything(entry.looking_for)
   # Photos
   dict['image'] = image
   dict['images'] = images
@@ -354,12 +350,12 @@ def handle_emailthread(entry,values):
 
   id_with = int(values['id'])
 
-  id       = entry[COL_ID]
-  location = entry[COL_LOCATION]
+  id       = entry.id
+  location = entry.location
   country  = GazCountry(location)
-  x        = entry[COL_X]
-  y        = entry[COL_Y]
-  tz       = entry[COL_TZ]
+  x        = entry.x
+  y        = entry.y
+  tz       = entry.tz
 
   SetLocale(country)
 
@@ -370,8 +366,7 @@ def handle_emailthread(entry,values):
   dict['id_previous'] = PreviousResult(id, id_with)
   dict['id_next']     = NextResult(id, id_with)
 
-  db.execute('SELECT * FROM profiles WHERE verified AND id=%d LIMIT 1' % (id_with))
-  entry = db.fetchone()
+  entry = db.session.query(ProfilesModel).filter(ProfilesModel.id==id_with, ProfilesModel.verified.is_(True)).one_or_none()
   if not entry:
     dict['error'] = "This member doesn't exist or has removed their account."
     return dict
@@ -381,54 +376,59 @@ def handle_emailthread(entry,values):
     return dict
 
   dict['entry']  = ListMember(id_with,0,location,x,y,tz,unit_distance)
-  dict['name']   = entry[COL_NAME]
+  dict['name']   = entry.name
   dict['action'] = 'member'
 
   spammer = spam.AnalyseSpammer(id_with)
 
   image = PhotoFilename(MasterPhoto(id_with))
   emails = []
-  db.execute('SELECT * FROM emails WHERE (id_from=%d AND id_to=%d) OR (id_from=%d AND id_to=%d) ORDER BY sent DESC' % (id, id_with, id_with, id))
-  for entry in db.fetchall():
+  entries = db.session.query(EmailsModel).filter(or_(and_(EmailsModel.id_from==id, EmailsModel.id_to==id_with), and_(EmailsModel.id_from==id_with, EmailsModel.id_to==id))).order_by(EmailsModel.sent.desc()).all()
+  for entry in entries:
     d = {}
-    d['sent']     = entry[COL4_ID_FROM] == id
-    d['message']  = entry[COL4_MESSAGE]
-    d['image']    = entry[COL4_IMAGE]
-    d['time']     = Since(entry[COL4_SENT], False)
-    d['viewed']   = entry[COL4_VIEWED]
+    d['sent']     = entry.id_from == id
+    d['message']  = entry.message
+    d['image']    = entry.image
+    d['time']     = Since(entry.sent, False)
+    d['viewed']   = entry.viewed
     if d['message'] and not d['sent']:
       d['spam']   = spam.IsSpamFactored(spam.AnalyseSpam(d['message']), spammer, 2)
     emails.append(d)
   dict['entries'] = emails
 
-  db.execute('UPDATE emails SET viewed=true WHERE id_from=%d AND id_to=%d' % (id_with, id))
-  db.commit()
+  db.session.query(EmailsModel).filter(EmailsModel.id_from==id_with, EmailsModel.id_to==id).update({"viewed":True},synchronize_session=False)
+  db.session.commit()
 
   return dict
 
 def handle_inbox(entry,values):
-  id       = entry[COL_ID]
-  location = entry[COL_LOCATION]
+  id       = entry.id
+  location = entry.location
   country  = GazCountry(location)
-  x        = entry[COL_X]
-  y        = entry[COL_Y]
-  tz       = entry[COL_TZ]
+  x        = entry.x
+  y        = entry.y
+  tz       = entry.tz
 
-  db.execute('SELECT id_from FROM (SELECT DISTINCT id_from,MAX(sent) FROM emails WHERE id_to=%d GROUP BY id_from ORDER BY MAX(sent) DESC) sub' % (id))
-  ids = map(lambda x:x[0], db.fetchall())
-
-  # Remove blocked members
-  ids = filter(lambda x:not BlockedMutually(id,x), ids)
+  blocked_by_me = aliased(BlockedModel)
+  blocked_by_them = aliased(BlockedModel)
+  entries = db.session.query(EmailsModel.id_from).\
+    outerjoin(blocked_by_me,and_(blocked_by_me.id==EmailsModel.id_from,blocked_by_me.id_block==EmailsModel.id_to)).\
+    outerjoin(blocked_by_them,and_(blocked_by_them.id_block==EmailsModel.id_to,blocked_by_them.id==EmailsModel.id_from)).\
+    filter(blocked_by_me.id.is_(None)).\
+    filter(blocked_by_them.id.is_(None)).\
+    filter(EmailsModel.id_to==id).\
+    group_by(EmailsModel.id_from).\
+    order_by(func.max(EmailsModel.sent).desc()).\
+    distinct().\
+    all()
+  ids = [entry.id_from for entry in entries]
 
   SaveResults(id, ids)
 
   counts = []
   for id_from in ids:
-    db.execute('SELECT COUNT(*) FROM emails WHERE id_from=%d and id_to=%d and not viewed' % (id_from, id))
-    entry = db.fetchone()
-    counts.append(entry[0])
-
-  db.commit()
+    count = db.session.query(func.count()).filter(EmailsModel.id_from==id_from, EmailsModel.id_to==id, EmailsModel.viewed.is_(False)).scalar()
+    counts.append(count)
 
   SetLocale(country)
 
@@ -442,28 +442,33 @@ def handle_inbox(entry,values):
   return dict
 
 def handle_outbox(entry,values):
-  id       = entry[COL_ID]
-  location = entry[COL_LOCATION]
+  id       = entry.id
+  location = entry.location
   country  = GazCountry(location)
-  x        = entry[COL_X]
-  y        = entry[COL_Y]
-  tz       = entry[COL_TZ]
+  x        = entry.x
+  y        = entry.y
+  tz       = entry.tz
 
-  db.execute('SELECT id_to FROM (SELECT DISTINCT id_to,MAX(sent) FROM emails WHERE id_from=%d GROUP BY id_to ORDER BY MAX(sent) DESC) sub' % (id))
-  ids = map(lambda x:x[0], db.fetchall())
-
-  # Remove blocked members
-  ids = filter(lambda x:not BlockedMutually(id,x), ids)
+  blocked_by_me = aliased(BlockedModel)
+  blocked_by_them = aliased(BlockedModel)
+  entries = db.session.query(EmailsModel.id_to).\
+    outerjoin(blocked_by_me,and_(blocked_by_me.id==EmailsModel.id_from,blocked_by_me.id_block==EmailsModel.id_to)).\
+    outerjoin(blocked_by_them,and_(blocked_by_them.id_block==EmailsModel.id_to,blocked_by_them.id==EmailsModel.id_from)).\
+    filter(blocked_by_me.id.is_(None)).\
+    filter(blocked_by_them.id.is_(None)).\
+    filter(EmailsModel.id_from==id).\
+    group_by(EmailsModel.id_to).\
+    order_by(func.max(EmailsModel.sent).desc()).\
+    distinct().\
+    all()
+  ids = [entry.id_to for entry in entries]
 
   SaveResults(id, ids)
 
   counts = []
   for id_to in ids:
-    db.execute('SELECT COUNT(*) FROM emails WHERE id_from=%d and id_to=%d and not viewed' % (id, id_to))
-    entry = db.fetchone()
-    counts.append(entry[0])
-
-  db.commit()
+    count = db.session.query(func.count()).filter(EmailsModel.id_from==id, EmailsModel.id_to==id_to, EmailsModel.viewed.is_(False)).scalar()
+    counts.append(count)
 
   SetLocale(country)
 
@@ -477,15 +482,15 @@ def handle_outbox(entry,values):
   return dict
 
 def handle_favorites(entry,values):
-  id       = entry[COL_ID]
-  location = entry[COL_LOCATION]
+  id       = entry.id
+  location = entry.location
   country  = GazCountry(location)
-  x        = entry[COL_X]
-  y        = entry[COL_Y]
-  tz       = entry[COL_TZ]
+  x        = entry.x
+  y        = entry.y
+  tz       = entry.tz
 
-  db.execute('SELECT DISTINCT f.id_favorite,p.last_login FROM favorites AS f INNER JOIN profiles AS p ON f.id_favorite=p.id WHERE f.id=%d ORDER BY p.last_login DESC' % (id))
-  ids = map(lambda x:x[0], db.fetchall())
+  entries = db.session.query(FavoritesModel.id_favorite.distinct(), ProfilesModel.last_login).join(ProfilesModel, ProfilesModel.id==FavoritesModel.id_favorite).filter(FavoritesModel.id==id).order_by(ProfilesModel.last_login).all()
+  ids = [entry.id_favorite for entry in entries]
 
   # Remove blocked members
   ids = filter(lambda x:not BlockedMutually(id,x), ids)
@@ -504,15 +509,15 @@ def handle_favorites(entry,values):
   return dict
 
 def handle_blocked(entry,values):
-  id       = entry[COL_ID]
-  location = entry[COL_LOCATION]
+  id       = entry.id
+  location = entry.location
   country  = GazCountry(location)
-  x        = entry[COL_X]
-  y        = entry[COL_Y]
-  tz       = entry[COL_TZ]
+  x        = entry.x
+  y        = entry.y
+  tz       = entry.tz
 
-  db.execute('SELECT DISTINCT id_block FROM blocked WHERE id=%d' % (id))
-  ids = map(lambda x:x[0], db.fetchall())
+  entries = db.session.query(BlockedModel.id_block).filter(BlockedModel.id==id).distinct().all()
+  ids = [entry.id_block for entry in entries]
 
   SaveResults(id, ids)
 
@@ -528,10 +533,10 @@ def handle_blocked(entry,values):
   return dict
 
 def handle_account(entry,values):
-  id       = entry[COL_ID]
-  email    = entry[COL_EMAIL]
-  password = entry[COL_PASSWORD]
-  dob      = entry[COL_DOB]
+  id       = entry.id
+  email    = entry.email
+  password = entry.password
+  dob      = entry.dob
 
   dict = {}
   dict['email']    = email
@@ -547,23 +552,22 @@ def handle_verify(entry,values):
     return {'error': 'email not specified'}
 
   id    = int(values['id'])
-  email = values['email']
+  email = values['email'].lower()
 
-  db.execute('SELECT id FROM profiles WHERE email ILIKE %s LIMIT 1' % (Quote(email)))
-  entry = db.fetchone()
+  entry = db.session.query(ProfilesModel.id).filter(ProfilesModel.email==email).one_or_none()
   if not entry:
     return {'error': 'Email Address not found'}
-  if entry[0] != id:
+  if entry.id != id:
     return {'error': 'Id does not match'}
 
   now = datetime.datetime.now()
-  db.execute('UPDATE profiles SET created2=%s, verified=true WHERE id=%d AND not verified' % (Quote(str(now)), id))
-  db.commit()
+  db.session.query(ProfilesModel).filter(ProfilesModel.id==id).update({"created2":now,"verified":True},synchronize_session=False)
+  db.session.commit()
 
   return {}
 
 def handle_cancelled(entry,values):
-  id = entry[COL_ID]
+  id = entry.id
 
   DeleteMember(id)
 
