@@ -1,7 +1,5 @@
 import sys, email, re
 
-from logger import *
-
 debug = False
 
 def parse(msg,indent=0):
@@ -16,7 +14,6 @@ def parse(msg,indent=0):
     else:
       recipient = msg['Final-Recipient'].lower()
     m = re.search(r'rfc822; *(.*)',recipient)
-    #logger.info('AUTO '+recipient+' '+text)
     return m.group(1)
   if msg.is_multipart():
     if debug:

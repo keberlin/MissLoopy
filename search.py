@@ -1,4 +1,4 @@
-import os, math, database
+import os, math, logging, re
 from sqlalchemy.sql.expression import or_
 
 from utils import *
@@ -9,12 +9,12 @@ from mlutils import *
 from database import db
 from model import *
 
-MAX_MATCHES = 300
-
 def search2(distance,order,id,x,y,tz,gender,age,ethnicity,height,weight,gender_choice,age_min,age_max,ethnicity_choice,height_min,height_max,weight_choice):
   adjust = GazLatAdjust(y)
 
-  query = db.session.query(ProfilesModel).filter(ProfilesModel.verified.is_(True))
+  query = db.session.query(ProfilesModel.id,ProfilesModel.x,ProfilesModel.y).filter(ProfilesModel.verified.is_(True))
+
+  # Limit profiles to those with genuine locations!
   #rules.append('last_ip_country = country')
   # Only list profiles which match this person's selection criteria
   if distance:
@@ -50,6 +50,7 @@ def search2(distance,order,id,x,y,tz,gender,age,ethnicity,height,weight,gender_c
     query = query.filter(or_(ProfilesModel.height.is_(None),ProfilesModel.height <= height_max))
   if weight_choice:
     query = query.filter(or_(ProfilesModel.weight.is_(None),ProfilesModel.weight.op('&')(weight_choice) != 0))
+
   # Only list profiles which match the other member's selection criteria
   query = query.filter(or_(ProfilesModel.gender_choice.is_(None),ProfilesModel.gender_choice.op('&')(gender)!=0))
   query = query.filter(or_(ProfilesModel.age_min.is_(None),ProfilesModel.age_min <= age))
@@ -70,7 +71,9 @@ def search2(distance,order,id,x,y,tz,gender,age,ethnicity,height,weight,gender_c
       query = query.order_by(ProfilesModel.created2.desc())
     else:
       pass # Order must be by distance
-  entries = query.limit(MAX_MATCHES).all()
+
+  entries = query.all()
+
   list = []
   for entry in entries:
     id = entry.id
@@ -83,4 +86,4 @@ def search2(distance,order,id,x,y,tz,gender,age,ethnicity,height,weight,gender_c
   if order == 'distance':
     list.sort(cmp=lambda a,b:int(a[1]-b[1])) # TODO
 
-  return map(lambda x:x[0], list)
+  return [x[0] for x in list]

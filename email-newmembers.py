@@ -41,7 +41,8 @@ for entry in entries:
   height_max       = entry.height_max
   weight_choice    = entry.weight_choice
 
-  ids = search.search2(50,'distance',id,x,y,tz,gender,age,ethnicity,height,weight,gender_choice,age_min,age_max,ethnicity_choice,height_min,height_max,weight_choice)
+  distance = 50
+  ids = search.search2(distance,'distance',id,x,y,tz,gender,age,ethnicity,height,weight,gender_choice,age_min,age_max,ethnicity_choice,height_min,height_max,weight_choice)
 
   # Remove blocked members
   ids = filter(lambda x:not BlockedMutually(id,x), ids)

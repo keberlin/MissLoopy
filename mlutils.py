@@ -1,11 +1,9 @@
-import os, datetime, cStringIO, base64
+import os, datetime, cStringIO, base64, logging
 from sqlalchemy.sql.expression import func, and_, or_
 from sqlalchemy.orm import aliased
 
 from database import db
 from model import *
-
-import logger
 
 from PIL import Image
 
@@ -13,8 +11,6 @@ from utils import *
 from iputils import *
 
 BASE_DIR = os.path.dirname(__file__)
-
-MISS_LOOPY_DB = 'missloopy'
 
 AGE_MIN = 18
 AGE_MAX = 99
@@ -382,7 +378,7 @@ def DeletePhoto(pid):
   try:
     os.remove(filename)
   except:
-    logger.error('ERROR: os.remove(%s) failed!' % filename)
+    logging.error('ERROR: os.remove(%s) failed!' % filename)
 
 def DeletePhotos(pids):
   for pid in pids:

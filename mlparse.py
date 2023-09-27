@@ -1,8 +1,6 @@
-import re
+import re, logging
 
 from mlutils import *
-
-from logger import *
 
 # Need these to counter the fact that IE does not support HTML5 properly!
 
@@ -26,7 +24,7 @@ def ParseAge(dict,key):
   if v is not None:
     dict[key] = str(min(max(int(v),AGE_MIN),AGE_MAX))
     return
-  logger.error('ERROR: Did not understand age: %s' % (dict[key]))
+  logging.error('ERROR: Did not understand age: %s' % (dict[key]))
   del dict[key]
 
 def ParseHeight(dict,key):
@@ -57,7 +55,7 @@ def ParseHeight(dict,key):
       v = (v1*12+v2)*2.54
       dict[key] = str(min(max(int(v),HEIGHT_MIN),HEIGHT_MAX))
       return
-  logger.error('ERROR: Did not understand height: %s' % (dict[key]))
+  logging.error('ERROR: Did not understand height: %s' % (dict[key]))
   del dict[key]
 
 def ParseRange(dict,kmin,kmax):

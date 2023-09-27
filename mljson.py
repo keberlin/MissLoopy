@@ -1,8 +1,6 @@
-import sys, json
+import sys, json, logging
 
 from utils import *
-
-from logger import *
 
 def ReturnJson(dict):
   print 'Content-type: application/json'
@@ -10,7 +8,7 @@ def ReturnJson(dict):
   print json.dumps(dict)
 
 def Return(dict):
-  logger.info(repr(dict))
+  logging.debug(repr(dict))
   ReturnJson(dict)
 
 def Error(str,dict=None):

@@ -1,4 +1,4 @@
-import datetime, json
+import datetime, json, logging
 import search, spam, mask
 from sqlalchemy.sql.expression import func, and_
 from sqlalchemy.orm import aliased
@@ -11,9 +11,9 @@ from mlutils import *
 from mlparse import *
 from mllist import *
 
-from logger import *
-
 from database import db
+
+MAX_RESULTS = 200
 
 # HTML Pages
 
@@ -115,8 +115,6 @@ def handle_seeking(entry,values):
   return dict
 
 def handle_matches(entry,values):
-  MAX_MATCHES = 100
-
   id               = entry.id
   location         = entry.location
   country          = GazCountry(location)
@@ -136,7 +134,8 @@ def handle_matches(entry,values):
   height_max       = entry.height_max
   weight_choice    = entry.weight_choice
 
-  ids = search.search2(300,'distance',id,x,y,tz,gender,age,ethnicity,height,weight,gender_choice,age_min,age_max,ethnicity_choice,height_min,height_max,weight_choice)[:MAX_MATCHES]
+  distance = 300
+  ids = search.search2(distance,'distance',id,x,y,tz,gender,age,ethnicity,height,weight,gender_choice,age_min,age_max,ethnicity_choice,height_min,height_max,weight_choice)[:MAX_RESULTS]
 
   # Remove blocked members
   ids = filter(lambda x:not BlockedMutually(id,x), ids)
@@ -179,8 +178,6 @@ def handle_search(entry,values):
   return dict
 
 def handle_results(entry,values):
-  MAX_MATCHES = 200
-
   id               = entry.id
   location         = entry.location
   country          = GazCountry(location)
@@ -233,7 +230,7 @@ def handle_results(entry,values):
   if values.get('order'):
     order = values['order']
 
-  ids = search.search2(distance,order,id,x,y,tz,gender,age,ethnicity,height,weight,gender_choice,age_min,age_max,ethnicity_choice,height_min,height_max,weight_choice)[:MAX_MATCHES]
+  ids = search.search2(distance,order,id,x,y,tz,gender,age,ethnicity,height,weight,gender_choice,age_min,age_max,ethnicity_choice,height_min,height_max,weight_choice)[:MAX_RESULTS]
 
   # Remove blocked members
   ids = filter(lambda x:not BlockedMutually(id,x), ids)

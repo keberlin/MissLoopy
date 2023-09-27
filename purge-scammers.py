@@ -1,10 +1,10 @@
-import csv, database
+import csv, logging
+
+import database
 
 from utils import *
 from mlutils import *
 from emails import *
-
-from logger import *
 
 db = database.Database(MISS_LOOPY_DB)
 
@@ -24,4 +24,4 @@ with open('listed_email_365.txt', 'rb') as csvfile:
 for id, email in ids:
   DeleteMember(id)
   EmailKickedStopForumSpam(email)
-  logger.info('Kicked due to banned email address %d %s' % (id, email))
+  logging.info('Kicked due to banned email address %d %s' % (id, email))

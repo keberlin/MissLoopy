@@ -1,7 +1,7 @@
 import SocketServer, threading, logging
 import dbserverinfo
 
-logger = logging.getLogger('dbserver')
+logger = logging.getLogger(__name__)
 logging.basicConfig(format='%(asctime)-15s %(message)s', filename='/var/log/dbserver/log', level=logging.DEBUG)
 
 sema = threading.Semaphore()

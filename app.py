@@ -1,4 +1,4 @@
-import sys
+import sys, logging
 
 from functools import wraps
 from flask import Flask, redirect, render_template, request, send_from_directory, g, jsonify
@@ -9,15 +9,17 @@ from handlers_json import *
 from database import db, MISSLOOPY_DB_URI
 from model import *
 
-from logger import *
+logging.basicConfig(filename='/var/log/missloopy/log', level=logging.DEBUG)
+
+#logger = logging.getLogger('missloopy')
 
 PAGE_SIZE = 20
 
 def debug(str):
-  logger.debug(request.remote_addr + ' ' + str)
+  logging.debug(request.remote_addr + ' ' + str)
 
 def info(str):
-  logger.info(request.remote_addr + ' ' + str)
+  logging.info(request.remote_addr + ' ' + str)
 
 class MyFlask(Flask):
   def get_send_file_max_age(self, name):

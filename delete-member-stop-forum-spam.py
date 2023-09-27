@@ -1,4 +1,4 @@
-import argparse
+import argparse, logging
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 
@@ -7,8 +7,6 @@ from mlutils import *
 from emails import *
 from database import MISSLOOPY_DB_URI, db
 from model import *
-
-from logger import *
 
 engine = create_engine(MISSLOOPY_DB_URI)
 Session = sessionmaker(bind=engine)
@@ -33,4 +31,4 @@ for id in args.id:
   StopForumSpamAdd(name,email,ip,message)
   DeleteMember(id)
   EmailKicked(email)
-  logger.info('Kicked %d %s' % (id, email))
+  logging.info('Kicked %d %s' % (id, email))

@@ -1,4 +1,4 @@
-import csv, requests
+import csv, requests, logging
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 
@@ -8,8 +8,6 @@ from mlutils import *
 from emails import *
 from database import MISSLOOPY_DB_URI, db
 from model import *
-
-from logger import *
 
 engine = create_engine(MISSLOOPY_DB_URI)
 Session = sessionmaker(bind=engine)
@@ -64,6 +62,6 @@ for id in ids:
     StopForumSpamAdd(name,email,ip,message)
     DeleteMember(id)
     EmailKicked(email)
-    logger.info('Kicked due to spamming %s %d %s' % (Quote(ip), id, email))
+    logging.info('Kicked due to spamming %s %d %s' % (Quote(ip), id, email))
   elif kick=='q':
     break

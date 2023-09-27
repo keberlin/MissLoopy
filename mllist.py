@@ -1,4 +1,4 @@
-import math, itertools
+import math, itertools, logging
 
 import mask
 
@@ -13,6 +13,7 @@ from model import *
 def ListMember(id,active,location,x,y,tz,unit_distance):
   entry = db.session.query(ProfilesModel).filter(ProfilesModel.id==id).one_or_none()
   if not entry:
+    logging.debug('debug: could not find profile: '+str(id))
     return None
   adjust = GazLatAdjust(y)
   dx = abs(x-entry.x)*adjust/1000
