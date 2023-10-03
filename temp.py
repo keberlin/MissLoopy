@@ -11,4 +11,3 @@ with open('bannedips.csv','rb') as csvfile:
     lower = row[0]
     upper = row[1]
     country = row[2]
-

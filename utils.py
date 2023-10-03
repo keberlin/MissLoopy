@@ -1,4 +1,11 @@
-import datetime, bisect, re, os, cgi, requests
+import bisect
+import cgi
+import datetime
+import os
+import re
+
+import requests
+
 
 def Days(month,day):
   return month*31+day

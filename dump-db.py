@@ -1,9 +1,9 @@
-import sys, csv
+import csv
+import sys
 
 import database
-
-from utils import *
 from mlutils import *
+from utils import *
 
 db = database.Database(MISS_LOOPY_DB)
 

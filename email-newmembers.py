@@ -1,12 +1,14 @@
-import datetime, search
+import datetime
+
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 
-from utils import *
-from localization import *
-from emails import *
+import search
 from database import MISSLOOPY_DB_URI, db
+from emails import *
+from localization import *
 from model import *
+from utils import *
 
 engine = create_engine(MISSLOOPY_DB_URI)
 Session = sessionmaker(bind=engine)
@@ -18,7 +20,7 @@ now = datetime.datetime.utcnow()
 
 results = {}
 
-entries = db.session.query(ProfilesModel).filter(ProfilesModel.verified.is_(True)).filter(ProfilesModel.created2>=since).all()
+entries = db.session.query(ProfileModel).filter(ProfileModel.verified.is_(True)).filter(ProfileModel.created2>=since).all()
 for entry in entries:
   id               = entry.id
   name             = entry.name
@@ -53,7 +55,7 @@ for entry in entries:
     results[id2].append(id)
 
 for id in results.keys():
-  entry = db.session.query(ProfilesModel).filter(ProfilesModel.id==id).one_or_none()
+  entry = db.session.query(ProfileModel).filter(ProfileModel.id==id).one_or_none()
   if not entry:
     continue
   if not entry.notifications & NOT_NEW_MEMBERS:

@@ -1,9 +1,10 @@
-from localization import *
 from html import *
-from mlhtml import *
-from mlutils import *
-from mllist import *
+
+from localization import *
 from mlemail import *
+from mlhtml import *
+from mllist import *
+from mlutils import *
 
 FROM = TITLE + '<noreply@' + DOMAIN + '>'
 
@@ -11,7 +12,7 @@ def EmailNewPhoto(filename,pid,id):
   dict = {}
   dict['id']    = id
   #dict['image'] = ImageData(filename)
-  dict['filename'] = PhotoFilename(pid)
+  dict['filename'] = filename
 
   html = RenderY('email-new-photo.html', dict)
   Email2(FROM, ['keith.hollis@gmail.com'], 'New Photo Uploaded (%d)' % (pid), html, 10)

@@ -1,7 +1,9 @@
-import sys, re, email
-from bs4 import BeautifulSoup
+import email
+import re
+import sys
 from xml.sax.saxutils import escape
 
+from bs4 import BeautifulSoup
 from mlhtml import *
 
 debug = False

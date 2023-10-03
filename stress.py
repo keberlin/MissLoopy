@@ -1,8 +1,9 @@
-import random, database
+import random
 
-from utils import *
+import database
 from gazeteer import *
 from mlutils import *
+from utils import *
 
 db = database.Database(MISS_LOOPY_DB)
 db2 = database.Database(GAZETTEER_DB)

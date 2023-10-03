@@ -25,6 +25,7 @@ __version__ = '2.0.0'
 
 import struct
 
+
 class Error(Exception):
 
     """Base class for exceptions."""

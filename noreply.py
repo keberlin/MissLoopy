@@ -1,6 +1,12 @@
 #!/usr/bin/python
 
-import os, sys, smtplib, email, re, tempfile, logging
+import email
+import logging
+import os
+import re
+import smtplib
+import sys
+import tempfile
 
 BASE_DIR = os.path.dirname(__file__)
 

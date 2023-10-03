@@ -1,5 +1,9 @@
-import os, socket, time
+import os
+import socket
+import time
+
 import dbserverinfo
+
 
 def sendmsg(message):
   # Connect to the server

@@ -1,13 +1,16 @@
-import re, datetime, time
+import datetime
+import re
+import time
+
 from sqlalchemy.sql.expression import func
 
-from mlutils import *
-
 from database import db
+from mlutils import *
 from model import *
 
+
 def AnalyseSpammer(id):
-  entry = db.session.query(func.count(EmailsModel.id_to.distinct()),func.count(),func.min(EmailsModel.sent)).filter(EmailsModel.id_from==id).one()
+  entry = db.session.query(func.count(EmailModel.id_to.distinct()),func.count(),func.min(EmailModel.sent)).filter(EmailModel.id_from==id).one()
   #db.execute('SELECT COUNT(DISTINCT id_to),COUNT(*),MIN(sent) FROM emails WHERE id_from=%d' % (id))
   members = entry[0]
   count = entry[1]

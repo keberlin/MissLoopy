@@ -1,11 +1,14 @@
-import re, datetime, json, time
+import datetime
+import json
+import re
+import time
+
 import requests
 
-from utilities import *
-from postcode import *
-from geolocate import *
-
 import database
+from geolocate import *
+from postcode import *
+from utilities import *
 
 SERVER_KEY='AIzaSyCYd-rpKMmESJv6Ry3Vr6M7fI92dK0duzA'
 
@@ -114,4 +117,3 @@ def geotravel_update(n):
     sql = "UPDATE geotravel SET travelling_time=%s,distance=%s,modified=%s WHERE start=%s AND destination=%s" % (str(seconds), str(distance), Quote(modified), Quote(beg), Quote(end))
     db.execute(sql)
     db.commit()
-

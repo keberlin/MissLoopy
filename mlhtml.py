@@ -1,8 +1,8 @@
-import sys, os
+import os
+import sys
+from html import *
 
 import jinja2
-
-from html import *
 
 BASE_DIR = os.path.dirname(__file__)
 

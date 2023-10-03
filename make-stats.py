@@ -1,14 +1,24 @@
-import sys, argparse, collections
+import argparse
+import collections
+import sys
 
-import database, mask
+from sqlalchemy import create_engine
+from sqlalchemy.orm import sessionmaker
 
-from utils import *
-from units import *
-from tzone import *
-from localization import *
+import mask
+from database import MISSLOOPY_DB_URI, db
 from gazetteer import *
-from mlutils import *
+from localization import *
 from mlhtml import *
+from mlutils import *
+from model import *
+from tzone import *
+from units import *
+from utils import *
+
+engine = create_engine(MISSLOOPY_DB_URI)
+Session = sessionmaker(bind=engine)
+db.session = Session()
 
 YEARS = [1,2,5]
 
@@ -20,17 +30,13 @@ args = parser.parse_args()
 
 BASE_DIR = os.path.dirname(__file__)
 
-db = database.Database(MISS_LOOPY_DB)
-
 now = datetime.datetime.utcnow()
 
 years = {}
 for year in YEARS:
-  sql = """
-    SELECT * FROM reports WHERE logged > %s ORDER BY logged
-  """
-  db.execute(sql, (now-datetime.timedelta(weeks=year*52),))
-  years[year] = [ReportStruct(report[0].strftime('%Y-%m-%d'),*report[1:]) for report in db.fetchall()]
+  td = now-datetime.timedelta(weeks=year*52)
+  entries = db.session.query(ReportModel).filter(ReportModel.logged>td).order_by(ReportModel.logged).all()
+  years[year] = [ReportStruct(report.logged.strftime('%Y-%m-%d'),report.verified,report.unverified,report.males,report.females,report.men,report.women,report.sugar_pups,report.sugar_babies,report.sugar_daddies,report.sugar_mommas,report.avg_age_males,report.avg_age_females,report.avg_age_men,report.avg_age_women,report.avg_age_sugar_pups,report.avg_age_sugar_babies,report.avg_age_sugar_daddies,report.avg_age_sugar_mommas,report.white,report.black,report.latino,report.indian,report.asian,report.mixed,report.other,report.active,report.messages) for report in entries]
 
 d = {'title':'Statistics', 'years':years}
 

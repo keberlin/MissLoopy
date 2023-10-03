@@ -1,6 +1,8 @@
 #!/usr/bin/python
 
-import os, sys, tempfile
+import os
+import sys
+import tempfile
 
 BASE_DIR = os.path.dirname(__file__)
 

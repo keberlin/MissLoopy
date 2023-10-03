@@ -1,14 +1,17 @@
-import os, datetime, cStringIO, base64, logging
-from sqlalchemy.sql.expression import func, and_, or_
-from sqlalchemy.orm import aliased
-
-from database import db
-from model import *
+import base64
+import cStringIO
+import datetime
+import logging
+import os
 
 from PIL import Image
+from sqlalchemy.orm import aliased
+from sqlalchemy.sql.expression import and_, func, or_
 
-from utils import *
+from database import db
 from iputils import *
+from model import *
+from utils import *
 
 BASE_DIR = os.path.dirname(__file__)
 
@@ -308,16 +311,16 @@ def PhotoFilename(pid):
   return os.path.join(PHOTOS_DIR, name + '.jpg')
 
 def MasterPhoto(id):
-  entry = db.session.query(PhotosModel.pid).filter(PhotosModel.id==id, PhotosModel.master.is_(True)).one_or_none()
+  entry = db.session.query(PhotoModel.pid).filter(PhotoModel.id==id, PhotoModel.master.is_(True)).one_or_none()
   if not entry:
-    entry = db.session.query(PhotosModel.pid).filter(PhotosModel.id==id).first()
+    entry = db.session.query(PhotoModel.pid).filter(PhotoModel.id==id).first()
     if not entry:
       return 0
   return entry.pid
 
 def Login(email,password):
   # Authenticate
-  entry = db.session.query(ProfilesModel).filter(ProfilesModel.email==email).one_or_none()
+  entry = db.session.query(ProfileModel).filter(ProfileModel.email==email).one_or_none()
   if not entry:
     return {'error': 'Email Address not found.'}
   if entry.password != password:
@@ -347,7 +350,7 @@ def Authenticate(cookies=None,remote_addr=None):
   password = cookies['password']
 
   # Authenticate
-  entry = db.session.query(ProfilesModel).filter(ProfilesModel.id==id, ProfilesModel.email==email, ProfilesModel.password==password).one_or_none()
+  entry = db.session.query(ProfileModel).filter(ProfileModel.id==id, ProfileModel.email==email, ProfileModel.password==password).one_or_none()
   if not entry:
     return None
 
@@ -372,9 +375,9 @@ def BlockedMutually(id,id_with):
 
 def DeletePhoto(pid):
   # Remove photo file using pid
-  db.session.query(PhotosModel).filter(PhotosModel.pid==pid).delete()
+  db.session.query(EmailModel).filter(PhotoModel.pid==pid).delete()
   db.session.commit()
-  filename = os.path.join(BASE_DIR, 'static', PhotoFilename(pid))
+  filename = os.path.join(BASE_DIR, PhotoFilename(pid))
   try:
     os.remove(filename)
   except:
@@ -385,70 +388,70 @@ def DeletePhotos(pids):
     DeletePhoto(pid)
 
 def DeleteMember(id):
-  db.session.query(ProfilesModel).filter(ProfilesModel.id==id).delete()
-  entries = db.session.query(PhotosModel.pid).filter(PhotosModel.id==id).all()
+  db.session.query(ProfileModel).filter(ProfileModel.id==id).delete()
+  entries = db.session.query(PhotoModel.pid).filter(PhotoModel.id==id).all()
   pids = [entry.pid for entry in entries]
   DeletePhotos(pids)
-  db.session.query(FavoritesModel).filter(or_(FavoritesModel.id==id, FavoritesModel.id_favorite==id)).delete()
+  db.session.query(FavoriteModel).filter(or_(FavoriteModel.id==id, FavoriteModel.id_favorite==id)).delete()
   db.session.query(BlockedModel).filter(or_(BlockedModel.id==id, BlockedModel.id_block==id)).delete()
-  db.session.query(EmailsModel).filter(or_(EmailsModel.id_from==id, EmailsModel.id_to==id)).delete()
-  db.session.query(ResultsModel).filter(ResultsModel.id==id).delete()
+  db.session.query(EmailModel).filter(or_(EmailModel.id_from==id, EmailModel.id_to==id)).delete()
+  db.session.query(ResultModel).filter(ResultModel.id==id).delete()
   #PurgeResults(id)
   db.session.commit()
 
 def InboxCount(id):
   blocked_by_me = aliased(BlockedModel)
   blocked_by_them = aliased(BlockedModel)
-  count = db.session.query(func.count(EmailsModel.id_from.distinct())).\
-    outerjoin(blocked_by_me,and_(blocked_by_me.id==EmailsModel.id_from,blocked_by_me.id_block==EmailsModel.id_to)).\
-    outerjoin(blocked_by_them,and_(blocked_by_them.id_block==EmailsModel.id_to,blocked_by_them.id==EmailsModel.id_from)).\
+  count = db.session.query(func.count(EmailModel.id_from.distinct())).\
+    outerjoin(blocked_by_me,and_(blocked_by_me.id==EmailModel.id_from,blocked_by_me.id_block==EmailModel.id_to)).\
+    outerjoin(blocked_by_them,and_(blocked_by_them.id_block==EmailModel.id_to,blocked_by_them.id==EmailModel.id_from)).\
     filter(blocked_by_me.id.is_(None)).\
     filter(blocked_by_them.id.is_(None)).\
-    filter(EmailsModel.id_to==id, EmailsModel.viewed.is_(False)).\
+    filter(EmailModel.id_to==id, EmailModel.viewed.is_(False)).\
     scalar()
   return count
 
 def OutboxCount(id):
   blocked_by_me = aliased(BlockedModel)
   blocked_by_them = aliased(BlockedModel)
-  count = db.session.query(func.count(EmailsModel.id_to.distinct())).\
-    outerjoin(blocked_by_me,and_(blocked_by_me.id==EmailsModel.id_from,blocked_by_me.id_block==EmailsModel.id_to)).\
-    outerjoin(blocked_by_them,and_(blocked_by_them.id_block==EmailsModel.id_to,blocked_by_them.id==EmailsModel.id_from)).\
+  count = db.session.query(func.count(EmailModel.id_to.distinct())).\
+    outerjoin(blocked_by_me,and_(blocked_by_me.id==EmailModel.id_from,blocked_by_me.id_block==EmailModel.id_to)).\
+    outerjoin(blocked_by_them,and_(blocked_by_them.id_block==EmailModel.id_to,blocked_by_them.id==EmailModel.id_from)).\
     filter(blocked_by_me.id.is_(None)).\
     filter(blocked_by_them.id.is_(None)).\
-    filter(EmailsModel.id_from==id, EmailsModel.viewed.is_(False)).\
+    filter(EmailModel.id_from==id, EmailModel.viewed.is_(False)).\
     scalar()
   return count
 
 def SaveResults(id,results):
-  db.session.query(ResultsModel).filter(ResultsModel.id==id).delete()
+  db.session.query(ResultModel).filter(ResultModel.id==id).delete()
   for i in range(len(results)):
     id_previous = results[i-1] if i > 0 else 0
     id_search = results[i]
     id_next = results[i+1] if i < len(results)-1 else 0
-    db.session.add(ResultsModel(id=id, id_search=id_search, id_previous=id_previous, id_next=id_next))
+    db.session.add(ResultModel(id=id, id_search=id_search, id_previous=id_previous, id_next=id_next))
     db.session.commit()
 
 def PreviousResult(id,id_search):
-  entry = db.session.query(ResultsModel.id_previous).filter(ResultsModel.id==id, ResultsModel.id_search==id_search).one_or_none()
+  entry = db.session.query(ResultModel.id_previous).filter(ResultModel.id==id, ResultModel.id_search==id_search).one_or_none()
   if not entry:
     return 0
   return entry.id_previous
 
 def NextResult(id,id_search):
-  entry = db.session.query(ResultsModel.id_next).filter(ResultsModel.id==id, ResultsModel.id_search==id_search).one_or_none()
+  entry = db.session.query(ResultModel.id_next).filter(ResultModel.id==id, ResultModel.id_search==id_search).one_or_none()
   if not entry:
     return 0
   return entry.id_next
 
 def PurgeResults(id_search):
-  entries = db.session.query(ResultsModel).filter(ResultsModel.id_search==id_search).all()
+  entries = db.session.query(ResultModel).filter(ResultModel.id_search==id_search).all()
   for entry in entries:
     id          = entry[COL5_ID]
     id_previous = entry[COL5_ID_PREVIOUS]
     id_next     = entry[COL5_ID_NEXT]
     if id_previous:
-      db.session.query(ResultsModel).filter(ResultsModel.id==id, ResultsModel.id_search==id_previous).update({"id_next":id_next},synchronize_session=False)
+      db.session.query(ResultModel).filter(ResultModel.id==id, ResultModel.id_search==id_previous).update({"id_next":id_next},synchronize_session=False)
     if id_next:
-      db.session.query(ResultsModel).filter(ResultsModel.id==id, ResultsModel.id_search==id_next).update({"id_previous":id_previous},synchronize_session=False)
+      db.session.query(ResultModel).filter(ResultModel.id==id, ResultModel.id_search==id_next).update({"id_previous":id_previous},synchronize_session=False)
     db.session.commit()

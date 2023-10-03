@@ -1,18 +1,26 @@
-import time, datetime, database
+import datetime
+import time
 
-from utils import *
+from sqlalchemy import create_engine
+from sqlalchemy.orm import sessionmaker
+
+from database import MISSLOOPY_DB_URI, db
 from mlutils import *
+from model import *
+from utils import *
 
-db = database.Database(MISS_LOOPY_DB)
+engine = create_engine(MISSLOOPY_DB_URI)
+Session = sessionmaker(bind=engine)
+db.session = Session()
 
-db.execute('SELECT id_from,COUNT(DISTINCT id_to),COUNT(*),MIN(sent) FROM emails GROUP BY id_from ORDER BY COUNT(DISTINCT id_to)')
-for entry in db.fetchall():
-  id_from = entry[0]
+entries = db.session.query(EmailModel.id_from,func.count(EmailModel.id_to.distinct()),func.min(EmailModel.sent)).group_by(EmailModel.id_from).order_by(func.count(EmailModel.id_to.distinct()).all()
+for entry in entries:
+  id_from = entry.id_from
   members = entry[1]
   if members < 5:
     continue
-  count = entry[2]
-  sent_min = datetime.datetime(*time.strptime(entry[3],"%Y-%m-%d %H:%M:%S.%f")[:6])
+  count = entry[1]
+  sent_min = entry[2]
   sent_max = datetime.datetime.utcnow()
   td = sent_max-sent_min
   seconds = td.days*24*60*60 + td.seconds

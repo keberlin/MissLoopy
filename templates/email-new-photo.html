@@ -1,6 +1,5 @@
-<!DOCTYPE html>
-<html>
-  <body>
-    <a href="{{www}}/member?id={{id}}"><img src="{{www}}/{{filename}}" style="width:100%;max-width:600px;min-width:300px" /></a>
-  </body>
-</html>
+{% extends 'email.html' %}
+
+{% block body %}
+  <a href="{{ www }}/member?id={{id}}"><img src="{{ www + url_for('static', filename=filename) }}" style="width:100%;max-width:600px;min-width:300px" /></a>
+{% endblock %}

@@ -1,8 +1,8 @@
 import os
 
-from utils import *
 from gazetteer import *
 from mljson import *
+from utils import *
 
 MAX_MATCHES = 5
 

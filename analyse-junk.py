@@ -1,9 +1,16 @@
 import sys
 
+from sqlalchemy import create_engine
+from sqlalchemy.orm import sessionmaker
+
+from database import MISSLOOPY_DB_URI, db
 from mlutils import *
+from model import *
 from utils import *
 
-import database
+engine = create_engine(MISSLOOPY_DB_URI)
+Session = sessionmaker(bind=engine)
+db.session = Session()
 
 MANDATORY = ['western union', 'proposal', 'money', 'usd', 'solicitor', 'lawyer', 'barrister', 'lottery', 'lotto', 'sweepstake',
              'transaction', 'bank', 'winner', 'official', 'payout', 'winning', 'orphan', 'cancer', 'moneygram', 'civil war',
@@ -14,8 +21,6 @@ MANDATORY = ['western union', 'proposal', 'money', 'usd', 'solicitor', 'lawyer',
              'rocketmail', 'facebook', 'ymail', 'loan', 'dollar', 'apply', 'collateral']
 
 EXCLUSIONS = ['hello', 'wink']
-
-db = database.Database(MISS_LOOPY_DB)
 
 message_count = 0
 keywords = {}
@@ -90,8 +95,7 @@ for item in MANDATORY:
     continue
   spam[item] = 0.75
 
-sql = 'TRUNCATE spam'
-db.execute(sql)
-sql = 'INSERT INTO spam (str,cost) VALUES %s'%(','.join([("(%s,%s)"%(tosql(str),tosql(cost))) for str,cost in spam.iteritems()]))
-db.execute(sql)
-db.commit()
+db.session.truncate(SpamModel)
+for str,cost in spam.iteritems():
+  db.session.add(SpamModel(str=str,cost=cost))
+db.session.commit()

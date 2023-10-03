@@ -1,11 +1,12 @@
 import datetime
+
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 
-from utils import *
-from mlutils import *
 from database import MISSLOOPY_DB_URI, db
+from mlutils import *
 from model import *
+from utils import *
 
 engine = create_engine(MISSLOOPY_DB_URI)
 Session = sessionmaker(bind=engine)
@@ -16,7 +17,7 @@ since = db.session.query(AdminModel.last_new_member_search).scalar()
 now = datetime.datetime.utcnow()
 
 count = 0
-entries = db.session.query(ProfilesModel).filter(ProfilesModel.verified.is_(True)).filter(ProfilesModel.created2>=since).all()
+entries = db.session.query(ProfileModel).filter(ProfileModel.verified.is_(True)).filter(ProfileModel.created2>=since).all()
 for entry in entries:
   id              = entry.id
   name            = entry.name

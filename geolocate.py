@@ -1,10 +1,11 @@
-import urllib, json
+import json
+import urllib
+
 import requests
 
-from utilities import *
-from postcode import *
-
 import database
+from postcode import *
+from utilities import *
 
 SERVER_KEY='AIzaSyCYd-rpKMmESJv6Ry3Vr6M7fI92dK0duzA'
 

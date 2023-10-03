@@ -1,22 +1,27 @@
 import os
 
-import database
+from sqlalchemy import create_engine
+from sqlalchemy.orm import sessionmaker
 
-from utils import *
+from database import MISSLOOPY_DB_URI, db
 from gazetteer import *
-from mlutils import *
 from mlhtml import *
+from mlutils import *
+from model import *
+from utils import *
+
+engine = create_engine(MISSLOOPY_DB_URI)
+Session = sessionmaker(bind=engine)
+db.session = Session()
 
 BASE_DIR = os.path.dirname(__file__)
-
-db = database.Database(MISS_LOOPY_DB)
 
 dict = {}
 
 with open(os.path.join(BASE_DIR, 'static', MEMBERS_DIR, 'all.html'), 'w') as f:
   coords = []
-  db.execute('SELECT DISTINCT x,y FROM profiles WHERE verified')
-  for entry in db.fetchall():
+  entries = db.session.query(ProfileModel.x,ProfileModel.y).filter(ProfileModel.verified.is_(True)).distinct().all()
+  for entry in entries:
     lat = entry[1]*360.0/CIRCUM_Y
     lng = entry[0]*360.0/CIRCUM_X
     coords.append(lat)

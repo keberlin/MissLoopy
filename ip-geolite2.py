@@ -1,4 +1,5 @@
-import argparse, csv
+import argparse
+import csv
 
 parser = argparse.ArgumentParser(description='Convert dbip IP Address csv File.')
 parser.add_argument('-o', metavar='output', nargs=1, required=True, help='output file')

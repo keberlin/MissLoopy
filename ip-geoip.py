@@ -1,4 +1,5 @@
-import argparse, csv
+import argparse
+import csv
 
 parser = argparse.ArgumentParser(description='Convert GeoIp IP Address csv File.')
 parser.add_argument('file', nargs='+', help='a file for conversion')

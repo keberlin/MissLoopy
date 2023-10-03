@@ -1,7 +1,7 @@
 import fileinput
 
-from utils import *
 from emails import *
+from utils import *
 
 emails = set()
 for line in fileinput.input():

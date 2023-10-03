@@ -1,7 +1,8 @@
-import sqlite3, cgi
+import cgi
+import sqlite3
 
-from utils import *
 from mljson import *
+from utils import *
 
 conn2 = sqlite3.connect('gazetteer.db', detect_types=sqlite3.PARSE_DECLTYPES)
 cursor2 = conn2.cursor()

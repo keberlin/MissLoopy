@@ -1,12 +1,14 @@
-import sys, logging
-
+import logging
+import sys
 from functools import wraps
-from flask import Flask, redirect, render_template, request, send_from_directory, g, jsonify
-
 from html import *
+
+from flask import (Flask, g, jsonify, redirect, render_template, request,
+                   send_from_directory)
+
+from database import MISSLOOPY_DB_URI, db
 from handlers_html import *
 from handlers_json import *
-from database import db, MISSLOOPY_DB_URI
 from model import *
 
 logging.basicConfig(filename='/var/log/missloopy/log', level=logging.DEBUG)

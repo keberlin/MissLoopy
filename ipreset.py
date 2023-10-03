@@ -1,10 +1,12 @@
+import argparse
+import csv
 import datetime
-import argparse, csv, psycopg2
+
+import psycopg2
 
 import database
-
-from utils import *
 from iputils import *
+from utils import *
 
 parser = argparse.ArgumentParser(description='Create IP Address Database.')
 parser.add_argument('file', nargs='+', help='a file for conversion')

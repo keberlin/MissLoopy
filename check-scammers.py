@@ -1,12 +1,19 @@
-import csv, database
+import csv
 
-from utils import *
+from sqlalchemy import create_engine
+from sqlalchemy.orm import sessionmaker
+
+from database import MISSLOOPY_DB_URI, db
 from mlutils import *
+from model import *
+from utils import *
 
-db = database.Database(MISS_LOOPY_DB)
+engine = create_engine(MISSLOOPY_DB_URI)
+Session = sessionmaker(bind=engine)
+db.session = Session()
 
-db.execute('SELECT LOWER(email) FROM profiles WHERE verified')
-emails = set([(entry[0]) for entry in db.fetchall()])
+entries = db.session.query(ProfileModel.email).filter(ProfileModel.verified.is_(True)).all()
+emails = set([entry.email.lower() for entry in entries])
 
 with open('listed_email_365.txt', 'rb') as csvfile:
   reader = csv.reader(csvfile, quoting=csv.QUOTE_NONE, skipinitialspace=True)
@@ -14,5 +21,5 @@ with open('listed_email_365.txt', 'rb') as csvfile:
     email = row[0].decode('utf-8', 'ignore').lower()
     if email in emails:
       print 'Scammer email address %s is registered' % (email)
-      db.execute('SELECT id,name,location,last_ip_country,last_ip FROM profiles WHERE email ILIKE %s LIMIT 1' % (Quote(email)))
-      print ' ', db.fetchone()
+      entry = db.session.query(ProfileModel.id,ProfileModel.name,ProfileModel.location,ProfileModel.last_ip_country).filter(func.lower(ProfileModel.email)==email).one()
+      print ' ', entry

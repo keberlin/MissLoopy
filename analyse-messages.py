@@ -1,4 +1,5 @@
-import fileinput, re
+import fileinput
+import re
 
 from utils import *
 

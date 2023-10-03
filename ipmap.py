@@ -1,5 +1,8 @@
-import fileinput, re
+import fileinput
+import re
+
 from iputils import *
+
 
 def IpSub(m):
   return IpCountry(m.group(1))

@@ -1,24 +1,29 @@
 import logging
 
-import database
+from sqlalchemy import create_engine
+from sqlalchemy.orm import sessionmaker
 
-from utils import *
-from mlutils import *
+from database import MISSLOOPY_DB_URI, db
 from emails import *
+from mlutils import *
+from model import *
+from utils import *
 
-db = database.Database(MISS_LOOPY_DB)
+engine = create_engine(MISSLOOPY_DB_URI)
+Session = sessionmaker(bind=engine)
+db.session = Session()
 
-db.execute('SELECT last_ip FROM profiles WHERE verified')
-ips = set([(entry[0]) for entry in db.fetchall()])
+entries = db.session.query(ProfileModel.last_ip).filter(ProfileModel.verified.is_(True)).all()
+ips = set([entry.last_ip for entry in entries])
 
 ids = []
 with open('bannedips.txt','r') as file:
   for line in file.readlines():
     ip = line.strip()
     if ip in ips:
-      db.execute('SELECT id, email FROM profiles WHERE last_ip=%s' % (Quote(ip)))
-      for entry in db.fetchall():
-        ids.append((entry[0], entry[1], ip))
+      entries = db.session.query(ProfileModel.id,ProfileModel.email).filter(ProfileModel.last_ip==ip).all()
+      for entry in entries:
+        ids.append((entry.id, entry.email, ip))
 
 for id, email, ip in ids:
   DeleteMember(id)

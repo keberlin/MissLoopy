@@ -1,4 +1,5 @@
 import os
+
 from PIL import Image
 
 im = Image.open(os.path.join('..', 'html', 'images', 'logo.png'))

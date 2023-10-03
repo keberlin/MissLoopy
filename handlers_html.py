@@ -1,17 +1,21 @@
-import datetime, json, logging
-import search, spam, mask
-from sqlalchemy.sql.expression import func, and_
+import datetime
+import json
+import logging
+
 from sqlalchemy.orm import aliased
+from sqlalchemy.sql.expression import and_, func
 
-from utils import *
-from units import *
-from localization import *
-from gazetteer import *
-from mlutils import *
-from mlparse import *
-from mllist import *
-
+import mask
+import search
+import spam
 from database import db
+from gazetteer import *
+from localization import *
+from mllist import *
+from mlparse import *
+from mlutils import *
+from units import *
+from utils import *
 
 MAX_RESULTS = 200
 
@@ -19,11 +23,11 @@ MAX_RESULTS = 200
 
 def handle_index(entry,values):
   # Get most favorite male members
-  entries = db.session.query(FavoritesModel.id_favorite,func.count(FavoritesModel.id.distinct())).filter(ProfilesModel.gender==1).join(ProfilesModel,FavoritesModel.id_favorite==ProfilesModel.id).group_by(FavoritesModel.id_favorite,FavoritesModel.id).order_by(FavoritesModel.id).limit(2).all()
+  entries = db.session.query(FavoriteModel.id_favorite,func.count(FavoriteModel.id.distinct())).filter(ProfileModel.gender==1).join(ProfileModel,FavoriteModel.id_favorite==ProfileModel.id).group_by(FavoriteModel.id_favorite,FavoriteModel.id).order_by(FavoriteModel.id).limit(2).all()
   male = [entry.id_favorite for entry in entries]
 
   # Get most favorite female members
-  entries = db.session.query(FavoritesModel.id_favorite,func.count(FavoritesModel.id.distinct())).filter(ProfilesModel.gender==2).join(ProfilesModel,FavoritesModel.id_favorite==ProfilesModel.id).group_by(FavoritesModel.id_favorite,FavoritesModel.id).order_by(FavoritesModel.id).limit(2).all()
+  entries = db.session.query(FavoriteModel.id_favorite,func.count(FavoriteModel.id.distinct())).filter(ProfileModel.gender==2).join(ProfileModel,FavoriteModel.id_favorite==ProfileModel.id).group_by(FavoriteModel.id_favorite,FavoriteModel.id).order_by(FavoriteModel.id).limit(2).all()
   female = [entry.id_favorite for entry in entries]
 
   ids = [female[0], male[0], female[1], male[1]]
@@ -31,7 +35,7 @@ def handle_index(entry,values):
   entries = []
   for id in ids:
     print('id:',id)
-    entry = db.session.query(ProfilesModel.name, ProfilesModel.location).filter(ProfilesModel.id==id).one()
+    entry = db.session.query(ProfileModel.name, ProfileModel.location).filter(ProfileModel.id==id).one()
     d = {}
     d['id']      = id
     d['image']   = PhotoFilename(MasterPhoto(id))
@@ -82,7 +86,7 @@ def handle_photos(entry,values):
 
   pids = []
   master = 0
-  entries = db.session.query(PhotosModel.pid, PhotosModel.master).filter(PhotosModel.id==id).all()
+  entries = db.session.query(PhotoModel.pid, PhotoModel.master).filter(PhotoModel.id==id).all()
   for entry in entries:
     pids.append(entry.pid)
     if entry.master:
@@ -279,7 +283,7 @@ def handle_member(entry,values):
   dict['id_previous'] = PreviousResult(id, id_view)
   dict['id_next']     = NextResult(id, id_view)
 
-  entry = db.session.query(ProfilesModel).filter(ProfilesModel.id==id_view, ProfilesModel.verified.is_(True)).one_or_none()
+  entry = db.session.query(ProfileModel).filter(ProfileModel.id==id_view, ProfileModel.verified.is_(True)).one_or_none()
   if not entry:
     dict['error'] = 'This member does not exist or has removed their account.'
     return dict
@@ -299,7 +303,7 @@ def handle_member(entry,values):
   master = MasterPhoto(id_view)
   image = PhotoFilename(master)
   pids = []
-  entries = db.session.query(PhotosModel.pid).filter(PhotosModel.id==id_view).all()
+  entries = db.session.query(PhotoModel.pid).filter(PhotoModel.id==id_view).all()
   for entry2 in entries:
     pid = entry2.pid
     if pid != master:
@@ -363,7 +367,7 @@ def handle_emailthread(entry,values):
   dict['id_previous'] = PreviousResult(id, id_with)
   dict['id_next']     = NextResult(id, id_with)
 
-  entry = db.session.query(ProfilesModel).filter(ProfilesModel.id==id_with, ProfilesModel.verified.is_(True)).one_or_none()
+  entry = db.session.query(ProfileModel).filter(ProfileModel.id==id_with, ProfileModel.verified.is_(True)).one_or_none()
   if not entry:
     dict['error'] = "This member doesn't exist or has removed their account."
     return dict
@@ -380,7 +384,7 @@ def handle_emailthread(entry,values):
 
   image = PhotoFilename(MasterPhoto(id_with))
   emails = []
-  entries = db.session.query(EmailsModel).filter(or_(and_(EmailsModel.id_from==id, EmailsModel.id_to==id_with), and_(EmailsModel.id_from==id_with, EmailsModel.id_to==id))).order_by(EmailsModel.sent.desc()).all()
+  entries = db.session.query(EmailModel).filter(or_(and_(EmailModel.id_from==id, EmailModel.id_to==id_with), and_(EmailModel.id_from==id_with, EmailModel.id_to==id))).order_by(EmailModel.sent.desc()).all()
   for entry in entries:
     d = {}
     d['sent']     = entry.id_from == id
@@ -393,7 +397,7 @@ def handle_emailthread(entry,values):
     emails.append(d)
   dict['entries'] = emails
 
-  db.session.query(EmailsModel).filter(EmailsModel.id_from==id_with, EmailsModel.id_to==id).update({"viewed":True},synchronize_session=False)
+  db.session.query(EmailModel).filter(EmailModel.id_from==id_with, EmailModel.id_to==id).update({"viewed":True},synchronize_session=False)
   db.session.commit()
 
   return dict
@@ -408,14 +412,14 @@ def handle_inbox(entry,values):
 
   blocked_by_me = aliased(BlockedModel)
   blocked_by_them = aliased(BlockedModel)
-  entries = db.session.query(EmailsModel.id_from).\
-    outerjoin(blocked_by_me,and_(blocked_by_me.id==EmailsModel.id_from,blocked_by_me.id_block==EmailsModel.id_to)).\
-    outerjoin(blocked_by_them,and_(blocked_by_them.id_block==EmailsModel.id_to,blocked_by_them.id==EmailsModel.id_from)).\
+  entries = db.session.query(EmailModel.id_from).\
+    outerjoin(blocked_by_me,and_(blocked_by_me.id==EmailModel.id_from,blocked_by_me.id_block==EmailModel.id_to)).\
+    outerjoin(blocked_by_them,and_(blocked_by_them.id_block==EmailModel.id_to,blocked_by_them.id==EmailModel.id_from)).\
     filter(blocked_by_me.id.is_(None)).\
     filter(blocked_by_them.id.is_(None)).\
-    filter(EmailsModel.id_to==id).\
-    group_by(EmailsModel.id_from).\
-    order_by(func.max(EmailsModel.sent).desc()).\
+    filter(EmailModel.id_to==id).\
+    group_by(EmailModel.id_from).\
+    order_by(func.max(EmailModel.sent).desc()).\
     distinct().\
     all()
   ids = [entry.id_from for entry in entries]
@@ -424,7 +428,7 @@ def handle_inbox(entry,values):
 
   counts = []
   for id_from in ids:
-    count = db.session.query(func.count()).filter(EmailsModel.id_from==id_from, EmailsModel.id_to==id, EmailsModel.viewed.is_(False)).scalar()
+    count = db.session.query(func.count()).filter(EmailModel.id_from==id_from, EmailModel.id_to==id, EmailModel.viewed.is_(False)).scalar()
     counts.append(count)
 
   SetLocale(country)
@@ -448,14 +452,14 @@ def handle_outbox(entry,values):
 
   blocked_by_me = aliased(BlockedModel)
   blocked_by_them = aliased(BlockedModel)
-  entries = db.session.query(EmailsModel.id_to).\
-    outerjoin(blocked_by_me,and_(blocked_by_me.id==EmailsModel.id_from,blocked_by_me.id_block==EmailsModel.id_to)).\
-    outerjoin(blocked_by_them,and_(blocked_by_them.id_block==EmailsModel.id_to,blocked_by_them.id==EmailsModel.id_from)).\
+  entries = db.session.query(EmailModel.id_to).\
+    outerjoin(blocked_by_me,and_(blocked_by_me.id==EmailModel.id_from,blocked_by_me.id_block==EmailModel.id_to)).\
+    outerjoin(blocked_by_them,and_(blocked_by_them.id_block==EmailModel.id_to,blocked_by_them.id==EmailModel.id_from)).\
     filter(blocked_by_me.id.is_(None)).\
     filter(blocked_by_them.id.is_(None)).\
-    filter(EmailsModel.id_from==id).\
-    group_by(EmailsModel.id_to).\
-    order_by(func.max(EmailsModel.sent).desc()).\
+    filter(EmailModel.id_from==id).\
+    group_by(EmailModel.id_to).\
+    order_by(func.max(EmailModel.sent).desc()).\
     distinct().\
     all()
   ids = [entry.id_to for entry in entries]
@@ -464,7 +468,7 @@ def handle_outbox(entry,values):
 
   counts = []
   for id_to in ids:
-    count = db.session.query(func.count()).filter(EmailsModel.id_from==id, EmailsModel.id_to==id_to, EmailsModel.viewed.is_(False)).scalar()
+    count = db.session.query(func.count()).filter(EmailModel.id_from==id, EmailModel.id_to==id_to, EmailModel.viewed.is_(False)).scalar()
     counts.append(count)
 
   SetLocale(country)
@@ -486,7 +490,7 @@ def handle_favorites(entry,values):
   y        = entry.y
   tz       = entry.tz
 
-  entries = db.session.query(FavoritesModel.id_favorite.distinct(), ProfilesModel.last_login).join(ProfilesModel, ProfilesModel.id==FavoritesModel.id_favorite).filter(FavoritesModel.id==id).order_by(ProfilesModel.last_login).all()
+  entries = db.session.query(FavoriteModel.id_favorite.distinct(), ProfileModel.last_login).join(ProfileModel, ProfileModel.id==FavoriteModel.id_favorite).filter(FavoriteModel.id==id).order_by(ProfileModel.last_login).all()
   ids = [entry.id_favorite for entry in entries]
 
   # Remove blocked members
@@ -551,14 +555,14 @@ def handle_verify(entry,values):
   id    = int(values['id'])
   email = values['email'].lower()
 
-  entry = db.session.query(ProfilesModel.id).filter(ProfilesModel.email==email).one_or_none()
+  entry = db.session.query(ProfileModel.id).filter(ProfileModel.email==email).one_or_none()
   if not entry:
     return {'error': 'Email Address not found'}
   if entry.id != id:
     return {'error': 'Id does not match'}
 
   now = datetime.datetime.now()
-  db.session.query(ProfilesModel).filter(ProfilesModel.id==id).update({"created2":now,"verified":True},synchronize_session=False)
+  db.session.query(ProfileModel).filter(ProfileModel.id==id).update({"created2":now,"verified":True},synchronize_session=False)
   db.session.commit()
 
   return {}

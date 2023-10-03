@@ -1,17 +1,19 @@
-import math, itertools, logging
+import itertools
+import logging
+import math
 
 import mask
-
-from utils import *
-from units import *
-from tzone import *
+from database import db
 from gazetteer import *
 from mlutils import *
-from database import db
 from model import *
+from tzone import *
+from units import *
+from utils import *
+
 
 def ListMember(id,active,location,x,y,tz,unit_distance):
-  entry = db.session.query(ProfilesModel).filter(ProfilesModel.id==id).one_or_none()
+  entry = db.session.query(ProfileModel).filter(ProfileModel.id==id).one_or_none()
   if not entry:
     logging.debug('debug: could not find profile: '+str(id))
     return None

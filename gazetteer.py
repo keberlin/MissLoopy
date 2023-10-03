@@ -1,7 +1,9 @@
-import os, math, difflib, re
+import difflib
+import math
+import os
+import re
 
 import database
-
 from utils import *
 
 GAZETTEER_DB = 'gazetteer'

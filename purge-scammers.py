@@ -1,15 +1,21 @@
-import csv, logging
+import csv
+import logging
 
-import database
+from sqlalchemy import create_engine
+from sqlalchemy.orm import sessionmaker
 
-from utils import *
-from mlutils import *
+from database import MISSLOOPY_DB_URI, db
 from emails import *
+from mlutils import *
+from model import *
+from utils import *
 
-db = database.Database(MISS_LOOPY_DB)
+engine = create_engine(MISSLOOPY_DB_URI)
+Session = sessionmaker(bind=engine)
+db.session = Session()
 
-db.execute('SELECT LOWER(email) FROM profiles WHERE verified')
-emails = set([(entry[0]) for entry in db.fetchall()])
+entries = db.session.query(ProfileModel.email).filter(ProfileModel.verified.is_(True)).all()
+emails = set([entry.email.lower() for entry in entries])
 
 ids = []
 with open('listed_email_365.txt', 'rb') as csvfile:
@@ -17,9 +23,8 @@ with open('listed_email_365.txt', 'rb') as csvfile:
   for row in reader:
     email = row[0].decode('utf-8', 'ignore').lower()
     if email in emails:
-      db.execute('SELECT id FROM profiles WHERE email ILIKE %s LIMIT 1' % (Quote(email)))
-      entry = db.fetchone()
-      ids.append((entry[0], email))
+      entry = db.session.query(ProfileModel.id).filter(func.lower(ProfileModel.email)==email).one()
+      ids.append((entry.id, email))
 
 for id, email in ids:
   DeleteMember(id)

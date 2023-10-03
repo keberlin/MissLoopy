@@ -1,16 +1,17 @@
 from database import db
 
 
-class ProfilesModel(db.Model):
+class ProfileModel(db.Model):
     __tablename__ = "profiles"
     #__table_args__ = {"schema":"missloopy"}
     #__unique__ = "email"
 
-    id = db.Column("id", db.Integer, db.Identity(), primary_key=True, nullable=False)
+    id = db.Column("id", db.Integer, primary_key=True, server_default=db.Identity(), nullable=False)
     email = db.Column("email", db.String, nullable=False)
     password = db.Column("password", db.String, nullable=False)
-    created = db.Column("created", db.DateTime, nullable=False)
-    verified = db.Column("verified", db.Boolean, default=0)
+    created = db.Column("created", db.DateTime)
+    created2 = db.Column("created2", db.DateTime, nullable=False)
+    verified = db.Column("verified", db.Boolean, default=False)
     last_login = db.Column("last_login", db.DateTime)
     name = db.Column("name", db.String)
     gender = db.Column("gender", db.Integer)
@@ -41,24 +42,23 @@ class ProfilesModel(db.Model):
     ethnicity_choice = db.Column("ethnicity_choice", db.Integer)
     location = db.Column("location", db.String)
     last_ip = db.Column("last_ip", db.String)
-    created2 = db.Column("created2", db.TIMESTAMP)
     last_ip_country = db.Column("last_ip_country", db.String)
     notifications = db.Column("notifications", db.Integer, default=0)
 
-class PhotosModel(db.Model):
+class PhotoModel(db.Model):
     __tablename__ = "photos"
 
-    pid = db.Column("pid", db.Integer, db.Identity(), primary_key=True, nullable=False)
-    id = db.Column("id", db.Integer, db.ForeignKey(ProfilesModel.id), nullable=False)
-    offset = db.Column("offset", db.Integer)
-    master = db.Column("master", db.Boolean, default=0)
+    pid = db.Column("pid", db.Integer, primary_key=True, server_default=db.Identity(), nullable=False)
+    id = db.Column("id", db.Integer, db.ForeignKey(ProfileModel.id), nullable=False)
+    sequence = db.Column("sequence", db.Integer, default=0)
+    master = db.Column("master", db.Boolean, default=False)
     created = db.Column("created", db.DateTime)
 
-class EmailsModel(db.Model):
+class EmailModel(db.Model):
     __tablename__ = "emails"
 
     id_from = db.Column("id_from", db.Integer, primary_key=True, nullable=False)
-    id_to = db.Column("id_to", db.Integer, db.ForeignKey(ProfilesModel.id), nullable=False)
+    id_to = db.Column("id_to", db.Integer, db.ForeignKey(ProfileModel.id), nullable=False)
     message = db.Column("message", db.String)
     sent = db.Column("sent", db.DateTime)
     viewed = db.Column("viewed", db.Boolean, default=False)
@@ -68,29 +68,29 @@ class BlockedModel(db.Model):
     __tablename__ = "blocked"
 
     id = db.Column("id", db.Integer, primary_key=True, nullable=False)
-    id_block = db.Column("id_block", db.Integer, db.ForeignKey(ProfilesModel.id), nullable=False)
+    id_block = db.Column("id_block", db.Integer, db.ForeignKey(ProfileModel.id), nullable=False)
 
-class FavoritesModel(db.Model):
+class FavoriteModel(db.Model):
     __tablename__ = "favorites"
 
     id = db.Column("id", db.Integer, primary_key=True, nullable=False)
-    id_favorite = db.Column("id_favorite", db.Integer, db.ForeignKey(ProfilesModel.id), nullable=False)
+    id_favorite = db.Column("id_favorite", db.Integer, db.ForeignKey(ProfileModel.id), nullable=False)
 
-class ResultsModel(db.Model):
+class ResultModel(db.Model):
     __tablename__ = "results"
 
     id = db.Column("id", db.Integer, primary_key=True, nullable=False)
-    id_search = db.Column("id_search", db.Integer, db.ForeignKey(ProfilesModel.id), nullable=False)
-    id_previous = db.Column("id_previous", db.Integer, db.ForeignKey(ProfilesModel.id), nullable=False)
-    id_next = db.Column("id_next", db.Integer, db.ForeignKey(ProfilesModel.id), nullable=False)
+    id_search = db.Column("id_search", db.Integer, db.ForeignKey(ProfileModel.id), nullable=False)
+    id_previous = db.Column("id_previous", db.Integer, db.ForeignKey(ProfileModel.id), nullable=False)
+    id_next = db.Column("id_next", db.Integer, db.ForeignKey(ProfileModel.id), nullable=False)
 
 class AdminModel(db.Model):
     __tablename__ = "admin"
 
     last_new_member_search = db.Column("last_new_member_search", db.DateTime, primary_key=True)
-    last_dump_member_search = db.Column("last_dump_member_search", db.TIMESTAMP)
+    last_dump_member_search = db.Column("last_dump_member_search", db.DateTime)
 
-class ReportsModel(db.Model):
+class ReportModel(db.Model):
     __tablename__ = "reports"
 
     logged = db.Column("logged", db.DateTime, primary_key=True, nullable=False)

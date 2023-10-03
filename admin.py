@@ -1,52 +1,50 @@
-import sys, optparse, re, mask
+import optparse
+import re
+import sys
 
-import database
+from sqlalchemy import create_engine
+from sqlalchemy.orm import sessionmaker
+from sqlalchemy.sql.expression import and_, func, or_
 
+import mask
+from database import MISSLOOPY_DB_URI, db
 from iputils import *
 from mlutils import *
+from model import *
+
+engine = create_engine(MISSLOOPY_DB_URI)
+Session = sessionmaker(bind=engine)
+db.session = Session()
 
 parser = optparse.OptionParser()
 parser.add_option("-n", "--non-interactive", dest="stdin", action="store_true", help="use stdin for input")
 
 (options, args) = parser.parse_args()
 
-db = database.Database(MISS_LOOPY_DB)
-
 def command(cmd):
+  limit = 50
   cmds = cmd.strip().upper().split()
   if len(cmds) == 0:
     return
-  reverse = False
   if cmds[0] == 'LOGIN':
-    cmd = 'SELECT id,email,name,gender,location,last_ip,last_ip_country FROM profiles ORDER BY last_login DESC LIMIT %d' % (50)
-    cmds = cmd.split()
-    reverse = True
+    query = db.session.query(ProfileModel.id,ProfileModel.email,ProfileModel.name,ProfileModel.gender,ProfileModel.location,ProfileModel.last_ip,ProfileModel.last_ip_country).order_by(ProfileModel.last_login.desc())
   elif cmds[0] == 'RECENT':
-    cmd = 'SELECT id,email,name,gender,location,last_ip,last_ip_country FROM profiles ORDER BY created2 DESC LIMIT %d' % (50)
-    cmds = cmd.split()
-    reverse = True
+    query = db.session.query(ProfileModel.id,ProfileModel.email,ProfileModel.name,ProfileModel.gender,ProfileModel.location,ProfileModel.last_ip,ProfileModel.last_ip_country).order_by(ProfileModel.created2.desc())
   elif cmds[0] == 'EMAILS':
-    cmd = "SELECT id_from,message FROM (SELECT DISTINCT id_from,message,MAX(sent) FROM emails GROUP BY id_from,message ORDER BY MAX(sent)) sub LIMIT %d" % (50)
-    cmds = cmd.split()
-    reverse = True
+    query = db.session.query(EmailModel.id_from,EmailModel.message).group_by(EmailModel.id_from).group_by(EmailModel.message).order_by(func.max(EmailModel.sent))
+    #cmd = "SELECT id_from,message FROM (SELECT DISTINCT id_from,message,MAX(sent) FROM emails GROUP BY id_from,message ORDER BY MAX(sent)) sub LIMIT %d" % (50)
   elif cmds[0].startswith('CONV'):
-    cmd = "SELECT id_from,id_to,message FROM emails WHERE ((id_from=%d AND id_to=%d) OR (id_from=%d AND id_to=%d)) ORDER BY sent" % (int(cmds[1]), int(cmds[2]), int(cmds[2]), int(cmds[1]))
-    cmds = cmd.split()
+    id1 = int(cmds[1])
+    id2 = int(cmds[2])
+    query = db.session.query(EmailModel.id_from,EmailModel.id_to,EmailModel.message).filter(or_(and_(EmailModel.id_from==int(id1),EmailModel.id_to==int(id2)),and_(EmailModel.id_from==int(id2),EmailModel.id_to==int(id1)))).order_by(EmailModel.sent)
   try:
     if cmds[0] == 'SELECT':
-      db.execute(cmd)
-      entries = db.fetchall()
-      if reverse:
-        entries = list(entries)
-        entries.reverse()
+      entries = query.limit(limit).all()
       for entry in entries:
-        ss = ', '.join(map(lambda x:unicode(x), entry))
-        print ss.encode('utf-8')
-    else:
-      db.execute(cmd)
-    db.commit()
+        print(entry)
+    db.session.commit()
   except Exception as e:
-    print 'Error:', repr(e), 'executing:', cmd
+    print 'Error:', repr(e), 'executing:', str(query)
 
 if not sys.stdin.isatty(): # Something available on stdin..
   for line in sys.stdin.readlines():

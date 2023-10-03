@@ -1,4 +1,5 @@
-import argparse, csv
+import argparse
+import csv
 
 from gazetteer import *
 

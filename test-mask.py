@@ -1,4 +1,6 @@
-import fileinput, mask
+import fileinput
+
+import mask
 
 lines = []
 for line in fileinput.input():

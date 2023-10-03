@@ -1,8 +1,8 @@
 import smtplib
-
-from email.mime.text import MIMEText
 from email.mime.image import MIMEImage
 from email.mime.multipart import MIMEMultipart
+from email.mime.text import MIMEText
+
 
 # to, subject and message must be in utf-8
 # importance = 1 Highest, 2, High, 3 Normal, 4 Low, 5 Lowest

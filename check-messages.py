@@ -1,18 +1,27 @@
-import sys, re, database, spam
+import re
+import sys
 
+from sqlalchemy import create_engine
+from sqlalchemy.orm import sessionmaker
+
+import spam
+from database import MISSLOOPY_DB_URI, db
 from mlutils import *
+from model import *
+
+engine = create_engine(MISSLOOPY_DB_URI)
+Session = sessionmaker(bind=engine)
+db.session = Session()
 
 MAX_LENGTH = 100
-
-db = database.Database(MISS_LOOPY_DB)
 
 for arg in sys.argv[1:]:
   id = int(arg)
   density_min = 9999
   spammer = spam.AnalyseSpammer(id)
-  db.execute('SELECT DISTINCT message FROM emails WHERE id_from=%d ORDER BY sent' % (id))
-  for entry in db.fetchall():
-    message = re.sub('[\r\n]+',' ',entry[0])
+  entries = db.session.query(EmailModel.message).filter(EmailModel.id_from==id).order_by(EmailModel.sent).distinct().all()
+  for entry in entries:
+    message = re.sub('[\r\n]+',' ',entry.message)
     tuple = spam.AnalyseSpam(message)
     if spam.IsSpamFactored(tuple, spammer, 2):
       print 'Potential Spam id:%d "%s..." {score:%d, density:%d, hits:%s}' % (id, message.encode('utf-8')[:MAX_LENGTH], tuple[0], tuple[1], tuple[2])

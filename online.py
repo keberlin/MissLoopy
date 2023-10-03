@@ -1,13 +1,17 @@
-import database
+from sqlalchemy import create_engine
+from sqlalchemy.orm import sessionmaker
 
-from utils import *
+from database import MISSLOOPY_DB_URI, db
 from mlutils import *
+from model import *
+from utils import *
 
-db = database.Database(MISS_LOOPY_DB)
+engine = create_engine(MISSLOOPY_DB_URI)
+Session = sessionmaker(bind=engine)
+db.session = Session()
 
 now = datetime.datetime.utcnow()
 
 # Count online users (active within the last hour)
-db.execute('SELECT COUNT(*) FROM profiles WHERE verified AND last_login>=%s' % (Quote(str(now-datetime.timedelta(hours=1)))))
-entry = db.fetchone()
-print 'Users online: %d' % entry[0]
+count = db.session.query(func.count(ProfileModel.id)).filter(ProfileModel.verified.is_(True),ProfileModel.last_login>=now-datetime.timedelta(hours=1)).scalar()
+print 'Users online: %d' % count

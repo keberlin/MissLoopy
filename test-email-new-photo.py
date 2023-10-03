@@ -1,5 +1,9 @@
+from emails import *
 from localization import *
 from mlutils import *
-from emails import *
 
-EmailNewPhoto('photos/img1.jpg', 1, 1)
+id = 1
+pid = 1
+filename = PhotoFilename(pid)
+
+EmailNewPhoto(filename, pid, id)

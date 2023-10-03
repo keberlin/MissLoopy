@@ -1,4 +1,6 @@
-import sys, email, re
+import email
+import re
+import sys
 
 debug = False
 

@@ -1,6 +1,5 @@
-from flask_sqlalchemy import SQLAlchemy
-
 import psycopg2
+from flask_sqlalchemy import SQLAlchemy
 
 #psycopg2.extensions.register_type(psycopg2.extensions.UNICODE)
 #psycopg2.extensions.register_type(psycopg2.extensions.UNICODEARRAY)

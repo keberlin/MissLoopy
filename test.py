@@ -1,7 +1,8 @@
 import psycopg2
-from mlutils import *
 
 import database
+from mlutils import *
+
 
 def check_if_user_exists(conn):
   cursor = conn.cursor()

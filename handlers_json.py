@@ -1,20 +1,28 @@
-import os, re, datetime, io, cStringIO, base64, psycopg2, time, logging
+import base64
+import cStringIO
+import datetime
+import io
+import logging
+import os
+import re
+import time
 
+import psycopg2
 from PIL import Image
 
-import search, spam, mask
-
-from utils import *
-from units import *
-from localization import *
-from gazetteer import *
-from emails import *
-from mlutils import *
-from mlparse import *
-from mlemail import *
-
+import mask
+import search
+import spam
 from database import db
+from emails import *
+from gazetteer import *
+from localization import *
+from mlemail import *
+from mlparse import *
+from mlutils import *
 from model import *
+from units import *
+from utils import *
 
 BASE_DIR = os.path.dirname(__file__)
 
@@ -59,7 +67,7 @@ def handle_mlaccount(entry,values,files):
       continue
     attrs[attr] = None
 
-  db.session.query(ProfilesModel).filter(ProfilesModel.id==id).update(attrs) 
+  db.session.query(ProfileModel).filter(ProfileModel.id==id).update(attrs) 
   db.session.commit()
 
   return {'message': 'Account updated successfully.'}
@@ -70,7 +78,7 @@ def handle_mladdfavorite(entry,values,files):
   ids = map(lambda x:int(x), values['id'].split('|'))
 
   for id_favorite in ids:
-    db.session.add(FavoritesModel(id=id, id_favorite=id_favorite))
+    db.session.add(FavoriteModel(id=id, id_favorite=id_favorite))
   db.session.commit()
 
   if len(ids) == 1:
@@ -99,7 +107,7 @@ def handle_mldeletefavorite(entry,values,files):
   else: ids = map(lambda x:int(x), values['id'].split('|'))
 
   for id_favorite in ids:
-    db.session.query(FavoritesModel).filter(FavoritesModel.id==id,FavoritesModel.id_favorite==id_favorite).delete() 
+    db.session.query(FavoriteModel).filter(FavoriteModel.id==id,FavoriteModel.id_favorite==id_favorite).delete() 
   db.session.commit()
 
   if len(ids) == 1:
@@ -115,7 +123,7 @@ def handle_mldeletephoto(entry,values,files):
 
   for pid in pids:
     # Ensure this member owns the photo first
-    entry = db.session.query(PhotosModel.id).filter(PhotosModel.pid==pid).one_or_none() 
+    entry = db.session.query(EmailModel.id).filter(PhotoModel.pid==pid).one_or_none() 
     if not entry:
       return {'error': 'Photo %d not found.' % (pid)}
     if entry.id != id:
@@ -127,7 +135,7 @@ def handle_mldeletephoto(entry,values,files):
 
   pids = []
   master = 0
-  entries = db.session.query(PhotosModel.pid,PhotosModel.master).filter(PhotosModel.id==id).all() 
+  entries = db.session.query(PhotoModel.pid,PhotoModel.master).filter(PhotoModel.id==id).all() 
   for entry in entries:
     pids.append(entry.pid)
     if entry.master:
@@ -147,18 +155,18 @@ def handle_mlmasterphoto(entry,values,files):
   pid = int(values['pid'])
 
   # Ensure this member owns the photo first
-  entry = db.session.query(PhotosModel.id).filter(PhotosModel.pid==pid).one_or_none() 
+  entry = db.session.query(EmailModel.id).filter(PhotoModel.pid==pid).one_or_none() 
   if entry.id != id:
     return {'error': 'You are not the owner of this photo.'}
   # Remove the master flag from all photos
-  db.session.query(PhotosModel).filter(PhotosModel.id==id).update({"master":False}) 
+  db.session.query(EmailModel).filter(EmailModel.id==id).update({"master":False}) 
   # Restore the master flag for the selected photo
-  db.session.query(PhotosModel).filter(PhotosModel.pid==pid).update({"master":True}) 
+  db.session.query(EmailModel).filter(PhotoModel.pid==pid).update({"master":True}) 
   db.session.commit()
 
   pids = []
   master = 0
-  entries = db.session.query(PhotosModel.pid,PhotosModel.master).filter(PhotosModel.id==id).all() 
+  entries = db.session.query(PhotoModel.pid,PhotoModel.master).filter(PhotoModel.id==id).all() 
   for entry in entries:
     pids.append(entry.pid)
     if entry.master:
@@ -200,7 +208,7 @@ def handle_mlprofile(entry,values,files):
       continue
     attrs[attr] = None
 
-  db.session.query(ProfilesModel).filter(ProfilesModel.id==id).update(attrs) 
+  db.session.query(ProfileModel).filter(ProfileModel.id==id).update(attrs) 
   db.session.commit()
 
   return {'message': 'Profile updated successfully.'}
@@ -236,13 +244,9 @@ def handle_mlregister(entry,values,files):
   if age<18:
     return {'error': 'Sorry, you\'re too young to register.'}
 
-  entry = db.session.query(ProfilesModel).filter(ProfilesModel.email==email).one_or_none() 
+  entry = db.session.query(ProfileModel).filter(ProfileModel.email==email).one_or_none() 
   if entry:
     return {'error': 'Email Address already in use.'}
-
-  attributes = ['email', 'password', 'name', 'gender', 'ethnicity',
-                'height', 'weight', 'education', 'status', 'smoking', 'drinking', 'occupation', 'summary', 'description',
-                'gender_choice', 'ethnicity_choice', 'age_min', 'age_max', 'height_min', 'height_max', 'weight_choice', 'looking_for']
 
   attrs = {}
   now = datetime.datetime.utcnow()
@@ -257,24 +261,18 @@ def handle_mlregister(entry,values,files):
     attrs['x'] = tuple[0]
     attrs['y'] = tuple[1]
     attrs['tz'] = tuple[2]
-  for attr in values:
-    if not attr in attributes:
-      continue
-    if not values.get(attr):
-      continue
+  for attr, value in values.iteritems():
     if attr.endswith('_choice'):
-      attrs[attr] = eval(values[attr])
+      attrs[attr] = eval(value)
     else:
-      attrs[attr] = values[attr][:MAX_LENGTH]
-  for attr in attributes:
-    if attr in attrs:
-      continue
-    attrs[attr] = None
+      attrs[attr] = value[:MAX_LENGTH]
 
-  db.session.add(ProfilesModel(attrs))
+  entry = ProfileModel(**attrs)
+  db.session.add(entry)
   db.session.commit()
+  assert entry.id
 
-  EmailVerify(email,id)
+  EmailVerify(email,entry.id)
 
   return {'code': 1002}
 
@@ -285,7 +283,7 @@ def handle_mlpassword(entry,values,files):
   email = values['email'].lower()
 
   # Retrieve the password
-  entry = db.session.query(ProfilesModel.password).filter(ProfilesModel.email==email).one_or_none() 
+  entry = db.session.query(ProfileModel.password).filter(ProfileModel.email==email).one_or_none() 
   if not entry:
     return {'error': 'Email Address not found.'}
 
@@ -300,7 +298,7 @@ def handle_mlresend(entry,values,files):
   email = values['email'].lower()
 
   # Retrieve the newly created id
-  entry = db.session.query(ProfilesModel.id).filter(ProfilesModel.email==email).one_or_none() 
+  entry = db.session.query(ProfileModel.id).filter(ProfileModel.email==email).one_or_none() 
   if not entry:
     return {'error': 'Account not found.'}
 
@@ -350,7 +348,7 @@ def handle_mlseeking(entry,values,files):
       continue
     attrs[attr] = None
 
-  db.session.query(ProfilesModel).filter(ProfilesModel.id==id).update(attrs) 
+  db.session.query(ProfileModel).filter(ProfileModel.id==id).update(attrs) 
   db.session.commit()
 
   return {'message': 'Seeking updated successfully.'}
@@ -385,14 +383,14 @@ def handle_mlsendemail(entry,values,files):
     with open(os.path.join(BASE_DIR, 'junk-auto.log'), 'a') as f:
       f.write('%d %s\n' % (id, re.sub('[\r\n]+',' ',message).encode('utf-8')))
 
-  entry_to = db.session.query(ProfilesModel).filter(ProfilesModel.id==id_to).one_or_none() 
+  entry_to = db.session.query(ProfileModel).filter(ProfileModel.id==id_to).one_or_none() 
   if not entry_to:
     return {'error': 'This member cannot be found.'}
 
   notifications = entry_to.notifications
 
   now = datetime.datetime.utcnow()
-  db.session.add(EmailsModel(id_from=id, id_to=id_to, message=message, sent=now))
+  db.session.add(EmailModel(id_from=id, id_to=id_to, message=message, sent=now))
   db.session.commit()
 
   if not notifications & NOT_NEW_MESSAGE:
@@ -436,14 +434,14 @@ def handle_mlsendphoto(entry,values,files):
   im.save(data, 'JPEG')
   image = 'data:image/jpg;base64,' + base64.b64encode(data.getvalue())
 
-  entry_to = db.session.query(ProfilesModel).filter(ProfilesModel.id==id_to).one_or_none() 
+  entry_to = db.session.query(ProfileModel).filter(ProfileModel.id==id_to).one_or_none() 
   if not entry_to:
     return {'error': 'This member cannot be found.'}
 
   notifications = entry_to.notifications
 
   now = datetime.datetime.utcnow()
-  db.session.add(EmailsModel(id_from=id, id_to=id_to, image=image, sent=now))
+  db.session.add(EmailModel(id_from=id, id_to=id_to, image=image, sent=now))
   db.session.commit()
 
   if not notifications & NOT_NEW_MESSAGE:
@@ -464,7 +462,7 @@ def handle_mlspam(entry,values,files):
   id_spam = int(values['id'])
 
   with open(os.path.join(BASE_DIR, 'junk-reported.log'), 'a') as f:
-    entries = db.session.query(EmailsModel.message).filter(EmailsModel.id_from==id_spam, EmailsModel.id_to==id).distinct().all() 
+    entries = db.session.query(EmailModel.message).filter(EmailModel.id_from==id_spam, EmailModel.id_to==id).distinct().all() 
     for entry in entries:
       f.write('%d %s\n' % (id_spam, re.sub('[\r\n]+',' ',entry.message).encode('utf-8')))
     db.session.commit()
@@ -517,8 +515,11 @@ def handle_mluploadphoto(entry,values,files):
   im = Image.composite(layer, im, layer)
 
   now = datetime.datetime.utcnow()
-  entry = db.session.add(PhotosModel(id=id, created=now))
+  entry = PhotoModel(id=id, created=now)
+  db.session.add(entry)
   db.session.commit()
+  #db.session.refresh(entry)
+  assert entry.pid
 
   # Create a photo file using pid and copy data into it
   filename = os.path.join(BASE_DIR, 'static', PhotoFilename(entry.pid))
@@ -530,11 +531,11 @@ def handle_mluploadphoto(entry,values,files):
   im = im.convert('RGB')
   im.save(filename, 'JPEG')
 
-  EmailNewPhoto(filename, pid, id)
+  EmailNewPhoto(filename, entry.pid, id)
 
   pids = []
   master = 0
-  entries = db.session.query(PhotosModel.pid, PhotosModel.master).filter(PhotosModel.id==id).all()
+  entries = db.session.query(PhotoModel.pid, PhotoModel.master).filter(PhotoModel.id==id).all()
   for entry in entries:
     pids.append(entry.pid)
     if entry.master:
@@ -559,7 +560,7 @@ def handle_mlwink(entry,values,files):
 
   unit_distance, unit_height = Units(country)
 
-  entry_to = db.session.query(ProfilesModel).filter(ProfilesModel.id==id_to, ProfilesModel.verified.is_(True)).one_or_none()
+  entry_to = db.session.query(ProfileModel).filter(ProfileModel.id==id_to, ProfileModel.verified.is_(True)).one_or_none()
   if not entry_to:
     return {'error': 'This member cannot be found.'}
 
@@ -568,7 +569,7 @@ def handle_mlwink(entry,values,files):
   message = 'Wink!'
 
   now = datetime.datetime.utcnow()
-  db.session.add(EmailsModel(id_from=id, id_to=id_to, message=message, sent=now))
+  db.session.add(EmailModel(id_from=id, id_to=id_to, message=message, sent=now))
   db.session.commit()
 
   if not notifications & NOT_NEW_MESSAGE:

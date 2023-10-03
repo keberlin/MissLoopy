@@ -1,21 +1,26 @@
 import os
 
-import database
+from sqlalchemy import create_engine
+from sqlalchemy.orm import sessionmaker
 
-from utils import *
-from units import *
-from tzone import *
-from localization import *
+from database import MISSLOOPY_DB_URI, db
 from gazetteer import *
-from mlutils import *
+from localization import *
 from mlhtml import *
+from mlutils import *
+from model import *
+from tzone import *
+from units import *
+from utils import *
+
+engine = create_engine(MISSLOOPY_DB_URI)
+Session = sessionmaker(bind=engine)
+db.session = Session()
 
 BASE_DIR = os.path.dirname(__file__)
 
-db = database.Database(MISS_LOOPY_DB)
-
-db.execute("SELECT id_from, image FROM emails WHERE image is not null ORDER BY sent DESC LIMIT 200")
-images = [(entry[0], entry[1]) for entry in db.fetchall()]
+entries = db.session.query(EmailModel.id_from,EmailModel.image).filter(EmailModel.image.is_not(None)).order_by(EmailModel.sent.desc()).limit(200).all()
+images = [(entry.id_from, entry.image) for entry in entries]
 
 d = {'title':'New Images', 'images':images}
 

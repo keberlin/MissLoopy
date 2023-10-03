@@ -1,8 +1,13 @@
-import database
+from sqlalchemy import create_engine
+from sqlalchemy.orm import sessionmaker
 
+from database import MISSLOOPY_DB_URI, db
 from mlutils import *
+from model import *
 
-db = database.Database(MISS_LOOPY_DB)
+engine = create_engine(MISSLOOPY_DB_URI)
+Session = sessionmaker(bind=engine)
+db.session = Session()
 
-db.execute('UPDATE admin SET last_dump_member_search="2000-01-01 00:00:00"')
-db.commit()
+db.session.query(AdminModel).update({"last_dump_member_search":datetime("2000-01-01 00:00:00"))
+db.session.commit()

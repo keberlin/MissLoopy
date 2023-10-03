@@ -1,4 +1,6 @@
-import fileinput, spam
+import fileinput
+
+import spam
 
 MAX_LENGTH = 100
 
