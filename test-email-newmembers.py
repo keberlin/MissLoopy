@@ -6,9 +6,9 @@ from localization import *
 from mlutils import *
 from model import *
 
-db = db_init(MISSLOOPY_DB_URI)
+session = db_init(MISSLOOPY_DB_URI)
 
-entry = db.session.query(ProfileModel).filter(ProfileModel.email=='keith.hollis@gmail.com').one()
+entry = session.query(ProfileModel).filter(ProfileModel.email=='keith.hollis@gmail.com').one()
 
 members = [15, 18, 25, 27, 35]
 

@@ -429,7 +429,8 @@ def SaveResults(id,results):
     id_previous = results[i-1] if i > 0 else 0
     id_search = results[i]
     id_next = results[i+1] if i < len(results)-1 else 0
-    db.session.add(ResultModel(id=id, id_search=id_search, id_previous=id_previous, id_next=id_next))
+    item = ResultModel(id=id, id_search=id_search, id_previous=id_previous, id_next=id_next)
+    db.session.add(item)
     db.session.commit()
 
 def PreviousResult(id,id_search):

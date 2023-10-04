@@ -8,9 +8,9 @@ from mlutils import *
 from model import *
 from utils import *
 
-db = db_init(MISSLOOPY_DB_URI)
+session = db_init(MISSLOOPY_DB_URI)
 
-entries = db.session.query(EmailModel.id_from,func.count(EmailModel.id_to.distinct()),func.min(EmailModel.sent)).group_by(EmailModel.id_from).order_by(func.count(EmailModel.id_to.distinct()).all()
+entries = session.query(EmailModel.id_from,func.count(EmailModel.id_to.distinct()),func.min(EmailModel.sent)).group_by(EmailModel.id_from).order_by(func.count(EmailModel.id_to.distinct()).all()
 for entry in entries:
   id_from = entry.id_from
   members = entry[1]

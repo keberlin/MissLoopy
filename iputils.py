@@ -4,7 +4,7 @@ from database import IPADDRESS_DB_URI, db_init
 
 BASE_DIR = os.path.dirname(__file__)
 
-db = db_init(IPADDRESS_DB_URI)
+session = db_init(IPADDRESS_DB_URI)
 
 def IpCountry(ip):
   def IpNumber(ip):
@@ -17,7 +17,7 @@ def IpCountry(ip):
     return 'Unknown'
 
   n = IpNumber(ip)
-  entry = db.session.query(RangeModel.country).filter(lower<=n,n<=upper).first()
+  entry = session.query(RangeModel.country).filter(lower<=n,n<=upper).first()
   if not entry:
     return 'Unknown'
   return entry.country

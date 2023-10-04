@@ -1,13 +1,13 @@
+import re
 import sys
 
-from sqlalchemy import create_engine
-
 from database import MISSLOOPY_DB_URI, db_init
-from mlutils import *
-from model import *
-from utils import *
+#from mlutils import *
+from model import SpamModel
 
-db = db_init(MISSLOOPY_DB_URI)
+#from utils import *
+
+session = db_init(MISSLOOPY_DB_URI)
 
 MANDATORY = ['western union', 'proposal', 'money', 'usd', 'solicitor', 'lawyer', 'barrister', 'lottery', 'lotto', 'sweepstake',
              'transaction', 'bank', 'winner', 'official', 'payout', 'winning', 'orphan', 'cancer', 'moneygram', 'civil war',
@@ -92,7 +92,8 @@ for item in MANDATORY:
     continue
   spam[item] = 0.75
 
-db.session.truncate(SpamModel)
-for str,cost in spam.iteritems():
-  db.session.add(SpamModel(str=str,cost=cost))
-db.session.commit()
+with session.begin():
+  session.query(SpamModel).delete()
+  for str,cost in spam.iteritems():
+    item = SpamModel(str=str,cost=cost)
+    session.add(item)

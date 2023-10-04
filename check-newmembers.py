@@ -7,13 +7,13 @@ from mlutils import *
 from model import *
 from utils import *
 
-db = db_init(MISSLOOPY_DB_URI)
+session = db_init(MISSLOOPY_DB_URI)
 
 now = datetime.datetime.utcnow()
 since = now-datetime.timedelta(days=30)
 
 count = 0
-entries = db.session.query(ProfileModel).filter(ProfileModel.verified.is_(True)).filter(ProfileModel.created2>=since).all()
+entries = session.query(ProfileModel).filter(ProfileModel.verified.is_(True)).filter(ProfileModel.created2>=since).all()
 for entry in entries:
   id              = entry.id
   name            = entry.name

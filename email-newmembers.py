@@ -9,15 +9,15 @@ from localization import *
 from model import *
 from utils import *
 
-db = db_init(MISSLOOPY_DB_URI)
+session = db_init(MISSLOOPY_DB_URI)
 
-since = db.session.query(AdminModel.last_new_member_search).scalar()
+since = session.query(AdminModel.last_new_member_search).scalar()
 
 now = datetime.datetime.utcnow()
 
 results = {}
 
-entries = db.session.query(ProfileModel).filter(ProfileModel.verified.is_(True)).filter(ProfileModel.created2>=since).all()
+entries = session.query(ProfileModel).filter(ProfileModel.verified.is_(True)).filter(ProfileModel.created2>=since).all()
 for entry in entries:
   id               = entry.id
   name             = entry.name
@@ -52,11 +52,11 @@ for entry in entries:
     results[id2].append(id)
 
 for id in results.keys():
-  entry = db.session.query(ProfileModel).filter(ProfileModel.id==id).one_or_none()
+  entry = session.query(ProfileModel).filter(ProfileModel.id==id).one_or_none()
   if not entry:
     continue
   if not entry.notifications & NOT_NEW_MEMBERS:
     EmailNewMembers(entry, results[id])
 
-db.session.query(AdminModel).update({"last_new_member_search":now},synchronize_session=False)
-db.session.commit()
+session.query(AdminModel).update({"last_new_member_search":now},synchronize_session=False)
+session.commit()

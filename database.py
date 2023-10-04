@@ -50,6 +50,5 @@ db = SQLAlchemy()
 def db_init(uri):
   engine = create_engine(uri)
   Session = sessionmaker(bind=engine)
-  db = SQLAlchemy()
-  db.session = Session()
-  return db
+  session = Session()
+  return session

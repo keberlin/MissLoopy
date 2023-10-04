@@ -7,7 +7,7 @@ from mlutils import *
 from model import *
 from utils import *
 
-db = db_init(MISSLOOPY_DB_URI)
+session = db_init(MISSLOOPY_DB_URI)
 
 def Null(v):
   if v: return Quote(v)

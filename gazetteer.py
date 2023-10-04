@@ -9,7 +9,7 @@ from database import GAZETTEER_DB_URI, db_init
 from model import LocationModel
 from utils import *
 
-db = db_init(GAZETTEER_DB_URI)
+session = db_init(GAZETTEER_DB_URI)
 
 CIRCUM_X = 40075017
 CIRCUM_Y = 40007860
@@ -18,7 +18,7 @@ def GazLatAdjust(y):
   return math.cos(y*2*math.pi/CIRCUM_Y)
 
 def GazLocation(location):
-  entry = db.session.query(LocationModel.x,LocationModel.y,LocationModel.tz).filter(LocationModel.location==location).one()
+  entry = session.query(LocationModel.x,LocationModel.y,LocationModel.tz).filter(LocationModel.location==location).one()
   return entry
 
 def Alias(query):
@@ -40,10 +40,10 @@ def GazClosestMatchesQuick(query,max):
 
   closest = []
 
-  entries = db.session.query(LocationModel.location).filter(LocationModel.location.ilike(query)).order_by(LocationModel.population.desc()).limit(max).all()
+  entries = session.query(LocationModel.location).filter(LocationModel.location.ilike(query)).order_by(LocationModel.population.desc()).limit(max).all()
   closest.extend([(entry.location) for entry in entries])
   if len(closest) < max:
-    entries = db.session.query(LocationModel.location).filter(LocationModel.location.ilike('%'+query+'%')).order_by(LocationModel.population.desc()).limit(max).all()
+    entries = session.query(LocationModel.location).filter(LocationModel.location.ilike('%'+query+'%')).order_by(LocationModel.population.desc()).limit(max).all()
     for entry in entries:
       if entry.location not in closest:
         closest.append(entry.location)
@@ -59,18 +59,18 @@ def GazClosestMatches(query,max):
 
   closest = []
 
-  entries = db.session.query(LocationModel.location).filter(LocationModel.location.ilike('%'+query+'%')).order_by(LocationModel.population.desc()).limit(max).all()
+  entries = session.query(LocationModel.location).filter(LocationModel.location.ilike('%'+query+'%')).order_by(LocationModel.population.desc()).limit(max).all()
   closest.extend([(entry.location) for entry in entries])
 
   if len(closest) < max:
-    entries = db.session.query(func.lower(func.substr(LocationModel.location,1,min(len(query),15)))).distinct().all()
+    entries = session.query(func.lower(func.substr(LocationModel.location,1,min(len(query),15)))).distinct().all()
     locations = [(entry[0]) for entry in entries]
 
     matches = difflib.get_close_matches(query, locations, max)
     # TODO remove any consecutive entries that are a subset of their preceding entry, e.g. Brugge, Brugg
 
     for match in matches:
-      entries = db.session.query(LocationModel.location).filter(LocationModel.location.ilike(match+'%')).order_by(LocationModel.population.desc()).limit(max).all()
+      entries = session.query(LocationModel.location).filter(LocationModel.location.ilike(match+'%')).order_by(LocationModel.population.desc()).limit(max).all()
       for entry in entries:
         if entry.location not in closest:
           closest.append(entry.location)
@@ -78,7 +78,7 @@ def GazClosestMatches(query,max):
             break
 
   if len(closest) < max:
-    entries = db.session.query(LocationModel.location).order_by(LocationModel.population.desc()).limit(max).all()
+    entries = session.query(LocationModel.location).order_by(LocationModel.population.desc()).limit(max).all()
     for entry in entries:
       if entry.location not in closest:
         closest.append(entry.location)

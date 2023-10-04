@@ -78,7 +78,8 @@ def handle_mladdfavorite(entry,values,files):
   ids = map(lambda x:int(x), values['id'].split('|'))
 
   for id_favorite in ids:
-    db.session.add(FavoriteModel(id=id, id_favorite=id_favorite))
+    item = FavoriteModel(id=id, id_favorite=id_favorite)
+    db.session.add(item)
   db.session.commit()
 
   if len(ids) == 1:
@@ -92,7 +93,8 @@ def handle_mlblock(entry,values,files):
   ids = map(lambda x:int(x), values['id'].split('|'))
 
   for id_block in ids:
-    db.session.add(BlockedModel(id=id, id_block=id_block))
+    item = BlockedModel(id=id, id_block=id_block)
+    db.session.add(item)
   db.session.commit()
 
   if len(ids) == 1:
@@ -267,8 +269,8 @@ def handle_mlregister(entry,values,files):
     else:
       attrs[attr] = value[:MAX_LENGTH]
 
-  entry = ProfileModel(**attrs)
-  db.session.add(entry)
+  item = ProfileModel(**attrs)
+  db.session.add(item)
   db.session.commit()
   assert entry.id
 
@@ -390,7 +392,8 @@ def handle_mlsendemail(entry,values,files):
   notifications = entry_to.notifications
 
   now = datetime.datetime.utcnow()
-  db.session.add(EmailModel(id_from=id, id_to=id_to, message=message, sent=now))
+  item = EmailModel(id_from=id, id_to=id_to, message=message, sent=now)
+  db.session.add(item)
   db.session.commit()
 
   if not notifications & NOT_NEW_MESSAGE:
@@ -441,7 +444,8 @@ def handle_mlsendphoto(entry,values,files):
   notifications = entry_to.notifications
 
   now = datetime.datetime.utcnow()
-  db.session.add(EmailModel(id_from=id, id_to=id_to, image=image, sent=now))
+  item = EmailModel(id_from=id, id_to=id_to, image=image, sent=now)
+  db.session.add(item)
   db.session.commit()
 
   if not notifications & NOT_NEW_MESSAGE:
@@ -515,8 +519,8 @@ def handle_mluploadphoto(entry,values,files):
   im = Image.composite(layer, im, layer)
 
   now = datetime.datetime.utcnow()
-  entry = PhotoModel(id=id, created=now)
-  db.session.add(entry)
+  item = PhotoModel(id=id, created=now)
+  db.session.add(item)
   db.session.commit()
   #db.session.refresh(entry)
   assert entry.pid
@@ -569,7 +573,8 @@ def handle_mlwink(entry,values,files):
   message = 'Wink!'
 
   now = datetime.datetime.utcnow()
-  db.session.add(EmailModel(id_from=id, id_to=id_to, message=message, sent=now))
+  item = EmailModel(id_from=id, id_to=id_to, message=message, sent=now)
+  db.session.add(item)
   db.session.commit()
 
   if not notifications & NOT_NEW_MESSAGE:

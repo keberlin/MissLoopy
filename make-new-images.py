@@ -12,11 +12,11 @@ from tzone import *
 from units import *
 from utils import *
 
-db = db_init(MISSLOOPY_DB_URI)
+session = db_init(MISSLOOPY_DB_URI)
 
 BASE_DIR = os.path.dirname(__file__)
 
-entries = db.session.query(EmailModel.id_from,EmailModel.image).filter(EmailModel.image.is_not(None)).order_by(EmailModel.sent.desc()).limit(200).all()
+entries = session.query(EmailModel.id_from,EmailModel.image).filter(EmailModel.image.is_not(None)).order_by(EmailModel.sent.desc()).limit(200).all()
 images = [(entry.id_from, entry.image) for entry in entries]
 
 d = {'title':'New Images', 'images':images}

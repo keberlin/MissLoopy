@@ -9,7 +9,7 @@ from mlutils import *
 from model import *
 from utils import *
 
-db = db_init(MISSLOOPY_DB_URI)
+session = db_init(MISSLOOPY_DB_URI)
 
 BASE_DIR = os.path.dirname(__file__)
 
@@ -17,7 +17,7 @@ dict = {}
 
 with open(os.path.join(BASE_DIR, 'static', MEMBERS_DIR, 'all.html'), 'w') as f:
   coords = []
-  entries = db.session.query(ProfileModel.x,ProfileModel.y).filter(ProfileModel.verified.is_(True)).distinct().all()
+  entries = session.query(ProfileModel.x,ProfileModel.y).filter(ProfileModel.verified.is_(True)).distinct().all()
   for entry in entries:
     lat = entry[1]*360.0/CIRCUM_Y
     lng = entry[0]*360.0/CIRCUM_X

@@ -9,7 +9,7 @@ from mlutils import *
 from model import *
 from utils import *
 
-db = db_init(MISSLOOPY_DB_URI)
+session = db_init(MISSLOOPY_DB_URI)
 
 parser = argparse.ArgumentParser(description='Delete Members.')
 parser.add_argument('id', nargs='+', help='member ids to be deleted')
@@ -17,13 +17,13 @@ args = parser.parse_args()
 
 for id in args.id:
   id = int(id)
-  entry = db.session.query(ProfileModel).filter(ProfileModel.id==id).one_or_none()
+  entry = session.query(ProfileModel).filter(ProfileModel.id==id).one_or_none()
   if not entry:
     continue
   ip = entry.last_ip
   email = entry.email
   name = entry.name
-  entry = db.session.query(EmailModel.message).filter(EmailModel.id_from==id).order_by(EmailModel.sent.desc()).first()
+  entry = session.query(EmailModel.message).filter(EmailModel.id_from==id).order_by(EmailModel.sent.desc()).first()
   if not entry:
     continue
   message = entry.message

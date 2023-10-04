@@ -8,7 +8,7 @@ from database import MISSLOOPY_DB_URI, db_init
 from mlutils import *
 from model import *
 
-db = db_init(MISSLOOPY_DB_URI)
+session = db_init(MISSLOOPY_DB_URI)
 
 MAX_LENGTH = 100
 
@@ -16,7 +16,7 @@ for arg in sys.argv[1:]:
   id = int(arg)
   density_min = 9999
   spammer = spam.AnalyseSpammer(id)
-  entries = db.session.query(EmailModel.message).filter(EmailModel.id_from==id).order_by(EmailModel.sent).distinct().all()
+  entries = session.query(EmailModel.message).filter(EmailModel.id_from==id).order_by(EmailModel.sent).distinct().all()
   for entry in entries:
     message = re.sub('[\r\n]+',' ',entry.message)
     tuple = spam.AnalyseSpam(message)

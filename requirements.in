@@ -1,0 +1,10 @@
+argparse
+beautifulsoup4
+coverage
+Flask
+Jinja2
+nose
+Pillow
+psycopg2
+psycopg2-binary
+pytz

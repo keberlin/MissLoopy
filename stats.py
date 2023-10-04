@@ -5,7 +5,7 @@ from mlutils import *
 from model import *
 from utils import *
 
-db = db_init(MISSLOOPY_DB_URI)
+session = db_init(MISSLOOPY_DB_URI)
 
 def Bit(enum):
   b = 0
@@ -21,7 +21,7 @@ genders     = [0,0,0,0,0,0]
 ages        = [0,0,0,0,0,0]
 ethnicities = [0,0,0,0,0,0,0]
 
-entries = db.session.query(ProfileModel).all()
+entries = session.query(ProfileModel).all()
 for entry in entries:
   if not entry.verified:
     unverified += 1
@@ -61,24 +61,24 @@ mixed = ethnicities[Bit(ETH_MIXED)]
 other = ethnicities[Bit(ETH_OTHER)]
 
 # Get number of active profiles (logged in within the last month)
-active = db.session.query(func.count()).select_from(ProfileModel).filter(ProfileModel.verified.is_(True)).filter(ProfileModel.last_login>=now-datetime.timedelta(days=30)).scalar()
+active = session.query(func.count()).select_from(ProfileModel).filter(ProfileModel.verified.is_(True)).filter(ProfileModel.last_login>=now-datetime.timedelta(days=30)).scalar()
 
 # Get number of sent messages (within the last month)
-messages = db.session.query(func.count()).select_from(EmailModel).filter(EmailModel.sent>=now-datetime.timedelta(days=30)).scalar()
+messages = session.query(func.count()).select_from(EmailModel).filter(EmailModel.sent>=now-datetime.timedelta(days=30)).scalar()
 
 # Get most blocked members
-entries = db.session.query(BlockedModel.id_block,func.count(BlockedModel.id.distinct())).group_by(BlockedModel.id_block).order_by(func.count(BlockedModel.id.distinct()).desc()).limit(10).all()
+entries = session.query(BlockedModel.id_block,func.count(BlockedModel.id.distinct())).group_by(BlockedModel.id_block).order_by(func.count(BlockedModel.id.distinct()).desc()).limit(10).all()
 most_blocked = [(entry.id_block) for entry in entries]
 
 # Get most favorite members
-entries = db.session.query(FavoriteModel.id_favorite,func.count(FavoriteModel.id.distinct())).group_by(FavoriteModel.id_favorite).order_by(func.count(FavoriteModel.id.distinct()).desc()).limit(10).all()
+entries = session.query(FavoriteModel.id_favorite,func.count(FavoriteModel.id.distinct())).group_by(FavoriteModel.id_favorite).order_by(func.count(FavoriteModel.id.distinct()).desc()).limit(10).all()
 most_favorite = [(entry.id_favorite) for entry in entries]
 
 stats = ReportModel(logged=now, verified=verified, unverified=unverified, males=males, females=females, men=men, women=women, sugar_pups=sugar_pups, sugar_babies=sugar_babies, sugar_daddies=sugar_daddies, sugar_mommas=sugar_mommas, avg_age_males=avg_age_males, avg_age_females=avg_age_females,
   avg_age_men=avg_age_men, avg_age_women=avg_age_women, avg_age_sugar_pups=avg_age_sugar_pups, avg_age_sugar_babies=avg_age_sugar_babies, avg_age_sugar_daddies=avg_age_sugar_daddies, avg_age_sugar_mommas=avg_age_sugar_mommas, white=white, black=black, latino=latino, indian=indian, asian=asian, mixed=mixed, other=other,
   active=active, messages=messages) 
-db.session.add(stats)
-db.session.commit()
+session.add(stats)
+session.commit()
 
 if __name__ == '__main__':
   print 'Number of verified profiles    : %6d' % (verified)

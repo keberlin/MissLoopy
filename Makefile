@@ -9,22 +9,22 @@ html: static/new-photos.html static/new-images.html static/stats.html
 
 # Scammers
 
-static/scammers/%.html: ../scammers/%.msg scammer-html.py templates/scammer.html templates/template-panel.html templates/template.html templates/header.html templates/footer.html templates/social.html
+static/scammers/%.html: ../scammers/%.msg scammer-html.py templates/scammer.html templates/base-panel.html templates/base.html templates/header.html templates/footer.html templates/social.html
 	cat $< | python scammer-html.py > $@
 
 # Photos
 
-static/new-photos.html: templates/template.html templates/new-photos.html .FORCE
+static/new-photos.html: templates/base.html templates/new-photos.html .FORCE
 	python make-new-photos.py > $@
 
 # Images
 
-static/new-images.html: templates/template.html templates/new-images.html .FORCE
+static/new-images.html: templates/base.html templates/new-images.html .FORCE
 	python make-new-images.py > $@
 
 # Statistics
 
-static/stats.html: templates/template.html templates/stats.html make-stats.py .FORCE
+static/stats.html: templates/base.html templates/stats.html make-stats.py .FORCE
 	python make-stats.py > $@
 
 # Gazetteer DB

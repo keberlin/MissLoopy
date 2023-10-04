@@ -15,7 +15,7 @@ from tzone import *
 from units import *
 from utils import *
 
-db = db_init(MISSLOOPY_DB_URI)
+session = db_init(MISSLOOPY_DB_URI)
 
 YEARS = [1,2,5]
 
@@ -32,7 +32,7 @@ now = datetime.datetime.utcnow()
 years = {}
 for year in YEARS:
   td = now-datetime.timedelta(weeks=year*52)
-  entries = db.session.query(ReportModel).filter(ReportModel.logged>td).order_by(ReportModel.logged).all()
+  entries = session.query(ReportModel).filter(ReportModel.logged>td).order_by(ReportModel.logged).all()
   years[year] = [ReportStruct(report.logged.strftime('%Y-%m-%d'),report.verified,report.unverified,report.males,report.females,report.men,report.women,report.sugar_pups,report.sugar_babies,report.sugar_daddies,report.sugar_mommas,report.avg_age_males,report.avg_age_females,report.avg_age_men,report.avg_age_women,report.avg_age_sugar_pups,report.avg_age_sugar_babies,report.avg_age_sugar_daddies,report.avg_age_sugar_mommas,report.white,report.black,report.latino,report.indian,report.asian,report.mixed,report.other,report.active,report.messages) for report in entries]
 
 d = {'title':'Statistics', 'years':years}
