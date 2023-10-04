@@ -1,5 +1,8 @@
+from sqlalchemy import BigInteger, Column, Integer, String, Table
+
 from database import db
 
+# DB missloopy
 
 class ProfileModel(db.Model):
     __tablename__ = "profiles"
@@ -127,3 +130,24 @@ class SpamModel(db.Model):
 
     str = db.Column("str", db.String, primary_key=True, nullable=False)
     cost = db.Column("cost", db.Float, nullable=False)
+
+# DB gazetteer
+
+class LocationModel(db.Model):
+    __tablename__ = "locations"
+
+    location = db.Column("location", db.String, primary_key=True, nullable=False)
+    x = db.Column("x", db.Integer, nullable=False)
+    y = db.Column("y", db.Integer, nullable=False)
+    tz = db.Column("tz", db.String, nullable=False)
+    population = db.Column("population", db.Integer)
+
+# DB ipaddresses
+
+class RangeModel(db.Model):
+    __tablename__ = "ranges"
+
+    #uid = db.Column("uid", db.Integer, db.Identity(), primary_key=True, nullable=False)
+    lower = db.Column("lower", db.BigInteger, primary_key=True, nullable=False)
+    upper = db.Column("upper", db.BigInteger, nullable=False)
+    country = db.Column("country", db.String, nullable=False)

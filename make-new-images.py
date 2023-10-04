@@ -1,9 +1,8 @@
 import os
 
 from sqlalchemy import create_engine
-from sqlalchemy.orm import sessionmaker
 
-from database import MISSLOOPY_DB_URI, db
+from database import MISSLOOPY_DB_URI, db_init
 from gazetteer import *
 from localization import *
 from mlhtml import *
@@ -13,9 +12,7 @@ from tzone import *
 from units import *
 from utils import *
 
-engine = create_engine(MISSLOOPY_DB_URI)
-Session = sessionmaker(bind=engine)
-db.session = Session()
+db = db_init(MISSLOOPY_DB_URI)
 
 BASE_DIR = os.path.dirname(__file__)
 

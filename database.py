@@ -1,10 +1,14 @@
 import psycopg2
 from flask_sqlalchemy import SQLAlchemy
+from sqlalchemy import create_engine
+from sqlalchemy.orm import sessionmaker
 
 #psycopg2.extensions.register_type(psycopg2.extensions.UNICODE)
 #psycopg2.extensions.register_type(psycopg2.extensions.UNICODEARRAY)
 
 MISSLOOPY_DB_URI = "postgresql://postgres:postgres@localhost:5432/missloopy?client_encoding=utf8"
+GAZETTEER_DB_URI = "postgresql://postgres:postgres@localhost:5432/gazetteer?client_encoding=utf8"
+IPADDRESS_DB_URI = "postgresql://postgres:postgres@localhost:5432/ipaddress?client_encoding=utf8"
 
 class Database():
   databases = {}
@@ -42,3 +46,10 @@ class Database():
     return self.conn.commit()
 
 db = SQLAlchemy()
+
+def db_init(uri):
+  engine = create_engine(uri)
+  Session = sessionmaker(bind=engine)
+  db = SQLAlchemy()
+  db.session = Session()
+  return db

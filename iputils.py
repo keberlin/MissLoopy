@@ -1,10 +1,10 @@
 import os
 
-import database
+from database import IPADDRESS_DB_URI, db_init
 
 BASE_DIR = os.path.dirname(__file__)
 
-IP_ADDRESS_DB = 'ipaddress'
+db = db_init(IPADDRESS_DB_URI)
 
 def IpCountry(ip):
   def IpNumber(ip):
@@ -16,12 +16,8 @@ def IpCountry(ip):
   if not ip:
     return 'Unknown'
 
-  db = database.Database(IP_ADDRESS_DB)
-
   n = IpNumber(ip)
-  db.execute('SELECT country FROM ranges WHERE lower<=%d AND %d<=upper LIMIT 1' % (n, n))
-  entry = db.fetchone()
-  db.commit()
+  entry = db.session.query(RangeModel.country).filter(lower<=n,n<=upper).first()
   if not entry:
     return 'Unknown'
-  return entry[0]
+  return entry.country

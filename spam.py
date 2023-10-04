@@ -11,12 +11,11 @@ from model import *
 
 def AnalyseSpammer(id):
   entry = db.session.query(func.count(EmailModel.id_to.distinct()),func.count(),func.min(EmailModel.sent)).filter(EmailModel.id_from==id).one()
-  #db.execute('SELECT COUNT(DISTINCT id_to),COUNT(*),MIN(sent) FROM emails WHERE id_from=%d' % (id))
   members = entry[0]
   count = entry[1]
   if count == 0:
     return (0, 0)
-  sent_min = entry[2] #datetime.datetime(*time.strptime(entry[2],"%Y-%m-%d %H:%M:%S.%f")[:6])
+  sent_min = entry[2]
   sent_max = datetime.datetime.utcnow()
   td = sent_max-sent_min
   frequency = (td.days*24*60*60 + td.seconds)/count

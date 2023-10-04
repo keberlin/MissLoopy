@@ -32,8 +32,8 @@ static/stats.html: templates/template.html templates/stats.html make-stats.py .F
 %.geo: %.txt geoconv.py admin1CodesASCII.txt admin2Codes.txt CountryCodes.csv
 	python geoconv.py $< -o $@
 
-.gazetteer: gazreset.py allCountries.geo
-	python gazreset.py allCountries.geo
+.gazetteer: gaz-update.py allCountries.geo
+	python gaz-update.py allCountries.geo
 	@touch $@
 
 # IP Addresses DB
@@ -44,8 +44,8 @@ geolite2.txt: ip-geolite2.py GeoLite2-Country-Locations.csv GeoLite2-Country-Blo
 dbip.txt: ip-dbip.py dbip-country-lite.csv
 	python ip-dbip.py dbip-country-lite.csv -o $@
 
-.ipaddress: ipreset.py geolite2.txt dbip.txt
-	python ipreset.py geolite2.txt dbip.txt
+.ipaddress: ip-update.py geolite2.txt dbip.txt
+	python ip-update.py geolite2.txt dbip.txt
 	@touch $@
 
 # Spam keywords

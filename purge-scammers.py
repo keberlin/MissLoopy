@@ -2,17 +2,14 @@ import csv
 import logging
 
 from sqlalchemy import create_engine
-from sqlalchemy.orm import sessionmaker
 
-from database import MISSLOOPY_DB_URI, db
+from database import MISSLOOPY_DB_URI, db_init
 from emails import *
 from mlutils import *
 from model import *
 from utils import *
 
-engine = create_engine(MISSLOOPY_DB_URI)
-Session = sessionmaker(bind=engine)
-db.session = Session()
+db = db_init(MISSLOOPY_DB_URI)
 
 entries = db.session.query(ProfileModel.email).filter(ProfileModel.verified.is_(True)).all()
 emails = set([entry.email.lower() for entry in entries])

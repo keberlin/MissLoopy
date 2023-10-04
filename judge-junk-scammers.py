@@ -3,18 +3,15 @@ import logging
 
 import requests
 from sqlalchemy import create_engine
-from sqlalchemy.orm import sessionmaker
 
-from database import MISSLOOPY_DB_URI, db
+from database import MISSLOOPY_DB_URI, db_init
 from emails import *
 from gazetteer import *
 from mlutils import *
 from model import *
 from utils import *
 
-engine = create_engine(MISSLOOPY_DB_URI)
-Session = sessionmaker(bind=engine)
-db.session = Session()
+db = db_init(MISSLOOPY_DB_URI)
 
 ids = set()
 with open('junk-auto.log', 'r') as file:
@@ -41,7 +38,6 @@ for id in ids:
   country = GazCountry(entry.location)
   last_login_country = entry.last_ip_country
   entry = db.session.query(EmailModel.message).filter(EmailModel.id_from==id).filter(EmailModel.message.is_not(None)).order_by(func.length(EmailModel.message).desc()).first()
-  #db.execute("SELECT message, sent FROM emails WHERE id_from=%d AND NOT message IS NULL ORDER BY LENGTH(message) DESC LIMIT 1" % (id))
   if not entry:
     continue
   message = entry.message

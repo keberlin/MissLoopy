@@ -2,16 +2,13 @@ import re
 import sys
 
 from sqlalchemy import create_engine
-from sqlalchemy.orm import sessionmaker
 
 import spam
-from database import MISSLOOPY_DB_URI, db
+from database import MISSLOOPY_DB_URI, db_init
 from mlutils import *
 from model import *
 
-engine = create_engine(MISSLOOPY_DB_URI)
-Session = sessionmaker(bind=engine)
-db.session = Session()
+db = db_init(MISSLOOPY_DB_URI)
 
 MAX_LENGTH = 100
 

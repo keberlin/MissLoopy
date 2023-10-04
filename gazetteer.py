@@ -3,10 +3,13 @@ import math
 import os
 import re
 
-import database
+from sqlalchemy.sql import func
+
+from database import GAZETTEER_DB_URI, db_init
+from model import LocationModel
 from utils import *
 
-GAZETTEER_DB = 'gazetteer'
+db = db_init(GAZETTEER_DB_URI)
 
 CIRCUM_X = 40075017
 CIRCUM_Y = 40007860
@@ -15,12 +18,8 @@ def GazLatAdjust(y):
   return math.cos(y*2*math.pi/CIRCUM_Y)
 
 def GazLocation(location):
-  db = database.Database(GAZETTEER_DB)
-
-  db.execute('SELECT x,y,tz FROM locations WHERE location=%s LIMIT 1' % (Quote(location)))
-  ret = db.fetchone()
-  db.commit()
-  return ret
+  entry = db.session.query(LocationModel.x,LocationModel.y,LocationModel.tz).filter(LocationModel.location==location).one()
+  return entry
 
 def Alias(query):
   str = re.sub(r'\W',r'',query).lower()
@@ -35,60 +34,56 @@ def Alias(query):
   return None
 
 def GazClosestMatchesQuick(query,max):
-  db = database.Database(GAZETTEER_DB)
-
   alias = Alias(query)
   if alias:
     query = alias
 
   closest = []
 
-  db.execute('SELECT location FROM locations WHERE location ILIKE %s ORDER BY population DESC LIMIT %d' % (Quote(query+'%'), max))
-  closest.extend([(entry[0]) for entry in db.fetchall()])
+  entries = db.session.query(LocationModel.location).filter(LocationModel.location.ilike(query)).order_by(LocationModel.population.desc()).limit(max).all()
+  closest.extend([(entry.location) for entry in entries])
   if len(closest) < max:
-    db.execute('SELECT location FROM locations WHERE location ILIKE %s ORDER BY population DESC LIMIT %d' % (Quote('%'+query+'%'), max))
-    for entry in db.fetchall():
-      if entry[0] not in closest:
-        closest.append(entry[0])
-
-  db.commit()
+    entries = db.session.query(LocationModel.location).filter(LocationModel.location.ilike('%'+query+'%')).order_by(LocationModel.population.desc()).limit(max).all()
+    for entry in entries:
+      if entry.location not in closest:
+        closest.append(entry.location)
+        if len(closest) >= max:
+          break
 
   return closest[:max]
 
 def GazClosestMatches(query,max):
-  db = database.Database(GAZETTEER_DB)
-
   alias = Alias(query)
   if alias:
     query = alias
 
   closest = []
 
-  db.execute('SELECT location FROM locations WHERE location ILIKE %s ORDER BY population DESC LIMIT %d' % (Quote('%'+query+'%'), max))
-  closest.extend([(entry[0]) for entry in db.fetchall()])
+  entries = db.session.query(LocationModel.location).filter(LocationModel.location.ilike('%'+query+'%')).order_by(LocationModel.population.desc()).limit(max).all()
+  closest.extend([(entry.location) for entry in entries])
 
   if len(closest) < max:
-    db.execute('SELECT DISTINCT LOWER(SUBSTR(location,1,%d)) FROM locations' % (min(len(query),15)))
-    locations = [(entry[0]) for entry in db.fetchall()]
+    entries = db.session.query(func.lower(func.substr(LocationModel.location,1,min(len(query),15)))).distinct().all()
+    locations = [(entry[0]) for entry in entries]
 
     matches = difflib.get_close_matches(query, locations, max)
     # TODO remove any consecutive entries that are a subset of their preceding entry, e.g. Brugge, Brugg
 
     for match in matches:
-      db.execute('SELECT location FROM locations WHERE location ILIKE %s ORDER BY population DESC LIMIT %d' % (Quote(match+'%'), max))
-      for entry in db.fetchall():
-        if entry[0] not in closest:
-          closest.append(entry[0])
-      if len(closest) >= max:
-        break
+      entries = db.session.query(LocationModel.location).filter(LocationModel.location.ilike(match+'%')).order_by(LocationModel.population.desc()).limit(max).all()
+      for entry in entries:
+        if entry.location not in closest:
+          closest.append(entry.location)
+          if len(closest) >= max:
+            break
 
   if len(closest) < max:
-    db.execute('SELECT location FROM locations ORDER BY population DESC LIMIT %d' % (max))
-    for entry in db.fetchall():
-      if entry[0] not in closest:
-        closest.append(entry[0])
-
-  db.commit()
+    entries = db.session.query(LocationModel.location).order_by(LocationModel.population.desc()).limit(max).all()
+    for entry in entries:
+      if entry.location not in closest:
+        closest.append(entry.location)
+        if len(closest) >= max:
+          break
 
   return closest[:max]
 
