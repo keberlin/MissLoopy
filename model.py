@@ -143,7 +143,7 @@ class LocationModel(db.Model):
     tz = Column("tz", String, nullable=False)
     population = Column("population", Integer)
 
-# DB ipaddresses
+# DB ipaddress
 
 class RangeModel(db.Model):
     __tablename__ = "ranges"

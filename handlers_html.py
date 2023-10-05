@@ -34,7 +34,6 @@ def handle_index(entry,values):
 
   entries = []
   for id in ids:
-    print('id:',id)
     entry = db.session.query(ProfileModel.name, ProfileModel.location).filter(ProfileModel.id==id).one()
     d = {}
     d['id']      = id
@@ -139,10 +138,8 @@ def handle_matches(entry,values):
   weight_choice    = entry.weight_choice
 
   distance = 300
-  ids = search.search2(distance,'distance',id,x,y,tz,gender,age,ethnicity,height,weight,gender_choice,age_min,age_max,ethnicity_choice,height_min,height_max,weight_choice)[:MAX_RESULTS]
-
-  # Remove blocked members
-  ids = filter(lambda x:not BlockedMutually(id,x), ids)
+  entries = search.search2(distance,'distance',id,x,y,tz,gender,age,ethnicity,height,weight,gender_choice,age_min,age_max,ethnicity_choice,height_min,height_max,weight_choice)[:MAX_RESULTS]
+  ids = [entry.id for entry in entries]
 
   SaveResults(id, ids)
 
@@ -164,7 +161,7 @@ def handle_matches(entry,values):
   dict['action']   = 'member'
   dict['type']     = 'short'
   dict['criteria'] = ', '.join(criteria)
-  dict['entries']  = ListMembers(ids,None,location,x,y,tz,unit_distance)
+  dict['entries']  = ListMembers(entries,None,location,x,y,tz,unit_distance)
 
   return dict
 
@@ -234,10 +231,8 @@ def handle_results(entry,values):
   if values.get('order'):
     order = values['order']
 
-  ids = search.search2(distance,order,id,x,y,tz,gender,age,ethnicity,height,weight,gender_choice,age_min,age_max,ethnicity_choice,height_min,height_max,weight_choice)[:MAX_RESULTS]
-
-  # Remove blocked members
-  ids = filter(lambda x:not BlockedMutually(id,x), ids)
+  entries = search.search2(distance,order,id,x,y,tz,gender,age,ethnicity,height,weight,gender_choice,age_min,age_max,ethnicity_choice,height_min,height_max,weight_choice)[:MAX_RESULTS]
+  ids = [entry.id for entry in entries]
 
   SaveResults(id, ids)
 
@@ -260,7 +255,7 @@ def handle_results(entry,values):
   dict['type']     = 'short'
   dict['around']   = Distance(distance,unit_distance) + ' around ' + GazPlacename(search_location, location) if distance else 'Worldwide'
   dict['criteria'] = ', '.join(criteria)
-  dict['entries']  = ListMembers(ids,None,location,x,y,tz,unit_distance)
+  dict['entries']  = ListMembers(entries,None,location,x,y,tz,unit_distance)
   dict['nav']      = 'search'
 
   return dict
@@ -376,7 +371,7 @@ def handle_emailthread(entry,values):
     dict['error'] = 'This member has blocked you.'
     return dict
 
-  dict['entry']  = ListMember(id_with,0,location,x,y,tz,unit_distance)
+  dict['entry']  = ListMember(entry,0,location,x,y,tz,unit_distance)
   dict['name']   = entry.name
   dict['action'] = 'member'
 
@@ -410,18 +405,17 @@ def handle_inbox(entry,values):
   y        = entry.y
   tz       = entry.tz
 
+  query = db.session.query(ProfileModel.id,ProfileModel.x,ProfileModel.y,ProfileModel.name,ProfileModel.gender,ProfileModel.dob,ProfileModel.ethnicity,ProfileModel.location,ProfileModel.summary,ProfileModel.last_login,ProfileModel.last_ip_country,ProfileModel.created2,EmailModel.id_from).join(EmailModel,EmailModel.id_from==ProfileModel.id)
+
+  # Remove any mutually blocked profiles
   blocked_by_me = aliased(BlockedModel)
   blocked_by_them = aliased(BlockedModel)
-  entries = db.session.query(EmailModel.id_from).\
-    outerjoin(blocked_by_me,and_(blocked_by_me.id==EmailModel.id_from,blocked_by_me.id_block==EmailModel.id_to)).\
-    outerjoin(blocked_by_them,and_(blocked_by_them.id_block==EmailModel.id_to,blocked_by_them.id==EmailModel.id_from)).\
+  query = query.outerjoin(blocked_by_me,and_(blocked_by_me.id==EmailModel.id_to,blocked_by_me.id_block==EmailModel.id_from)).\
+    outerjoin(blocked_by_them,and_(blocked_by_them.id==EmailModel.id_from,blocked_by_them.id_block==EmailModel.id_to)).\
     filter(blocked_by_me.id.is_(None)).\
-    filter(blocked_by_them.id.is_(None)).\
-    filter(EmailModel.id_to==id).\
-    group_by(EmailModel.id_from).\
-    order_by(func.max(EmailModel.sent).desc()).\
-    distinct().\
-    all()
+    filter(blocked_by_them.id.is_(None))
+
+  entries = query.filter(EmailModel.id_to==id).group_by(EmailModel.id_from).group_by(ProfileModel.id).order_by(func.max(EmailModel.sent).desc()).all()
   ids = [entry.id_from for entry in entries]
 
   SaveResults(id, ids)
@@ -438,7 +432,7 @@ def handle_inbox(entry,values):
   dict = {}
   dict['action']  = 'emailthread'
   dict['type']    = 'number'
-  dict['entries'] = ListMembers(ids,counts,location,x,y,tz,unit_distance)
+  dict['entries'] = ListMembers(entries,counts,location,x,y,tz,unit_distance)
 
   return dict
 
@@ -450,18 +444,17 @@ def handle_outbox(entry,values):
   y        = entry.y
   tz       = entry.tz
 
+  query = db.session.query(ProfileModel.id,ProfileModel.x,ProfileModel.y,ProfileModel.name,ProfileModel.gender,ProfileModel.dob,ProfileModel.ethnicity,ProfileModel.location,ProfileModel.summary,ProfileModel.last_login,ProfileModel.last_ip_country,ProfileModel.created2,EmailModel.id_to).join(EmailModel,EmailModel.id_to==ProfileModel.id)
+
+  # Remove any mutually blocked profiles
   blocked_by_me = aliased(BlockedModel)
   blocked_by_them = aliased(BlockedModel)
-  entries = db.session.query(EmailModel.id_to).\
-    outerjoin(blocked_by_me,and_(blocked_by_me.id==EmailModel.id_from,blocked_by_me.id_block==EmailModel.id_to)).\
-    outerjoin(blocked_by_them,and_(blocked_by_them.id_block==EmailModel.id_to,blocked_by_them.id==EmailModel.id_from)).\
+  query = query.outerjoin(blocked_by_me,and_(blocked_by_me.id==EmailModel.id_from,blocked_by_me.id_block==EmailModel.id_to)).\
+    outerjoin(blocked_by_them,and_(blocked_by_them.id==EmailModel.id_to,blocked_by_them.id_block==EmailModel.id_from)).\
     filter(blocked_by_me.id.is_(None)).\
-    filter(blocked_by_them.id.is_(None)).\
-    filter(EmailModel.id_from==id).\
-    group_by(EmailModel.id_to).\
-    order_by(func.max(EmailModel.sent).desc()).\
-    distinct().\
-    all()
+    filter(blocked_by_them.id.is_(None))
+
+  entries = query.filter(EmailModel.id_from==id).group_by(EmailModel.id_to).group_by(ProfileModel.id).order_by(func.max(EmailModel.sent).desc()).all()
   ids = [entry.id_to for entry in entries]
 
   SaveResults(id, ids)
@@ -478,7 +471,7 @@ def handle_outbox(entry,values):
   dict = {}
   dict['action']  = 'emailthread'
   dict['type']    = 'number'
-  dict['entries'] = ListMembers(ids,counts,location,x,y,tz,unit_distance)
+  dict['entries'] = ListMembers(entries,counts,location,x,y,tz,unit_distance)
 
   return dict
 
@@ -490,11 +483,18 @@ def handle_favorites(entry,values):
   y        = entry.y
   tz       = entry.tz
 
-  entries = db.session.query(FavoriteModel.id_favorite.distinct(), ProfileModel.last_login).join(ProfileModel, ProfileModel.id==FavoriteModel.id_favorite).filter(FavoriteModel.id==id).order_by(ProfileModel.last_login).all()
-  ids = [entry.id_favorite for entry in entries]
+  query = db.session.query(ProfileModel.id,ProfileModel.x,ProfileModel.y,ProfileModel.name,ProfileModel.gender,ProfileModel.dob,ProfileModel.ethnicity,ProfileModel.location,ProfileModel.summary,ProfileModel.last_login,ProfileModel.last_ip_country,ProfileModel.created2,FavoriteModel.id_favorite).join(FavoriteModel,FavoriteModel.id_favorite==ProfileModel.id)
 
-  # Remove blocked members
-  ids = filter(lambda x:not BlockedMutually(id,x), ids)
+  # Remove any mutually blocked profiles
+  blocked_by_me = aliased(BlockedModel)
+  blocked_by_them = aliased(BlockedModel)
+  query = query.outerjoin(blocked_by_me,and_(blocked_by_me.id==FavoriteModel.id,blocked_by_me.id_block==FavoriteModel.id_favorite)).\
+    outerjoin(blocked_by_them,and_(blocked_by_them.id==FavoriteModel.id_favorite,blocked_by_them.id_block==FavoriteModel.id)).\
+    filter(blocked_by_me.id.is_(None)).\
+    filter(blocked_by_them.id.is_(None))
+
+  entries = query.filter(FavoriteModel.id==id).order_by(ProfileModel.last_login).distinct().all()
+  ids = [entry.id_favorite for entry in entries]
 
   SaveResults(id, ids)
 
@@ -505,7 +505,7 @@ def handle_favorites(entry,values):
   dict = {}
   dict['action']  = 'member'
   dict['type']    = 'full'
-  dict['entries'] = ListMembers(ids,None,location,x,y,tz,unit_distance)
+  dict['entries'] = ListMembers(entries,None,location,x,y,tz,unit_distance)
 
   return dict
 
@@ -517,7 +517,9 @@ def handle_blocked(entry,values):
   y        = entry.y
   tz       = entry.tz
 
-  entries = db.session.query(BlockedModel.id_block).filter(BlockedModel.id==id).distinct().all()
+  query = db.session.query(ProfileModel.id,ProfileModel.x,ProfileModel.y,ProfileModel.name,ProfileModel.gender,ProfileModel.dob,ProfileModel.ethnicity,ProfileModel.location,ProfileModel.summary,ProfileModel.last_login,ProfileModel.last_ip_country,ProfileModel.created2,BlockedModel.id_block).join(BlockedModel,BlockedModel.id_block==ProfileModel.id)
+
+  entries = query.filter(BlockedModel.id==id).distinct().all()
   ids = [entry.id_block for entry in entries]
 
   SaveResults(id, ids)
@@ -529,7 +531,7 @@ def handle_blocked(entry,values):
   dict = {}
   dict['action']  = 'member'
   dict['type']    = 'full'
-  dict['entries'] = ListMembers(ids,None,location,x,y,tz,unit_distance)
+  dict['entries'] = ListMembers(entries,None,location,x,y,tz,unit_distance)
 
   return dict
 

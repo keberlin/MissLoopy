@@ -12,18 +12,15 @@ from units import *
 from utils import *
 
 
-def ListMember(id,active,location,x,y,tz,unit_distance):
-  entry = db.session.query(ProfileModel).filter(ProfileModel.id==id).one_or_none()
-  if not entry:
-    logging.debug('debug: could not find profile: '+str(id))
-    return None
+def ListMember(entry,active,location,x,y,tz,unit_distance):
+  logging.debug(entry)
   adjust = GazLatAdjust(y)
   dx = abs(x-entry.x)*adjust/1000
   dy = abs(y-entry.y)/1000
   distance = math.sqrt((dx*dx)+(dy*dy))
 
   member = {}
-  member['id']            = id
+  member['id']            = entry.id
   member['image']         = PhotoFilename(MasterPhoto(entry.id))
   member['name']          = mask.MaskEverything(entry.name)
   member['gender']        = Gender(entry.gender)
@@ -41,11 +38,9 @@ def ListMember(id,active,location,x,y,tz,unit_distance):
 
   return member
 
-def ListMembers(ids,counts,location,x,y,tz,unit_distance):
+def ListMembers(entries,counts,location,x,y,tz,unit_distance):
   members = []
-  for id, count in itertools.izip_longest(ids,counts if counts else []):
-    member = ListMember(id,count,location,x,y,tz,unit_distance)
-    if not member:
-      continue
+  for entry, count in itertools.izip_longest(entries,counts if counts else []):
+    member = ListMember(entry,count,location,x,y,tz,unit_distance)
     members.append(member)
   return members

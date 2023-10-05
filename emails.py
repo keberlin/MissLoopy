@@ -126,7 +126,7 @@ def EmailNotify(entry,entry_from):
   html = RenderY('email-notify.html', dict)
   Email2(FROM, [email], 'New Message Received', html)
 
-def EmailNewMembers(entry,ids):
+def EmailNewMembers(entry,entries):
   email    = entry.email
   location = entry.location
   country  = GazCountry(location)
@@ -141,7 +141,7 @@ def EmailNewMembers(entry,ids):
   dict = {}
   dict['action']     = 'member'
   dict['navigation'] = 'matches'
-  dict['entries'] = ListMembers(ids,None,location,x,y,tz,unit_distance)
+  dict['entries'] = ListMembers(entries,None,location,x,y,tz,unit_distance)
 
   html = RenderY('email-newmembers.html', dict)
   Email2(FROM, [email], 'New Members Available', html, 4)

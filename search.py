@@ -16,7 +16,15 @@ from utils import *
 def search2(distance,order,id,x,y,tz,gender,age,ethnicity,height,weight,gender_choice,age_min,age_max,ethnicity_choice,height_min,height_max,weight_choice):
   adjust = GazLatAdjust(y)
 
-  query = db.session.query(ProfileModel.id,ProfileModel.x,ProfileModel.y).filter(ProfileModel.verified.is_(True))
+  query = db.session.query(ProfileModel).filter(ProfileModel.verified.is_(True))
+
+  # Remove any mutually blocked profiles
+  blocked_by_me = aliased(BlockedModel)
+  blocked_by_them = aliased(BlockedModel)
+  query = query.outerjoin(blocked_by_me,and_(blocked_by_me.id==id,blocked_by_me.id_block==ProfileModel.id)).\
+    outerjoin(blocked_by_them,and_(blocked_by_them.id==ProfileModel.id,blocked_by_them.id_block==id)).\
+    filter(blocked_by_me.id.is_(None)).\
+    filter(blocked_by_them.id.is_(None))
 
   # Limit profiles to those with genuine locations!
   #rules.append('last_ip_country = country')
@@ -80,13 +88,12 @@ def search2(distance,order,id,x,y,tz,gender,age,ethnicity,height,weight,gender_c
 
   list = []
   for entry in entries:
-    id = entry.id
     dx = abs(x-entry.x)*adjust/1000
     dy = abs(y-entry.y)/1000
     d = math.sqrt((dx*dx)+(dy*dy))
     if distance and d > distance:
       continue
-    list.append((id,d))
+    list.append((entry,d))
   if order == 'distance':
     list.sort(cmp=lambda a,b:int(a[1]-b[1])) # TODO
 

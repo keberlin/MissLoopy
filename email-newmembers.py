@@ -41,22 +41,16 @@ for entry in entries:
   weight_choice    = entry.weight_choice
 
   distance = 50
-  ids = search.search2(distance,'distance',id,x,y,tz,gender,age,ethnicity,height,weight,gender_choice,age_min,age_max,ethnicity_choice,height_min,height_max,weight_choice)
+  entries = search.search2(distance,'distance',id,x,y,tz,gender,age,ethnicity,height,weight,gender_choice,age_min,age_max,ethnicity_choice,height_min,height_max,weight_choice)
 
-  # Remove blocked members
-  ids = filter(lambda x:not BlockedMutually(id,x), ids)
+  for entry2 in entries:
+    if entry2 not in results:
+      results[entry2] = []
+    results[entry2].append(entry)
 
-  for id2 in ids:
-    if id2 not in results:
-      results[id2] = []
-    results[id2].append(id)
-
-for id in results.keys():
-  entry = session.query(ProfileModel).filter(ProfileModel.id==id).one_or_none()
-  if not entry:
-    continue
+for entry, members in results.iteritems():
   if not entry.notifications & NOT_NEW_MEMBERS:
-    EmailNewMembers(entry, results[id])
+    EmailNewMembers(entry, members)
 
 session.query(AdminModel).update({"last_new_member_search":now},synchronize_session=False)
 session.commit()

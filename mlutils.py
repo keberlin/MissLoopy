@@ -400,27 +400,31 @@ def DeleteMember(id):
   db.session.commit()
 
 def InboxCount(id):
+  query = db.session.query(func.count(EmailModel.id_from.distinct()))
+
+  # Remove any mutually blocked profiles
   blocked_by_me = aliased(BlockedModel)
   blocked_by_them = aliased(BlockedModel)
-  count = db.session.query(func.count(EmailModel.id_from.distinct())).\
-    outerjoin(blocked_by_me,and_(blocked_by_me.id==EmailModel.id_from,blocked_by_me.id_block==EmailModel.id_to)).\
-    outerjoin(blocked_by_them,and_(blocked_by_them.id_block==EmailModel.id_to,blocked_by_them.id==EmailModel.id_from)).\
+  query = query.outerjoin(blocked_by_me,and_(blocked_by_me.id==EmailModel.id_from,blocked_by_me.id_block==EmailModel.id_to)).\
+    outerjoin(blocked_by_them,and_(blocked_by_them.id==EmailModel.id_to,blocked_by_them.id_block==EmailModel.id_from)).\
     filter(blocked_by_me.id.is_(None)).\
-    filter(blocked_by_them.id.is_(None)).\
-    filter(EmailModel.id_to==id, EmailModel.viewed.is_(False)).\
-    scalar()
+    filter(blocked_by_them.id.is_(None))
+
+  count = query.filter(EmailModel.id_to==id, EmailModel.viewed.is_(False)).scalar()
   return count
 
 def OutboxCount(id):
+  query = db.session.query(func.count(EmailModel.id_to.distinct()))
+
+  # Remove any mutually blocked profiles
   blocked_by_me = aliased(BlockedModel)
   blocked_by_them = aliased(BlockedModel)
-  count = db.session.query(func.count(EmailModel.id_to.distinct())).\
-    outerjoin(blocked_by_me,and_(blocked_by_me.id==EmailModel.id_from,blocked_by_me.id_block==EmailModel.id_to)).\
-    outerjoin(blocked_by_them,and_(blocked_by_them.id_block==EmailModel.id_to,blocked_by_them.id==EmailModel.id_from)).\
+  query = query.outerjoin(blocked_by_me,and_(blocked_by_me.id==EmailModel.id_from,blocked_by_me.id_block==EmailModel.id_to)).\
+    outerjoin(blocked_by_them,and_(blocked_by_them.id==EmailModel.id_to,blocked_by_them.id_block==EmailModel.id_from)).\
     filter(blocked_by_me.id.is_(None)).\
-    filter(blocked_by_them.id.is_(None)).\
-    filter(EmailModel.id_from==id, EmailModel.viewed.is_(False)).\
-    scalar()
+    filter(blocked_by_them.id.is_(None))
+
+  count = query.filter(EmailModel.id_from==id, EmailModel.viewed.is_(False)).scalar()
   return count
 
 def SaveResults(id,results):

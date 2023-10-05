@@ -13,7 +13,9 @@ from model import *
 
 BASE_DIR = os.path.dirname(__file__)
 
-logging.basicConfig(filename='/var/log/missloopy/log', level=logging.DEBUG)
+TEST = (re.search('root',BASE_DIR) is not None)
+
+logging.basicConfig(filename='/var/log/missloopy/log', level=logging.DEBUG if TEST else logging.INFO)
 
 PAGE_SIZE = 20
 
@@ -44,9 +46,9 @@ def login_required(f):
 # Flask application
 def create_app():
   app = MyFlask(__name__)
-  app.config['DEBUG'] = re.search('root',BASE_DIR)
+  app.config['DEBUG'] = TEST
   # Databases
-  app.config['SQLALCHEMY_ECHO'] = re.search('root',BASE_DIR)
+  app.config['SQLALCHEMY_ECHO'] = TEST
   app.config['SQLALCHEMY_DATABASE_URI'] = MISSLOOPY_DB_URI
   app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
