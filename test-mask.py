@@ -4,6 +4,6 @@ import mask
 
 lines = []
 for line in fileinput.input():
-  lines.append(line.decode('utf-8','ignore'))
+    lines.append(line)
 
-print mask.MaskEverything(''.join(lines)).encode('utf-8')
+print(mask.MaskEverything("".join(lines)))

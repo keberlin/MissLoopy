@@ -1,3 +1,3 @@
 from emails import *
 
-EmailInboxReminder('keith.hollis@gmail.com', 'Teefy')
+EmailInboxReminder("keith.hollis@gmail.com", "Teefy")

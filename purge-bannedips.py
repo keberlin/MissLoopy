@@ -14,15 +14,15 @@ entries = session.query(ProfileModel.last_ip).filter(ProfileModel.verified.is_(T
 ips = set([entry.last_ip for entry in entries])
 
 ids = []
-with open('bannedips.txt','r') as file:
-  for line in file.readlines():
-    ip = line.strip()
-    if ip in ips:
-      entries = session.query(ProfileModel.id,ProfileModel.email).filter(ProfileModel.last_ip==ip).all()
-      for entry in entries:
-        ids.append((entry.id, entry.email, ip))
+with open("bannedips.txt", "r") as file:
+    for line in file.readlines():
+        ip = line.strip()
+        if ip in ips:
+            entries = session.query(ProfileModel.id, ProfileModel.email).filter(ProfileModel.last_ip == ip).all()
+            for entry in entries:
+                ids.append((entry.id, entry.email, ip))
 
 for id, email, ip in ids:
-  DeleteMember(id)
-  EmailKickedStopForumSpam(email)
-  logging.info('Kicked due to banned IP address %s %d %s' % (Quote(ip), id, email))
+    DeleteMember(id)
+    EmailKickedStopForumSpam(email)
+    logging.info("Kicked due to banned IP address %s %d %s" % (Quote(ip), id, email))

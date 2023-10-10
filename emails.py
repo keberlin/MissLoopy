@@ -6,149 +6,159 @@ from mlhtml import *
 from mllist import *
 from mlutils import *
 
-FROM = TITLE + '<noreply@' + DOMAIN + '>'
+FROM = TITLE + "<noreply@" + DOMAIN + ">"
 
-def EmailNewPhoto(filename,pid,id):
-  dict = {}
-  dict['id']    = id
-  #dict['image'] = ImageData(filename)
-  dict['filename'] = filename
 
-  html = RenderY('email-new-photo.html', dict)
-  Email2(FROM, ['keith.hollis@gmail.com'], 'New Photo Uploaded (%d)' % (pid), html, 10)
+def EmailNewPhoto(filename, pid, id):
+    dict = {}
+    dict["id"] = id
+    # dict['image'] = ImageData(filename)
+    dict["filename"] = filename
 
-def EmailVerify(email,id):
-  dict = {}
-  dict['id']    = id
-  dict['email'] = email
+    html = RenderY("email-new-photo.html", dict)
+    Email2(FROM, ["keith.hollis@gmail.com"], "New Photo Uploaded (%d)" % (pid), html, 10)
 
-  html = RenderY('email-verify.html', dict)
-  Email2(FROM, [email], 'Verify Registration', html, 1)
 
-def EmailPassword(email,password):
-  dict = {}
-  dict['password'] = password
+def EmailVerify(email, id):
+    dict = {}
+    dict["id"] = id
+    dict["email"] = email
 
-  html = RenderY('email-password.html', dict)
-  Email2(FROM, [email], 'Password Reminder', html, 1)
+    html = RenderY("email-verify.html", dict)
+    Email2(FROM, [email], "Verify Registration", html, 1)
+
+
+def EmailPassword(email, password):
+    dict = {}
+    dict["password"] = password
+
+    html = RenderY("email-password.html", dict)
+    Email2(FROM, [email], "Password Reminder", html, 1)
+
 
 def EmailKicked(email):
-  dict = {}
+    dict = {}
 
-  html = RenderY('email-kicked.html', dict)
-  Email2(FROM, [email], 'Removal Alert', html)
+    html = RenderY("email-kicked.html", dict)
+    Email2(FROM, [email], "Removal Alert", html)
+
 
 def EmailKickedStopForumSpam(email):
-  dict = {}
+    dict = {}
 
-  html = RenderY('email-kicked-stopforumspam.html', dict)
-  Email2(FROM, [email], 'Removal Alert', html)
+    html = RenderY("email-kicked-stopforumspam.html", dict)
+    Email2(FROM, [email], "Removal Alert", html)
+
 
 def EmailPhotoDeleted(email):
-  dict = {}
+    dict = {}
 
-  html = RenderY('email-photo-deleted.html', dict)
-  Email2(FROM, [email], 'Photo Removal Alert', html)
+    html = RenderY("email-photo-deleted.html", dict)
+    Email2(FROM, [email], "Photo Removal Alert", html)
 
-def EmailWink(entry,entry_from):
-  email    = entry.email
-  location = entry.location
-  country  = GazCountry(location)
-  tz       = entry.tz
-  adjust = GazLatAdjust(entry_from.y)
-  dx = abs(entry_from.x-entry.x)*adjust/1000
-  dy = abs(entry_from.y-entry.y)/1000
-  distance = math.sqrt((dx*dx)+(dy*dy))
 
-  SetLocale(country)
+def EmailWink(entry, entry_from):
+    email = entry.email
+    location = entry.location
+    country = GazCountry(location)
+    tz = entry.tz
+    adjust = GazLatAdjust(entry_from.y)
+    dx = abs(entry_from.x - entry.x) * adjust / 1000
+    dy = abs(entry_from.y - entry.y) / 1000
+    distance = math.sqrt((dx * dx) + (dy * dy))
 
-  unit_distance, unit_height = Units(country)
+    SetLocale(country)
 
-  dict = {}
-  dict['action']     = 'emailthread'
-  dict['navigation'] = 'inbox'
+    unit_distance, unit_height = Units(country)
 
-  member = {}
-  member['id']            = entry_from.id
-  member['image']         = PhotoFilename(MasterPhoto(entry_from.id))
-  member['name']          = mask.MaskEverything(entry_from.name)
-  member['gender']        = Gender(entry_from.gender)
-  member['age']           = Age(entry_from.dob)
-  member['starsign']      = Starsign(entry_from.dob)
-  member['ethnicity']     = Ethnicity(entry_from.ethnicity)
-  member['location']      = entry_from.location
-  member['summary']       = mask.MaskEverything(entry_from.summary)
-  member['last_login']    = Since(entry_from.last_login)
-  member['login_country'] = entry_from.last_ip_country
-  member['created']       = Datetime(entry_from.created2, tz).strftime('%x')
-  member['distance']      = Distance(distance, unit_distance)
-  member['active']        = False
-  dict['entry'] = member
+    dict = {}
+    dict["action"] = "emailthread"
+    dict["navigation"] = "inbox"
 
-  html = RenderY('email-wink.html', dict)
-  Email2(FROM, [email], 'New Wink! Received', html)
+    member = {}
+    member["id"] = entry_from.id
+    member["image"] = PhotoFilename(MasterPhoto(entry_from.id))
+    member["name"] = mask.MaskEverything(entry_from.name)
+    member["gender"] = Gender(entry_from.gender)
+    member["age"] = Age(entry_from.dob)
+    member["starsign"] = Starsign(entry_from.dob)
+    member["ethnicity"] = Ethnicity(entry_from.ethnicity)
+    member["location"] = entry_from.location
+    member["summary"] = mask.MaskEverything(entry_from.summary)
+    member["last_login"] = Since(entry_from.last_login)
+    member["login_country"] = entry_from.last_ip_country
+    member["created"] = Datetime(entry_from.created2, tz).strftime("%x")
+    member["distance"] = Distance(distance, unit_distance)
+    member["active"] = False
+    dict["entry"] = member
 
-def EmailNotify(entry,entry_from):
-  email    = entry.email
-  location = entry.location
-  country  = GazCountry(location)
-  tz       = entry.tz
-  adjust = GazLatAdjust(entry_from.y)
-  dx = abs(entry_from.x-entry.x)*adjust/1000
-  dy = abs(entry_from.y-entry.y)/1000
-  distance = math.sqrt((dx*dx)+(dy*dy))
+    html = RenderY("email-wink.html", dict)
+    Email2(FROM, [email], "New Wink! Received", html)
 
-  SetLocale(country)
 
-  unit_distance, unit_height = Units(country)
+def EmailNotify(entry, entry_from):
+    email = entry.email
+    location = entry.location
+    country = GazCountry(location)
+    tz = entry.tz
+    adjust = GazLatAdjust(entry_from.y)
+    dx = abs(entry_from.x - entry.x) * adjust / 1000
+    dy = abs(entry_from.y - entry.y) / 1000
+    distance = math.sqrt((dx * dx) + (dy * dy))
 
-  dict = {}
-  dict['action']     = 'emailthread'
-  dict['navigation'] = 'inbox'
+    SetLocale(country)
 
-  member = {}
-  member['id']            = entry_from.id
-  member['image']         = PhotoFilename(MasterPhoto(entry_from.id))
-  member['name']          = mask.MaskEverything(entry_from.name)
-  member['gender']        = Gender(entry_from.gender)
-  member['age']           = Age(entry_from.dob)
-  member['starsign']      = Starsign(entry_from.dob)
-  member['ethnicity']     = Ethnicity(entry_from.ethnicity)
-  member['location']      = entry_from.location
-  member['summary']       = mask.MaskEverything(entry_from.summary)
-  member['last_login']    = Since(entry_from.last_login)
-  member['login_country'] = entry_from.last_ip_country
-  member['created']       = Datetime(entry_from.created2, tz).strftime('%x')
-  member['distance']      = Distance(distance, unit_distance)
-  member['active']        = False
-  dict['entry'] = member
+    unit_distance, unit_height = Units(country)
 
-  html = RenderY('email-notify.html', dict)
-  Email2(FROM, [email], 'New Message Received', html)
+    dict = {}
+    dict["action"] = "emailthread"
+    dict["navigation"] = "inbox"
 
-def EmailNewMembers(entry,entries):
-  email    = entry.email
-  location = entry.location
-  country  = GazCountry(location)
-  x        = entry.x
-  y        = entry.y
-  tz       = entry.tz
+    member = {}
+    member["id"] = entry_from.id
+    member["image"] = PhotoFilename(MasterPhoto(entry_from.id))
+    member["name"] = mask.MaskEverything(entry_from.name)
+    member["gender"] = Gender(entry_from.gender)
+    member["age"] = Age(entry_from.dob)
+    member["starsign"] = Starsign(entry_from.dob)
+    member["ethnicity"] = Ethnicity(entry_from.ethnicity)
+    member["location"] = entry_from.location
+    member["summary"] = mask.MaskEverything(entry_from.summary)
+    member["last_login"] = Since(entry_from.last_login)
+    member["login_country"] = entry_from.last_ip_country
+    member["created"] = Datetime(entry_from.created2, tz).strftime("%x")
+    member["distance"] = Distance(distance, unit_distance)
+    member["active"] = False
+    dict["entry"] = member
 
-  SetLocale(country)
+    html = RenderY("email-notify.html", dict)
+    Email2(FROM, [email], "New Message Received", html)
 
-  unit_distance, unit_height = Units(country)
 
-  dict = {}
-  dict['action']     = 'member'
-  dict['navigation'] = 'matches'
-  dict['entries'] = ListMembers(entries,None,location,x,y,tz,unit_distance)
+def EmailNewMembers(entry, entries):
+    email = entry.email
+    location = entry.location
+    country = GazCountry(location)
+    x = entry.x
+    y = entry.y
+    tz = entry.tz
 
-  html = RenderY('email-newmembers.html', dict)
-  Email2(FROM, [email], 'New Members Available', html, 4)
+    SetLocale(country)
 
-def EmailInboxReminder(email,name):
-  dict = {}
-  dict['name'] = name
+    unit_distance, unit_height = Units(country)
 
-  html = RenderY('email-inbox-reminder.html', dict)
-  Email2(FROM, [email], 'Unread Messages Reminder', html, 1)
+    dict = {}
+    dict["action"] = "member"
+    dict["navigation"] = "matches"
+    dict["entries"] = ListMembers(entries, None, location, x, y, tz, unit_distance)
+
+    html = RenderY("email-newmembers.html", dict)
+    Email2(FROM, [email], "New Members Available", html, 4)
+
+
+def EmailInboxReminder(email, name):
+    dict = {}
+    dict["name"] = name
+
+    html = RenderY("email-inbox-reminder.html", dict)
+    Email2(FROM, [email], "Unread Messages Reminder", html, 1)

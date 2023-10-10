@@ -1,3 +1,3 @@
 from emails import *
 
-EmailPhotoDeleted('keith.hollis@gmail.com')
+EmailPhotoDeleted("keith.hollis@gmail.com")

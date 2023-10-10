@@ -6,11 +6,11 @@ MAX_MATCHES = 5
 
 dict = FetchFormFields()
 
-if not 'query' in dict:
-  Error('No query specified.')
+if not "query" in dict:
+    Error("No query specified.")
 
-query = dict['query'].lstrip()
+query = dict["query"].lstrip()
 
 closest = GazClosestMatchesQuick(query, MAX_MATCHES)
 
-Return({'matches':closest})
+Return({"matches": closest})

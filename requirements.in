@@ -2,6 +2,7 @@ argparse
 beautifulsoup4
 coverage
 Flask
+flask-sqlalchemy
 Jinja2
 nose
 Pillow

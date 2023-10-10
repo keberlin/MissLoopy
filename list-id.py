@@ -12,7 +12,7 @@ session = db_init(MISSLOOPY_DB_URI)
 
 email = sys.argv[1]
 
-entry = session.query(ProfileModel.id).filter(func.lower(ProfileModel.email)==email).one_or_none()
+entry = session.query(ProfileModel.id).filter(func.lower(ProfileModel.email) == email).one_or_none()
 if entry:
-  id = entry.id
-  print id
+    id = entry.id
+    print(id)

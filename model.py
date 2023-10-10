@@ -1,14 +1,14 @@
-from sqlalchemy import (BigInteger, Boolean, Column, Date, DateTime, Float,
-                        ForeignKey, Identity, Integer, String)
+from sqlalchemy import BigInteger, Boolean, Column, Date, DateTime, Float, ForeignKey, Identity, Integer, String
 
 from database import db
 
 # DB missloopy
 
+
 class ProfileModel(db.Model):
     __tablename__ = "profiles"
-    #__table_args__ = {"schema":"missloopy"}
-    #__unique__ = "email"
+    # __table_args__ = {"schema":"missloopy"}
+    # __unique__ = "email"
 
     id = Column("id", Integer, primary_key=True, server_default=Identity(), nullable=False)
     email = Column("email", String, nullable=False)
@@ -49,6 +49,7 @@ class ProfileModel(db.Model):
     last_ip_country = Column("last_ip_country", String)
     notifications = Column("notifications", Integer, default=0)
 
+
 class PhotoModel(db.Model):
     __tablename__ = "photos"
 
@@ -57,6 +58,7 @@ class PhotoModel(db.Model):
     sequence = Column("sequence", Integer, default=0)
     master = Column("master", Boolean, default=False)
     created = Column("created", DateTime)
+
 
 class EmailModel(db.Model):
     __tablename__ = "emails"
@@ -68,17 +70,20 @@ class EmailModel(db.Model):
     viewed = Column("viewed", Boolean, default=False)
     image = Column("image", String)
 
+
 class BlockedModel(db.Model):
     __tablename__ = "blocked"
 
     id = Column("id", Integer, primary_key=True, nullable=False)
     id_block = Column("id_block", Integer, ForeignKey(ProfileModel.id), nullable=False)
 
+
 class FavoriteModel(db.Model):
     __tablename__ = "favorites"
 
     id = Column("id", Integer, primary_key=True, nullable=False)
     id_favorite = Column("id_favorite", Integer, ForeignKey(ProfileModel.id), nullable=False)
+
 
 class ResultModel(db.Model):
     __tablename__ = "results"
@@ -88,11 +93,13 @@ class ResultModel(db.Model):
     id_previous = Column("id_previous", Integer, ForeignKey(ProfileModel.id), nullable=False)
     id_next = Column("id_next", Integer, ForeignKey(ProfileModel.id), nullable=False)
 
+
 class AdminModel(db.Model):
     __tablename__ = "admin"
 
     last_new_member_search = Column("last_new_member_search", DateTime, primary_key=True)
     last_dump_member_search = Column("last_dump_member_search", DateTime)
+
 
 class ReportModel(db.Model):
     __tablename__ = "reports"
@@ -126,13 +133,16 @@ class ReportModel(db.Model):
     active = Column("active", Integer)
     messages = Column("messages", Integer)
 
+
 class SpamModel(db.Model):
     __tablename__ = "spam"
 
     str = Column("str", String, primary_key=True, nullable=False)
     cost = Column("cost", Float, nullable=False)
 
+
 # DB gazetteer
+
 
 class LocationModel(db.Model):
     __tablename__ = "locations"
@@ -143,12 +153,14 @@ class LocationModel(db.Model):
     tz = Column("tz", String, nullable=False)
     population = Column("population", Integer)
 
+
 # DB ipaddress
+
 
 class RangeModel(db.Model):
     __tablename__ = "ranges"
 
-    #uid = Column("uid", Integer, Identity(), primary_key=True, nullable=False)
+    # uid = Column("uid", Integer, Identity(), primary_key=True, nullable=False)
     lower = Column("lower", BigInteger, primary_key=True, nullable=False)
     upper = Column("upper", BigInteger, nullable=False)
     country = Column("country", String, nullable=False)

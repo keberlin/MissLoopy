@@ -1,3 +1,3 @@
 from emails import *
 
-EmailKicked('keith.hollis@gmail.com')
+EmailKicked("keith.hollis@gmail.com")

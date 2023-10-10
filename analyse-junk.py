@@ -2,98 +2,169 @@ import re
 import sys
 
 from database import MISSLOOPY_DB_URI, db_init
-#from mlutils import *
+
+# from mlutils import *
 from model import SpamModel
 
-#from utils import *
+# from utils import *
 
 session = db_init(MISSLOOPY_DB_URI)
 
-MANDATORY = ['western union', 'proposal', 'money', 'usd', 'solicitor', 'lawyer', 'barrister', 'lottery', 'lotto', 'sweepstake',
-             'transaction', 'bank', 'winner', 'official', 'payout', 'winning', 'orphan', 'cancer', 'moneygram', 'civil war',
-             'property', 'transfer', 'refuge', 'million', 'fighting', 'deposit', 'account', 'political', 'assistance', 'relocate',
-             'profit', 'worth', 'inherit', 'fortune', 'court', 'death', 'pastor', 'relative', 'tragic', 'fund', 'document',
-             'invest', 'honest', 'business', 'urgent', 'willing', 'notification', 'promotion', 'congratulation', 'ticket',
-             'results', 'gbp', 'jackpot', 'reference', 'important', 'yahoo', 'gmail', 'hotmail', 'outlook', 'live', 'skype',
-             'rocketmail', 'facebook', 'ymail', 'loan', 'dollar', 'apply', 'collateral']
+MANDATORY = [
+    "western union",
+    "proposal",
+    "money",
+    "usd",
+    "solicitor",
+    "lawyer",
+    "barrister",
+    "lottery",
+    "lotto",
+    "sweepstake",
+    "transaction",
+    "bank",
+    "winner",
+    "official",
+    "payout",
+    "winning",
+    "orphan",
+    "cancer",
+    "moneygram",
+    "civil war",
+    "property",
+    "transfer",
+    "refuge",
+    "million",
+    "fighting",
+    "deposit",
+    "account",
+    "political",
+    "assistance",
+    "relocate",
+    "profit",
+    "worth",
+    "inherit",
+    "fortune",
+    "court",
+    "death",
+    "pastor",
+    "relative",
+    "tragic",
+    "fund",
+    "document",
+    "invest",
+    "honest",
+    "business",
+    "urgent",
+    "willing",
+    "notification",
+    "promotion",
+    "congratulation",
+    "ticket",
+    "results",
+    "gbp",
+    "jackpot",
+    "reference",
+    "important",
+    "yahoo",
+    "gmail",
+    "hotmail",
+    "outlook",
+    "live",
+    "skype",
+    "rocketmail",
+    "facebook",
+    "ymail",
+    "loan",
+    "dollar",
+    "apply",
+    "collateral",
+]
 
-EXCLUSIONS = ['hello', 'wink']
+EXCLUSIONS = ["hello", "wink"]
 
 message_count = 0
 keywords = {}
 
-def Process(file,count=1):
-  global message_count
-  with open(file, 'r') as f:
-    messages = set()
-    for line in f.readlines():
-      if len(line) == 0:
-        continue
-      #junk = line.decode('utf-8','ignore').lower()
-      junk = line.lower()
-      messages.add(re.sub(r'\W+',r' ',junk))
-    message_count += len(messages)
-    # Put in single words first
-    for message in messages:
-      ss = message.split()
-      if len(ss) < 2:
-        continue
-      for word in ss:
-        if len(word) >= 5:
-          if word in keywords:
-            keywords[word] += count
-          else:
-            keywords[word] = count
-    # Then double words
-    for message in messages:
-      ss = message.split()
-      if len(ss) < 2:
-        continue
-      last = ss[0]
-      for word in ss[1:]:
-        if len(last) >= 2 and len(word) >= 2 and (len(last) >= 4 or len(word) >= 4):
-          keyword = last + ' ' + word
-          if keyword in keywords:
-            keywords[keyword] += count
-          else:
-            keywords[keyword] = count
-        last = word
-    # Then triple words
-    for message in messages:
-      ss = message.split()
-      if len(ss) < 2:
-        continue
-      last1 = ss[0]
-      last2 = ss[1]
-      for word in ss[2:]:
-        if len(last1) >= 2 and len(last2) >= 2 and len(word) >= 2 and (len(last1) >= 4 or len(last2) >= 4 or len(word) >= 4):
-          keyword = last1 + ' ' + last2 + ' ' + word
-          if keyword in keywords:
-            keywords[keyword] += count
-          else:
-            keywords[keyword] = count
-        last1 = last2
-        last2 = word
+
+def Process(file, count=1):
+    global message_count
+    with open(file, "r") as f:
+        messages = set()
+        for line in f.readlines():
+            if len(line) == 0:
+                continue
+            # junk = line.lower()
+            junk = line.lower()
+            messages.add(re.sub(r"\W+", r" ", junk))
+        message_count += len(messages)
+        # Put in single words first
+        for message in messages:
+            ss = message.split()
+            if len(ss) < 2:
+                continue
+            for word in ss:
+                if len(word) >= 5:
+                    if word in keywords:
+                        keywords[word] += count
+                    else:
+                        keywords[word] = count
+        # Then double words
+        for message in messages:
+            ss = message.split()
+            if len(ss) < 2:
+                continue
+            last = ss[0]
+            for word in ss[1:]:
+                if len(last) >= 2 and len(word) >= 2 and (len(last) >= 4 or len(word) >= 4):
+                    keyword = last + " " + word
+                    if keyword in keywords:
+                        keywords[keyword] += count
+                    else:
+                        keywords[keyword] = count
+                last = word
+        # Then triple words
+        for message in messages:
+            ss = message.split()
+            if len(ss) < 2:
+                continue
+            last1 = ss[0]
+            last2 = ss[1]
+            for word in ss[2:]:
+                if (
+                    len(last1) >= 2
+                    and len(last2) >= 2
+                    and len(word) >= 2
+                    and (len(last1) >= 4 or len(last2) >= 4 or len(word) >= 4)
+                ):
+                    keyword = last1 + " " + last2 + " " + word
+                    if keyword in keywords:
+                        keywords[keyword] += count
+                    else:
+                        keywords[keyword] = count
+                last1 = last2
+                last2 = word
+
 
 Process(sys.argv[1], 1)
 Process(sys.argv[2], 2)
 
-threshold = message_count/75
+threshold = message_count / 75
 
 spam = {}
-for item,count in keywords.iteritems():
-  if count < threshold:
-    continue
-  if item in EXCLUSIONS:
-    continue
-  spam[item] = count/float(message_count)
+for item, count in keywords.items():
+    if count < threshold:
+        continue
+    if item in EXCLUSIONS:
+        continue
+    spam[item] = count / float(message_count)
 for item in MANDATORY:
-  if item in keywords:
-    continue
-  spam[item] = 0.75
+    if item in keywords:
+        continue
+    spam[item] = 0.75
 
 with session.begin():
-  session.query(SpamModel).delete()
-  for str,cost in spam.iteritems():
-    item = SpamModel(str=str,cost=cost)
-    session.add(item)
+    session.query(SpamModel).delete()
+    for str, cost in spam.items():
+        item = SpamModel(str=str, cost=cost)
+        session.add(item)

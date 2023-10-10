@@ -1,3 +1,3 @@
 from emails import *
 
-EmailKickedStopForumSpam('keith.hollis@gmail.com')
+EmailKickedStopForumSpam("keith.hollis@gmail.com")

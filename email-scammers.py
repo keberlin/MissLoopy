@@ -5,8 +5,8 @@ from utils import *
 
 emails = set()
 for line in fileinput.input():
-  email = line.decode('utf-8', 'ignore')
-  emails.add(email)
+    email = line
+    emails.add(email)
 
 for email in emails:
-  EmailVerify(email, 1)
+    EmailVerify(email, 1)

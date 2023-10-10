@@ -7,7 +7,7 @@ from model import *
 
 session = db_init(MISSLOOPY_DB_URI)
 
-entries = session.query(ProfileModel.id,ProfileModel.email).filter(ProfileModel.verified.is_(False)).all()
+entries = session.query(ProfileModel.id, ProfileModel.email).filter(ProfileModel.verified.is_(False)).all()
 for entry in entries:
-  print entry.email.encode('utf-8'), entry.id
-  EmailVerify(entry.email, entry.id)
+    print(entry.email, entry.id)
+    EmailVerify(entry.email, entry.id)
