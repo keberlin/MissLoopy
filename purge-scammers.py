@@ -15,7 +15,7 @@ entries = session.query(ProfileModel.email).filter(ProfileModel.verified.is_(Tru
 emails = set([entry.email.lower() for entry in entries])
 
 ids = []
-with open("listed_email_365.txt", "rb") as csvfile:
+with open("listed_email_365.txt", "r") as csvfile:
     reader = csv.reader(csvfile, quoting=csv.QUOTE_NONE, skipinitialspace=True)
     for row in reader:
         email = row[0].lower()

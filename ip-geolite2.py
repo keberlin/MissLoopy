@@ -13,11 +13,11 @@ def IpNumber(ip):
     return (int(s[0]) << 24) + (int(s[1]) << 16) + (int(s[2]) << 8) + int(s[3])
 
 
-with open(args.o[0], "wb") as output:
+with open(args.o[0], "w") as output:
     writer = csv.writer(output, delimiter=",")
 
     geonames = {}
-    with open("GeoLite2-Country-Locations.csv", "rb") as csvfile:
+    with open("GeoLite2-Country-Locations.csv", "r") as csvfile:
         reader = csv.reader(csvfile, delimiter=",", skipinitialspace=True)
         first = True
         for row in reader:
@@ -28,7 +28,7 @@ with open(args.o[0], "wb") as output:
             country = row[4]
             geonames[row[0]] = country if country else continent
 
-    with open("GeoLite2-Country-Blocks-IPv4.csv", "rb") as csvfile:
+    with open("GeoLite2-Country-Blocks-IPv4.csv", "r") as csvfile:
         reader = csv.reader(csvfile, delimiter=",", skipinitialspace=True)
         first = True
         for row in reader:

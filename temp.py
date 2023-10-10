@@ -1,6 +1,6 @@
 import csv
 
-with open("bannedips.csv", "rb") as csvfile:
+with open("bannedips.csv", "r") as csvfile:
     lower = ""
     upper = ""
     country = ""

@@ -19,7 +19,7 @@ countries = set()
 count = added = updated = 0
 for file in args.file:
     print("Processing", file)
-    with open(file, "rb") as csvfile:
+    with open(file, "r") as csvfile:
         reader = csv.reader(csvfile, delimiter=";", quoting=csv.QUOTE_NONE, skipinitialspace=True)
         for row in reader:
             count += 1

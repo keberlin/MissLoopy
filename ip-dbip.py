@@ -14,12 +14,12 @@ def IpNumber(ip):
     return (int(s[0]) << 24) + (int(s[1]) << 16) + (int(s[2]) << 8) + int(s[3])
 
 
-with open(args.o[0], "wb") as output:
+with open(args.o[0], "w") as output:
     writer = csv.writer(output, delimiter=",")
 
     for file in args.file:
         print("Processing", file)
-        with open(file, "rb") as csvfile:
+        with open(file, "r") as csvfile:
             reader = csv.reader(csvfile, delimiter=",", skipinitialspace=True)
             for row in reader:
                 # Ignore IPv6 rows

@@ -1,8 +1,8 @@
 import csv
 
-with open("CountryCodes.csv", "wb") as csvfile:
+with open("CountryCodes.csv", "w") as csvfile:
     writer = csv.writer(csvfile, delimiter=",")
-    with open("GeoLite2-Country-Locations.csv", "rb") as csvfile:
+    with open("GeoLite2-Country-Locations.csv", "r") as csvfile:
         reader = csv.reader(csvfile, delimiter=",", skipinitialspace=True)
         first = True
         for row in reader:

@@ -35,7 +35,7 @@ def Quoted(v):
 
 
 print("Processing profiles..")
-with open("profiles.csv", "rb") as input:
+with open("profiles.csv", "r") as input:
     reader = csv.reader(input)
     for entry in reader:
         sql = """
@@ -79,7 +79,7 @@ with open("profiles.csv", "rb") as input:
         db.execute(sql)
 
 print("Processing photos..")
-with open("photos.csv", "rb") as input:
+with open("photos.csv", "r") as input:
     reader = csv.reader(input)
     for entry in reader:
         sql = """
@@ -92,7 +92,7 @@ with open("photos.csv", "rb") as input:
         db.execute(sql)
 
 print("Processing emails..")
-with open("emails.csv", "rb") as input:
+with open("emails.csv", "r") as input:
     reader = csv.reader(input)
     for entry in reader:
         sql = """
@@ -107,7 +107,7 @@ with open("emails.csv", "rb") as input:
         db.execute(sql)
 
 print("Processing blocked..")
-with open("blocked.csv", "rb") as input:
+with open("blocked.csv", "r") as input:
     reader = csv.reader(input)
     for entry in reader:
         sql = """
@@ -119,7 +119,7 @@ with open("blocked.csv", "rb") as input:
         db.execute(sql)
 
 print("Processing favorites..")
-with open("favorites.csv", "rb") as input:
+with open("favorites.csv", "r") as input:
     reader = csv.reader(input)
     for entry in reader:
         sql = """
@@ -131,7 +131,7 @@ with open("favorites.csv", "rb") as input:
         db.execute(sql)
 
 print("Processing results..")
-with open("results.csv", "rb") as input:
+with open("results.csv", "r") as input:
     reader = csv.reader(input)
     for entry in reader:
         sql = """
@@ -145,7 +145,7 @@ with open("results.csv", "rb") as input:
         db.execute(sql)
 
 print("Processing admin..")
-with open("admin.csv", "rb") as input:
+with open("admin.csv", "r") as input:
     reader = csv.reader(input)
     for entry in reader:
         sql = """

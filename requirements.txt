@@ -31,5 +31,6 @@ scandir==1.10.0           # via pathlib2
 six==1.16.0               # via pathlib2
 soupsieve==1.9.6          # via beautifulsoup4
 sqlalchemy==1.4.49        # via flask-sqlalchemy
+typing==3.10.0.0          # via pathlib2
 werkzeug==1.0.1           # via flask
 zipp==1.2.0               # via importlib-metadata

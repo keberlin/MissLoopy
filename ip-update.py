@@ -15,7 +15,7 @@ session = db_init(IPADDRESS_DB_URI)
 # Load the country code data
 
 countries = {}
-with open("CountryCodes.csv", "rb") as csvfile:
+with open("CountryCodes.csv", "r") as csvfile:
     reader = csv.reader(csvfile, delimiter=",", skipinitialspace=True)
     for row in reader:
         countries[row[0]] = row[1]
@@ -28,7 +28,7 @@ countries["Asia"] = "Asia"
 for file in args.file:
     print("Processing %s.." % (file))
     count = added = 0
-    with open(file, "rb") as csvfile:
+    with open(file, "r") as csvfile:
         reader = csv.reader(csvfile, delimiter=",", skipinitialspace=True)
         for row in reader:
             count += 1

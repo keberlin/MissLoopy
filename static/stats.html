@@ -139,8 +139,6 @@ src="//pagead2.googlesyndication.com/pagead/show_ads.js">
     function drawChart1_y1() {
       var data = google.visualization.arrayToDataTable([ ['Date', 'Verified', 'Unverified', 'Males', 'Females'],
         
-          [new Date('2022-10-06'), 10941, 1, 6637, 4304],
-        
           [new Date('2022-10-13'), 10941, 1, 6637, 4304],
         
           [new Date('2022-10-20'), 10940, 1, 6636, 4304],
@@ -221,6 +219,8 @@ src="//pagead2.googlesyndication.com/pagead/show_ads.js">
         
           [new Date('2023-10-01'), 10896, 0, 6608, 4288],
         
+          [new Date('2023-10-08'), 10897, 0, 6609, 4288],
+        
       ]);
       var options = { title: 'Members', curveType: 'function', legend: { position: 'bottom' } };
       var chart = new google.visualization.LineChart(document.getElementById('members_y1')); chart.draw(data, options); 
@@ -229,8 +229,6 @@ src="//pagead2.googlesyndication.com/pagead/show_ads.js">
 
     function drawChart2_y1() {
       var data = google.visualization.arrayToDataTable([ ['Date', 'Men', 'Women', 'Sugar Pups', 'Sugar Babies', 'Sugar Daddies', 'Sugar Mommas'],
-        
-          [new Date('2022-10-06'), 6616*100/10941, 4184*100/10941, 11*100/10941, 111*100/10941, 10*100/10941, 9*100/10941],
         
           [new Date('2022-10-13'), 6616*100/10941, 4184*100/10941, 11*100/10941, 111*100/10941, 10*100/10941, 9*100/10941],
         
@@ -312,6 +310,8 @@ src="//pagead2.googlesyndication.com/pagead/show_ads.js">
         
           [new Date('2023-10-01'), 6587*100/10896, 4169*100/10896, 11*100/10896, 110*100/10896, 10*100/10896, 9*100/10896],
         
+          [new Date('2023-10-08'), 6588*100/10897, 4169*100/10897, 11*100/10897, 110*100/10897, 10*100/10897, 9*100/10897],
+        
       ]);
       var options = { title: 'Categories', curveType: 'function', legend: { position: 'bottom' } };
       var chart = new google.visualization.LineChart(document.getElementById('categories_y1')); chart.draw(data, options); 
@@ -320,8 +320,6 @@ src="//pagead2.googlesyndication.com/pagead/show_ads.js">
 
     function drawChart3_y1() {
       var data = google.visualization.arrayToDataTable([ ['Date', 'Men', 'Women', 'Sugar Pups', 'Sugar Babies', 'Sugar Daddies', 'Sugar Mommas'],
-        
-          [new Date('2022-10-06'), 41.4741535671, 36.7684034417, 42.5454545455, 33.4684684685, 49.8, 37.3333333333],
         
           [new Date('2022-10-13'), 41.4931983071, 36.7930210325, 42.5454545455, 33.4954954955, 49.8, 37.3333333333],
         
@@ -399,9 +397,11 @@ src="//pagead2.googlesyndication.com/pagead/show_ads.js">
         
           [new Date('2023-09-24'), 42.4651586458, 37.7497600768, 43.5454545455, 34.4414414414, 50.8, 38.3333333333],
         
-          [new Date('2023-09-26'), 42.471231213, 37.7538387716, 43.5454545455, 34.4414414414, 50.8, 38.3333333333],
+          [new Date('2023-09-26'), 42.4712312129953, 37.7538387715931, 43.5454545454545, 34.4414414414414, 50.8, 38.3333333333333],
         
           [new Date('2023-10-01'), 42.4844390466, 37.7661309667, 43.5454545455, 34.3909090909, 50.8, 38.3333333333],
+        
+          [new Date('2023-10-08'), 42.5009107468124, 37.7764451906932, 43.5454545454545, 34.4090909090909, 50.8, 38.3333333333333],
         
       ]);
       var options = { title: 'Average Ages', curveType: 'function', legend: { position: 'bottom' } };
@@ -411,8 +411,6 @@ src="//pagead2.googlesyndication.com/pagead/show_ads.js">
 
     function drawChart4_y1() {
       var data = google.visualization.arrayToDataTable([ ['Date', 'White', 'Black', 'Latino', 'Indian', 'Asian', 'Mixed', 'Other'],
-        
-          [new Date('2022-10-06'), 4758*100/10941, 3529*100/10941, 106*100/10941, 478*100/10941, 825*100/10941, 799*100/10941, 446*100/10941],
         
           [new Date('2022-10-13'), 4758*100/10941, 3529*100/10941, 106*100/10941, 478*100/10941, 825*100/10941, 799*100/10941, 446*100/10941],
         
@@ -494,6 +492,8 @@ src="//pagead2.googlesyndication.com/pagead/show_ads.js">
         
           [new Date('2023-10-01'), 4734*100/10896, 3516*100/10896, 106*100/10896, 476*100/10896, 822*100/10896, 797*100/10896, 445*100/10896],
         
+          [new Date('2023-10-08'), 4735*100/10897, 3516*100/10897, 106*100/10897, 476*100/10897, 822*100/10897, 797*100/10897, 445*100/10897],
+        
       ]);
       var options = { title: 'Ethnicities', curveType: 'function', legend: { position: 'bottom' } };
       var chart = new google.visualization.LineChart(document.getElementById('ethnicities_y1')); chart.draw(data, options); 
@@ -504,8 +504,6 @@ src="//pagead2.googlesyndication.com/pagead/show_ads.js">
 
     function drawChart1_y2() {
       var data = google.visualization.arrayToDataTable([ ['Date', 'Verified', 'Unverified', 'Males', 'Females'],
-        
-          [new Date('2021-10-07'), 11010, 1, 6678, 4332],
         
           [new Date('2021-10-14'), 11010, 1, 6678, 4332],
         
@@ -691,6 +689,8 @@ src="//pagead2.googlesyndication.com/pagead/show_ads.js">
         
           [new Date('2023-10-01'), 10896, 0, 6608, 4288],
         
+          [new Date('2023-10-08'), 10897, 0, 6609, 4288],
+        
       ]);
       var options = { title: 'Members', curveType: 'function', legend: { position: 'bottom' } };
       var chart = new google.visualization.LineChart(document.getElementById('members_y2')); chart.draw(data, options); 
@@ -699,8 +699,6 @@ src="//pagead2.googlesyndication.com/pagead/show_ads.js">
 
     function drawChart2_y2() {
       var data = google.visualization.arrayToDataTable([ ['Date', 'Men', 'Women', 'Sugar Pups', 'Sugar Babies', 'Sugar Daddies', 'Sugar Mommas'],
-        
-          [new Date('2021-10-07'), 6657*100/11010, 4212*100/11010, 11*100/11010, 111*100/11010, 10*100/11010, 9*100/11010],
         
           [new Date('2021-10-14'), 6657*100/11010, 4212*100/11010, 11*100/11010, 111*100/11010, 10*100/11010, 9*100/11010],
         
@@ -886,6 +884,8 @@ src="//pagead2.googlesyndication.com/pagead/show_ads.js">
         
           [new Date('2023-10-01'), 6587*100/10896, 4169*100/10896, 11*100/10896, 110*100/10896, 10*100/10896, 9*100/10896],
         
+          [new Date('2023-10-08'), 6588*100/10897, 4169*100/10897, 11*100/10897, 110*100/10897, 10*100/10897, 9*100/10897],
+        
       ]);
       var options = { title: 'Categories', curveType: 'function', legend: { position: 'bottom' } };
       var chart = new google.visualization.LineChart(document.getElementById('categories_y2')); chart.draw(data, options); 
@@ -894,8 +894,6 @@ src="//pagead2.googlesyndication.com/pagead/show_ads.js">
 
     function drawChart3_y2() {
       var data = google.visualization.arrayToDataTable([ ['Date', 'Men', 'Women', 'Sugar Pups', 'Sugar Babies', 'Sugar Daddies', 'Sugar Mommas'],
-        
-          [new Date('2021-10-07'), 40.4791948325, 35.7661443495, 41.5454545455, 32.4774774775, 48.8, 36.3333333333],
         
           [new Date('2021-10-14'), 40.4985729307, 35.7901234568, 41.5454545455, 32.4954954955, 48.8, 36.3333333333],
         
@@ -1077,9 +1075,11 @@ src="//pagead2.googlesyndication.com/pagead/show_ads.js">
         
           [new Date('2023-09-24'), 42.4651586458, 37.7497600768, 43.5454545455, 34.4414414414, 50.8, 38.3333333333],
         
-          [new Date('2023-09-26'), 42.471231213, 37.7538387716, 43.5454545455, 34.4414414414, 50.8, 38.3333333333],
+          [new Date('2023-09-26'), 42.4712312129953, 37.7538387715931, 43.5454545454545, 34.4414414414414, 50.8, 38.3333333333333],
         
           [new Date('2023-10-01'), 42.4844390466, 37.7661309667, 43.5454545455, 34.3909090909, 50.8, 38.3333333333],
+        
+          [new Date('2023-10-08'), 42.5009107468124, 37.7764451906932, 43.5454545454545, 34.4090909090909, 50.8, 38.3333333333333],
         
       ]);
       var options = { title: 'Average Ages', curveType: 'function', legend: { position: 'bottom' } };
@@ -1089,8 +1089,6 @@ src="//pagead2.googlesyndication.com/pagead/show_ads.js">
 
     function drawChart4_y2() {
       var data = google.visualization.arrayToDataTable([ ['Date', 'White', 'Black', 'Latino', 'Indian', 'Asian', 'Mixed', 'Other'],
-        
-          [new Date('2021-10-07'), 4795*100/11010, 3541*100/11010, 107*100/11010, 480*100/11010, 831*100/11010, 808*100/11010, 448*100/11010],
         
           [new Date('2021-10-14'), 4795*100/11010, 3541*100/11010, 107*100/11010, 480*100/11010, 831*100/11010, 808*100/11010, 448*100/11010],
         
@@ -1276,6 +1274,8 @@ src="//pagead2.googlesyndication.com/pagead/show_ads.js">
         
           [new Date('2023-10-01'), 4734*100/10896, 3516*100/10896, 106*100/10896, 476*100/10896, 822*100/10896, 797*100/10896, 445*100/10896],
         
+          [new Date('2023-10-08'), 4735*100/10897, 3516*100/10897, 106*100/10897, 476*100/10897, 822*100/10897, 797*100/10897, 445*100/10897],
+        
       ]);
       var options = { title: 'Ethnicities', curveType: 'function', legend: { position: 'bottom' } };
       var chart = new google.visualization.LineChart(document.getElementById('ethnicities_y2')); chart.draw(data, options); 
@@ -1286,8 +1286,6 @@ src="//pagead2.googlesyndication.com/pagead/show_ads.js">
 
     function drawChart1_y5() {
       var data = google.visualization.arrayToDataTable([ ['Date', 'Verified', 'Unverified', 'Males', 'Females'],
-        
-          [new Date('2018-10-13'), 10637, 1, 6457, 4180],
         
           [new Date('2018-11-12'), 10636, 1, 6456, 4180],
         
@@ -1707,6 +1705,8 @@ src="//pagead2.googlesyndication.com/pagead/show_ads.js">
         
           [new Date('2023-10-01'), 10896, 0, 6608, 4288],
         
+          [new Date('2023-10-08'), 10897, 0, 6609, 4288],
+        
       ]);
       var options = { title: 'Members', curveType: 'function', legend: { position: 'bottom' } };
       var chart = new google.visualization.LineChart(document.getElementById('members_y5')); chart.draw(data, options); 
@@ -1715,8 +1715,6 @@ src="//pagead2.googlesyndication.com/pagead/show_ads.js">
 
     function drawChart2_y5() {
       var data = google.visualization.arrayToDataTable([ ['Date', 'Men', 'Women', 'Sugar Pups', 'Sugar Babies', 'Sugar Daddies', 'Sugar Mommas'],
-        
-          [new Date('2018-10-13'), 6436*100/10637, 4067*100/10637, 11*100/10637, 104*100/10637, 10*100/10637, 9*100/10637],
         
           [new Date('2018-11-12'), 6435*100/10636, 4067*100/10636, 11*100/10636, 104*100/10636, 10*100/10636, 9*100/10636],
         
@@ -2136,6 +2134,8 @@ src="//pagead2.googlesyndication.com/pagead/show_ads.js">
         
           [new Date('2023-10-01'), 6587*100/10896, 4169*100/10896, 11*100/10896, 110*100/10896, 10*100/10896, 9*100/10896],
         
+          [new Date('2023-10-08'), 6588*100/10897, 4169*100/10897, 11*100/10897, 110*100/10897, 10*100/10897, 9*100/10897],
+        
       ]);
       var options = { title: 'Categories', curveType: 'function', legend: { position: 'bottom' } };
       var chart = new google.visualization.LineChart(document.getElementById('categories_y5')); chart.draw(data, options); 
@@ -2144,8 +2144,6 @@ src="//pagead2.googlesyndication.com/pagead/show_ads.js">
 
     function drawChart3_y5() {
       var data = google.visualization.arrayToDataTable([ ['Date', 'Men', 'Women', 'Sugar Pups', 'Sugar Babies', 'Sugar Daddies', 'Sugar Mommas'],
-        
-          [new Date('2018-10-13'), 37.8, 32.9, 38.5, 30.0, 46.2, 32.8],
         
           [new Date('2018-11-12'), 37.8, 33.0, 38.5, 30.0, 46.4, 32.8],
         
@@ -2561,9 +2559,11 @@ src="//pagead2.googlesyndication.com/pagead/show_ads.js">
         
           [new Date('2023-09-24'), 42.4651586458, 37.7497600768, 43.5454545455, 34.4414414414, 50.8, 38.3333333333],
         
-          [new Date('2023-09-26'), 42.471231213, 37.7538387716, 43.5454545455, 34.4414414414, 50.8, 38.3333333333],
+          [new Date('2023-09-26'), 42.4712312129953, 37.7538387715931, 43.5454545454545, 34.4414414414414, 50.8, 38.3333333333333],
         
           [new Date('2023-10-01'), 42.4844390466, 37.7661309667, 43.5454545455, 34.3909090909, 50.8, 38.3333333333],
+        
+          [new Date('2023-10-08'), 42.5009107468124, 37.7764451906932, 43.5454545454545, 34.4090909090909, 50.8, 38.3333333333333],
         
       ]);
       var options = { title: 'Average Ages', curveType: 'function', legend: { position: 'bottom' } };
@@ -2573,8 +2573,6 @@ src="//pagead2.googlesyndication.com/pagead/show_ads.js">
 
     function drawChart4_y5() {
       var data = google.visualization.arrayToDataTable([ ['Date', 'White', 'Black', 'Latino', 'Indian', 'Asian', 'Mixed', 'Other'],
-        
-          [new Date('2018-10-13'), 4573*100/10637, 3466*100/10637, 104*100/10637, 474*100/10637, 800*100/10637, 793*100/10637, 427*100/10637],
         
           [new Date('2018-11-12'), 4573*100/10636, 3465*100/10636, 105*100/10636, 474*100/10636, 800*100/10636, 793*100/10636, 426*100/10636],
         
@@ -2993,6 +2991,8 @@ src="//pagead2.googlesyndication.com/pagead/show_ads.js">
           [new Date('2023-09-26'), 4734*100/10896, 3516*100/10896, 106*100/10896, 476*100/10896, 822*100/10896, 797*100/10896, 445*100/10896],
         
           [new Date('2023-10-01'), 4734*100/10896, 3516*100/10896, 106*100/10896, 476*100/10896, 822*100/10896, 797*100/10896, 445*100/10896],
+        
+          [new Date('2023-10-08'), 4735*100/10897, 3516*100/10897, 106*100/10897, 476*100/10897, 822*100/10897, 797*100/10897, 445*100/10897],
         
       ]);
       var options = { title: 'Ethnicities', curveType: 'function', legend: { position: 'bottom' } };

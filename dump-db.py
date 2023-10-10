@@ -8,7 +8,7 @@ from utils import *
 db = database.Database(MISS_LOOPY_DB)
 
 print("Dumping profiles..")
-with open("profiles.csv", "wb") as output:
+with open("profiles.csv", "w") as output:
     writer = csv.writer(output)
     db.execute("SELECT * FROM profiles")
     for entry in db.fetchall():
@@ -16,7 +16,7 @@ with open("profiles.csv", "wb") as output:
         writer.writerow(fields)
 
 print("Dumping photos..")
-with open("photos.csv", "wb") as output:
+with open("photos.csv", "w") as output:
     writer = csv.writer(output)
     db.execute("SELECT * FROM photos")
     for entry in db.fetchall():
@@ -24,7 +24,7 @@ with open("photos.csv", "wb") as output:
         writer.writerow(fields)
 
 print("Dumping emails..")
-with open("emails.csv", "wb") as output:
+with open("emails.csv", "w") as output:
     writer = csv.writer(output)
     db.execute("SELECT * FROM emails")
     for entry in db.fetchall():
@@ -32,7 +32,7 @@ with open("emails.csv", "wb") as output:
         writer.writerow(fields)
 
 print("Dumping blocked..")
-with open("blocked.csv", "wb") as output:
+with open("blocked.csv", "w") as output:
     writer = csv.writer(output)
     db.execute("SELECT * FROM blocked")
     for entry in db.fetchall():
@@ -40,7 +40,7 @@ with open("blocked.csv", "wb") as output:
         writer.writerow(fields)
 
 print("Dumping favorites..")
-with open("favorites.csv", "wb") as output:
+with open("favorites.csv", "w") as output:
     writer = csv.writer(output)
     db.execute("SELECT * FROM favorites")
     for entry in db.fetchall():
@@ -48,7 +48,7 @@ with open("favorites.csv", "wb") as output:
         writer.writerow(fields)
 
 print("Dumping results..")
-with open("results.csv", "wb") as output:
+with open("results.csv", "w") as output:
     writer = csv.writer(output)
     db.execute("SELECT * FROM results")
     for entry in db.fetchall():
@@ -56,7 +56,7 @@ with open("results.csv", "wb") as output:
         writer.writerow(fields)
 
 print("Dumping admin..")
-with open("admin.csv", "wb") as output:
+with open("admin.csv", "w") as output:
     writer = csv.writer(output)
     db.execute("SELECT * FROM admin")
     for entry in db.fetchall():
