@@ -10,7 +10,7 @@ parser.add_argument("file", nargs="+", help="a file for conversion")
 parser.add_argument("-o", metavar="output", nargs=1, required=True, help="output file")
 args = parser.parse_args()
 
-with open(args.o[0], "w") as output:
+with open(args.o[0], "w", encoding="utf-8") as output:
     writer = csv.writer(output, delimiter=";")
 
     mult_x = CIRCUM_X / 360.0
@@ -18,18 +18,18 @@ with open(args.o[0], "w") as output:
 
     # Load the country table
     countries = {}
-    with open("CountryCodes.csv", "r") as csvfile:
+    with open("CountryCodes.csv", "r", encoding="utf-8") as csvfile:
         reader = csv.reader(csvfile, delimiter=",", quoting=csv.QUOTE_NONE, skipinitialspace=True)
         for row in reader:
             countries[row[0]] = row[1]
 
     # Load the region admin table
     admin = {}
-    with open("admin1CodesASCII.txt", "r") as csvfile:
+    with open("admin1CodesASCII.txt", "r", encoding="utf-8") as csvfile:
         reader = csv.reader(csvfile, delimiter="\t", quoting=csv.QUOTE_NONE)
         for row in reader:
             admin[row[0]] = row[1]
-    with open("admin2Codes.txt", "r") as csvfile:
+    with open("admin2Codes.txt", "r", encoding="utf-8") as csvfile:
         reader = csv.reader(csvfile, delimiter="\t", quoting=csv.QUOTE_NONE)
         for row in reader:
             admin[row[0]] = row[1]
@@ -58,7 +58,7 @@ with open(args.o[0], "w") as output:
 
     for file in args.file:
         print("Processing", file)
-        with open(file, "r") as csvfile:
+        with open(file, "r", encoding="utf-8") as csvfile:
             reader = csv.reader(csvfile, delimiter="\t", quoting=csv.QUOTE_NONE, skipinitialspace=True)
             for row in reader:
                 if row[8] == "US":
