@@ -1,9 +1,7 @@
 import hashlib
 import re
 
-from sqlalchemy import create_engine
-
-from database import MISSLOOPY_DB_URI, db_init
+from database import db_init, MISSLOOPY_DB_URI
 from mlutils import *
 from model import *
 from utils import *

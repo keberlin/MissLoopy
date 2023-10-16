@@ -2,12 +2,10 @@ import argparse
 import collections
 import sys
 
-from sqlalchemy import create_engine
-
-import mask
-from database import MISSLOOPY_DB_URI, db_init
+from database import db_init, MISSLOOPY_DB_URI
 from gazetteer import *
 from localization import *
+import mask
 from mlhtml import *
 from mlutils import *
 from model import *

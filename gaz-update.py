@@ -2,7 +2,7 @@ import argparse
 import csv
 import datetime
 
-from database import GAZETTEER_DB_URI, db_init
+from database import db_init, GAZETTEER_DB_URI
 from gazetteer import *
 from model import LocationModel
 from utils import *
@@ -19,7 +19,7 @@ countries = set()
 count = added = updated = 0
 for file in args.file:
     print("Processing", file)
-    with open(file, "r") as csvfile:
+    with open(file, "r", encoding="utf-8") as csvfile:
         reader = csv.reader(csvfile, delimiter=";", quoting=csv.QUOTE_NONE, skipinitialspace=True)
         for row in reader:
             count += 1

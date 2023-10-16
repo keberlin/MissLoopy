@@ -1,10 +1,18 @@
+from functools import wraps
 import logging
 import sys
-from functools import wraps
 
-from flask import Flask, g, jsonify, redirect, render_template, request, send_from_directory
+from flask import (
+    Flask,
+    g,
+    jsonify,
+    redirect,
+    render_template,
+    request,
+    send_from_directory,
+)
 
-from database import MISSLOOPY_DB_URI, db
+from database import db, MISSLOOPY_DB_URI
 from handlers_html import *
 from handlers_json import *
 from mlhtml import *
@@ -88,8 +96,6 @@ def logged_out_html():
     if json:
         values.update(json)
 
-    info("%s: %s" % (page, values))
-
     attrs = html_defaults(request.user_agent.string)
     attrs.update(values)
     func = globals().get("handle_%s" % page)
@@ -106,7 +112,6 @@ def logged_out_html():
 @app.route("/matches")
 @app.route("/search")
 @app.route("/results")
-@app.route("/member")
 @app.route("/emailthread")
 @app.route("/inbox")
 @app.route("/outbox")
@@ -129,8 +134,6 @@ def logged_in_html():
     id = g.entry.id
     user = g.entry.name
 
-    info("%s: id:%d %s" % (page, id, values))
-
     attrs = html_defaults(request.user_agent.string)
     attrs.update(values)
     if not "nav" in attrs:
@@ -139,6 +142,33 @@ def logged_in_html():
     attrs["advert"] = True
     attrs["inbox"] = InboxCount(id)
     attrs["outbox"] = OutboxCount(id)
+    func = globals().get("handle_%s" % (page))
+    if func:
+        attrs.update(func(g.entry, values))
+    attrs["per_page"] = PAGE_SIZE
+    return render_template(page + ".html", **attrs)
+
+
+@app.route("/member")
+@login_required
+def maybe_logged_in_html():
+    page = request.path[1:]
+    values = dict([(x, "|".join(request.values.getlist(x))) for x in list(request.values.keys())])
+    json = request.get_json()
+    if json:
+        values.update(json)
+
+    id = g.entry.id if g.entry else None
+    user = g.entry.name if g.entry else None
+
+    attrs = html_defaults(request.user_agent.string)
+    attrs.update(values)
+    if not "nav" in attrs:
+        attrs["nav"] = page
+    attrs["user"] = user
+    attrs["advert"] = True
+    attrs["inbox"] = InboxCount(id) if id else 0
+    attrs["outbox"] = OutboxCount(id) if id else 0
     func = globals().get("handle_%s" % (page))
     if func:
         attrs.update(func(g.entry, values))
@@ -158,11 +188,7 @@ def mllogin():
     if not password:
         return jsonify({"error": "No password specified."})
 
-    info("%s: %s %s" % (page, email, password))
-
     data = Login(email, password)
-
-    info("%s: %s" % (page, data))
 
     return jsonify(data)
 
@@ -178,11 +204,8 @@ def logged_out_json():
     if json:
         values.update(json)
 
-    info("%s: %s" % (page, values))
-
     func = globals().get("handle_%s" % page)
     data = func(None, values, request.files)
-    info("%s: %s" % (page, data))
     return jsonify(data)
 
 
@@ -215,18 +238,13 @@ def logged_in_json():
 
     id = g.entry.id
 
-    info("%s: id:%d %s" % (page, id, values))
-
     func = globals().get("handle_%s" % page)
     data = func(g.entry, values, request.files)
-    info("%s: %s" % (page, data))
     return jsonify(data)
 
 
 @app.route("/<path:path>")
 def the_rest(path):
-    info(path)
-
     return send_from_directory(app.static_folder, path)
 
 

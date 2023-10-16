@@ -2,9 +2,8 @@ import csv
 import logging
 
 import requests
-from sqlalchemy import create_engine
 
-from database import MISSLOOPY_DB_URI, db_init
+from database import db_init, MISSLOOPY_DB_URI
 from emails import *
 from gazetteer import *
 from mlutils import *

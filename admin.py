@@ -2,12 +2,11 @@ import optparse
 import re
 import sys
 
-from sqlalchemy import create_engine
 from sqlalchemy.sql.expression import and_, func, or_
 
-import mask
-from database import MISSLOOPY_DB_URI, db_init
+from database import db_init, MISSLOOPY_DB_URI
 from iputils import *
+import mask
 from mlutils import *
 from model import *
 

@@ -5,15 +5,15 @@ import logging
 from sqlalchemy.orm import aliased
 from sqlalchemy.sql.expression import and_, func
 
-import mask
-import search
-import spam
 from database import db
 from gazetteer import *
 from localization import *
+import mask
 from mllist import *
 from mlparse import *
 from mlutils import *
+import search
+import spam
 from units import *
 from utils import *
 
@@ -333,12 +333,17 @@ def handle_member(entry, values):
 
     id_view = int(values["id"])
 
-    id = entry.id
-    location = entry.location
-    country = GazCountry(location)
-    x = entry.x
-    y = entry.y
-    tz = entry.tz
+    if entry:
+        id = entry.id
+        location = entry.location
+        country = GazCountry(location)
+        x = entry.x
+        y = entry.y
+        tz = entry.tz
+    else:
+        id = x = y = None
+        country = "United States"
+        tz = "America/New_York"
 
     dict = {}
     dict["id"] = id_view
@@ -376,8 +381,8 @@ def handle_member(entry, values):
     for pid in pids:
         images.append(PhotoFilename(pid))
 
-    dict["mylat"] = y * 360.0 / CIRCUM_Y
-    dict["mylng"] = x * 360.0 / CIRCUM_X
+    dict["mylat"] = y * 360.0 / CIRCUM_Y if y else None
+    dict["mylng"] = x * 360.0 / CIRCUM_X if x else None
     # About me
     dict["gender"] = Gender(entry.gender)
     dict["age"] = Age(entry.dob)

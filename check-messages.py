@@ -1,12 +1,10 @@
 import re
 import sys
 
-from sqlalchemy import create_engine
-
-import spam
-from database import MISSLOOPY_DB_URI, db_init
+from database import db_init, MISSLOOPY_DB_URI
 from mlutils import *
 from model import *
+import spam
 
 session = db_init(MISSLOOPY_DB_URI)
 

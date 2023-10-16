@@ -1,8 +1,6 @@
 import datetime
 
-from sqlalchemy import create_engine
-
-from database import MISSLOOPY_DB_URI, db_init
+from database import db_init, MISSLOOPY_DB_URI
 from model import *
 
 session = db_init(MISSLOOPY_DB_URI)

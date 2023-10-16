@@ -1,21 +1,22 @@
 import os
 
 import database
-import mask
+from database import db_init, MISSLOOPY_DB_URI
 from gazetteer import *
 from localization import *
+import mask
 from mlhtml import *
 from mlutils import *
+from model import *
 from tzone import *
 from units import *
 from utils import *
 
 BASE_DIR = os.path.dirname(__file__)
 
-db = database.Database(MISS_LOOPY_DB)
+session = db_init(MISSLOOPY_DB_URI)
 
-db.execute("SELECT last_dump_member_search FROM admin LIMIT 1")
-since = db.fetchone()[0]
+since = session.query(AdminModel.last_dump_member_search).one()
 
 now = datetime.datetime.utcnow()
 
@@ -26,10 +27,8 @@ SetLocale(country)
 
 unit_distance, unit_height = Units(country)
 
-db.execute(
-    "SELECT * FROM profiles WHERE verified AND last_login>=%s AND last_login<%s" % (Quote(str(since)), Quote(str(now)))
-)
-for entry in db.fetchall():
+entries = session.query( ProfileModel).filter(ProfileModel.verified.is_(True),ProfileModel.last_login>=since,ProfileModel.last_login<now").all()
+for entry in entries:
 
     id = entry[COL_ID]
     location = entry[COL_LOCATION]
@@ -64,9 +63,9 @@ for entry in db.fetchall():
     master = MasterPhoto(id)
     dict["image"] = ImageData(os.path.join(BASE_DIR, "static", PhotoFilename(master)))
     pids = []
-    db.execute("SELECT pid FROM photos WHERE id=%d" % (id))
-    for entry in db.fetchall():
-        pid = entry[0]
+    photos = session.query(PhotoModel.pid).filter(PhotoModel.id=id").all()
+    for photo in photos:
+        pid = photo.pid
         if pid != master:
             pids.append(pid)
     dict["images"] = []
@@ -78,5 +77,5 @@ for entry in db.fetchall():
 
         f.write(RenderY("archive.html", dict))
 
-db.execute("UPDATE admin SET last_dump_member_search=%s" % (Quote(str(now))))
-db.commit()
+session.query(AdminModel).update({"last_dump_member_search":now})
+session.commit()

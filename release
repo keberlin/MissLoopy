@@ -10,6 +10,8 @@ echo 'Copying sh files..'
 cp -u *.sh $RELEASE
 echo 'Copying Makefile..'
 cp -u Makefile $RELEASE
+echo 'Copying xml files..'
+cp -u *.xml $RELEASE
 echo 'Copying templates directory..'
 cp -ru templates $RELEASE
 echo 'Copying static directory..'
