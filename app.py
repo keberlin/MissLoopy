@@ -80,14 +80,15 @@ def top():
     return redirect("index")
 
 
-@app.route("/index")
 @app.route("/about")
-@app.route("/register")
-@app.route("/registered")
+@app.route("/forgotpassword")
+@app.route("/index")
 @app.route("/login")
-@app.route("/resetpassword")
 @app.route("/logout")
 @app.route("/notverified")
+@app.route("/register")
+@app.route("/registered")
+@app.route("/resetpassword")
 @app.route("/verify")
 def logged_out_html():
     page = request.path[1:]
@@ -104,20 +105,48 @@ def logged_out_html():
     return render_template(page + ".html", **attrs)
 
 
+@app.route("/member")
+@login_required
+def maybe_logged_in_html():
+    page = request.path[1:]
+    values = dict([(x, "|".join(request.values.getlist(x))) for x in list(request.values.keys())])
+    json = request.get_json()
+    if json:
+        values.update(json)
+
+    id = g.entry.id if g.entry else None
+    user = g.entry.name if g.entry else None
+
+    attrs = html_defaults(request.user_agent.string)
+    attrs.update(values)
+    if not "nav" in attrs:
+        attrs["nav"] = page
+    attrs["user"] = user
+    attrs["advert"] = True
+    attrs["inbox"] = InboxCount(id) if id else 0
+    attrs["outbox"] = OutboxCount(id) if id else 0
+    func = globals().get("handle_%s" % (page))
+    if func:
+        attrs.update(func(g.entry, values))
+    attrs["per_page"] = PAGE_SIZE
+    return render_template(page + ".html", **attrs)
+
+
+@app.route("/account")
+@app.route("/blocked")
 @app.route("/cancelled")
+@app.route("/changepassword")
 @app.route("/dashboard")
+@app.route("/emailthread")
+@app.route("/favorites")
+@app.route("/inbox")
+@app.route("/matches")
+@app.route("/outbox")
 @app.route("/profile")
 @app.route("/photos")
-@app.route("/seeking")
-@app.route("/matches")
-@app.route("/search")
 @app.route("/results")
-@app.route("/emailthread")
-@app.route("/inbox")
-@app.route("/outbox")
-@app.route("/favorites")
-@app.route("/blocked")
-@app.route("/account")
+@app.route("/seeking")
+@app.route("/search")
 @login_required
 def logged_in_html():
     if not g.entry:
@@ -149,33 +178,6 @@ def logged_in_html():
     return render_template(page + ".html", **attrs)
 
 
-@app.route("/member")
-@login_required
-def maybe_logged_in_html():
-    page = request.path[1:]
-    values = dict([(x, "|".join(request.values.getlist(x))) for x in list(request.values.keys())])
-    json = request.get_json()
-    if json:
-        values.update(json)
-
-    id = g.entry.id if g.entry else None
-    user = g.entry.name if g.entry else None
-
-    attrs = html_defaults(request.user_agent.string)
-    attrs.update(values)
-    if not "nav" in attrs:
-        attrs["nav"] = page
-    attrs["user"] = user
-    attrs["advert"] = True
-    attrs["inbox"] = InboxCount(id) if id else 0
-    attrs["outbox"] = OutboxCount(id) if id else 0
-    func = globals().get("handle_%s" % (page))
-    if func:
-        attrs.update(func(g.entry, values))
-    attrs["per_page"] = PAGE_SIZE
-    return render_template(page + ".html", **attrs)
-
-
 @app.route("/mllogin")
 def mllogin():
     page = request.path[1:]
@@ -194,9 +196,11 @@ def mllogin():
 
 
 @app.route("/closestnames", methods=["GET", "POST"])
+@app.route("/mlforgotpassword", methods=["POST"])
 @app.route("/mlpassword", methods=["POST"])
 @app.route("/mlregister", methods=["POST"])
 @app.route("/mlresend", methods=["POST"])
+@app.route("/mlresetpassword", methods=["POST"])
 def logged_out_json():
     page = request.path[1:]
     values = dict([(x, "|".join(request.values.getlist(x))) for x in list(request.values.keys())])
@@ -212,6 +216,7 @@ def logged_out_json():
 @app.route("/mlaccount", methods=["POST"])
 @app.route("/mladdfavorite", methods=["POST"])
 @app.route("/mlblock", methods=["POST"])
+@app.route("/mlchangepassword", methods=["POST"])
 @app.route("/mldeletefavorite", methods=["POST"])
 @app.route("/mldeletephoto", methods=["POST"])
 @app.route("/mlmasterphoto", methods=["POST"])
@@ -235,8 +240,6 @@ def logged_in_json():
     json = request.get_json()
     if json:
         values.update(json)
-
-    id = g.entry.id
 
     func = globals().get("handle_%s" % page)
     data = func(g.entry, values, request.files)

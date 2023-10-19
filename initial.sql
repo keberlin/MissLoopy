@@ -1,4 +1,4 @@
-# Database missloopy
+# Database: missloopy
 
 DROP TABLE IF EXISTS profiles;
 DROP TABLE IF EXISTS photos;
@@ -121,10 +121,14 @@ CREATE TABLE reports (
 
 CREATE TABLE spam (str VARCHAR, cost FLOAT);
 
+# UUIDs
+
+CREATE TABLE uuids (uuid UUID PRIMARY KEY NOT NULL, profile_id INTEGER NOT NULL, created TIMESTAMP NOT NULL);
+
 COMMIT;
 
 
-# Database gazatteer
+# Database: gazatteer
 
 CREATE TABLE locations (location VARCHAR PRIMARY KEY NOT NULL, x INTEGER, y INTEGER, tz VARCHAR, population INTEGER);
 
@@ -133,7 +137,7 @@ CREATE INDEX idx1 ON locations (location);
 COMMIT;
 
 
-# Database ipaddress
+# Database: ipaddress
 
 CREATE TABLE ranges (lower BIGINT NOT NULL, upper BIGINT NOT NULL, country VARCHAR);
 

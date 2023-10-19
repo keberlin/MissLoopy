@@ -1,6 +1,7 @@
-import datetime
+from datetime import date, datetime
 import json
 import logging
+from uuid import UUID
 
 from sqlalchemy.orm import aliased
 from sqlalchemy.sql.expression import and_, func
@@ -69,10 +70,40 @@ def handle_index(entry, values):
 
 def handle_register(entry, values):
     dict = {}
-    today = datetime.date.today()
-    dict["dob_max"] = datetime.date(today.year - AGE_MIN, today.month, today.day)
+    today = date.today()
+    dict["dob_max"] = date(today.year - AGE_MIN, today.month, today.day)
 
     return dict
+
+
+def handle_verify(entry, values):
+    if not values.get("uuid"):
+        return {"error": "uuid not specified"}
+    if not values.get("email"):
+        return {"error": "email not specified"}
+
+    uuid = UUID(values["uuid"])
+    email = values["email"].lower()
+
+    entry = db.session.query(UUIDModel.profile_id).filter(UUIDModel.uuid == uuid).one_or_none()
+    if not entry:
+        return {"error": "This verification link has expired"}
+
+    profile_id = entry.profile_id
+
+    entry = (
+        db.session.query(ProfileModel).filter(ProfileModel.id == profile_id, ProfileModel.email == email).one_or_none()
+    )
+    if not entry:
+        return {"error": "Profile not found"}
+
+    now = datetime.now()
+    db.session.query(ProfileModel).filter(ProfileModel.id == id).update(
+        {"created2": now, "verified": True}, synchronize_session=False
+    )
+    db.session.commit()
+
+    return {}
 
 
 def handle_profile(entry, values):
@@ -105,7 +136,7 @@ def handle_photos(entry, values):
 
     pids = []
     master = 0
-    entries = db.session.query(PhotoModel.pid, PhotoModel.master).filter(PhotoModel.id == id).all()
+    entries = db.session.query(PhotoModel.pid, PhotoModel.master).filter(PhotoModel.profile_id == id).all()
     for entry in entries:
         pids.append(entry.pid)
         if entry.master:
@@ -347,8 +378,9 @@ def handle_member(entry, values):
 
     dict = {}
     dict["id"] = id_view
-    dict["id_previous"] = PreviousResult(id, id_view)
-    dict["id_next"] = NextResult(id, id_view)
+    prev, next = PreviousNextResult(id, id_view)
+    dict["id_previous"] = prev
+    dict["id_next"] = next
 
     entry = (
         db.session.query(ProfileModel).filter(ProfileModel.id == id_view, ProfileModel.verified.is_(True)).one_or_none()
@@ -371,15 +403,9 @@ def handle_member(entry, values):
 
     master = MasterPhoto(id_view)
     image = PhotoFilename(master)
-    pids = []
-    entries = db.session.query(PhotoModel.pid).filter(PhotoModel.id == id_view).all()
-    for entry2 in entries:
-        pid = entry2.pid
-        if pid != master:
-            pids.append(pid)
-    images = []
-    for pid in pids:
-        images.append(PhotoFilename(pid))
+    entries = db.session.query(PhotoModel.pid).filter(PhotoModel.profile_id == id_view).all()
+    pids = list(filter(pid != master, [entry2.pid for entry2 in entries]))
+    images = [PhotoFilename(pid) for pid in pids]
 
     dict["mylat"] = y * 360.0 / CIRCUM_Y if y else None
     dict["mylng"] = x * 360.0 / CIRCUM_X if x else None
@@ -741,28 +767,24 @@ def handle_account(entry, values):
     return dict
 
 
-def handle_verify(entry, values):
-    if not values.get("id"):
-        return {"error": "id not specified"}
+def handle_resetpassword(entry, values):
+    if not values.get("uuid"):
+        return {"error": "uuid not specified"}
     if not values.get("email"):
         return {"error": "email not specified"}
 
-    id = int(values["id"])
-    email = values["email"].lower()
+    uuid = values["uuid"]
+    email = values["email"]
 
-    entry = db.session.query(ProfileModel.id).filter(ProfileModel.email == email).one_or_none()
+    entry = db.session.query(UUIDModel.profile_id).filter(UUIDModel.uuid == uuid).one_or_none()
     if not entry:
-        return {"error": "Email Address not found"}
-    if entry.id != id:
-        return {"error": "Id does not match"}
+        return {"error": "This change password link has expired"}
 
-    now = datetime.datetime.now()
-    db.session.query(ProfileModel).filter(ProfileModel.id == id).update(
-        {"created2": now, "verified": True}, synchronize_session=False
-    )
-    db.session.commit()
+    dict = {}
+    dict["uuid"] = uuid
+    dict["email"] = email
 
-    return {}
+    return dict
 
 
 def handle_cancelled(entry, values):

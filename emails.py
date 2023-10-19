@@ -1,5 +1,3 @@
-from html import *
-
 from localization import *
 from mlemail import *
 from mlhtml import *
@@ -19,21 +17,22 @@ def EmailNewPhoto(filename, pid, id):
     Email2(FROM, ["keith.hollis@gmail.com"], "New Photo Uploaded (%d)" % (pid), html, 10)
 
 
-def EmailVerify(email, id):
+def EmailVerify(email, uuid):
     dict = {}
-    dict["id"] = id
+    dict["uuid"] = uuid
     dict["email"] = email
 
     html = RenderY("email-verify.html", dict)
     Email2(FROM, [email], "Verify Registration", html, 1)
 
 
-def EmailPassword(email, password):
+def EmailResetPassword(email, uuid):
     dict = {}
-    dict["password"] = password
+    dict["uuid"] = uuid
+    dict["email"] = email
 
-    html = RenderY("email-password.html", dict)
-    Email2(FROM, [email], "Password Reminder", html, 1)
+    html = RenderY("email-reset-password.html", dict)
+    Email2(FROM, [email], "Password Reset Link", html, 1)
 
 
 def EmailKicked(email):

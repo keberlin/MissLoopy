@@ -1,16 +1,32 @@
-from sqlalchemy import BigInteger, Boolean, Column, Date, DateTime, Float, ForeignKey, Identity, Integer, String
+import uuid
+
+from sqlalchemy import (
+    BigInteger,
+    Boolean,
+    Column,
+    Date,
+    DateTime,
+    Float,
+    ForeignKey,
+    Identity,
+    Integer,
+    String,
+    text,
+)
+from sqlalchemy_utils import UUIDType
 
 from database import db
 
-# DB missloopy
+#
+# Database: missloopy
+#
 
 
 class ProfileModel(db.Model):
     __tablename__ = "profiles"
-    # __table_args__ = {"schema":"missloopy"}
-    # __unique__ = "email"
+    __unique__ = "email"
 
-    id = Column("id", Integer, primary_key=True, server_default=Identity(), nullable=False)
+    id = Column("id", Integer, Identity(), primary_key=True, nullable=False)
     email = Column("email", String, nullable=False)
     password = Column("password", String, nullable=False)
     created = Column("created", DateTime)
@@ -53,11 +69,11 @@ class ProfileModel(db.Model):
 class PhotoModel(db.Model):
     __tablename__ = "photos"
 
-    pid = Column("pid", Integer, primary_key=True, server_default=Identity(), nullable=False)
-    id = Column("id", Integer, ForeignKey(ProfileModel.id), nullable=False)
+    pid = Column("pid", Integer, Identity(), primary_key=True, nullable=False)
+    profile_id = Column("id", Integer, ForeignKey(ProfileModel.id), nullable=False)
     sequence = Column("sequence", Integer, default=0)
     master = Column("master", Boolean, default=False)
-    created = Column("created", DateTime)
+    created = Column("created", DateTime, nullable=False)
 
 
 class EmailModel(db.Model):
@@ -141,7 +157,17 @@ class SpamModel(db.Model):
     cost = Column("cost", Float, nullable=False)
 
 
-# DB gazetteer
+class UUIDModel(db.Model):
+    __tablename__ = "uuids"
+
+    uuid = Column("uuid", UUIDType(binary=False), primary_key=True, nullable=False, default=uuid.uuid4)
+    profile_id = Column("profile_id", ForeignKey(ProfileModel.id), nullable=False)
+    created = Column("created", DateTime, nullable=False)
+
+
+#
+# Database: gazetteer
+#
 
 
 class LocationModel(db.Model):
@@ -154,7 +180,9 @@ class LocationModel(db.Model):
     population = Column("population", Integer)
 
 
-# DB ipaddress
+#
+# Database: ipaddress
+#
 
 
 class RangeModel(db.Model):

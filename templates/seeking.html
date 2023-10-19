@@ -89,17 +89,17 @@
       if (data.message)
         jsShowMessage(data.message);
     }
-    // Handle submit of update form
+    // Handle Update button
     $('#form').submit( function(e) {
       e.preventDefault();
       $.ajax({
         url: '/mlseeking',
         type: 'POST',
         data: $(this).serialize(),
+        success: handleSuccess,
         error: function(jqXHR, textStatus, errorThrown) {
           jsShowError("There's a problem with your Internet connection.");
-        },
-        success: handleSuccess
+        }
       });
       return false;
     });

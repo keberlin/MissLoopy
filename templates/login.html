@@ -28,7 +28,7 @@
 {% block buttons %}
   <div class="col-xs-12">
     <br>
-    <a href="/resetpassword">Forgotten password?</a>
+    <a href="/forgotpassword">Forgotten password?</a>
   </div>
   <div class="col-xs-12">
     <br>
@@ -55,7 +55,7 @@
       }
       return "";
     }
-    // Handle submit of login form
+    // Handle Login button
     var redirect = "{{ (redirect or '')|safe }}";
     $("#form").submit( function(e) {
       $("#email").val($("#email").val().replace(/\s+/g, ''));

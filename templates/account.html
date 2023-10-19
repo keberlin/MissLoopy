@@ -11,20 +11,10 @@
       </div>
     </div>
     <div class="form-group">
-      <label class="col-xs-3 control-label" for="password">Password</label>
-      <div class="col-xs-8">
-        <input type="password" id="password" class="form-control" name="password" value="" required>
-      </div>
-    </div>
-    <div class="form-group">
       <label class="col-xs-3 control-label" for="dob">Date of birth</label>
       <div class="col-xs-5">
         <input type="date" id="dob" class="form-control" name="dob" value="{{ dob }}" disabled>
       </div>
-    </div>
-    <div class="col-xs-12">
-      <br>
-      <button type="submit" class="btn btn-success">Update</button>
     </div>
   </form>
 {% endblock %}
@@ -33,6 +23,8 @@
   <div class="col-xs-12">
     <br>
     <button type="button" class="btn btn-danger btn-sm" id="cancel">Cancel Membership</button>
+    &nbsp;
+    <button class="btn btn-info" id="change-password">Change Password</button>
   </div>
 {% endblock %}
 
@@ -42,31 +34,13 @@
     .controller('ctrl', function($scope, $http) {
     });
 
-    // Handle submit of update form
-    $('#form').submit( function(e) {
-      e.preventDefault();
-      var form = $("#form");
-      $.ajax({
-        url: '/mlaccount',
-        type: 'POST',
-        data: form.serialize(),
-        error: function(jqXHR, textStatus, errorThrown) {
-          jsShowError("There's a problem with your Internet connection.");
-        },
-        success: function(data) {
-          if (data.error)
-            jsShowError(data.error);
-          else if (data.message) {
-            jsShowMessage(data.message);
-            setCookie('password',$("#password").val(),14);
-          }
-        }
-      });
-      return false;
-    });
     $('#cancel').click( function(e) {
       if (confirm("Are you sure you want to cancel your membership? This action cannot be undone!"))
         window.location = "/cancelled";
+      return false;
+    });
+    $('#change-password').click( function(e) {
+      window.location = "/changepassword";
       return false;
     });
   </script>

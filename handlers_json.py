@@ -5,21 +5,22 @@ import logging
 import os
 import re
 import time
+from uuid import UUID
 
-import psycopg2
 from PIL import Image
+import psycopg2
 
-import mask
-import search
-import spam
 from database import db
 from emails import *
 from gazetteer import *
 from localization import *
+import mask
 from mlemail import *
 from mlparse import *
 from mlutils import *
 from model import *
+import search
+import spam
 from units import *
 from utils import *
 
@@ -46,7 +47,7 @@ def handle_closestnames(entry, values, files):
 
 def handle_mlaccount(entry, values, files):
     if not values.get("password"):
-        return {"error": "No Password specified."}
+        return {"error": "password not specified"}
 
     id = entry.id
 
@@ -148,7 +149,7 @@ def handle_mldeletephoto(entry, values, files):
 
     pids = []
     master = 0
-    entries = db.session.query(PhotoModel.pid, PhotoModel.master).filter(PhotoModel.id == id).all()
+    entries = db.session.query(PhotoModel.pid, PhotoModel.master).filter(PhotoModel.profile_id == id).all()
     for entry in entries:
         pids.append(entry.pid)
         if entry.master:
@@ -180,7 +181,7 @@ def handle_mlmasterphoto(entry, values, files):
 
     pids = []
     master = 0
-    entries = db.session.query(PhotoModel.pid, PhotoModel.master).filter(PhotoModel.id == id).all()
+    entries = db.session.query(PhotoModel.pid, PhotoModel.master).filter(PhotoModel.profile_id == id).all()
     for entry in entries:
         pids.append(entry.pid)
         if entry.master:
@@ -246,7 +247,7 @@ def handle_mlregister(entry, values, files):
     if not values.get("email"):
         return {"error": "No Email Address specified."}
     if not values.get("password"):
-        return {"error": "No Password specified."}
+        return {"error": "password not specified"}
     if not values.get("dob"):
         return {"error": "No Date of Birth specified."}
     if not values.get("name"):
@@ -277,8 +278,9 @@ def handle_mlregister(entry, values, files):
     if entry:
         return {"error": "Email Address already in use."}
 
-    attrs = {}
     now = datetime.datetime.utcnow()
+
+    attrs = {}
     attrs["created2"] = now
     attrs["dob"] = dt.strftime("%Y-%m-%d")
     if "location" in values:
@@ -296,35 +298,28 @@ def handle_mlregister(entry, values, files):
         else:
             attrs[attr] = value[:MAX_LENGTH]
 
+    # Create a new profile entry
     item = ProfileModel(**attrs)
     db.session.add(item)
     db.session.commit()
-    assert entry.id
+    assert item.id
 
-    EmailVerify(email, entry.id)
+    profile_id = item.id
+
+    # Create a uuid to use in the verification email
+    uuid = UUIDModel(profile_id=profile_id, created=now)
+    db.session.add(uuid)
+    db.session.commit()
+    assert uuid.uuid
+
+    EmailVerify(email, uuid.uuid)
 
     return {"code": 1002}
 
 
-def handle_mlpassword(entry, values, files):
-    if not values.get("email"):
-        return {"error": "No email specified."}
-
-    email = values["email"].lower()
-
-    # Retrieve the password
-    entry = db.session.query(ProfileModel.password).filter(ProfileModel.email == email).one_or_none()
-    if not entry:
-        return {"error": "Email Address not found."}
-
-    EmailPassword(email, entry.password)
-
-    return {"message": "Your password reminder has been sent..."}
-
-
 def handle_mlresend(entry, values, files):
     if not values.get("email"):
-        return {"error": "No email specified."}
+        return {"error": "email not specified"}
 
     email = values["email"].lower()
 
@@ -336,6 +331,72 @@ def handle_mlresend(entry, values, files):
     EmailVerify(email, entry.id)
 
     return {"message": "Verify Registration email has been resent..."}
+
+
+def handle_mlforgotpassword(entry, values, files):
+    if not values.get("email"):
+        return {"error": "email not specified"}
+
+    email = values["email"].lower()
+
+    # Retrieve the password
+    entry = db.session.query(ProfileModel).filter(ProfileModel.email == email).one_or_none()
+    if not entry:
+        return {"error": "Email Address not found."}
+
+    now = datetime.datetime.utcnow()
+
+    profile_id = entry.id
+
+    # Create a uuid to use in the verification email
+    uuid = UUIDModel(profile_id=profile_id, created=now)
+    db.session.add(uuid)
+    db.session.commit()
+    assert uuid.uuid
+
+    EmailResetPassword(email, uuid)
+
+    return {"message": "Your password reset email has been sent..."}
+
+
+def handle_mlresetpassword(entry, values, files):
+    if not values.get("uuid"):
+        return {"error": "uuid not specified"}
+    if not values.get("email"):
+        return {"error": "email not specified"}
+    if not values.get("password"):
+        return {"error": "password not specified"}
+
+    uuid = values["uuid"]
+    email = values["email"]
+    password = values["password"]
+
+    entry = db.session.query(UUIDModel.profile_id).filter(UUIDModel.uuid == uuid).one_or_none()
+    if not entry:
+        return {"error": "This change password link has expired."}
+
+    profile_id = entry.profile_id
+
+    db.session.query(ProfileModel).filter(ProfileModel.id == profile_id, ProfileModel.email == email).update(
+        {"password": password}
+    )
+    db.session.commit()
+
+    return {"message": "Your password has been changed..."}
+
+
+def handle_mlchangepassword(entry, values, files):
+    if not values.get("password"):
+        return {"error": "password not specified"}
+
+    password = values["password"]
+
+    profile_id = entry.id
+
+    db.session.query(ProfileModel).filter(ProfileModel.id == profile_id).update({"password": password})
+    db.session.commit()
+
+    return {"message": "Your password has been changed..."}
 
 
 def handle_mlsearch(entry, values, files):
@@ -433,6 +494,7 @@ def handle_mlsendemail(entry, values, files):
     notifications = entry_to.notifications
 
     now = datetime.datetime.utcnow()
+
     item = EmailModel(id_from=id, id_to=id_to, message=message, sent=now)
     db.session.add(item)
     db.session.commit()
@@ -486,6 +548,7 @@ def handle_mlsendphoto(entry, values, files):
     notifications = entry_to.notifications
 
     now = datetime.datetime.utcnow()
+
     item = EmailModel(id_from=id, id_to=id_to, image=image, sent=now)
     db.session.add(item)
     db.session.commit()
@@ -573,11 +636,11 @@ def handle_mluploadphoto(entry, values, files):
     im = Image.composite(layer, im, layer)
 
     now = datetime.datetime.utcnow()
-    item = PhotoModel(id=id, created=now)
+
+    item = PhotoModel(profile_id=id, created=now)
     db.session.add(item)
     db.session.commit()
-    # db.session.refresh(entry)
-    assert entry.pid
+    assert item.pid
 
     # Create a photo file using pid and copy data into it
     filename = os.path.join(BASE_DIR, "static", PhotoFilename(entry.pid))
@@ -593,7 +656,7 @@ def handle_mluploadphoto(entry, values, files):
 
     pids = []
     master = 0
-    entries = db.session.query(PhotoModel.pid, PhotoModel.master).filter(PhotoModel.id == id).all()
+    entries = db.session.query(PhotoModel.pid, PhotoModel.master).filter(PhotoModel.profile_id == id).all()
     for entry in entries:
         pids.append(entry.pid)
         if entry.master:
@@ -630,6 +693,7 @@ def handle_mlwink(entry, values, files):
     message = "Wink!"
 
     now = datetime.datetime.utcnow()
+
     item = EmailModel(id_from=id, id_to=id_to, message=message, sent=now)
     db.session.add(item)
     db.session.commit()

@@ -27,7 +27,11 @@ SetLocale(country)
 
 unit_distance, unit_height = Units(country)
 
-entries = session.query( ProfileModel).filter(ProfileModel.verified.is_(True),ProfileModel.last_login>=since,ProfileModel.last_login<now").all()
+entries = (
+    session.query(ProfileModel)
+    .filter(ProfileModel.verified.is_(True), ProfileModel.last_login >= since, ProfileModel.last_login < now)
+    .all()
+)
 for entry in entries:
 
     id = entry[COL_ID]
@@ -63,7 +67,7 @@ for entry in entries:
     master = MasterPhoto(id)
     dict["image"] = ImageData(os.path.join(BASE_DIR, "static", PhotoFilename(master)))
     pids = []
-    photos = session.query(PhotoModel.pid).filter(PhotoModel.id=id").all()
+    photos = session.query(PhotoModel.pid).filter(PhotoModel.profile_id == id).all()
     for photo in photos:
         pid = photo.pid
         if pid != master:
@@ -77,5 +81,5 @@ for entry in entries:
 
         f.write(RenderY("archive.html", dict))
 
-session.query(AdminModel).update({"last_dump_member_search":now})
+session.query(AdminModel).update({"last_dump_member_search": now})
 session.commit()

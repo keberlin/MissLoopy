@@ -325,9 +325,11 @@ def PhotoFilename(pid):
 
 
 def MasterPhoto(id):
-    entry = db.session.query(PhotoModel.pid).filter(PhotoModel.id == id, PhotoModel.master.is_(True)).one_or_none()
+    entry = (
+        db.session.query(PhotoModel.pid).filter(PhotoModel.profile_id == id, PhotoModel.master.is_(True)).one_or_none()
+    )
     if not entry:
-        entry = db.session.query(PhotoModel.pid).filter(PhotoModel.id == id).first()
+        entry = db.session.query(PhotoModel.pid).filter(PhotoModel.profile_id == id).first()
         if not entry:
             return 0
     return entry.pid
@@ -429,7 +431,7 @@ def DeletePhotos(pids):
 
 def DeleteMember(id):
     db.session.query(ProfileModel).filter(ProfileModel.id == id).delete()
-    entries = db.session.query(PhotoModel.pid).filter(PhotoModel.id == id).all()
+    entries = db.session.query(PhotoModel.pid).filter(PhotoModel.profile_id == id).all()
     pids = [entry.pid for entry in entries]
     DeletePhotos(pids)
     db.session.query(FavoriteModel).filter(or_(FavoriteModel.id == id, FavoriteModel.id_favorite == id)).delete()
@@ -495,26 +497,15 @@ def SaveResults(id, results):
         db.session.commit()
 
 
-def PreviousResult(id, id_search):
+def PreviousNextResult(id, id_search):
     entry = (
-        db.session.query(ResultModel.id_previous)
+        db.session.query(ResultModel.id_previous, ResultModel.id_next)
         .filter(ResultModel.id == id, ResultModel.id_search == id_search)
         .one_or_none()
     )
     if not entry:
-        return 0
-    return entry.id_previous
-
-
-def NextResult(id, id_search):
-    entry = (
-        db.session.query(ResultModel.id_next)
-        .filter(ResultModel.id == id, ResultModel.id_search == id_search)
-        .one_or_none()
-    )
-    if not entry:
-        return 0
-    return entry.id_next
+        return 0, 0
+    return entry.id_previous, entry.id_next
 
 
 def PurgeResults(id_search):

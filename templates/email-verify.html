@@ -3,9 +3,9 @@
 {% block body %}
 You recently registered on the {{ title }} website. Click on the following link to verify your email address.<br>
 <br>
-<a href="{{ www }}/verify?id={{ id }}&email={{ email }}"><b>Click Here</b></a><br>
+<a href="{{ www }}/verify?uuid={{ uuid }}&email={{ email }}"><b>Click Here</b></a><br>
 <br>
 <br>
 or alternatively copy and paste the following into your browser.<br>
-<pre>{{ www }}/verify?id={{ id }}&email={{ email }}</pre>
+<pre>{{ www }}/verify?uuid={{ uuid }}&email={{ email }}</pre>
 {% endblock %}
