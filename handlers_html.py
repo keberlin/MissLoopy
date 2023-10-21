@@ -1,7 +1,6 @@
 from datetime import date, datetime
 import json
 import logging
-from uuid import UUID
 
 from sqlalchemy.orm import aliased
 from sqlalchemy.sql.expression import and_, func
@@ -19,6 +18,7 @@ from units import *
 from utils import *
 
 MAX_RESULTS = 200
+PER_PAGE = 20
 
 # HTML Pages
 
@@ -77,12 +77,12 @@ def handle_register(entry, values):
 
 
 def handle_verify(entry, values):
-    if not values.get("uuid"):
+    if "uuid" not in values:
         return {"error": "uuid not specified"}
-    if not values.get("email"):
+    if "email" not in values:
         return {"error": "email not specified"}
 
-    uuid = UUID(values["uuid"])
+    uuid = values["uuid"]
     email = values["email"].lower()
 
     entry = db.session.query(UUIDModel.profile_id).filter(UUIDModel.uuid == uuid).one_or_none()
@@ -171,6 +171,9 @@ def handle_seeking(entry, values):
 
 
 def handle_matches(entry, values):
+    page = int(values.get("page", 0))
+    per_page = int(values.get("per_page", PER_PAGE))
+
     id = entry.id
     location = entry.location
     country = GazCountry(location)
@@ -210,10 +213,13 @@ def handle_matches(entry, values):
         height_min,
         height_max,
         weight_choice,
-    )[:MAX_RESULTS]
+    )
     ids = [entry.id for entry in entries]
 
     SaveResults(id, ids)
+
+    total = len(entries)
+    entries = entries[page * per_page : (page + 1) * per_page]
 
     SetLocale(country)
 
@@ -234,6 +240,9 @@ def handle_matches(entry, values):
     dict["type"] = "short"
     dict["criteria"] = ", ".join(criteria)
     dict["entries"] = ListMembers(entries, None, location, x, y, tz, unit_distance)
+    dict["total"] = total
+    dict["page"] = page
+    dict["per_page"] = per_page
 
     return dict
 
@@ -359,7 +368,7 @@ def handle_results(entry, values):
 
 
 def handle_member(entry, values):
-    if not values.get("id"):
+    if "id" not in values:
         return {"error": "id not specified"}
 
     id_view = int(values["id"])
@@ -404,7 +413,7 @@ def handle_member(entry, values):
     master = MasterPhoto(id_view)
     image = PhotoFilename(master)
     entries = db.session.query(PhotoModel.pid).filter(PhotoModel.profile_id == id_view).all()
-    pids = list(filter(pid != master, [entry2.pid for entry2 in entries]))
+    pids = list(filter(lambda x: x != master, [entry2.pid for entry2 in entries]))
     images = [PhotoFilename(pid) for pid in pids]
 
     dict["mylat"] = y * 360.0 / CIRCUM_Y if y else None
@@ -442,7 +451,7 @@ def handle_member(entry, values):
 
 
 def handle_emailthread(entry, values):
-    if not values.get("id"):
+    if "id" not in values:
         return {"error": "id not specified"}
 
     id_with = int(values["id"])
@@ -768,9 +777,9 @@ def handle_account(entry, values):
 
 
 def handle_resetpassword(entry, values):
-    if not values.get("uuid"):
+    if "uuid" not in values:
         return {"error": "uuid not specified"}
-    if not values.get("email"):
+    if "email" not in values:
         return {"error": "email not specified"}
 
     uuid = values["uuid"]

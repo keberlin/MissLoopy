@@ -15,7 +15,7 @@ session = db_init(MISSLOOPY_DB_URI)
 BASE_DIR = os.path.dirname(__file__)
 
 entries = session.query(PhotoModel.profile_id, PhotoModel.pid).order_by(PhotoModel.created.desc()).limit(200).all()
-photos = [(entry.id, PhotoFilename(entry.pid)) for entry in entries]
+photos = [(entry.profile_id, PhotoFilename(entry.pid)) for entry in entries]
 
 d = {"title": "New Photos", "photos": photos}
 

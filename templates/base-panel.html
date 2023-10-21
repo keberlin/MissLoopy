@@ -1,93 +1,93 @@
 {% extends 'base.html' %}
 
 {% block base %}
-            <table border=0 style="width:100%;border-spacing:10px 0px;border-collapse:separate" id="canvas">
-              {% if nav %}
+  <table border=0 style="width:100%;border-spacing:10px 0px;border-collapse:separate" id="canvas">
+    {% if nav %}
+    <tr>
+        <td width="120px" valign="top">
+          <ul class="nav nav-pills nav-stacked">
+            <li id="dashboard" {% if nav == "dashboard" %}class="active"{% endif %}><a href="/dashboard"                      >Home</a></li>
+            <li id="profile"   {% if nav == "profile"   %}class="active"{% endif %}><a href="/profile"                        >Profile</a></li>
+            <li id="photos"    {% if nav == "photos"    %}class="active"{% endif %}><a href="/photos"                         >Photos</a></li>
+            <li id="seeking"   {% if nav == "seeking"   %}class="active"{% endif %}><a href="/seeking"                        >Seeking</a></li>
+            <li id="matches"   {% if nav == "matches"   %}class="active"{% endif %}><a href="/matches?per_page={{per_page}}"  >Matches</a></li>
+            <li id="search"    {% if nav == "search"    %}class="active"{% endif %}><a href="/search?per_page={{per_page}}"   >Search</a></li>
+            <li id="inbox"     {% if nav == "inbox"     %}class="active"{% endif %}><a href="/inbox?per_page={{per_page}}"    >Inbox{% if inbox %}&nbsp;<span class="badge pull-right">{{ inbox }}</span>{% endif %}</a></li>
+            <li id="outbox"    {% if nav == "outbox"    %}class="active"{% endif %}><a href="/outbox?per_page={{per_page}}"   >Outbox{% if outbox %}&nbsp;<span class="badge pull-right">{{ outbox }}</span>{% endif %}</a></li>
+            <li id="favorites" {% if nav == "favorites" %}class="active"{% endif %}><a href="/favorites?per_page={{per_page}}">Favorites</a></li>
+            <li id="blocked"   {% if nav == "blocked"   %}class="active"{% endif %}><a href="/blocked?per_page={{per_page}}"  >Blocked</a></li>
+            <li id="account"   {% if nav == "account"   %}class="active"{% endif %}><a href="/account"                        >Account</a></li>
+          </ul>
+        </td>
+      {% endif %}
+      <td wwidth="100%" valign="top">
+        <div class="panel panel-{{ heading_type or 'default' }}" id="panel1">
+          <div class="panel-heading">
+            <table border=0 style="width:100%;border-spacing:0px 0px;border-collapse:separate">
               <tr>
-                  <td width="120px" valign="top">
-                    <ul class="nav nav-pills nav-stacked">
-                      <li id="dashboard" {% if nav == "dashboard" %}class="active"{% endif %}><a href="/dashboard">Home</a></li>
-                      <li id="profile"   {% if nav == "profile"   %}class="active"{% endif %}><a href="/profile"  >Profile</a></li>
-                      <li id="photos"    {% if nav == "photos"    %}class="active"{% endif %}><a href="/photos"   >Photos</a></li>
-                      <li id="seeking"   {% if nav == "seeking"   %}class="active"{% endif %}><a href="/seeking"  >Seeking</a></li>
-                      <li id="matches"   {% if nav == "matches"   %}class="active"{% endif %}><a href="/matches"  >Matches</a></li>
-                      <li id="search"    {% if nav == "search"    %}class="active"{% endif %}><a href="/search"   >Search</a></li>
-                      <li id="inbox"     {% if nav == "inbox"     %}class="active"{% endif %}><a href="/inbox"    >Inbox{% if inbox %}&nbsp;<span class="badge pull-right">{{ inbox }}</span>{% endif %}</a></li>
-                      <li id="outbox"    {% if nav == "outbox"    %}class="active"{% endif %}><a href="/outbox"   >Outbox{% if outbox %}&nbsp;<span class="badge pull-right">{{ outbox }}</span>{% endif %}</a></li>
-                      <li id="favorites" {% if nav == "favorites" %}class="active"{% endif %}><a href="/favorites">Favorites</a></li>
-                      <li id="blocked"   {% if nav == "blocked"   %}class="active"{% endif %}><a href="/blocked"  >Blocked</a></li>
-                      <li id="account"   {% if nav == "account"   %}class="active"{% endif %}><a href="/account"  >Account</a></li>
-                    </ul>
+                <td align="left"><h4>{{ heading|e }}</h4>
+                </td>
+                <td><h4>&nbsp;</h4>
+                </td>
+                {% if id_previous or id_next %}
+                  <td align="right"><span class="btn-group"><button class="btn" id="previous" {% if not id_previous %}disabled{% endif %}><span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span> Previous</button> <button class="btn" id="next" {% if not id_next %}disabled{% endif %}>Next <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span></button></span>
                   </td>
                 {% endif %}
-                <td wwidth="100%" valign="top">
-                  <div class="panel panel-{{ heading_type or 'default' }}" id="panel1">
-                    <div class="panel-heading">
-                      <table border=0 style="width:100%;border-spacing:0px 0px;border-collapse:separate">
-                        <tr>
-                          <td align="left"><h4>{{ heading|e }}</h4>
-                          </td>
-                          <td><h4>&nbsp;</h4>
-                          </td>
-                          {% if id_previous or id_next %}
-                            <td align="right"><span class="btn-group"><button class="btn" id="previous" {% if not id_previous %}disabled{% endif %}><span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span> Previous</button> <button class="btn" id="next" {% if not id_next %}disabled{% endif %}>Next <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span></button></span>
-                            </td>
-                          {% endif %}
-                        </tr>
-                      </table>
-                    </div>
-                    {% if error or not no_panel %}
-                      <div class="panel-body">
-                        {% if error %}
-                        <div class="col-xs-12 alert alert-danger">
-                          <strong><span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span> {{ error }}</strong>
-                        </div>
-                      {% else %}
-                        {% block panel_header %}
-                        {% endblock %}
-
-                        {% block canvas %}
-                        {% endblock %}
-
-                        {% block panel_footer %}
-                        {% endblock %}
-                      {% endif %}
-                      </div><!-- panel-body -->
-                    {% endif %}
-
-                    {% block list %}
-                    {% endblock %}
-                  </div><!-- panel -->
-
-                  {% block buttons %}
-                  {% endblock %}
-
-                  <div ng-cloak ng-if="num_pages>1" align="center" id="pagetabs">
-                    <ul class="pagination">
-                      <li ng-click="prev()" ng-disabled="page==0"><span>&laquo;</span></li>
-                      <li ng-repeat="chunk in chunked" ng-class="{active:page==$index}" ng-click="tab($index)"><span>{% raw %}{{$index+1}}{% endraw %}</span></li>
-                      <li ng-click="next()" ng-disabled="page==num_pages-1"><span>&raquo;</span></li>
-                    </ul>
-                  </div>
-
-                  {% if heading2 %}
-                    {% if partial %}
-                      <div class="col-md-{{ partial }} col-md-offset-{{ ((12-partial)/2)|int }} col-xs-12">
-                    {% endif %}
-
-                    <div class="panel panel-info" id="panel2" hidden>
-                      <div class="panel-heading"><h4>{{ heading2|e }}</h4></div>
-                      <div class="panel-body">
-                        {% block panel2 %}
-                        {% endblock %}
-                      </div><!-- panel-body -->
-                    </div>
-
-                    {% if partial %}
-                      </div>
-                    {% endif %}
-                  {% endif %}
-                </td>
               </tr>
             </table>
+          </div>
+          {% if error or not no_panel %}
+            <div class="panel-body">
+              {% if error %}
+              <div class="col-xs-12 alert alert-danger">
+                <strong><span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span> {{ error }}</strong>
+              </div>
+            {% else %}
+              {% block panel_header %}
+              {% endblock %}
+
+              {% block canvas %}
+              {% endblock %}
+
+              {% block panel_footer %}
+              {% endblock %}
+            {% endif %}
+            </div><!-- panel-body -->
+          {% endif %}
+
+          {% block list %}
+          {% endblock %}
+        </div><!-- panel -->
+
+        {% block buttons %}
+        {% endblock %}
+
+        <div ng-cloak ng-if="num_pages>1" align="center" id="pagetabs">
+          <ul class="pagination">
+            <li ng-click="prev()" ng-disabled="page==0"><span>&laquo;</span></li>
+            <li ng-repeat="p in pages" ng-class="{active:page==$index}" ng-click="tab($index)"><span>{% raw %}{{$index+1}}{% endraw %}</span></li>
+            <li ng-click="next()" ng-disabled="page==num_pages-1"><span>&raquo;</span></li>
+          </ul>
+        </div>
+
+        {% if heading2 %}
+          {% if partial %}
+            <div class="col-md-{{ partial }} col-md-offset-{{ ((12-partial)/2)|int }} col-xs-12">
+          {% endif %}
+
+          <div class="panel panel-info" id="panel2" hidden>
+            <div class="panel-heading"><h4>{{ heading2|e }}</h4></div>
+            <div class="panel-body">
+              {% block panel2 %}
+              {% endblock %}
+            </div><!-- panel-body -->
+          </div>
+
+          {% if partial %}
+            </div>
+          {% endif %}
+        {% endif %}
+      </td>
+    </tr>
+  </table>
 {% endblock %}

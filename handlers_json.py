@@ -33,10 +33,10 @@ MAX_LENGTH = 3000
 
 
 def handle_closestnames(entry, values, files):
-    MAX_MATCHES = 5
-
-    if not values.get("query"):
+    if "query" not in values:
         return {"error": "No query specified."}
+
+    MAX_MATCHES = 5
 
     query = values["query"].lstrip()
 
@@ -46,9 +46,6 @@ def handle_closestnames(entry, values, files):
 
 
 def handle_mlaccount(entry, values, files):
-    if not values.get("password"):
-        return {"error": "password not specified"}
-
     id = entry.id
 
     # TODO Find a mechanism for updating a member's email address too..
@@ -162,7 +159,7 @@ def handle_mldeletephoto(entry, values, files):
 
 
 def handle_mlmasterphoto(entry, values, files):
-    if not values.get("pid"):
+    if "pid" not in values:
         return {"error": "No Photo selected."}
 
     id = entry.id
@@ -191,7 +188,7 @@ def handle_mlmasterphoto(entry, values, files):
 
 
 def handle_mlprofile(entry, values, files):
-    if not values.get("name"):
+    if "name" not in values:
         return {"error": "No Display Name specified."}
 
     id = entry.id
@@ -244,21 +241,21 @@ def handle_mlprofile(entry, values, files):
 
 
 def handle_mlregister(entry, values, files):
-    if not values.get("email"):
+    if "email" not in values:
         return {"error": "No Email Address specified."}
-    if not values.get("password"):
+    if "password" not in values:
         return {"error": "password not specified"}
-    if not values.get("dob"):
+    if "dob" not in values:
         return {"error": "No Date of Birth specified."}
-    if not values.get("name"):
+    if "name" not in values:
         return {"error": "No Display Name specified."}
-    if not values.get("gender"):
+    if "gender" not in values:
         return {"error": "No Gender specified."}
-    if not values.get("ethnicity"):
+    if "ethnicity" not in values:
         return {"error": "No Ethnicity specified."}
-    if not values.get("gender_choice"):
+    if "gender_choice" not in values:
         return {"error": "No Seeking gender specified."}
-    if not values.get("location"):
+    if "location" not in values:
         return {"error": "No Location specified."}
 
     email = values["email"].lower()
@@ -318,7 +315,7 @@ def handle_mlregister(entry, values, files):
 
 
 def handle_mlresend(entry, values, files):
-    if not values.get("email"):
+    if "email" not in values:
         return {"error": "email not specified"}
 
     email = values["email"].lower()
@@ -334,7 +331,7 @@ def handle_mlresend(entry, values, files):
 
 
 def handle_mlforgotpassword(entry, values, files):
-    if not values.get("email"):
+    if "email" not in values:
         return {"error": "email not specified"}
 
     email = values["email"].lower()
@@ -360,11 +357,11 @@ def handle_mlforgotpassword(entry, values, files):
 
 
 def handle_mlresetpassword(entry, values, files):
-    if not values.get("uuid"):
+    if "uuid" not in values:
         return {"error": "uuid not specified"}
-    if not values.get("email"):
+    if "email" not in values:
         return {"error": "email not specified"}
-    if not values.get("password"):
+    if "password" not in values:
         return {"error": "password not specified"}
 
     uuid = values["uuid"]
@@ -386,7 +383,7 @@ def handle_mlresetpassword(entry, values, files):
 
 
 def handle_mlchangepassword(entry, values, files):
-    if not values.get("password"):
+    if "password" not in values:
         return {"error": "password not specified"}
 
     password = values["password"]
@@ -400,7 +397,7 @@ def handle_mlchangepassword(entry, values, files):
 
 
 def handle_mlsearch(entry, values, files):
-    if not values.get("query"):
+    if "query" not in values:
         return {"error": "No query specified."}
 
     query = values["query"].strip()
@@ -415,7 +412,7 @@ def handle_mlsearch(entry, values, files):
 def handle_mlseeking(entry, values, files):
     id = entry.id
 
-    if not values.get("gender_choice"):
+    if "gender_choice" not in values:
         return {"error": "No Seeking Gender specified."}
 
     ParseAge(values, "age_min")
@@ -465,7 +462,7 @@ def handle_mlsendemail(entry, values, files):
     y = entry.y
     tz = entry.tz
 
-    if not values.get("message"):
+    if "message" not in values:
         return {"error": "No message specified."}
 
     id_to = int(values["id"])

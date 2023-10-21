@@ -24,7 +24,7 @@ TEST = re.search("root", BASE_DIR) is not None
 
 logging.basicConfig(filename="/var/log/missloopy/log", level=logging.DEBUG if TEST else logging.INFO)
 
-PAGE_SIZE = 20
+PER_PAGE = 20
 
 
 def debug(str):
@@ -128,7 +128,7 @@ def maybe_logged_in_html():
     func = globals().get("handle_%s" % (page))
     if func:
         attrs.update(func(g.entry, values))
-    attrs["per_page"] = PAGE_SIZE
+    attrs["per_page"] = PER_PAGE
     return render_template(page + ".html", **attrs)
 
 
@@ -174,7 +174,7 @@ def logged_in_html():
     func = globals().get("handle_%s" % (page))
     if func:
         attrs.update(func(g.entry, values))
-    attrs["per_page"] = PAGE_SIZE
+    attrs["per_page"] = PER_PAGE
     return render_template(page + ".html", **attrs)
 
 
