@@ -1,5 +1,6 @@
 import argparse
 import collections
+from datetime import datetime, timedelta
 import sys
 
 from database import db_init, MISSLOOPY_DB_URI
@@ -30,11 +31,11 @@ args = parser.parse_args()
 
 BASE_DIR = os.path.dirname(__file__)
 
-now = datetime.datetime.utcnow()
+now = datetime.utcnow()
 
 years = {}
 for year in YEARS:
-    td = now - datetime.timedelta(weeks=year * 52)
+    td = now - timedelta(weeks=year * 52)
     entries = session.query(ReportModel).filter(ReportModel.logged > td).order_by(ReportModel.logged).all()
     years[year] = [
         ReportStruct(

@@ -6,7 +6,7 @@
 
 {% block canvas %}
   <div class="col-xs-12 alert alert-info" align="left">
-    Filter: {{ criteria|e }}
+    {{total}} results, {{criteria|e}}
   </div>
   <div ng-cloak ng-if="num_pages==0" class="col-xs-12 alert alert-warning" align="left">
     <strong><span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span> None found.</strong>

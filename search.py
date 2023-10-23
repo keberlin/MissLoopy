@@ -1,3 +1,4 @@
+from datetime import date, datetime
 import logging
 import math
 import os
@@ -58,22 +59,22 @@ def search2(
     if gender_choice:
         query = query.filter(ProfileModel.gender.op("&")(gender_choice) != 0)
     if age_min:
-        now = datetime.datetime.utcnow()
+        now = datetime.utcnow()
         ref = Datetime(now, tz)
         try:
-            dob = datetime.date(ref.year - age_min, ref.month, ref.day)
+            dob = date(ref.year - age_min, ref.month, ref.day)
         except ValueError:
             # cater for leap year
-            dob = datetime.date(ref.year - age_min, ref.month, ref.day - 1)
+            dob = date(ref.year - age_min, ref.month, ref.day - 1)
         query = query.filter(ProfileModel.dob <= dob)
     if age_max:
-        now = datetime.datetime.utcnow()
+        now = datetime.utcnow()
         ref = Datetime(now, tz)
         try:
-            dob = datetime.date(ref.year - age_max - 1, ref.month, ref.day)
+            dob = date(ref.year - age_max - 1, ref.month, ref.day)
         except ValueError:
             # cater for leap year
-            dob = datetime.date(ref.year - age_max - 1, ref.month, ref.day - 1)
+            dob = date(ref.year - age_max - 1, ref.month, ref.day - 1)
         query = query.filter(ProfileModel.dob > dob)
     if ethnicity_choice:
         query = query.filter(ProfileModel.ethnicity.op("&")(ethnicity_choice) != 0)

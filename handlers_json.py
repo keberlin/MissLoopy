@@ -368,9 +368,9 @@ def handle_mlresetpassword(entry, values, files):
     email = values["email"]
     password = values["password"]
 
-    entry = db.session.query(UUIDModel.profile_id).filter(UUIDModel.uuid == uuid).one_or_none()
+    entry = db.session.query(UUIDModel.profile_id).filter(UUIDModel.uuid == UUID(uuid)).one_or_none()
     if not entry:
-        return {"error": "This change password link has expired."}
+        return {"error": "This reset password link has expired."}
 
     profile_id = entry.profile_id
 

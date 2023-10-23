@@ -1,4 +1,4 @@
-import datetime
+from datetime import datetime
 import re
 import time
 
@@ -20,7 +20,7 @@ def AnalyseSpammer(id):
     if count == 0:
         return (0, 0)
     sent_min = entry[2]
-    sent_max = datetime.datetime.utcnow()
+    sent_max = datetime.utcnow()
     td = sent_max - sent_min
     frequency = (td.days * 24 * 60 * 60 + td.seconds) / count
     return (members, frequency)

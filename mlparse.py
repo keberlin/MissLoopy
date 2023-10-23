@@ -1,3 +1,4 @@
+from datetime import datetime
 import logging
 import re
 
@@ -19,22 +20,20 @@ def ParseNumber(ss):
     return None
 
 
-def ParseAge(dict, key):
-    if not dict.get(key):
+def ParseAge(ss):
+    if not ss:
         return
-    ss = re.sub(r"[^0-9]", r" ", dict[key])
+    ss = re.sub(r"[^0-9]", r" ", ss)
     v = ParseNumber(ss)
     if v is not None:
-        dict[key] = str(min(max(int(v), AGE_MIN), AGE_MAX))
-        return
-    logging.error("ERROR: Did not understand age: %s" % (dict[key]))
-    del dict[key]
+        return min(max(int(v), AGE_MIN), AGE_MAX)
+    logging.error(f"ERROR: Did not understand age: {ss}")
 
 
-def ParseHeight(dict, key):
-    if not dict.get(key):
+def ParseHeight(ss):
+    if not ss:
         return
-    ss = dict[key].replace(r",", r".")
+    ss = ss.replace(r",", r".")
     ss = re.sub(r"[^0-9\.]", r" ", ss)
     ss = re.sub(r" *\. *", r".", ss)
     v = ParseNumber(ss)
@@ -48,8 +47,7 @@ def ParseHeight(dict, key):
         else:
             # Assume it's in centimetres
             pass
-        dict[key] = str(min(max(int(v), HEIGHT_MIN), HEIGHT_MAX))
-        return
+        return min(max(int(v), HEIGHT_MIN), HEIGHT_MAX)
     # Assume it's in feet & inches
     s = ss.split()
     if len(s) >= 2:
@@ -57,20 +55,15 @@ def ParseHeight(dict, key):
         v2 = ParseNumber(s[1])
         if v1 is not None and v2 is not None:
             v = (v1 * 12 + v2) * 2.54
-            dict[key] = str(min(max(int(v), HEIGHT_MIN), HEIGHT_MAX))
-            return
-    logging.error("ERROR: Did not understand height: %s" % (dict[key]))
-    del dict[key]
+            return min(max(int(v), HEIGHT_MIN), HEIGHT_MAX)
+    logging.error(f"ERROR: Did not understand height: {ss}")
 
 
-def ParseRange(dict, kmin, kmax):
-    if not dict.get(kmin) or not dict.get(kmax):
-        return
-    vmin = int(dict[kmin])
-    vmax = int(dict[kmax])
-    if vmax < vmin:
-        dict[kmin] = str(vmax)
-        dict[kmax] = str(vmin)
+def ParseRange(min, max):
+    if not min is None and not max is None:
+        if max < min:
+            return max, min
+    return min, max
 
 
 def ParseDob(dob):
@@ -107,7 +100,7 @@ def ParseDob(dob):
     ]
     for f in formats:
         try:
-            return datetime.datetime.strptime(s, f)
+            return datetime.strptime(s, f)
         except:
             pass
     return None

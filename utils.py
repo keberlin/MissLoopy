@@ -1,6 +1,6 @@
 import bisect
 import cgi
-import datetime
+from datetime import date, datetime, time
 import os
 import re
 
@@ -46,7 +46,7 @@ def Starsign(date):
 
 
 def Age(date):
-    today = datetime.date.today()
+    today = date.today()
     years = today.year - date.year
     if Days(today.month, today.day) < Days(date.month, date.day):
         years -= 1
@@ -89,7 +89,7 @@ def TimeDiff(td):
 def Since(time, recently=True):
     if not time:
         return None
-    now = datetime.datetime.utcnow()
+    now = datetime.utcnow()
     td = now - time
     if recently and td.days == 0 and td.seconds < 60:
         return "online now"
@@ -131,11 +131,11 @@ def tosql(v):
         return 1 if v else 0
     elif isinstance(v, str):
         return "'" + v + "'"
-    elif isinstance(v, datetime.datetime):
+    elif isinstance(v, datetime):
         return "'" + str(v) + "'::date"
-    elif isinstance(v, datetime.date):
+    elif isinstance(v, date):
         return "'" + str(v) + "'::date"
-    elif isinstance(v, datetime.time):
+    elif isinstance(v, time):
         return "'" + str(v) + "'::time"
     elif callable(v):
         return v.__name__

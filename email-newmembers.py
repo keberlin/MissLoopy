@@ -1,4 +1,4 @@
-import datetime
+from datetime import datetime
 
 from database import db_init, MISSLOOPY_DB_URI
 from emails import *
@@ -13,7 +13,7 @@ session = db_init(MISSLOOPY_DB_URI)
 
 since = session.query(AdminModel.last_new_member_search).scalar()
 
-now = datetime.datetime.utcnow()
+now = datetime.utcnow()
 
 results = {}
 

@@ -20,4 +20,4 @@ for entry in entries:
     db.session.commit()
     assert uuid.uuid
 
-    EmailVerify(entry.email, uuid)
+    EmailVerify(entry.email, uuid.uuid)

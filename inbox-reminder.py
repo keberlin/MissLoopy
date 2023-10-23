@@ -1,3 +1,4 @@
+from datetime import datetime, timedelta
 import os
 
 from database import db_init, MISSLOOPY_DB_URI
@@ -9,8 +10,8 @@ logging.basicConfig(filename="/var/log/missloopy/log", level=logging.INFO)
 
 session = db_init(MISSLOOPY_DB_URI)
 
-now = datetime.datetime.utcnow()
-since = now - datetime.timedelta(days=14)
+now = datetime.utcnow()
+since = now - timedelta(days=14)
 
 entries = (
     session.query(ProfileModel.id)

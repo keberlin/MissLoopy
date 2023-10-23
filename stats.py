@@ -1,3 +1,5 @@
+from datetime import datetime, timedelta
+
 from database import db_init, MISSLOOPY_DB_URI
 from mlutils import *
 from model import *
@@ -15,7 +17,7 @@ def Bit(enum):
     return b
 
 
-now = datetime.datetime.utcnow()
+now = datetime.utcnow()
 
 verified = 0
 unverified = 0
@@ -67,16 +69,13 @@ active = (
     session.query(func.count())
     .select_from(ProfileModel)
     .filter(ProfileModel.verified.is_(True))
-    .filter(ProfileModel.last_login >= now - datetime.timedelta(days=30))
+    .filter(ProfileModel.last_login >= now - timedelta(days=30))
     .scalar()
 )
 
 # Get number of sent messages (within the last month)
 messages = (
-    session.query(func.count())
-    .select_from(EmailModel)
-    .filter(EmailModel.sent >= now - datetime.timedelta(days=30))
-    .scalar()
+    session.query(func.count()).select_from(EmailModel).filter(EmailModel.sent >= now - timedelta(days=30)).scalar()
 )
 
 # Get most blocked members

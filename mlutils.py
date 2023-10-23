@@ -1,5 +1,5 @@
 import base64
-import datetime
+from datetime import datetime
 import io
 import logging
 import os
@@ -376,7 +376,7 @@ def Authenticate(cookies=None, remote_addr=None):
     if not entry:
         return None
 
-    now = datetime.datetime.utcnow()
+    now = datetime.utcnow()
     entry.last_login = now
     if not remote_addr:
         remote_addr = FetchRemoteAddr()

@@ -1,4 +1,4 @@
-import datetime
+from datetime import datetime, timedelta
 
 from database import db_init, MISSLOOPY_DB_URI
 from mlutils import *
@@ -7,8 +7,8 @@ from utils import *
 
 session = db_init(MISSLOOPY_DB_URI)
 
-now = datetime.datetime.utcnow()
-since = now - datetime.timedelta(days=30)
+now = datetime.utcnow()
+since = now - timedelta(days=30)
 
 count = 0
 entries = (
@@ -32,7 +32,7 @@ for entry in entries:
 if count:
     td = now - since
     seconds = td.days * 24 * 60 * 60 + td.seconds
-    td = datetime.timedelta(seconds=seconds / count)
+    td = timedelta(seconds=seconds / count)
     print(
         "%d new members since %s, 1 every %s, %d per day"
         % (count, str(since), TimeDiff(td), count * 24 * 60 * 60 / seconds)

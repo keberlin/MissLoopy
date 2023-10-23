@@ -1,6 +1,6 @@
+from datetime import database
 import os
 
-import database
 from database import db_init, MISSLOOPY_DB_URI
 from gazetteer import *
 from localization import *
@@ -18,7 +18,7 @@ session = db_init(MISSLOOPY_DB_URI)
 
 since = session.query(AdminModel.last_dump_member_search).one()
 
-now = datetime.datetime.utcnow()
+now = datetime.utcnow()
 
 country = "United States"
 tz = "America/New_York"

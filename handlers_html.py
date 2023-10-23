@@ -1,6 +1,7 @@
 from datetime import date, datetime
 import json
 import logging
+from uuid import UUID
 
 from sqlalchemy.orm import aliased
 from sqlalchemy.sql.expression import and_, func
@@ -84,7 +85,7 @@ def handle_verify(entry, values):
     uuid = values["uuid"]
     email = values["email"].lower()
 
-    entry = db.session.query(UUIDModel.profile_id).filter(UUIDModel.uuid == uuid).one_or_none()
+    entry = db.session.query(UUIDModel.profile_id).filter(UUIDModel.uuid == UUID(uuid)).one_or_none()
     if not entry:
         return {"error": "This verification link has expired"}
 
@@ -97,7 +98,7 @@ def handle_verify(entry, values):
         return {"error": "Profile not found"}
 
     now = datetime.now()
-    db.session.query(ProfileModel).filter(ProfileModel.id == id).update(
+    db.session.query(ProfileModel).filter(ProfileModel.id == profile_id).update(
         {"created2": now, "verified": True}, synchronize_session=False
     )
     db.session.commit()
@@ -283,38 +284,31 @@ def handle_results(entry, values):
     height_max = entry.height_max
     weight_choice = entry.weight_choice
 
-    ParseAge(values, "age_min")
-    ParseAge(values, "age_max")
-    ParseRange(values, "age_min", "age_max")
-    ParseHeight(values, "height_min")
-    ParseHeight(values, "height_max")
-    ParseRange(values, "height_min", "height_max")
-
-    distance = None
+    # Override this person's preferences with those from the url
     if values.get("distance"):
         distance = int(values["distance"])
-        search_location = location
         if values.get("location"):
-            tuple = GazLocation(values["location"])
+            location = values["location"]
+            tuple = GazLocation(location)
             if tuple:
-                search_location = values["location"]
                 x = tuple[0]
                 y = tuple[1]
+
     if values.get("age_min"):
-        age_min = int(values["age_min"])
+        age_min = ParseAge(values["age_min"])
     if values.get("age_max"):
-        age_max = int(values["age_max"])
+        age_max = ParseAge(values["age_max"])
+    age_min, age_max = ParseRange(age_min, age_max)
     if values.get("ethnicity_choice"):
         ethnicity_choice = eval(values["ethnicity_choice"])
     if values.get("height_min"):
-        height_min = int(values["height_min"])
+        height_min = ParseAge(values["height_min"])
     if values.get("height_max"):
-        height_max = int(values["height_max"])
+        height_max = ParseAge(values["height_max"])
+    height_min, height_max = ParseRange(height_min, height_max)
     if values.get("weight_choice"):
         weight_choice = eval(values["weight_choice"])
-    order = None
-    if values.get("order"):
-        order = values["order"]
+    order = values.get("order")
 
     entries = search.search2(
         distance,
@@ -361,7 +355,7 @@ def handle_results(entry, values):
     dict["action"] = "member"
     dict["type"] = "short"
     dict["around"] = (
-        Distance(distance, unit_distance) + " around " + GazPlacename(search_location, location)
+        Distance(distance, unit_distance) + " around " + GazPlacename(location, entry.location)
         if distance
         else "Worldwide"
     )
@@ -814,7 +808,7 @@ def handle_resetpassword(entry, values):
     uuid = values["uuid"]
     email = values["email"]
 
-    entry = db.session.query(UUIDModel.profile_id).filter(UUIDModel.uuid == uuid).one_or_none()
+    entry = db.session.query(UUIDModel.profile_id).filter(UUIDModel.uuid == UUID(uuid)).one_or_none()
     if not entry:
         return {"error": "This change password link has expired"}
 
