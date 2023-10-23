@@ -1,5 +1,5 @@
 import base64
-import datetime
+from datetime import datetime, timedelta
 import io
 import logging
 import os
@@ -275,7 +275,7 @@ def handle_mlregister(entry, values, files):
     if entry:
         return {"error": "Email Address already in use."}
 
-    now = datetime.datetime.utcnow()
+    now = datetime.utcnow()
 
     attrs = {}
     attrs["created2"] = now
@@ -304,7 +304,7 @@ def handle_mlregister(entry, values, files):
     profile_id = item.id
 
     # Create a uuid to use in the verification email
-    uuid = UUIDModel(profile_id=profile_id, created=now)
+    uuid = UUIDModel(profile_id=profile_id, expiry=now + timedelta(minutes=15))
     db.session.add(uuid)
     db.session.commit()
     assert uuid.uuid
@@ -341,12 +341,12 @@ def handle_mlforgotpassword(entry, values, files):
     if not entry:
         return {"error": "Email Address not found."}
 
-    now = datetime.datetime.utcnow()
+    now = datetime.utcnow()
 
     profile_id = entry.id
 
     # Create a uuid to use in the verification email
-    uuid = UUIDModel(profile_id=profile_id, created=now)
+    uuid = UUIDModel(profile_id=profile_id, expiry=now + timedelta(minutes=15))
     db.session.add(uuid)
     db.session.commit()
     assert uuid.uuid
@@ -490,7 +490,7 @@ def handle_mlsendemail(entry, values, files):
 
     notifications = entry_to.notifications
 
-    now = datetime.datetime.utcnow()
+    now = datetime.utcnow()
 
     item = EmailModel(id_from=id, id_to=id_to, message=message, sent=now)
     db.session.add(item)
@@ -544,7 +544,7 @@ def handle_mlsendphoto(entry, values, files):
 
     notifications = entry_to.notifications
 
-    now = datetime.datetime.utcnow()
+    now = datetime.utcnow()
 
     item = EmailModel(id_from=id, id_to=id_to, image=image, sent=now)
     db.session.add(item)
@@ -632,7 +632,7 @@ def handle_mluploadphoto(entry, values, files):
     layer.paste(mark, (im.size[0] - mark.size[0], im.size[1] - mark.size[1]))
     im = Image.composite(layer, im, layer)
 
-    now = datetime.datetime.utcnow()
+    now = datetime.utcnow()
 
     item = PhotoModel(profile_id=id, created=now)
     db.session.add(item)
@@ -689,7 +689,7 @@ def handle_mlwink(entry, values, files):
 
     message = "Wink!"
 
-    now = datetime.datetime.utcnow()
+    now = datetime.utcnow()
 
     item = EmailModel(id_from=id, id_to=id_to, message=message, sent=now)
     db.session.add(item)

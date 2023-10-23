@@ -7,9 +7,8 @@ session = db_init(MISSLOOPY_DB_URI)
 
 now = datetime.utcnow()
 
-# Delete any uuids after 15 minutes
-td = now - timedelta(minutes=15)
-session.query(UUIDModel).filter(UUIDModel.created < td).delete()
+# Delete any expired uuids
+session.query(UUIDModel).filter(UUIDModel.expiry <= now).delete()
 session.commit()
 
 # Delete any unverified profiles after 1 month

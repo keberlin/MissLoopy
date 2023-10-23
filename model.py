@@ -162,7 +162,7 @@ class UUIDModel(db.Model):
 
     uuid = Column("uuid", UUIDType(binary=False), primary_key=True, nullable=False, default=uuid.uuid4)
     profile_id = Column("profile_id", ForeignKey(ProfileModel.id), nullable=False)
-    created = Column("created", DateTime, nullable=False)
+    expiry = Column("expiry", DateTime, nullable=False)
 
 
 #
