@@ -5,7 +5,7 @@ from mlutils import *
 from model import *
 from utils import *
 
-logging.basicConfig(filename="/var/log/missloopy/log", logging.INFO)
+logging.basicConfig(filename="/var/log/missloopy/log", level=logging.INFO)
 
 session = db_init(MISSLOOPY_DB_URI)
 
@@ -20,4 +20,4 @@ emails = set([entry.email.lower() for entry in entries])
 for email in emails.intersection(bounced):
     entry = session.query(ProfileModel.id).filter(func.lower(ProfileModel.email) == email).one()
     id = entry.id
-    DeleteMember(session,id)
+    DeleteMember(session, id)

@@ -2,7 +2,7 @@ from database import db_init, MISSLOOPY_DB_URI
 from emails import *
 from model import *
 
-logging.basicConfig(filename="/var/log/missloopy/log", logging.INFO)
+logging.basicConfig(filename="/var/log/missloopy/log", level=logging.INFO)
 
 session = db_init(MISSLOOPY_DB_URI)
 

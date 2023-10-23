@@ -3,7 +3,7 @@ import fileinput
 from emails import *
 from utils import *
 
-logging.basicConfig(filename="/var/log/missloopy/log", logging.INFO)
+logging.basicConfig(filename="/var/log/missloopy/log", level=logging.INFO)
 
 emails = set()
 for line in fileinput.input():

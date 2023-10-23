@@ -12,7 +12,7 @@ from utils import *
 
 BASE_DIR = os.path.dirname(__file__)
 
-logging.basicConfig(filename="/var/log/missloopy/log", logging.INFO)
+logging.basicConfig(filename="/var/log/missloopy/log", level=logging.INFO)
 
 session = db_init(MISSLOOPY_DB_URI)
 

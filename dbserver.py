@@ -4,7 +4,7 @@ import threading
 
 import dbserverinfo
 
-logging.basicConfig(format="%(asctime)-15s %(message)s", filename="/var/log/dbserver/log", level=logging.DEBUG)
+logging.basicConfig(filename="/var/log/dbserver/log", level=logging.DEBUG)
 
 sema = threading.Semaphore()
 waiting = 0
