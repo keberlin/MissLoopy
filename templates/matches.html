@@ -44,7 +44,7 @@
       $scope.per_page = {{per_page}};
       $scope.page = {{page}};
       $scope.entries = {{ (entries or [])|tojson|safe }};
-      $scope.num_pages = Math.floor(({{total}}+({{per_page}}-1))/{{per_page}});
+      $scope.num_pages = {{((total+(per_page-1))/per_page)|int}};
       $scope.pages = new Array($scope.num_pages).fill('').map((val,i)=>i);
       $scope.sels = [];
 
@@ -64,7 +64,6 @@
         if ($scope.page >= $scope.num_pages-1) return;
         setPage($scope.page + 1);
       }
-
     })
     .directive('member', function($parse) {
       return {

@@ -17,7 +17,6 @@ import spam
 from units import *
 from utils import *
 
-MAX_RESULTS = 200
 PER_PAGE = 20
 
 # HTML Pages
@@ -262,6 +261,9 @@ def handle_search(entry, values):
 
 
 def handle_results(entry, values):
+    page = int(values.get("page", 0))
+    per_page = int(values.get("per_page", PER_PAGE))
+
     id = entry.id
     location = entry.location
     country = GazCountry(location)
@@ -333,10 +335,13 @@ def handle_results(entry, values):
         height_min,
         height_max,
         weight_choice,
-    )[:MAX_RESULTS]
+    )
     ids = [entry.id for entry in entries]
 
     SaveResults(id, ids)
+
+    total = len(entries)
+    entries = entries[page * per_page : (page + 1) * per_page]
 
     SetLocale(country)
 
@@ -363,6 +368,9 @@ def handle_results(entry, values):
     dict["criteria"] = ", ".join(criteria)
     dict["entries"] = ListMembers(entries, None, location, x, y, tz, unit_distance)
     dict["nav"] = "search"
+    dict["total"] = total
+    dict["page"] = page
+    dict["per_page"] = per_page
 
     return dict
 
@@ -469,8 +477,9 @@ def handle_emailthread(entry, values):
 
     dict = {}
     dict["id"] = id_with
-    dict["id_previous"] = PreviousResult(id, id_with)
-    dict["id_next"] = NextResult(id, id_with)
+    prev, next = PreviousNextResult(id, id_with)
+    dict["id_previous"] = prev
+    dict["id_next"] = next
 
     entry = (
         db.session.query(ProfileModel).filter(ProfileModel.id == id_with, ProfileModel.verified.is_(True)).one_or_none()
@@ -523,6 +532,9 @@ def handle_emailthread(entry, values):
 
 
 def handle_inbox(entry, values):
+    page = int(values.get("page", 0))
+    per_page = int(values.get("per_page", PER_PAGE))
+
     id = entry.id
     location = entry.location
     country = GazCountry(location)
@@ -572,6 +584,9 @@ def handle_inbox(entry, values):
 
     SaveResults(id, ids)
 
+    total = len(entries)
+    entries = entries[page * per_page : (page + 1) * per_page]
+
     counts = []
     for id_from in ids:
         count = (
@@ -589,11 +604,17 @@ def handle_inbox(entry, values):
     dict["action"] = "emailthread"
     dict["type"] = "number"
     dict["entries"] = ListMembers(entries, counts, location, x, y, tz, unit_distance)
+    dict["total"] = total
+    dict["page"] = page
+    dict["per_page"] = per_page
 
     return dict
 
 
 def handle_outbox(entry, values):
+    page = int(values.get("page", 0))
+    per_page = int(values.get("per_page", PER_PAGE))
+
     id = entry.id
     location = entry.location
     country = GazCountry(location)
@@ -643,6 +664,9 @@ def handle_outbox(entry, values):
 
     SaveResults(id, ids)
 
+    total = len(entries)
+    entries = entries[page * per_page : (page + 1) * per_page]
+
     counts = []
     for id_to in ids:
         count = (
@@ -660,6 +684,9 @@ def handle_outbox(entry, values):
     dict["action"] = "emailthread"
     dict["type"] = "number"
     dict["entries"] = ListMembers(entries, counts, location, x, y, tz, unit_distance)
+    dict["total"] = total
+    dict["page"] = page
+    dict["per_page"] = per_page
 
     return dict
 
