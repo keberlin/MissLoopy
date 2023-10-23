@@ -586,6 +586,7 @@ def handle_inbox(entry, values):
 
     total = len(entries)
     entries = entries[page * per_page : (page + 1) * per_page]
+    ids = [entry.id_from for entry in entries]
 
     counts = []
     for id_from in ids:
@@ -666,6 +667,7 @@ def handle_outbox(entry, values):
 
     total = len(entries)
     entries = entries[page * per_page : (page + 1) * per_page]
+    ids = [entry.id_to for entry in entries]
 
     counts = []
     for id_to in ids:
@@ -826,6 +828,6 @@ def handle_resetpassword(entry, values):
 def handle_cancelled(entry, values):
     id = entry.id
 
-    DeleteMember(id)
+    DeleteMember(db.session, id)
 
     return {}

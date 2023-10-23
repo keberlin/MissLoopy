@@ -140,7 +140,7 @@ def handle_mldeletephoto(entry, values, files):
         if entry.id != id:
             return {"error": "You are not the owner of photo %d." % (pid)}
 
-    DeletePhotos(pids)
+    DeletePhotos(db.session, pids)
 
     deleted = pids
 

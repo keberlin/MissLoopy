@@ -5,6 +5,8 @@ from emails import *
 from mlutils import *
 from model import *
 
+logging.basicConfig(filename="/var/log/missloopy/log", logging.INFO)
+
 session = db_init(MISSLOOPY_DB_URI)
 
 parser = argparse.ArgumentParser(description="Delete Photos.")
@@ -17,5 +19,5 @@ for pid in args.pid:
     id = entry.id
     entry = session.query(ProfileModel.email).filter(ProfileModel.id == id).one()
     email = entry.email
-    DeletePhoto(pid)
+    DeletePhoto(session,pid)
     EmailPhotoDeleted(email)

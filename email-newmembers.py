@@ -7,6 +7,8 @@ from model import *
 import search
 from utils import *
 
+logging.basicConfig(filename="/var/log/missloopy/log", logging.INFO)
+
 session = db_init(MISSLOOPY_DB_URI)
 
 since = session.query(AdminModel.last_new_member_search).scalar()

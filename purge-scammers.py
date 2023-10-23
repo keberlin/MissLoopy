@@ -7,6 +7,8 @@ from mlutils import *
 from model import *
 from utils import *
 
+logging.basicConfig(filename="/var/log/missloopy/log", logging.INFO)
+
 session = db_init(MISSLOOPY_DB_URI)
 
 entries = session.query(ProfileModel.email).filter(ProfileModel.verified.is_(True)).all()
@@ -22,6 +24,6 @@ with open("listed_email_365.txt", "r") as csvfile:
             ids.append((entry.id, email))
 
 for id, email in ids:
-    DeleteMember(id)
+    DeleteMember(session,id)
     EmailKickedStopForumSpam(email)
     logging.info("Kicked due to banned email address %d %s" % (id, email))

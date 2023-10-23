@@ -413,10 +413,10 @@ def BlockedMutually(id, id_with):
     return count > 0
 
 
-def DeletePhoto(pid):
+def DeletePhoto(session, pid):
     # Remove photo file using pid
-    db.session.query(EmailModel).filter(PhotoModel.pid == pid).delete()
-    db.session.commit()
+    session.query(EmailModel).filter(PhotoModel.pid == pid).delete()
+    session.commit()
     filename = os.path.join(BASE_DIR, PhotoFilename(pid))
     try:
         os.remove(filename)
@@ -424,22 +424,22 @@ def DeletePhoto(pid):
         logging.error("ERROR: os.remove(%s) failed!" % filename)
 
 
-def DeletePhotos(pids):
+def DeletePhotos(session, pids):
     for pid in pids:
-        DeletePhoto(pid)
+        DeletePhoto(session, pid)
 
 
-def DeleteMember(id):
-    db.session.query(ProfileModel).filter(ProfileModel.id == id).delete()
-    entries = db.session.query(PhotoModel.pid).filter(PhotoModel.profile_id == id).all()
+def DeleteMember(session, id):
+    session.query(ProfileModel).filter(ProfileModel.id == id).delete()
+    entries = session.query(PhotoModel.pid).filter(PhotoModel.profile_id == id).all()
     pids = [entry.pid for entry in entries]
-    DeletePhotos(pids)
-    db.session.query(FavoriteModel).filter(or_(FavoriteModel.id == id, FavoriteModel.id_favorite == id)).delete()
-    db.session.query(BlockedModel).filter(or_(BlockedModel.id == id, BlockedModel.id_block == id)).delete()
-    db.session.query(EmailModel).filter(or_(EmailModel.id_from == id, EmailModel.id_to == id)).delete()
-    db.session.query(ResultModel).filter(ResultModel.id == id).delete()
+    DeletePhotos(session, pids)
+    session.query(FavoriteModel).filter(or_(FavoriteModel.id == id, FavoriteModel.id_favorite == id)).delete()
+    session.query(BlockedModel).filter(or_(BlockedModel.id == id, BlockedModel.id_block == id)).delete()
+    session.query(EmailModel).filter(or_(EmailModel.id_from == id, EmailModel.id_to == id)).delete()
+    session.query(ResultModel).filter(ResultModel.id == id).delete()
     # PurgeResults(id)
-    db.session.commit()
+    session.commit()
 
 
 def InboxCount(id):

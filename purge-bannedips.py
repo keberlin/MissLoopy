@@ -6,6 +6,8 @@ from mlutils import *
 from model import *
 from utils import *
 
+logging.basicConfig(filename="/var/log/missloopy/log", logging.INFO)
+
 session = db_init(MISSLOOPY_DB_URI)
 
 entries = session.query(ProfileModel.last_ip).filter(ProfileModel.verified.is_(True)).all()
@@ -21,6 +23,6 @@ with open("bannedips.txt", "r") as file:
                 ids.append((entry.id, entry.email, ip))
 
 for id, email, ip in ids:
-    DeleteMember(id)
+    DeleteMember(session,id)
     EmailKickedStopForumSpam(email)
     logging.info("Kicked due to banned IP address %s %d %s" % (Quote(ip), id, email))

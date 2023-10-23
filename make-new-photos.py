@@ -10,9 +10,11 @@ from tzone import *
 from units import *
 from utils import *
 
-session = db_init(MISSLOOPY_DB_URI)
-
 BASE_DIR = os.path.dirname(__file__)
+
+logging.basicConfig(filename="/var/log/missloopy/log", logging.INFO)
+
+session = db_init(MISSLOOPY_DB_URI)
 
 entries = session.query(PhotoModel.profile_id, PhotoModel.pid).order_by(PhotoModel.created.desc()).limit(200).all()
 photos = [(entry.profile_id, PhotoFilename(entry.pid)) for entry in entries]

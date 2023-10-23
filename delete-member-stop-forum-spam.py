@@ -7,6 +7,8 @@ from mlutils import *
 from model import *
 from utils import *
 
+logging.basicConfig(filename="/var/log/missloopy/log", logging.INFO)
+
 session = db_init(MISSLOOPY_DB_URI)
 
 parser = argparse.ArgumentParser(description="Delete Members.")
@@ -26,6 +28,6 @@ for id in args.id:
         continue
     message = entry.message
     StopForumSpamAdd(name, email, ip, message)
-    DeleteMember(id)
+    DeleteMember(session,id)
     EmailKicked(email)
     logging.info("Kicked %d %s" % (id, email))
