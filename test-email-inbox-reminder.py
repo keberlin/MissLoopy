@@ -1,3 +1,8 @@
+from database import db_init, MISSLOOPY_DB_URI
 from emails import *
 
-EmailInboxReminder("keith.hollis@gmail.com", "Teefy")
+session = db_init(MISSLOOPY_DB_URI)
+
+email = "keith.hollis@gmail.com"
+
+EmailInboxReminder(session, email, "Teefy")

@@ -1,7 +1,7 @@
 import logging
 
 from database import db_init, MISSLOOPY_DB_URI
-from emails import *
+from emails import EmailKickedStopForumSpam
 from mlutils import *
 from model import *
 from utils import *
@@ -24,5 +24,5 @@ with open("bannedips.txt", "r") as file:
 
 for id, email, ip in ids:
     DeleteMember(session, id)
-    EmailKickedStopForumSpam(email)
+    EmailKickedStopForumSpam(session, email)
     logging.info("Kicked due to banned IP address %s %d %s" % (Quote(ip), id, email))

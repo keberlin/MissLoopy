@@ -1,8 +1,10 @@
 from datetime import datetime
+import logging
 
 from database import db_init, MISSLOOPY_DB_URI
-from emails import *
+from emails import EmailNewMembers
 from localization import *
+from mlutils import NOT_NEW_MEMBERS
 from model import *
 import search
 from utils import *
@@ -44,6 +46,7 @@ for entry in entries:
 
     distance = 50
     entries = search.search2(
+        session,
         distance,
         "distance",
         id,
@@ -71,7 +74,7 @@ for entry in entries:
 
 for entry, members in results.items():
     if not entry.notifications & NOT_NEW_MEMBERS:
-        EmailNewMembers(entry, members)
+        EmailNewMembers(session, entry, members)
 
 session.query(AdminModel).update({"last_new_member_search": now}, synchronize_session=False)
 session.commit()

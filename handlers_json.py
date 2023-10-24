@@ -309,7 +309,7 @@ def handle_mlregister(entry, values, files):
     db.session.commit()
     assert uuid.uuid
 
-    EmailVerify(email, uuid.uuid)
+    EmailVerify(db.session, email, uuid.uuid)
 
     return {"code": 1002}
 
@@ -325,7 +325,7 @@ def handle_mlresend(entry, values, files):
     if not entry:
         return {"error": "Account not found."}
 
-    EmailVerify(email, entry.id)
+    EmailVerify(db.session, email, entry.id)
 
     return {"message": "Verify Registration email has been resent..."}
 
@@ -351,7 +351,7 @@ def handle_mlforgotpassword(entry, values, files):
     db.session.commit()
     assert uuid.uuid
 
-    EmailResetPassword(email, uuid)
+    EmailResetPassword(db.session, email, uuid)
 
     return {"message": "Your password reset email has been sent..."}
 
@@ -497,7 +497,7 @@ def handle_mlsendemail(entry, values, files):
     db.session.commit()
 
     if not notifications & NOT_NEW_MESSAGE:
-        EmailNotify(entry_to, entry)
+        EmailNotify(db.session, entry_to, entry)
 
     d = {}
     d["sent"] = True
@@ -551,7 +551,7 @@ def handle_mlsendphoto(entry, values, files):
     db.session.commit()
 
     if not notifications & NOT_NEW_MESSAGE:
-        EmailNotify(entry_to, entry)
+        EmailNotify(db.session, entry_to, entry)
 
     d = {}
     d["sent"] = True
@@ -649,7 +649,7 @@ def handle_mluploadphoto(entry, values, files):
     im = im.convert("RGB")
     im.save(filename, "JPEG")
 
-    EmailNewPhoto(filename, entry.pid, id)
+    EmailNewPhoto(db.session, filename, entry.pid, id)
 
     pids = []
     master = 0
@@ -696,6 +696,6 @@ def handle_mlwink(entry, values, files):
     db.session.commit()
 
     if not notifications & NOT_NEW_MESSAGE:
-        EmailWink(entry_to, entry)
+        EmailWink(db.session, entry_to, entry)
 
     return {"message": "Your Wink! has been sent."}

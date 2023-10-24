@@ -55,7 +55,7 @@ def handle_index(entry, values):
         entry = db.session.query(ProfileModel.name, ProfileModel.location).filter(ProfileModel.id == id).one()
         d = {}
         d["id"] = id
-        d["image"] = PhotoFilename(MasterPhoto(id))
+        d["image"] = PhotoFilename(MasterPhoto(db.session, id))
         filename = os.path.join(BASE_DIR, "static", d["image"])
         d["size"] = ImageDimensions(filename)
         d["name"] = entry.name
@@ -195,6 +195,7 @@ def handle_matches(entry, values):
 
     distance = 300
     entries = search.search2(
+        db.session,
         distance,
         "distance",
         id,
@@ -239,7 +240,7 @@ def handle_matches(entry, values):
     dict["action"] = "member"
     dict["type"] = "short"
     dict["criteria"] = ", ".join(criteria)
-    dict["entries"] = ListMembers(entries, None, location, x, y, tz, unit_distance)
+    dict["entries"] = ListMembers(db.session, entries, None, location, x, y, tz, unit_distance)
     dict["total"] = total
     dict["page"] = page
     dict["per_page"] = per_page
@@ -311,6 +312,7 @@ def handle_results(entry, values):
     order = values.get("order")
 
     entries = search.search2(
+        db.session,
         distance,
         order,
         id,
@@ -360,7 +362,7 @@ def handle_results(entry, values):
         else "Worldwide"
     )
     dict["criteria"] = ", ".join(criteria)
-    dict["entries"] = ListMembers(entries, None, location, x, y, tz, unit_distance)
+    dict["entries"] = ListMembers(db.session, entries, None, location, x, y, tz, unit_distance)
     dict["nav"] = "search"
     dict["total"] = total
     dict["page"] = page
@@ -412,7 +414,7 @@ def handle_member(entry, values):
 
     location = entry.location
 
-    master = MasterPhoto(id_view)
+    master = MasterPhoto(db.session, id_view)
     image = PhotoFilename(master)
     entries = db.session.query(PhotoModel.pid).filter(PhotoModel.profile_id == id_view).all()
     pids = list(filter(lambda x: x != master, [entry2.pid for entry2 in entries]))
@@ -486,13 +488,13 @@ def handle_emailthread(entry, values):
         dict["error"] = "This member has blocked you."
         return dict
 
-    dict["entry"] = ListMember(entry, 0, location, x, y, tz, unit_distance)
+    dict["entry"] = ListMember(db.session, entry, 0, location, x, y, tz, unit_distance)
     dict["name"] = entry.name
     dict["action"] = "member"
 
     spammer = spam.AnalyseSpammer(id_with)
 
-    image = PhotoFilename(MasterPhoto(id_with))
+    image = PhotoFilename(MasterPhoto(db.session, id_with))
     emails = []
     entries = (
         db.session.query(EmailModel)
@@ -598,7 +600,7 @@ def handle_inbox(entry, values):
     dict = {}
     dict["action"] = "emailthread"
     dict["type"] = "number"
-    dict["entries"] = ListMembers(entries, counts, location, x, y, tz, unit_distance)
+    dict["entries"] = ListMembers(db.session, entries, counts, location, x, y, tz, unit_distance)
     dict["total"] = total
     dict["page"] = page
     dict["per_page"] = per_page
@@ -679,7 +681,7 @@ def handle_outbox(entry, values):
     dict = {}
     dict["action"] = "emailthread"
     dict["type"] = "number"
-    dict["entries"] = ListMembers(entries, counts, location, x, y, tz, unit_distance)
+    dict["entries"] = ListMembers(db.session, entries, counts, location, x, y, tz, unit_distance)
     dict["total"] = total
     dict["page"] = page
     dict["per_page"] = per_page
@@ -739,7 +741,7 @@ def handle_favorites(entry, values):
     dict = {}
     dict["action"] = "member"
     dict["type"] = "full"
-    dict["entries"] = ListMembers(entries, None, location, x, y, tz, unit_distance)
+    dict["entries"] = ListMembers(db.session, entries, None, location, x, y, tz, unit_distance)
 
     return dict
 
@@ -780,7 +782,7 @@ def handle_blocked(entry, values):
     dict = {}
     dict["action"] = "member"
     dict["type"] = "full"
-    dict["entries"] = ListMembers(entries, None, location, x, y, tz, unit_distance)
+    dict["entries"] = ListMembers(db.session, entries, None, location, x, y, tz, unit_distance)
 
     return dict
 

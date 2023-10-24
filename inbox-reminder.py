@@ -1,8 +1,9 @@
 from datetime import datetime, timedelta
+import logging
 import os
 
 from database import db_init, MISSLOOPY_DB_URI
-from emails import *
+from emails import EmailInboxReminder
 from mlutils import *
 from model import *
 
@@ -26,4 +27,4 @@ for id in ids:
     entry = session.query(ProfileModel.email, ProfileModel.name).filter(ProfileModel.id == id).one()
     email = entry.email
     name = entry.name
-    EmailInboxReminder(email, name)
+    EmailInboxReminder(session, email, name)

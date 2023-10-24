@@ -6,18 +6,20 @@ from mlutils import *
 
 FROM = TITLE + "<noreply@" + DOMAIN + ">"
 
+ADMIN_EMAIL = "keith.hollis@gmail.com"
 
-def EmailNewPhoto(filename, pid, id):
+
+def EmailNewPhoto(session, filename, pid, id):
     dict = {}
     dict["id"] = id
     # dict['image'] = ImageData(filename)
     dict["filename"] = filename
 
     html = RenderY("email-new-photo.html", dict)
-    Email2(FROM, ["keith.hollis@gmail.com"], "New Photo Uploaded (%d)" % (pid), html, 10)
+    Email2(FROM, [ADMIN_EMAIL], "New Photo Uploaded (%d)" % (pid), html, 10)
 
 
-def EmailVerify(email, uuid):
+def EmailVerify(session, email, uuid):
     dict = {}
     dict["uuid"] = uuid
     dict["email"] = email
@@ -26,7 +28,7 @@ def EmailVerify(email, uuid):
     Email2(FROM, [email], "Verify Registration", html, 1)
 
 
-def EmailResetPassword(email, uuid):
+def EmailResetPassword(session, email, uuid):
     dict = {}
     dict["uuid"] = uuid
     dict["email"] = email
@@ -35,28 +37,28 @@ def EmailResetPassword(email, uuid):
     Email2(FROM, [email], "Password Reset Link", html, 1)
 
 
-def EmailKicked(email):
+def EmailKicked(session, email):
     dict = {}
 
     html = RenderY("email-kicked.html", dict)
     Email2(FROM, [email], "Removal Alert", html)
 
 
-def EmailKickedStopForumSpam(email):
+def EmailKickedStopForumSpam(session, email):
     dict = {}
 
     html = RenderY("email-kicked-stopforumspam.html", dict)
     Email2(FROM, [email], "Removal Alert", html)
 
 
-def EmailPhotoDeleted(email):
+def EmailPhotoDeleted(session, email):
     dict = {}
 
     html = RenderY("email-photo-deleted.html", dict)
     Email2(FROM, [email], "Photo Removal Alert", html)
 
 
-def EmailWink(entry, entry_from):
+def EmailWink(session, entry, entry_from):
     email = entry.email
     location = entry.location
     country = GazCountry(location)
@@ -76,7 +78,7 @@ def EmailWink(entry, entry_from):
 
     member = {}
     member["id"] = entry_from.id
-    member["image"] = PhotoFilename(MasterPhoto(entry_from.id))
+    member["image"] = PhotoFilename(MasterPhoto(session, entry_from.id))
     member["name"] = mask.MaskEverything(entry_from.name)
     member["gender"] = Gender(entry_from.gender)
     member["age"] = Age(entry_from.dob)
@@ -95,7 +97,7 @@ def EmailWink(entry, entry_from):
     Email2(FROM, [email], "New Wink! Received", html)
 
 
-def EmailNotify(entry, entry_from):
+def EmailNotify(session, entry, entry_from):
     email = entry.email
     location = entry.location
     country = GazCountry(location)
@@ -115,7 +117,7 @@ def EmailNotify(entry, entry_from):
 
     member = {}
     member["id"] = entry_from.id
-    member["image"] = PhotoFilename(MasterPhoto(entry_from.id))
+    member["image"] = PhotoFilename(MasterPhoto(session, entry_from.id))
     member["name"] = mask.MaskEverything(entry_from.name)
     member["gender"] = Gender(entry_from.gender)
     member["age"] = Age(entry_from.dob)
@@ -134,7 +136,7 @@ def EmailNotify(entry, entry_from):
     Email2(FROM, [email], "New Message Received", html)
 
 
-def EmailNewMembers(entry, entries):
+def EmailNewMembers(session, entry, entries):
     email = entry.email
     location = entry.location
     country = GazCountry(location)
@@ -149,13 +151,13 @@ def EmailNewMembers(entry, entries):
     dict = {}
     dict["action"] = "member"
     dict["navigation"] = "matches"
-    dict["entries"] = ListMembers(entries, None, location, x, y, tz, unit_distance)
+    dict["entries"] = ListMembers(session, entries, None, location, x, y, tz, unit_distance)
 
     html = RenderY("email-newmembers.html", dict)
     Email2(FROM, [email], "New Members Available", html, 4)
 
 
-def EmailInboxReminder(email, name):
+def EmailInboxReminder(session, email, name):
     dict = {}
     dict["name"] = name
 

@@ -2,9 +2,9 @@ import itertools
 import logging
 import math
 
-import mask
 from database import db
 from gazetteer import *
+import mask
 from mlutils import *
 from model import *
 from tzone import *
@@ -12,7 +12,7 @@ from units import *
 from utils import *
 
 
-def ListMember(entry, active, location, x, y, tz, unit_distance):
+def ListMember(session, entry, active, location, x, y, tz, unit_distance):
     logging.debug(entry)
     adjust = GazLatAdjust(y)
     dx = abs(x - entry.x) * adjust / 1000
@@ -21,7 +21,7 @@ def ListMember(entry, active, location, x, y, tz, unit_distance):
 
     member = {}
     member["id"] = entry.id
-    member["image"] = PhotoFilename(MasterPhoto(entry.id))
+    member["image"] = PhotoFilename(MasterPhoto(session, entry.id))
     member["name"] = mask.MaskEverything(entry.name)
     member["gender"] = Gender(entry.gender)
     member["age"] = Age(entry.dob)
@@ -39,9 +39,9 @@ def ListMember(entry, active, location, x, y, tz, unit_distance):
     return member
 
 
-def ListMembers(entries, counts, location, x, y, tz, unit_distance):
+def ListMembers(session, entries, counts, location, x, y, tz, unit_distance):
     members = []
     for entry, count in itertools.zip_longest(entries, counts if counts else []):
-        member = ListMember(entry, count, location, x, y, tz, unit_distance)
+        member = ListMember(session, entry, count, location, x, y, tz, unit_distance)
         members.append(member)
     return members

@@ -6,7 +6,10 @@ from model import *
 
 session = db_init(MISSLOOPY_DB_URI)
 
-entry1 = session.query(ProfileModel).filter(ProfileModel.email == "keith.hollis@gmail.com").one()
-entry2 = session.query(ProfileModel).filter(ProfileModel.email == "razeberlin@gmail.com").one()
+email1 = "keith.hollis@gmail.com"
+email2 = "razeberlin@gmail.com"
 
-EmailWink(entry1, entry2)
+entry1 = session.query(ProfileModel).filter(ProfileModel.email == email1).one()
+entry2 = session.query(ProfileModel).filter(ProfileModel.email == email2).one()
+
+EmailWink(session, entry1, entry2)

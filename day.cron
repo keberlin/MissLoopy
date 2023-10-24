@@ -1,0 +1,11 @@
+#!/bin/bash
+
+cd /var/www/missloopy
+
+source venv/bin/activate
+
+python email-newmembers.py
+python fetch-bannedips.py
+#python purge-bounced.py
+
+make

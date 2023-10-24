@@ -1,13 +1,15 @@
+# from localization import *
+# from mlutils import *
 from database import db_init, MISSLOOPY_DB_URI
-from emails import *
-from localization import *
-from mlutils import *
-from model import *
+from emails import EmailNewMembers
+from model import ProfileModel
 
 session = db_init(MISSLOOPY_DB_URI)
 
-entry = session.query(ProfileModel).filter(ProfileModel.email == "keith.hollis@gmail.com").one()
+email = "keith.hollis@gmail.com"
 
-members = [15, 18, 25, 27, 35]
+entry = session.query(ProfileModel).filter(ProfileModel.email == email).one()
 
-EmailNewMembers(entry, members)
+members = session.query(ProfileModel).filter(ProfileModel.id.in_([15, 18, 25, 27, 35])).all()
+
+EmailNewMembers(session, entry, members)

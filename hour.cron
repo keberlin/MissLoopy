@@ -1,0 +1,12 @@
+#!/bin/bash
+
+cd /var/www/missloopy
+
+source venv/bin/activate
+
+python purge-bannedips.py
+python purge-scammers.py
+
+#python dump-members.py
+
+make html

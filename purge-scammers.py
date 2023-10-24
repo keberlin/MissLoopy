@@ -1,11 +1,14 @@
 import csv
 import logging
 
+from sqlalchemy.sql import func
+
 from database import db_init, MISSLOOPY_DB_URI
-from emails import *
-from mlutils import *
-from model import *
-from utils import *
+from emails import EmailKickedStopForumSpam
+from mlutils import DeleteMember
+from model import ProfileModel
+
+# from utils import *
 
 logging.basicConfig(filename="/var/log/missloopy/log", level=logging.INFO)
 
@@ -25,5 +28,5 @@ with open("listed_email_365.txt", "r") as csvfile:
 
 for id, email in ids:
     DeleteMember(session, id)
-    EmailKickedStopForumSpam(email)
+    EmailKickedStopForumSpam(session, email)
     logging.info("Kicked due to banned email address %d %s" % (id, email))

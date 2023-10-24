@@ -1,3 +1,8 @@
+from database import db_init, MISSLOOPY_DB_URI
 from emails import *
 
-EmailKicked("keith.hollis@gmail.com")
+session = db_init(MISSLOOPY_DB_URI)
+
+email = "keith.hollis@gmail.com"
+
+EmailKicked(session, email)

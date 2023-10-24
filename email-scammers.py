@@ -1,4 +1,5 @@
 import fileinput
+import logging
 
 from emails import *
 from utils import *
@@ -11,4 +12,4 @@ for line in fileinput.input():
     emails.add(email)
 
 for email in emails:
-    EmailVerify(email, 1)
+    EmailVerify(session, email, 1)

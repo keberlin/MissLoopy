@@ -1,0 +1,9 @@
+#!/bin/bash
+
+cd /var/www/missloopy
+
+source venv/bin/activate
+
+python inbox-reminder.py
+
+sh ./fetch-ipaddresses.sh

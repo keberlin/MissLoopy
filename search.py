@@ -6,7 +6,6 @@ import re
 
 from sqlalchemy.sql.expression import or_
 
-from database import db
 from gazetteer import *
 from mlutils import *
 from model import *
@@ -15,6 +14,7 @@ from utils import *
 
 
 def search2(
+    session,
     distance,
     order,
     id,
@@ -36,7 +36,7 @@ def search2(
 ):
     adjust = GazLatAdjust(y)
 
-    query = db.session.query(ProfileModel).filter(ProfileModel.verified.is_(True))
+    query = session.query(ProfileModel).filter(ProfileModel.verified.is_(True))
 
     # Remove any mutually blocked profiles
     blocked_by_me = aliased(BlockedModel)

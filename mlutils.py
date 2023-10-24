@@ -324,12 +324,10 @@ def PhotoFilename(pid):
     return os.path.join(PHOTOS_DIR, name + ".jpg")
 
 
-def MasterPhoto(id):
-    entry = (
-        db.session.query(PhotoModel.pid).filter(PhotoModel.profile_id == id, PhotoModel.master.is_(True)).one_or_none()
-    )
+def MasterPhoto(session, id):
+    entry = session.query(PhotoModel.pid).filter(PhotoModel.profile_id == id, PhotoModel.master.is_(True)).one_or_none()
     if not entry:
-        entry = db.session.query(PhotoModel.pid).filter(PhotoModel.profile_id == id).first()
+        entry = session.query(PhotoModel.pid).filter(PhotoModel.profile_id == id).first()
         if not entry:
             return 0
     return entry.pid

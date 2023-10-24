@@ -64,7 +64,7 @@ for entry in entries:
     dict["age_range"] = Range(entry[COL_AGE_MIN], entry[COL_AGE_MAX])
     dict["looking_for"] = mask.MaskEverything(entry[COL_LOOKING_FOR])
 
-    master = MasterPhoto(id)
+    master = MasterPhoto(session, id)
     dict["image"] = ImageData(os.path.join(BASE_DIR, "static", PhotoFilename(master)))
     pids = []
     photos = session.query(PhotoModel.pid).filter(PhotoModel.profile_id == id).all()

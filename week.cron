@@ -1,0 +1,13 @@
+#!/bin/bash
+
+cd /var/www/missloopy
+
+source venv/bin/activate
+
+python stats.py                                                                                                                                                                
+
+python dump-allmembers.py
+
+python generate-sitemap-urls.py
+
+python2.7 /root/sitemap_gen/sitemap_gen.py --config=sitemap_config.xml

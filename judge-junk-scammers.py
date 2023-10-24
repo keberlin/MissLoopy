@@ -73,7 +73,7 @@ for id in ids:
     if kick == "y":
         StopForumSpamAdd(name, email, ip, message)
         DeleteMember(session, id)
-        EmailKicked(email)
+        EmailKicked(session, email)
         logging.info("Kicked due to spamming %s %d %s" % (Quote(ip), id, email))
     elif kick == "q":
         break

@@ -19,4 +19,4 @@ session.add(item)
 session.commit()
 assert item.uuid
 
-EmailVerify("keith.hollis@gmail.com", item.uuid)
+EmailVerify(session, email, item.uuid)

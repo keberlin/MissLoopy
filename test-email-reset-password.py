@@ -21,4 +21,4 @@ session.add(item)
 session.commit()
 assert item.uuid
 
-EmailResetPassword(email, item.uuid)
+EmailResetPassword(session, email, item.uuid)

@@ -1,0 +1,7 @@
+#!/bin/bash
+
+cd /var/www/missloopy
+
+source venv/bin/activate
+
+python purge.py
