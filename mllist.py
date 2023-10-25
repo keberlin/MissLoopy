@@ -1,9 +1,9 @@
 import itertools
-import logging
 import math
 
 from database import db
 from gazetteer import *
+from logger import logger
 import mask
 from mlutils import *
 from model import *
@@ -13,7 +13,6 @@ from utils import *
 
 
 def ListMember(session, entry, active, location, x, y, tz, unit_distance):
-    logging.debug(entry)
     adjust = GazLatAdjust(y)
     dx = abs(x - entry.x) * adjust / 1000
     dy = abs(y - entry.y) / 1000

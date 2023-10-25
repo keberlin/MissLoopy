@@ -1,7 +1,6 @@
 import base64
 from datetime import datetime
 import io
-import logging
 import os
 
 from PIL import Image
@@ -10,6 +9,7 @@ from sqlalchemy.sql.expression import and_, func, or_
 
 from database import db
 from iputils import *
+from logger import logger
 from model import *
 from utils import *
 
@@ -419,7 +419,7 @@ def DeletePhoto(session, pid):
     try:
         os.remove(filename)
     except:
-        logging.error("ERROR: os.remove(%s) failed!" % filename)
+        logger.error("ERROR: os.remove(%s) failed!" % filename)
 
 
 def DeletePhotos(session, pids):

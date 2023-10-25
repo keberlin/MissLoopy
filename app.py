@@ -1,5 +1,4 @@
 from functools import wraps
-import logging
 import sys
 
 from flask import (
@@ -15,6 +14,7 @@ from flask import (
 from database import db, MISSLOOPY_DB_URI
 from handlers_html import *
 from handlers_json import *
+from logger import logger
 from mlhtml import *
 from model import *
 
@@ -22,17 +22,7 @@ BASE_DIR = os.path.dirname(__file__)
 
 TEST = re.search("root", BASE_DIR) is not None
 
-logging.basicConfig(filename="/var/log/missloopy/log", level=logging.DEBUG if TEST else logging.INFO)
-
 PER_PAGE = 20
-
-
-def debug(str):
-    logging.debug(request.remote_addr + " " + str)
-
-
-def info(str):
-    logging.info(request.remote_addr + " " + str)
 
 
 class MyFlask(Flask):
@@ -51,7 +41,8 @@ def bitcompare(a, b):
 def login_required(f):
     @wraps(f)
     def decorated_function(*args, **kwargs):
-        g.entry = Authenticate(request.cookies, request.remote_addr)
+        app.logger.debug(request.environ)
+        g.entry = Authenticate(request.cookies, request.environ.get("HTTP_X_FORWARDED_FOR", request.remote_addr))
         return f(*args, **kwargs)
 
     return decorated_function
@@ -60,6 +51,7 @@ def login_required(f):
 # Flask application
 def create_app():
     app = MyFlask(__name__)
+
     # Databases
     app.config["SQLALCHEMY_ECHO"] = TEST
     app.config["SQLALCHEMY_DATABASE_URI"] = MISSLOOPY_DB_URI

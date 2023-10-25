@@ -1,7 +1,7 @@
 from datetime import datetime
-import logging
 import re
 
+from logger import logger
 from mlutils import *
 
 # Need these to counter the fact that IE does not support HTML5 properly!
@@ -27,7 +27,7 @@ def ParseAge(ss):
     v = ParseNumber(ss)
     if v is not None:
         return min(max(int(v), AGE_MIN), AGE_MAX)
-    logging.error(f"ERROR: Did not understand age: {ss}")
+    logger.error(f"ERROR: Did not understand age: {ss}")
 
 
 def ParseHeight(ss):
@@ -56,7 +56,7 @@ def ParseHeight(ss):
         if v1 is not None and v2 is not None:
             v = (v1 * 12 + v2) * 2.54
             return min(max(int(v), HEIGHT_MIN), HEIGHT_MAX)
-    logging.error(f"ERROR: Did not understand height: {ss}")
+    logger.error(f"ERROR: Did not understand height: {ss}")
 
 
 def ParseRange(min, max):

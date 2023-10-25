@@ -1,10 +1,8 @@
 import fileinput
-import logging
 
 from emails import *
+from logger import logger
 from utils import *
-
-logging.basicConfig(filename="/var/log/missloopy/log", level=logging.INFO)
 
 emails = set()
 for line in fileinput.input():

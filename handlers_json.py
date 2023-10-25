@@ -1,7 +1,6 @@
 import base64
 from datetime import datetime, timedelta
 import io
-import logging
 import os
 import re
 import time
@@ -14,6 +13,7 @@ from database import db
 from emails import *
 from gazetteer import *
 from localization import *
+from logger import logger
 import mask
 from mlemail import *
 from mlparse import *
@@ -642,7 +642,7 @@ def handle_mluploadphoto(entry, values, files):
     # Create a photo file using pid and copy data into it
     filename = os.path.join(BASE_DIR, "static", PhotoFilename(entry.pid))
     if os.path.isfile(filename):
-        logging.error("ERROR: Photo file %s already exists!" % (filename))
+        logger.error("ERROR: Photo file %s already exists!" % (filename))
         os.remove(filename)
 
     # Save the modified photo

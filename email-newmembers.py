@@ -1,15 +1,13 @@
 from datetime import datetime
-import logging
 
 from database import db_init, MISSLOOPY_DB_URI
 from emails import EmailNewMembers
 from localization import *
+from logger import logger
 from mlutils import NOT_NEW_MEMBERS
 from model import *
 import search
 from utils import *
-
-logging.basicConfig(filename="/var/log/missloopy/log", level=logging.INFO)
 
 session = db_init(MISSLOOPY_DB_URI)
 

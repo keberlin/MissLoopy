@@ -6,6 +6,7 @@ import sys
 from database import db_init, MISSLOOPY_DB_URI
 from gazetteer import *
 from localization import *
+from logger import logger
 import mask
 from mlhtml import *
 from mlutils import *
@@ -13,8 +14,6 @@ from model import *
 from tzone import *
 from units import *
 from utils import *
-
-logging.basicConfig(filename="/var/log/missloopy/log", level=logging.INFO)
 
 session = db_init(MISSLOOPY_DB_URI)
 

@@ -1,6 +1,5 @@
 from datetime import date, datetime
 import json
-import logging
 from uuid import UUID
 
 from sqlalchemy.orm import aliased
@@ -9,6 +8,7 @@ from sqlalchemy.sql.expression import and_, func
 from database import db
 from gazetteer import *
 from localization import *
+from logger import logger
 import mask
 from mllist import *
 from mlparse import *

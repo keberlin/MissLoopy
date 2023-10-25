@@ -1,5 +1,4 @@
 from datetime import date, datetime
-import logging
 import math
 import os
 import re
@@ -7,6 +6,7 @@ import re
 from sqlalchemy.sql.expression import or_
 
 from gazetteer import *
+from logger import logger
 from mlutils import *
 from model import *
 from tzone import *

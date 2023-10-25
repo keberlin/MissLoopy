@@ -1,12 +1,13 @@
 #!/usr/bin/python
 
 import email
-import logging
 import os
 import re
 import smtplib
 import sys
 import tempfile
+
+from logger import logger
 
 BASE_DIR = os.path.dirname(__file__)
 
@@ -17,11 +18,11 @@ def parse(msg):
         if not recipient:
             recipient = msg.get("Final-Recipient")
         if not recipient:
-            logging.error("ERROR: noreply: Could not find recipient in %s" % (msg))
+            logger.error("ERROR: noreply: Could not find recipient in %s" % (msg))
             return None
         m = re.search(r"rfc822; *(.*)", recipient)
         if not m:
-            logging.error("ERROR: noreply: Did not understand recipient %s" % (recipient))
+            logger.error("ERROR: noreply: Did not understand recipient %s" % (recipient))
             return None
         return m.group(1)
     if msg.is_multipart():

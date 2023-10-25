@@ -69,18 +69,18 @@ def TimeDiff(td):
     def Format(unit, n):
         return "%d %s%s ago" % (n, unit, "s" if n > 1 else "")
 
-    if td.days / 365:
-        return Format("year", td.days / 365)
-    if td.days / 30:
-        return Format("month", td.days / 30)
-    if td.days / 7:
-        return Format("week", td.days / 7)
+    if td.days // 365:
+        return Format("year", td.days // 365)
+    if td.days // 30:
+        return Format("month", td.days // 30)
+    if td.days // 7:
+        return Format("week", td.days // 7)
     if td.days:
         return Format("day", td.days)
-    if td.seconds / 60 / 60:
-        return Format("hour", td.seconds / 60 / 60)
-    if td.seconds / 60:
-        return Format("minute", td.seconds / 60)
+    if td.seconds // 60 // 60:
+        return Format("hour", td.seconds // 60 // 60)
+    if td.seconds // 60:
+        return Format("minute", td.seconds // 60)
     if td.seconds:
         return Format("second", td.seconds)
     return "just now"
@@ -109,9 +109,9 @@ def FetchCookies():
 
 
 def FetchRemoteAddr():
-    if not "REMOTE_ADDR" in os.environ:
-        return None
-    return os.environ["REMOTE_ADDR"]
+    from flask import request
+
+    return request.environ.get("HTTP_X_REAL_IP", request.remote_addr)
 
 
 def FetchFormFields(sep="|"):

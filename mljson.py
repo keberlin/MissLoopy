@@ -1,7 +1,7 @@
 import json
-import logging
 import sys
 
+from logger import logger
 from utils import *
 
 
@@ -12,7 +12,7 @@ def ReturnJson(dict):
 
 
 def Return(dict):
-    logging.debug(repr(dict))
+    logger.debug(repr(dict))
     ReturnJson(dict)
 
 
