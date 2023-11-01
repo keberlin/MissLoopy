@@ -11,7 +11,7 @@
             <li id="photos"    {% if nav == "photos"    %}class="active"{% endif %}><a href="/photos"                         >Photos</a></li>
             <li id="seeking"   {% if nav == "seeking"   %}class="active"{% endif %}><a href="/seeking"                        >Seeking</a></li>
             <li id="matches"   {% if nav == "matches"   %}class="active"{% endif %}><a href="/matches?per_page={{per_page}}"  >Matches</a></li>
-            <li id="search"    {% if nav == "search"    %}class="active"{% endif %}><a href="/search?per_page={{per_page}}"   >Search</a></li>
+            <li id="search"    {% if nav == "search"    %}class="active"{% endif %}><a href="/results?per_page={{per_page}}"  >Search</a></li>
             <li id="inbox"     {% if nav == "inbox"     %}class="active"{% endif %}><a href="/inbox?per_page={{per_page}}"    >Inbox{% if inbox %}&nbsp;<span class="badge pull-right">{{ inbox }}</span>{% endif %}</a></li>
             <li id="outbox"    {% if nav == "outbox"    %}class="active"{% endif %}><a href="/outbox?per_page={{per_page}}"   >Outbox{% if outbox %}&nbsp;<span class="badge pull-right">{{ outbox }}</span>{% endif %}</a></li>
             <li id="favorites" {% if nav == "favorites" %}class="active"{% endif %}><a href="/favorites?per_page={{per_page}}">Favorites</a></li>

@@ -27,7 +27,7 @@ from utils import *
 BASE_DIR = os.path.dirname(__file__)
 
 MAX_MATCHES = 8
-MAX_LENGTH = 3000
+MAX_LENGTH = 1000
 
 # JSON returns
 
@@ -52,15 +52,17 @@ def handle_mlaccount(entry, values, files):
     attributes = ["password"]
 
     attrs = {}
-    for attr in values:
+    for attr, value in values.items():
         if not attr in attributes:
             continue
-        if not values.get(attr):
+        if not value:
             continue
         if attr.endswith("_choice"):
-            attrs[attr] = eval(values[attr])
+            attrs[attr] = eval(value)
+        elif isinstance(value, str):
+            attrs[attr] = value[:MAX_LENGTH]
         else:
-            attrs[attr] = values[attr][:MAX_LENGTH]
+            attrs[attr] = value
     for attr in attributes:
         if attr in attrs:
             continue
@@ -189,11 +191,11 @@ def handle_mlmasterphoto(entry, values, files):
 
 def handle_mlprofile(entry, values, files):
     if "name" not in values:
-        return {"error": "No Display Name specified."}
+        return {"error": "name not specified."}
 
-    id = entry.id
+    profile_id = entry.id
 
-    ParseHeight(values, "height")
+    values["height"] = ParseHeight(values.get("height"))
 
     attributes = [
         "name",
@@ -220,21 +222,23 @@ def handle_mlprofile(entry, values, files):
         attrs["x"] = tuple[0]
         attrs["y"] = tuple[1]
         attrs["tz"] = tuple[2]
-    for attr in values:
+    for attr, value in values.items():
         if not attr in attributes:
             continue
-        if not values.get(attr):
+        if not value:
             continue
         if attr.endswith("_choice"):
-            attrs[attr] = eval(values[attr])
+            attrs[attr] = eval(value)
+        elif isinstance(value, str):
+            attrs[attr] = value[:MAX_LENGTH]
         else:
-            attrs[attr] = values[attr][:MAX_LENGTH]
+            attrs[attr] = value
     for attr in attributes:
         if attr in attrs:
             continue
         attrs[attr] = None
 
-    db.session.query(ProfileModel).filter(ProfileModel.id == id).update(attrs)
+    db.session.query(ProfileModel).filter(ProfileModel.id == profile_id).update(attrs)
     db.session.commit()
 
     return {"message": "Profile updated successfully."}
@@ -292,8 +296,10 @@ def handle_mlregister(entry, values, files):
     for attr, value in values.items():
         if attr.endswith("_choice"):
             attrs[attr] = eval(value)
-        else:
+        elif isinstance(value, str):
             attrs[attr] = value[:MAX_LENGTH]
+        else:
+            attrs[attr] = value
 
     # Create a new profile entry
     item = ProfileModel(**attrs)
@@ -396,31 +402,31 @@ def handle_mlchangepassword(entry, values, files):
     return {"message": "Your password has been changed..."}
 
 
-def handle_mlsearch(entry, values, files):
-    if "query" not in values:
-        return {"error": "No query specified."}
+def handle_mllocation(entry, values, files):
+    if "location" not in values:
+        return {"error": "No location specified."}
 
-    query = values["query"].strip()
+    location = values["location"].strip()
 
-    tuple = GazLocation(query)
+    tuple = GazLocation(location)
     if not tuple:
-        return {"matches": GazClosestMatches(query, MAX_MATCHES)}
+        return {"matches": GazClosestMatches(location, MAX_MATCHES)}
 
     return {"code": 1003}
 
 
 def handle_mlseeking(entry, values, files):
-    id = entry.id
+    profile_id = entry.id
 
     if "gender_choice" not in values:
-        return {"error": "No Seeking Gender specified."}
+        return {"error": "gender_choice not specified."}
 
-    ParseAge(values, "age_min")
-    ParseAge(values, "age_max")
-    ParseRange(values, "age_min", "age_max")
-    ParseHeight(values, "height_min")
-    ParseHeight(values, "height_max")
-    ParseRange(values, "height_min", "height_max")
+    values["age_min"] = ParseAge(values.get("age_min"))
+    values["age_max"] = ParseAge(values.get("age_max"))
+    values["age_min"], values["age_max"] = ParseRange(values["age_min"], values["age_max"])
+    values["height_min"] = ParseHeight(values.get("height_min"))
+    values["height_max"] = ParseHeight(values.get("height_max"))
+    values["height_min"], values["height_max"] = ParseRange(values["height_min"], values["height_max"])
 
     attributes = [
         "gender_choice",
@@ -434,24 +440,96 @@ def handle_mlseeking(entry, values, files):
     ]
 
     attrs = {}
-    for attr in values:
+    for attr, value in values.items():
         if not attr in attributes:
             continue
-        if not values.get(attr):
+        if not value:
             continue
         if attr.endswith("_choice"):
-            attrs[attr] = eval(values[attr])
+            attrs[attr] = eval(value)
+        elif isinstance(value, str):
+            attrs[attr] = value[:MAX_LENGTH]
         else:
-            attrs[attr] = values[attr][:MAX_LENGTH]
+            attrs[attr] = value
     for attr in attributes:
         if attr in attrs:
             continue
         attrs[attr] = None
 
-    db.session.query(ProfileModel).filter(ProfileModel.id == id).update(attrs)
+    db.session.query(ProfileModel).filter(ProfileModel.id == profile_id).update(attrs)
     db.session.commit()
 
     return {"message": "Seeking updated successfully."}
+
+
+def handle_mlfilter(entry, values, files):
+    profile_id = entry.id
+
+    name = values.get("name")
+    gender_choice = values.get("gender_choice")
+
+    values["age_min"] = ParseAge(values.get("age_min"))
+    values["age_max"] = ParseAge(values.get("age_max"))
+    values["age_min"], values["age_max"] = ParseRange(values["age_min"], values["age_max"])
+    values["height_min"] = ParseHeight(values.get("height_min"))
+    values["height_max"] = ParseHeight(values.get("height_max"))
+    values["height_min"], values["height_max"] = ParseRange(values["height_min"], values["height_max"])
+
+    attributes = [
+        "name",
+        "sort",
+        "location",
+        "distance",
+        "gender_choice",
+        "age_min",
+        "age_max",
+        "ethnicity_choice",
+        "height_min",
+        "height_max",
+        "weight_choice",
+    ]
+
+    attrs = {}
+    if "location" in values:
+        tuple = GazLocation(values["location"])
+        if not tuple:
+            return {"matches": GazClosestMatches(values["location"], MAX_MATCHES)}
+        attrs["location"] = values["location"]
+        attrs["x"] = tuple[0]
+        attrs["y"] = tuple[1]
+        attrs["tz"] = tuple[2]
+    for attr, value in values.items():
+        if not attr in attributes:
+            continue
+        if not value:
+            continue
+        if attr.endswith("_choice"):
+            attrs[attr] = eval(value)
+        elif isinstance(value, str):
+            attrs[attr] = value[:MAX_LENGTH]
+        else:
+            attrs[attr] = value
+    for attr in attributes:
+        if attr in attrs:
+            continue
+        attrs[attr] = None
+
+    query = db.session.query(FilterModel).filter(FilterModel.profile_id == profile_id)
+    if name:
+        query = query.filter(FilterModel.name == name)
+    else:
+        query = query.filter(FilterModel.name.is_(None))
+    filter = query.one_or_none()
+
+    if filter:
+        for attr, value in attrs.items():
+            setattr(filter, attr, value)
+    else:
+        item = FilterModel(profile_id=profile_id, **attrs)
+        db.session.add(item)
+    db.session.commit()
+
+    return {"message": "Filter updated successfully."}
 
 
 def handle_mlsendemail(entry, values, files):

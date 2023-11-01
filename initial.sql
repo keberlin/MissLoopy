@@ -31,7 +31,7 @@ CREATE TABLE profiles (
     drinking INTEGER,
     country VARCHAR,
     region VARCHAR,
-    placename VARCHAR,
+    location VARCHAR,
     x INTEGER,
     y INTEGER,
     tz VARCHAR,
@@ -46,7 +46,6 @@ CREATE TABLE profiles (
     height_max INTEGER,
     weight_choice INTEGER,
     ethnicity_choice INTEGER,
-    location VARCHAR,
     last_ip VARCHAR,
     created2 TIMESTAMP,
     last_ip_country VARCHAR,
@@ -126,6 +125,26 @@ CREATE TABLE spam (str VARCHAR, cost FLOAT);
 CREATE TABLE uuids (uuid UUID PRIMARY KEY NOT NULL, profile_id INTEGER NOT NULL, expiry TIMESTAMP NOT NULL);
 
 COMMIT;
+
+# Filters
+
+CREATE TABLE filters (
+    profile_id BIGINT NOT NULL,
+    name VARCHAR,
+    sort VARCHAR,
+    distance INTEGER,
+    location VARCHAR,
+    x INTEGER,
+    y INTEGER,
+    tz VARCHAR,
+    gender_choice INTEGER,
+    age_min INTEGER,
+    age_max INTEGER,
+    ethnicity_choice INTEGER,
+    height_min INTEGER,
+    height_max INTEGER,
+    weight_choice INTEGER
+);
 
 
 # Database: gazatteer

@@ -13,9 +13,9 @@ from sqlalchemy import (
     String,
     text,
 )
-from sqlalchemy_utils import UUIDType
 
 from database import db
+from sqlalchemy_utils import UUIDType
 
 #
 # Database: missloopy
@@ -45,7 +45,7 @@ class ProfileModel(db.Model):
     drinking = Column("drinking", Integer)
     country = Column("country", String)
     region = Column("region", String)
-    placename = Column("placename", String)
+    location = Column("location", String)
     x = Column("x", Integer)
     y = Column("y", Integer)
     tz = Column("tz", String)
@@ -56,11 +56,10 @@ class ProfileModel(db.Model):
     gender_choice = Column("gender_choice", Integer)
     age_min = Column("age_min", Integer)
     age_max = Column("age_max", Integer)
+    ethnicity_choice = Column("ethnicity_choice", Integer)
     height_min = Column("height_min", Integer)
     height_max = Column("height_max", Integer)
     weight_choice = Column("weight_choice", Integer)
-    ethnicity_choice = Column("ethnicity_choice", Integer)
-    location = Column("location", String)
     last_ip = Column("last_ip", String)
     last_ip_country = Column("last_ip_country", String)
     notifications = Column("notifications", Integer, default=0)
@@ -163,6 +162,26 @@ class UUIDModel(db.Model):
     uuid = Column("uuid", UUIDType(binary=False), primary_key=True, nullable=False, default=uuid.uuid4)
     profile_id = Column("profile_id", ForeignKey(ProfileModel.id), nullable=False)
     expiry = Column("expiry", DateTime, nullable=False)
+
+
+class FilterModel(db.Model):
+    __tablename__ = "filters"
+
+    profile_id = Column("profile_id", ForeignKey(ProfileModel.id), primary_key=True, nullable=False)
+    name = Column("name", String)
+    sort = Column("sort", String)
+    distance = Column("distance", Integer)
+    location = Column("location", String)
+    x = Column("x", Integer)
+    y = Column("y", Integer)
+    tz = Column("tz", String)
+    gender_choice = Column("gender_choice", Integer)
+    age_min = Column("age_min", Integer)
+    age_max = Column("age_max", Integer)
+    ethnicity_choice = Column("ethnicity_choice", Integer)
+    height_min = Column("height_min", Integer)
+    height_max = Column("height_max", Integer)
+    weight_choice = Column("weight_choice", Integer)
 
 
 #

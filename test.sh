@@ -10,4 +10,4 @@ source venv/bin/activate
 
 export FLASK_DEBUG=1
 
-flask run -p 6001
+gunicorn --workers 1 --threads 1 --timeout 0 --bind :6001 wsgi:app

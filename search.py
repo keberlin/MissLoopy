@@ -16,7 +16,7 @@ from utils import *
 def search2(
     session,
     distance,
-    order,
+    sort,
     id,
     x,
     y,
@@ -98,12 +98,12 @@ def search2(
         query = query.filter(or_(ProfileModel.height_max.is_(None), ProfileModel.height_max >= height))
     if weight:
         query = query.filter(or_(ProfileModel.weight_choice.is_(None), ProfileModel.weight_choice.op("&")(weight) != 0))
-    if order:
-        if order == "age":
+    if sort:
+        if sort == "age":
             query = query.order_by(ProfileModel.dob.desc())
-        elif order == "login":
+        elif sort == "login":
             query = query.order_by(ProfileModel.last_login.desc())
-        elif order == "created":
+        elif sort == "created":
             query = query.order_by(ProfileModel.created2.desc())
         else:
             pass  # Order must be by distance
@@ -118,7 +118,7 @@ def search2(
         if distance and d > distance:
             continue
         list.append((entry, d))
-    if order == "distance":
+    if sort == "distance":
         list.sort(key=lambda a: a[1])  # TODO Move into the query itself
 
     return [x[0] for x in list]

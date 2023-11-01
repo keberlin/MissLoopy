@@ -1,11 +1,12 @@
 argparse
 beautifulsoup4
 coverage
-Flask
+flask
 flask-sqlalchemy
-Jinja2
+gunicorn
+jinja2
 nose
-Pillow
+pillow
 psycopg2
 psycopg2-binary
 pytz

@@ -1,18 +1,18 @@
 {% extends 'base-panel.html' %}
 
-{% set heading = 'Search' %}
+{% set heading = 'Filter {{name}}' %}
 {% set heading2 = 'Confirm your location' %}
 
 {% block canvas %}
   <form class="form-horizontal" id="form" role="form" action="results" method="get" autocomplete="on">
     <div class="form-group">
-      <label class="col-xs-3 control-label" for="order">Sort by</label>
+      <label class="col-xs-3 control-label" for="sort">Sort by</label>
       <div class="col-xs-4">
-      <select class="form-control" id="order" name="order">
-        <option value="distance">Distance</option>
-        <option value="age">Age</option>
-        <option value="login">Last login</option>
-        <option value="created">Newest profile</option>
+      <select class="form-control" id="sort" name="sort">
+        <option value="distance" {% if sort=="distance" %}selected{% endif %}>Distance</option>
+        <option value="age"      {% if sort=="age"      %}selected{% endif %}>Age</option>
+        <option value="login"    {% if sort=="login"    %}selected{% endif %}>Last login</option>
+        <option value="created"  {% if sort=="created"  %}selected{% endif %}>Newest profile</option>
       </select>
       </div>
     </div>
@@ -21,21 +21,21 @@
       <div class="col-xs-4">
         <select class="form-control" id="distance" name="distance">
           {% if metric %}
-            <option value="5"          >5 kms</option>
-            <option value="10"         >10 kms</option>
-            <option value="30" selected>30 kms</option>
-            <option value="75"         >75 kms</option>
-            <option value="150"        >150 kms</option>
-            <option value="300"        >300 kms</option>
-            <option value=""           >Worldwide</option>
+            <option value="5"   {% if distance==5 %}selected{% endif %}>5 kms</option>
+            <option value="10"  {% if distance==10 %}selected{% endif %}>10 kms</option>
+            <option value="30"  {% if distance==30 %}selected{% endif %}>30 kms</option>
+            <option value="75"  {% if distance==75 %}selected{% endif %}>75 kms</option>
+            <option value="150" {% if distance==150 %}selected{% endif %}>150 kms</option>
+            <option value="300" {% if distance==300 %}selected{% endif %}>300 kms</option>
+            <option value=""    {% if distance==0 %}selected{% endif %}>Worldwide</option>
           {% else %}
-            <option value="8"          >5 miles</option>
-            <option value="16"         >10 miles</option>
-            <option value="32" selected>20 miles</option>
-            <option value="80"         >50 miles</option>
-            <option value="161"        >100 miles</option>
-            <option value="322"        >200 miles</option>
-            <option value=""           >Worldwide</option>
+            <option value="8"   {% if distance==8 %}selected{% endif %}>5 miles</option>
+            <option value="16"  {% if distance==16 %}selected{% endif %}>10 miles</option>
+            <option value="32"  {% if distance==32 %}selected{% endif %}>20 miles</option>
+            <option value="80"  {% if distance==80 %}selected{% endif %}>50 miles</option>
+            <option value="161" {% if distance==161 %}selected{% endif %}>100 miles</option>
+            <option value="322" {% if distance==322 %}selected{% endif %}>200 miles</option>
+            <option value=""    {% if distance==0 %}selected{% endif %}>Worldwide</option>
           {% endif %}
         </select>
       </div>
@@ -43,7 +43,7 @@
     <div class="form-group" id="group_location">
       <label class="col-xs-3 control-label" for="location">Location</label>
       <div class="col-xs-9">
-      <input type="text" id="location" class="form-control" name="location" placeholder="{{ location }}" autocomplete="off">
+      <input type="text" id="location" class="form-control" name="location" placeholder="{{default_location}}" autocomplete="off">
       </div>
     </div>
     <div class="form-group" hidden>
@@ -62,34 +62,46 @@
     <div class="form-group">
       <label class="col-xs-3 control-label" for="age_min">Age from</label>
       <div class="col-xs-2">
-        <input type="number" class="form-control" id="age_min" name="age_min" value="{{ age_min|e }}" min="18" max="99" placeholder="18"/>
+        <input type="number" class="form-control" id="age_min" name="age_min" value="{{ age_min|e }}" min="18" max="99" placeholder="{{default_age_min}}"/>
       </div>
       <label class="col-xs-1 control-label" for="age_max">to</label>
       <div class="col-xs-2">
-        <input type="number" class="form-control" id="age_max" name="age_max" value="{{ age_max|e }}" min="18" max="99" placeholder="99"/>
-      </div>
-    </div>
-    <div class="form-group">
-      <label class="col-xs-3 control-label" for="height_min">Height from</label>
-      <div class="col-xs-2">
-        <input type="text" class="form-control" id="height_min" name="height_min" value="{{ height_min|e }}" placeholder="any"/>
-      </div>
-      <label class="col-xs-1 control-label" for="height_max">to</label>
-      <div class="col-xs-2">
-        <input type="text" class="form-control" id="height_max" name="height_max" value="{{ height_max|e }}" placeholder="any"/>
+        <input type="number" class="form-control" id="age_max" name="age_max" value="{{ age_max|e }}" min="18" max="99" placeholder="{{default_age_max}}"/>
       </div>
     </div>
     <div class="form-group">
       <label class="col-xs-3 control-label" for="ethnicity_choice">Ethnicity</label>
       <div class="col-xs-4">
       <select multiple class="form-control" id="ethnicity_choice" name="ethnicity_choice">
-        <option value="1" >White</option>
-        <option value="2" >Black</option>
-        <option value="4" >Latino</option>
-        <option value="64">Indian</option>
-        <option value="8" >Asian</option>
-        <option value="16">Mixed</option>
-        <option value="32">Other</option>
+        <option value="1"  {% if ethnicity_choice |bitcompare( 1) %}selected{% endif %}>White</option>
+        <option value="2"  {% if ethnicity_choice |bitcompare( 2) %}selected{% endif %}>Black</option>
+        <option value="4"  {% if ethnicity_choice |bitcompare( 4) %}selected{% endif %}>Latino</option>
+        <option value="64" {% if ethnicity_choice |bitcompare(64) %}selected{% endif %}>Indian</option>
+        <option value="8"  {% if ethnicity_choice |bitcompare( 8) %}selected{% endif %}>Asian</option>
+        <option value="16" {% if ethnicity_choice |bitcompare(16) %}selected{% endif %}>Mixed</option>
+        <option value="32" {% if ethnicity_choice |bitcompare(32) %}selected{% endif %}>Other</option>
+      </select>
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="col-xs-3 control-label" for="height_min">Height from</label>
+      <div class="col-xs-2">
+        <input type="text" class="form-control" id="height_min" name="height_min" value="{{ height_min|e }}" placeholder="{{default_height_min}}"/>
+      </div>
+      <label class="col-xs-1 control-label" for="height_max">to</label>
+      <div class="col-xs-2">
+        <input type="text" class="form-control" id="height_max" name="height_max" value="{{ height_max|e }}" placeholder="{{default_height_max}}"/>
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="col-xs-3 control-label" for="weight_choice">Body type</label>
+      <div class="col-xs-4">
+      <select multiple class="form-control" id="weight_choice" name="weight_choice">
+        <option value="1"  {% if weight_choice |bitcompare( 1) %}selected{% endif %}>Slim</option>
+        <option value="2"  {% if weight_choice |bitcompare( 2) %}selected{% endif %}>Athletic</option>
+        <option value="4"  {% if weight_choice |bitcompare( 4) %}selected{% endif %}>Average</option>
+        <option value="8"  {% if weight_choice |bitcompare( 8) %}selected{% endif %}>A few extra pounds</option>
+        <option value="16" {% if weight_choice |bitcompare(16) %}selected{% endif %}>Large</option>
       </select>
       </div>
     </div>
@@ -167,9 +179,9 @@
       if (location.length) {
         success = false;
         $.ajax({
-          url: '/mllocation',
+          url: '/mlfilter',
           type: 'POST',
-          data: ({'location':location}),
+          data: $(this).serialize(),
           error: function(jqXHR, textStatus, errorThrown) {
             jsShowError("There's a problem with your Internet connection.");
           },
@@ -185,7 +197,7 @@
               $("#panel1").hide();
               $("#panel2").show();
             }
-            else if (data.code == 1003)
+            else
               success = true;
           },
           async: false

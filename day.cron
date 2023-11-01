@@ -4,8 +4,10 @@ cd /var/www/missloopy
 
 source venv/bin/activate
 
+sh fetch-bannedips.sh
+sh fetch-scammers.sh
+
 python email-newmembers.py
-python fetch-bannedips.py
 #python purge-bounced.py
 
 make

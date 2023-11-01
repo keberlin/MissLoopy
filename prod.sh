@@ -8,4 +8,4 @@ cd $SCRIPTPATH
 
 source venv/bin/activate
 
-flask run -p 6000
+gunicorn --workers 1 --threads 5 --timeout 0 --bind :6000 wsgi:app

@@ -109,8 +109,8 @@ def handle_verify(entry, values):
 def handle_profile(entry, values):
     id = entry.id
     location = entry.location
-    country = GazCountry(location)
 
+    country = GazCountry(location)
     unit_distance, unit_height = Units(country)
 
     dict = {}
@@ -153,8 +153,8 @@ def handle_photos(entry, values):
 def handle_seeking(entry, values):
     id = entry.id
     location = entry.location
-    country = GazCountry(location)
 
+    country = GazCountry(location)
     unit_distance, unit_height = Units(country)
 
     dict = {}
@@ -176,7 +176,6 @@ def handle_matches(entry, values):
 
     id = entry.id
     location = entry.location
-    country = GazCountry(location)
     x = entry.x
     y = entry.y
     tz = entry.tz
@@ -222,9 +221,10 @@ def handle_matches(entry, values):
     total = len(entries)
     entries = entries[page * per_page : (page + 1) * per_page]
 
-    SetLocale(country)
-
+    country = GazCountry(location)
     unit_distance, unit_height = Units(country)
+
+    SetLocale(country)
 
     criteria = []
     if gender_choice:
@@ -251,71 +251,175 @@ def handle_matches(entry, values):
 def handle_search(entry, values):
     id = entry.id
     location = entry.location
-    country = GazCountry(location)
 
+    country = GazCountry(location)
     unit_distance, unit_height = Units(country)
 
     dict = {}
-    dict["location"] = location
     dict["metric"] = unit_distance == UNIT_KM
+    dict["location"] = location
+
+    return dict
+
+
+def handle_filter(entry, values):
+    name = values.get("name")
+
+    profile_id = entry.id
+
+    default_sort = "distance"
+    default_distance = 50  # km
+    default_location = entry.location
+    default_gender_choice = entry.gender_choice
+    default_age_min = entry.age_min
+    default_age_max = entry.age_max
+    default_ethnicity_choice = entry.ethnicity_choice
+    default_height_min = entry.height_min
+    default_height_max = entry.height_max
+    default_weight_choice = entry.weight_choice
+
+    sort = (
+        distance
+    ) = location = gender_choice = age_min = age_max = ethnicity_choice = height_min = height_max = weight_choice = None
+
+    query = db.session.query(FilterModel).filter(FilterModel.profile_id == profile_id)
+    if name:
+        query = query.filter(FilterModel.name == name)
+    else:
+        query = query.filter(FilterModel.name.is_(None))
+    filter = query.one_or_none()
+    if filter:
+        sort = filter.sort
+        distance = filter.distance
+        location = filter.location
+        gender_choice = filter.gender_choice
+        age_min = filter.age_min
+        age_max = filter.age_max
+        ethnicity_choice = filter.ethnicity_choice
+        height_min = filter.height_min
+        height_max = filter.height_max
+        weight_choice = filter.weight_choice
+
+    if sort is None:
+        sort = default_sort
+    if distance is None:
+        distance = default_distance
+    if location is None:
+        location = default_location
+    if gender_choice is None:
+        gender_choice = default_gender_choice
+    if age_min is None:
+        age_min = default_age_min
+    if age_max is None:
+        age_max = default_age_max
+    if ethnicity_choice is None:
+        ethnicity_choice = default_ethnicity_choice
+    if height_min is None:
+        height_min = default_height_min
+    if height_max is None:
+        height_max = default_height_max
+    if weight_choice is None:
+        weight_choice = default_weight_choice
+
+    country = GazCountry(location)
+    unit_distance, unit_height = Units(country)
+
+    dict = {}
+    dict["metric"] = unit_distance == UNIT_KM
+    dict["sort"] = sort
+    dict["distance"] = distance
+    dict["location"] = location
+    dict["gender_choice"] = gender_choice
+    dict["age_min"] = age_min
+    dict["age_max"] = age_max
+    dict["ethnicity_choice"] = ethnicity_choice
+    dict["height_min"] = height_min
+    dict["height_max"] = height_max
+    dict["weight_choice"] = weight_choice
 
     return dict
 
 
 def handle_results(entry, values):
+    name = values.get("name")
     page = int(values.get("page", 0))
     per_page = int(values.get("per_page", PER_PAGE))
 
-    id = entry.id
-    location = entry.location
-    country = GazCountry(location)
-    x = entry.x
-    y = entry.y
-    tz = entry.tz
+    profile_id = entry.id
     gender = entry.gender
     age = Age(entry.dob)
     ethnicity = entry.ethnicity
     height = entry.height
     weight = entry.weight
-    gender_choice = entry.gender_choice
-    age_min = entry.age_min
-    age_max = entry.age_max
-    ethnicity_choice = entry.ethnicity_choice
-    height_min = entry.height_min
-    height_max = entry.height_max
-    weight_choice = entry.weight_choice
 
-    # Override this person's preferences with those from the url
-    if values.get("distance"):
-        distance = int(values["distance"])
-        if values.get("location"):
-            location = values["location"]
-            tuple = GazLocation(location)
-            if tuple:
-                x = tuple[0]
-                y = tuple[1]
+    default_sort = "distance"
+    default_distance = 50  # km
+    default_location = entry.location
+    default_x = entry.x
+    default_y = entry.y
+    default_tz = entry.tz
+    default_gender_choice = entry.gender_choice
+    default_age_min = entry.age_min
+    default_age_max = entry.age_max
+    default_ethnicity_choice = entry.ethnicity_choice
+    default_height_min = entry.height_min
+    default_height_max = entry.height_max
+    default_weight_choice = entry.weight_choice
 
-    if values.get("age_min"):
-        age_min = ParseAge(values["age_min"])
-    if values.get("age_max"):
-        age_max = ParseAge(values["age_max"])
-    age_min, age_max = ParseRange(age_min, age_max)
-    if values.get("ethnicity_choice"):
-        ethnicity_choice = eval(values["ethnicity_choice"])
-    if values.get("height_min"):
-        height_min = ParseAge(values["height_min"])
-    if values.get("height_max"):
-        height_max = ParseAge(values["height_max"])
-    height_min, height_max = ParseRange(height_min, height_max)
-    if values.get("weight_choice"):
-        weight_choice = eval(values["weight_choice"])
-    order = values.get("order")
+    sort = (
+        distance
+    ) = location = gender_choice = age_min = age_max = ethnicity_choice = height_min = height_max = weight_choice = None
+
+    query = db.session.query(FilterModel).filter(FilterModel.profile_id == profile_id)
+    if name:
+        query = query.filter(FilterModel.name == name)
+    else:
+        query = query.filter(FilterModel.name.is_(None))
+    filter = query.one_or_none()
+    if filter:
+        sort = filter.sort
+        distance = filter.distance
+        location = filter.location
+        x = filter.x
+        y = filter.y
+        tz = filter.tz
+        gender_choice = filter.gender_choice
+        age_min = filter.age_min
+        age_max = filter.age_max
+        ethnicity_choice = filter.ethnicity_choice
+        height_min = filter.height_min
+        height_max = filter.height_max
+        weight_choice = filter.weight_choice
+
+    if sort is None:
+        sort = default_sort
+    if distance is None:
+        distance = default_distance
+    if location is None:
+        location = default_location
+        x = default_x
+        y = default_y
+        tz = default_tz
+    if gender_choice is None:
+        gender_choice = default_gender_choice
+    if age_min is None:
+        age_min = default_age_min
+    if age_max is None:
+        age_max = default_age_max
+    if ethnicity_choice is None:
+        ethnicity_choice = default_ethnicity_choice
+    if height_min is None:
+        height_min = default_height_min
+    if height_max is None:
+        height_max = default_height_max
+    if weight_choice is None:
+        weight_choice = default_weight_choice
 
     entries = search.search2(
         db.session,
         distance,
-        order,
-        id,
+        sort,
+        profile_id,
         x,
         y,
         tz,
@@ -334,14 +438,15 @@ def handle_results(entry, values):
     )
     ids = [entry.id for entry in entries]
 
-    SaveResults(id, ids)
+    SaveResults(profile_id, ids)
 
     total = len(entries)
     entries = entries[page * per_page : (page + 1) * per_page]
 
-    SetLocale(country)
-
+    country = GazCountry(location)
     unit_distance, unit_height = Units(country)
+
+    SetLocale(country)
 
     criteria = []
     if gender_choice:
@@ -408,9 +513,9 @@ def handle_member(entry, values):
         dict["error"] = "This member has blocked you."
         return dict
 
-    SetLocale(country)
-
     unit_distance, unit_height = Units(country)
+
+    SetLocale(country)
 
     location = entry.location
 
@@ -462,14 +567,14 @@ def handle_emailthread(entry, values):
 
     id = entry.id
     location = entry.location
-    country = GazCountry(location)
     x = entry.x
     y = entry.y
     tz = entry.tz
 
-    SetLocale(country)
-
+    country = GazCountry(location)
     unit_distance, unit_height = Units(country)
+
+    SetLocale(country)
 
     dict = {}
     dict["id"] = id_with
@@ -533,7 +638,6 @@ def handle_inbox(entry, values):
 
     id = entry.id
     location = entry.location
-    country = GazCountry(location)
     x = entry.x
     y = entry.y
     tz = entry.tz
@@ -593,9 +697,10 @@ def handle_inbox(entry, values):
         )
         counts.append(count)
 
-    SetLocale(country)
-
+    country = GazCountry(location)
     unit_distance, unit_height = Units(country)
+
+    SetLocale(country)
 
     dict = {}
     dict["action"] = "emailthread"
@@ -614,7 +719,6 @@ def handle_outbox(entry, values):
 
     id = entry.id
     location = entry.location
-    country = GazCountry(location)
     x = entry.x
     y = entry.y
     tz = entry.tz
@@ -674,9 +778,10 @@ def handle_outbox(entry, values):
         )
         counts.append(count)
 
-    SetLocale(country)
-
+    country = GazCountry(location)
     unit_distance, unit_height = Units(country)
+
+    SetLocale(country)
 
     dict = {}
     dict["action"] = "emailthread"
@@ -692,7 +797,6 @@ def handle_outbox(entry, values):
 def handle_favorites(entry, values):
     id = entry.id
     location = entry.location
-    country = GazCountry(location)
     x = entry.x
     y = entry.y
     tz = entry.tz
@@ -734,9 +838,10 @@ def handle_favorites(entry, values):
 
     SaveResults(id, ids)
 
-    SetLocale(country)
-
+    country = GazCountry(location)
     unit_distance, unit_height = Units(country)
+
+    SetLocale(country)
 
     dict = {}
     dict["action"] = "member"
@@ -749,7 +854,6 @@ def handle_favorites(entry, values):
 def handle_blocked(entry, values):
     id = entry.id
     location = entry.location
-    country = GazCountry(location)
     x = entry.x
     y = entry.y
     tz = entry.tz
@@ -775,9 +879,10 @@ def handle_blocked(entry, values):
 
     SaveResults(id, ids)
 
-    SetLocale(country)
-
+    country = GazCountry(location)
     unit_distance, unit_height = Units(country)
+
+    SetLocale(country)
 
     dict = {}
     dict["action"] = "member"

@@ -41,7 +41,6 @@ def bitcompare(a, b):
 def login_required(f):
     @wraps(f)
     def decorated_function(*args, **kwargs):
-        app.logger.debug(request.environ)
         g.entry = Authenticate(request.cookies, request.environ.get("HTTP_X_FORWARDED_FOR", request.remote_addr))
         return f(*args, **kwargs)
 
@@ -131,6 +130,7 @@ def maybe_logged_in_html():
 @app.route("/dashboard")
 @app.route("/emailthread")
 @app.route("/favorites")
+@app.route("/filter")
 @app.route("/inbox")
 @app.route("/matches")
 @app.route("/outbox")
@@ -211,6 +211,7 @@ def logged_out_json():
 @app.route("/mlchangepassword", methods=["POST"])
 @app.route("/mldeletefavorite", methods=["POST"])
 @app.route("/mldeletephoto", methods=["POST"])
+@app.route("/mlfilter", methods=["POST"])
 @app.route("/mlmasterphoto", methods=["POST"])
 @app.route("/mlpassword", methods=["POST"])
 @app.route("/mlprofile", methods=["POST"])
