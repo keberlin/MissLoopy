@@ -213,12 +213,13 @@ def handle_mlprofile(entry, values, files):
     ]
 
     attrs = {}
-    if "location" in values:
-        tuple = GazLocation(values["location"])
+    location = values["location"]
+    if location:
+        tuple = GazLocation(location)
         if not tuple:
-            return {"matches": GazClosestMatches(values["location"], MAX_MATCHES)}
-        attrs["location"] = values["location"]
-        attrs["country"] = GazCountry(values["location"])
+            return {"matches": GazClosestMatches(location, MAX_MATCHES)}
+        attrs["location"] = location
+        attrs["country"] = GazCountry(location)
         attrs["x"] = tuple[0]
         attrs["y"] = tuple[1]
         attrs["tz"] = tuple[2]
@@ -284,12 +285,13 @@ def handle_mlregister(entry, values, files):
     attrs = {}
     attrs["created2"] = now
     attrs["dob"] = dt.strftime("%Y-%m-%d")
-    if "location" in values:
-        tuple = GazLocation(values["location"])
+    location = values["location"]
+    if location:
+        tuple = GazLocation(location)
         if not tuple:
-            return {"matches": GazClosestMatches(values["location"], MAX_MATCHES)}
-        attrs["location"] = values["location"]
-        attrs["country"] = GazCountry(values["location"])
+            return {"matches": GazClosestMatches(location, MAX_MATCHES)}
+        attrs["location"] = location
+        attrs["country"] = GazCountry(location)
         attrs["x"] = tuple[0]
         attrs["y"] = tuple[1]
         attrs["tz"] = tuple[2]
@@ -490,11 +492,12 @@ def handle_mlfilter(entry, values, files):
     ]
 
     attrs = {}
-    if "location" in values:
-        tuple = GazLocation(values["location"])
+    location = values["location"]
+    if location:
+        tuple = GazLocation(location)
         if not tuple:
-            return {"matches": GazClosestMatches(values["location"], MAX_MATCHES)}
-        attrs["location"] = values["location"]
+            return {"matches": GazClosestMatches(location, MAX_MATCHES)}
+        attrs["location"] = location
         attrs["x"] = tuple[0]
         attrs["y"] = tuple[1]
         attrs["tz"] = tuple[2]
@@ -529,7 +532,7 @@ def handle_mlfilter(entry, values, files):
         db.session.add(item)
     db.session.commit()
 
-    return {"message": "Filter updated successfully."}
+    return {"code": 1000}
 
 
 def handle_mlsendemail(entry, values, files):
@@ -720,7 +723,7 @@ def handle_mluploadphoto(entry, values, files):
     # Create a photo file using pid and copy data into it
     filename = os.path.join(BASE_DIR, "static", PhotoFilename(entry.pid))
     if os.path.isfile(filename):
-        logger.error("ERROR: Photo file %s already exists!" % (filename))
+        logger.error("Photo file %s already exists!" % (filename))
         os.remove(filename)
 
     # Save the modified photo

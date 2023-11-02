@@ -5,7 +5,7 @@ import re
 
 from sqlalchemy.sql import func
 
-from database import GAZETTEER_DB_URI, db_init
+from database import db_init, GAZETTEER_DB_URI
 from model import LocationModel
 from utils import *
 
@@ -23,7 +23,7 @@ def GazLocation(location):
     entry = (
         session.query(LocationModel.x, LocationModel.y, LocationModel.tz)
         .filter(LocationModel.location == location)
-        .one()
+        .one_or_none()
     )
     return entry
 

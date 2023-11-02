@@ -2,10 +2,12 @@
 
 {% import 'macros.html' as macros %}
 
-{% set heading = 'Matches around ' + around %}
+{% set heading = 'Matches ' + around %}
 
 {% block canvas %}
   <div class="col-xs-12 alert alert-info" align="left">
+    <button class="btn btn-info" id="filter">Filter</button>
+    &nbsp;
     {{total}} results, {{criteria|e}}
   </div>
   <div ng-cloak ng-if="num_pages==0" class="col-xs-12 alert alert-warning" align="left">
@@ -71,6 +73,11 @@
         },
         templateUrl: '/static/ng-templates/member.html'
       }
+    });
+    // Handle Filter button
+    $('#filter').click( function(e) {
+      window.location = "/filter";
+      return false;
     });
   </script>
 {% endblock %}

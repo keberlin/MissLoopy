@@ -210,6 +210,9 @@
         url: '/mlprofile',
         type: 'POST',
         data: $(this).serialize(),
+        error: function(jqXHR, textStatus, errorThrown) {
+          jsShowError("There's a problem with your Internet connection.");
+        },
         success: function(data) {
           if (data.matches) {
             var html = '';
@@ -224,9 +227,6 @@
             jsShowError(data.error);
           else if (data.message)
             jsShowMessage(data.message);
-        },
-        error: function(jqXHR, textStatus, errorThrown) {
-          jsShowError("There's a problem with your Internet connection.");
         },
         async: false
       });

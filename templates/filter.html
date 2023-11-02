@@ -4,7 +4,7 @@
 {% set heading2 = 'Confirm your location' %}
 
 {% block canvas %}
-  <form class="form-horizontal" id="form" role="form" action="results" method="get" autocomplete="on">
+  <form class="form-horizontal" id="form" role="form" autocomplete="on">
     <div class="form-group">
       <label class="col-xs-3 control-label" for="sort">Sort by</label>
       <div class="col-xs-4">
@@ -43,7 +43,7 @@
     <div class="form-group" id="group_location">
       <label class="col-xs-3 control-label" for="location">Location</label>
       <div class="col-xs-9">
-      <input type="text" id="location" class="form-control" name="location" placeholder="{{default_location}}" autocomplete="off">
+      <input type="text" id="location" class="form-control" name="location" value="{{location}}" placeholder="{{default_location}}" autocomplete="off">
       </div>
     </div>
     <div class="form-group" hidden>
@@ -174,36 +174,37 @@
   //  });
     // Handle Search button
     $("#form").submit( function(e) {
-      var success = true;
-      var location = $('#location').val();
-      if (location.length) {
-        success = false;
-        $.ajax({
-          url: '/mlfilter',
-          type: 'POST',
-          data: $(this).serialize(),
-          error: function(jqXHR, textStatus, errorThrown) {
-            jsShowError("There's a problem with your Internet connection.");
-          },
-          success: function(data) {
-            if (data.error)
-              jsShowError(data.error);
-            else if (data.matches) {
-              var html = '';
-              for (var i in data.matches)
-                html = html.concat('<li><a>'+data.matches[i]+'</a></li>');
-              $("#locations li").remove();
-              $("#locations").append(html);
-              $("#panel1").hide();
-              $("#panel2").show();
-            }
-            else
-              success = true;
-          },
-          async: false
-        });
+      var success = false;
+      $.ajax({
+        url: '/mlfilter',
+        type: 'POST',
+        data: $(this).serialize(),
+        error: function(jqXHR, textStatus, errorThrown) {
+          jsShowError("There's a problem with your Internet connection.");
+        },
+        success: function(data) {
+          if (data.error)
+            jsShowError(data.error);
+          else if (data.matches) {
+            var html = '';
+            for (var i in data.matches)
+              html = html.concat('<li><a>'+data.matches[i]+'</a></li>');
+            $("#locations li").remove();
+            $("#locations").append(html);
+            $("#panel1").hide();
+            $("#panel2").show();
+          }
+          else if (data.message)
+            jsShowMessage(data.message);
+          else
+            success = true;
+        },
+        async: false
+      });
+      if (success) {
+        window.location = '/results?per_page={{per_page}}';
       }
-      return success;
+      return false;
     });
     $("#cancel").click( function(e) {
       e.preventDefault();
