@@ -2,8 +2,9 @@ from database import db_init, MISSLOOPY_DB_URI
 from emails import EmailKickedStopForumSpam
 from logger import logger
 from mlutils import *
-from model import *
-from utils import *
+from model import ProfileModel
+
+# from utils import *
 
 session = db_init(MISSLOOPY_DB_URI)
 
@@ -22,4 +23,4 @@ with open("bannedips.txt", "r") as file:
 for id, email, ip in ids:
     DeleteMember(session, id)
     EmailKickedStopForumSpam(session, email)
-    logger.info("Kicked due to banned IP address %s %d %s" % (Quote(ip), id, email))
+    logger.info(f"Kicked due to banned IP address {ip} {id} {email}")

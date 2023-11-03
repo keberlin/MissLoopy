@@ -1,10 +1,7 @@
 import bisect
-import cgi
 from datetime import date, datetime, time
 import os
 import re
-
-import requests
 
 
 def Days(month, day):
@@ -51,12 +48,6 @@ def Age(date):
     if Days(today.month, today.day) < Days(date.month, date.day):
         years -= 1
     return years
-
-
-def Text(text, alt=""):
-    if text:
-        return text
-    return alt
 
 
 def Quote(str):
@@ -112,32 +103,3 @@ def FetchRemoteAddr():
     from flask import request
 
     return request.environ.get("HTTP_X_REAL_IP", request.remote_addr)
-
-
-def FetchFormFields(sep="|"):
-    form = cgi.FieldStorage()
-    return dict([(field, sep.join(form.getlist(field))) for field in list(form.keys())])
-
-
-def StopForumSpamAdd(username, email, ip, evidence):
-    data = {"username": username, "email": email, "ip_addr": ip, "api_key": "dejcsw8ph7iu5n", "evidence": evidence}
-    requests.post("http://www.stopforumspam.com/add", data)
-
-
-def tosql(v):
-    if v is None:
-        return "null"
-    elif isinstance(v, bool):
-        return 1 if v else 0
-    elif isinstance(v, str):
-        return "'" + v + "'"
-    elif isinstance(v, datetime):
-        return "'" + str(v) + "'::date"
-    elif isinstance(v, date):
-        return "'" + str(v) + "'::date"
-    elif isinstance(v, time):
-        return "'" + str(v) + "'::time"
-    elif callable(v):
-        return v.__name__
-    else:
-        return str(v)

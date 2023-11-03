@@ -12,6 +12,10 @@ argparse==1.4.0
     # via -r requirements.in
 beautifulsoup4==4.12.2
     # via -r requirements.in
+certifi==2023.7.22
+    # via requests
+charset-normalizer==2.0.12
+    # via requests
 click==8.0.4
     # via flask
 coverage==6.2
@@ -28,6 +32,8 @@ greenlet==2.0.2
     # via sqlalchemy
 gunicorn==21.2.0
     # via -r requirements.in
+idna==3.4
+    # via requests
 importlib-metadata==4.8.3
     # via
     #   click
@@ -56,6 +62,8 @@ pyparsing==3.1.1
     # via packaging
 pytz==2023.3.post1
     # via -r requirements.in
+requests==2.27.1
+    # via -r requirements.in
 soupsieve==2.3.2.post1
     # via beautifulsoup4
 sqlalchemy==1.4.50
@@ -66,6 +74,8 @@ sqlalchemy-utils==0.41.1
     # via -r requirements.in
 typing-extensions==4.1.1
     # via importlib-metadata
+urllib3==1.26.18
+    # via requests
 werkzeug==2.0.3
     # via flask
 zipp==3.6.0

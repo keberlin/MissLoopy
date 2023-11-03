@@ -248,20 +248,6 @@ def handle_matches(entry, values):
     return dict
 
 
-def handle_search(entry, values):
-    id = entry.id
-    location = entry.location
-
-    country = GazCountry(location)
-    unit_distance, unit_height = Units(country)
-
-    dict = {}
-    dict["metric"] = unit_distance == UNIT_KM
-    dict["location"] = location
-
-    return dict
-
-
 def handle_filter(entry, values):
     name = values.get("name")
 
@@ -333,8 +319,8 @@ def handle_filter(entry, values):
     dict["age_min"] = age_min
     dict["age_max"] = age_max
     dict["ethnicity_choice"] = ethnicity_choice
-    dict["height_min"] = height_min
-    dict["height_max"] = height_max
+    dict["height_min"] = Height(height_min, unit_height, 2)
+    dict["height_max"] = Height(height_max, unit_height, 2)
     dict["weight_choice"] = weight_choice
 
     return dict

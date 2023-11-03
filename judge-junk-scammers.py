@@ -1,14 +1,12 @@
 import csv
 
-import requests
-
 from database import db_init, MISSLOOPY_DB_URI
 from emails import *
 from gazetteer import *
 from logger import logger
 from mlutils import *
-from model import *
-from utils import *
+from model import EmailModel, ProfileModel
+from urlutils import StopForumSpamAdd
 
 session = db_init(MISSLOOPY_DB_URI)
 
@@ -72,6 +70,6 @@ for id in ids:
         StopForumSpamAdd(name, email, ip, message)
         DeleteMember(session, id)
         EmailKicked(session, email)
-        logger.info("Kicked due to spamming %s %d %s" % (Quote(ip), id, email))
+        logger.info(f"Kicked due to spamming {ip} {id} {email}")
     elif kick == "q":
         break

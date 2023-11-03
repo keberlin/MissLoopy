@@ -138,7 +138,6 @@ def maybe_logged_in_html():
 @app.route("/photos")
 @app.route("/results")
 @app.route("/seeking")
-@app.route("/search")
 @login_required
 def logged_in_html():
     if not g.entry:
@@ -215,7 +214,6 @@ def logged_out_json():
 @app.route("/mlmasterphoto", methods=["POST"])
 @app.route("/mlpassword", methods=["POST"])
 @app.route("/mlprofile", methods=["POST"])
-@app.route("/mlsearch", methods=["POST"])
 @app.route("/mlseeking", methods=["POST"])
 @app.route("/mlsendemail", methods=["POST"])
 @app.route("/mlsendphoto", methods=["POST"])

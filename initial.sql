@@ -16,7 +16,7 @@ CREATE TABLE profiles (
     id BIGSERIAL PRIMARY KEY,
     email VARCHAR UNIQUE,
     password VARCHAR,
-    created DATE,
+    created2 TIMEDATE,
     verified BOOLEAN DEFAULT false,
     last_login TIMESTAMP,
     name VARCHAR,
@@ -47,7 +47,6 @@ CREATE TABLE profiles (
     weight_choice INTEGER,
     ethnicity_choice INTEGER,
     last_ip VARCHAR,
-    created2 TIMESTAMP,
     last_ip_country VARCHAR,
     notifications INTEGER DEFAULT 0
 );

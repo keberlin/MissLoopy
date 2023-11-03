@@ -10,4 +10,5 @@ pillow
 psycopg2
 psycopg2-binary
 pytz
+requests
 sqlalchemy-utils
