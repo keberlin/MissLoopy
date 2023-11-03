@@ -16,7 +16,7 @@ CREATE TABLE profiles (
     id BIGSERIAL PRIMARY KEY,
     email VARCHAR UNIQUE,
     password VARCHAR,
-    created2 TIMEDATE,
+    created TIMEDATE,
     verified BOOLEAN DEFAULT false,
     last_login TIMESTAMP,
     name VARCHAR,

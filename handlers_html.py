@@ -99,7 +99,7 @@ def handle_verify(entry, values):
 
     now = datetime.now()
     db.session.query(ProfileModel).filter(ProfileModel.id == profile_id).update(
-        {"created2": now, "verified": True}, synchronize_session=False
+        {"created": now, "verified": True}, synchronize_session=False
     )
     db.session.commit()
 
@@ -533,7 +533,7 @@ def handle_member(entry, values):
     dict["description"] = mask.MaskEverything(entry.description)
     dict["last_login"] = Since(entry.last_login)
     dict["login_country"] = entry.last_ip_country
-    dict["created"] = Datetime(entry.created2, tz).strftime("%x")
+    dict["created"] = Datetime(entry.created, tz).strftime("%x")
     # Seeking
     dict["gender_choice"] = GenderList(entry.gender_choice)
     dict["age_range"] = Range(entry.age_min, entry.age_max)
@@ -640,7 +640,7 @@ def handle_inbox(entry, values):
         ProfileModel.summary,
         ProfileModel.last_login,
         ProfileModel.last_ip_country,
-        ProfileModel.created2,
+        ProfileModel.created,
         EmailModel.id_from,
     ).join(EmailModel, EmailModel.id_from == ProfileModel.id)
 
@@ -721,7 +721,7 @@ def handle_outbox(entry, values):
         ProfileModel.summary,
         ProfileModel.last_login,
         ProfileModel.last_ip_country,
-        ProfileModel.created2,
+        ProfileModel.created,
         EmailModel.id_to,
     ).join(EmailModel, EmailModel.id_to == ProfileModel.id)
 
@@ -799,7 +799,7 @@ def handle_favorites(entry, values):
         ProfileModel.summary,
         ProfileModel.last_login,
         ProfileModel.last_ip_country,
-        ProfileModel.created2,
+        ProfileModel.created,
         FavoriteModel.id_favorite,
     ).join(FavoriteModel, FavoriteModel.id_favorite == ProfileModel.id)
 
@@ -856,7 +856,7 @@ def handle_blocked(entry, values):
         ProfileModel.summary,
         ProfileModel.last_login,
         ProfileModel.last_ip_country,
-        ProfileModel.created2,
+        ProfileModel.created,
         BlockedModel.id_block,
     ).join(BlockedModel, BlockedModel.id_block == ProfileModel.id)
 

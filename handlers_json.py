@@ -283,7 +283,7 @@ def handle_mlregister(entry, values, files):
     now = datetime.utcnow()
 
     attrs = {}
-    attrs["created2"] = now
+    attrs["created"] = now
     attrs["dob"] = dt.strftime("%Y-%m-%d")
     location = values["location"]
     if location:

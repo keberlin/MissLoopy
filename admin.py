@@ -42,7 +42,7 @@ def command(cmd):
             ProfileModel.location,
             ProfileModel.last_ip,
             ProfileModel.last_ip_country,
-        ).order_by(ProfileModel.created2.desc())
+        ).order_by(ProfileModel.created.desc())
     elif cmds[0] == "EMAILS":
         query = (
             session.query(EmailModel.id_from, EmailModel.message)

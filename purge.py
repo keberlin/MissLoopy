@@ -13,7 +13,7 @@ session.commit()
 
 # Delete any unverified profiles after 1 month
 td = now - timedelta(days=30)
-session.query(ProfileModel).filter(ProfileModel.verified.is_(False), ProfileModel.created2 < td).delete()
+session.query(ProfileModel).filter(ProfileModel.verified.is_(False), ProfileModel.created < td).delete()
 session.commit()
 
 # Delete all emails older than 6 months

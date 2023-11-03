@@ -104,7 +104,7 @@ def search2(
         elif sort == "login":
             query = query.order_by(ProfileModel.last_login.desc())
         elif sort == "created":
-            query = query.order_by(ProfileModel.created2.desc())
+            query = query.order_by(ProfileModel.created.desc())
         else:
             pass  # Order must be by distance
 

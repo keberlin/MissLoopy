@@ -88,7 +88,7 @@ def EmailWink(session, entry, entry_from):
     member["summary"] = mask.MaskEverything(entry_from.summary)
     member["last_login"] = Since(entry_from.last_login)
     member["login_country"] = entry_from.last_ip_country
-    member["created"] = Datetime(entry_from.created2, tz).strftime("%x")
+    member["created"] = Datetime(entry_from.created, tz).strftime("%x")
     member["distance"] = Distance(distance, unit_distance)
     member["active"] = False
     dict["entry"] = member
@@ -127,7 +127,7 @@ def EmailNotify(session, entry, entry_from):
     member["summary"] = mask.MaskEverything(entry_from.summary)
     member["last_login"] = Since(entry_from.last_login)
     member["login_country"] = entry_from.last_ip_country
-    member["created"] = Datetime(entry_from.created2, tz).strftime("%x")
+    member["created"] = Datetime(entry_from.created, tz).strftime("%x")
     member["distance"] = Distance(distance, unit_distance)
     member["active"] = False
     dict["entry"] = member

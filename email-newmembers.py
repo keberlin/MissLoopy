@@ -18,7 +18,7 @@ now = datetime.utcnow()
 results = {}
 
 entries = (
-    session.query(ProfileModel).filter(ProfileModel.verified.is_(True)).filter(ProfileModel.created2 >= since).all()
+    session.query(ProfileModel).filter(ProfileModel.verified.is_(True)).filter(ProfileModel.created >= since).all()
 )
 for entry in entries:
     id = entry.id

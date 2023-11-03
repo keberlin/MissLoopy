@@ -31,7 +31,7 @@ def ListMember(session, entry, active, location, x, y, tz, unit_distance):
     member["summary"] = mask.MaskEverything(entry.summary)
     member["last_login"] = Since(entry.last_login)
     member["login_country"] = entry.last_ip_country
-    member["created"] = Datetime(entry.created2, tz).strftime("%x")
+    member["created"] = Datetime(entry.created, tz).strftime("%x")
     member["distance"] = Distance(distance, unit_distance)
     member["active"] = active
 

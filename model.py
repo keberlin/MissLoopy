@@ -29,7 +29,7 @@ class ProfileModel(db.Model):
     id = Column("id", Integer, Identity(), primary_key=True, nullable=False)
     email = Column("email", String, nullable=False)
     password = Column("password", String, nullable=False)
-    created2 = Column("created2", DateTime, nullable=False)
+    created = Column("created", DateTime, nullable=False)
     verified = Column("verified", Boolean, default=False)
     last_login = Column("last_login", DateTime)
     name = Column("name", String)
