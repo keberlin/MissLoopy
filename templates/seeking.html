@@ -20,11 +20,11 @@
     <div class="form-group">
       <label class="col-xs-3 control-label" for="age_min">Age from</label>
       <div class="col-xs-2">
-        <input type="number" class="form-control" id="age_min" name="age_min" value="{{ age_min|e }}" min="18" max="99" placeholder="18"/>
+        <input type="number" class="form-control" id="age_min" name="age_min" value="{{age_min|e}}" min="{{limit_age_min}}" max="{{limit_age_max}}" placeholder="{{default_age_min}}"/>
       </div>
       <label class="col-xs-1 control-label" for="age_max">to</label>
       <div class="col-xs-2">
-        <input type="number" class="form-control" id="age_max" name="age_max" value="{{ age_max|e }}" min="18" max="99" placeholder="99"/>
+        <input type="number" class="form-control" id="age_max" name="age_max" value="{{age_max|e}}" min="{{limit_age_min}}" max="{{limit_age_max}}" placeholder="{{default_age_max}}"/>
       </div>
     </div>
     <div class="form-group">
@@ -44,11 +44,11 @@
     <div class="form-group">
       <label class="col-xs-3 control-label" for="height_min">Height from</label>
       <div class="col-xs-2">
-        <input type="text" class="form-control" id="height_min" name="height_min" value="{{ (height_min or '')|e }}" placeholder="any"/>
+        <input type="text" class="form-control" id="height_min" name="height_min" value="{{height_min|e}}" placeholder="{{default_height_min}}"/>
       </div>
       <label class="col-xs-1 control-label" for="height_max">to</label>
       <div class="col-xs-2">
-        <input type="text" class="form-control" id="height_max" name="height_max" value="{{ (height_max or '')|e }}" placeholder="any"/>
+        <input type="text" class="form-control" id="height_max" name="height_max" value="{{height_max|e}}" placeholder="{{default_height_max}}"/>
       </div>
     </div>
     <div class="form-group">

@@ -97,9 +97,3 @@ def FetchCookies():
             continue
         cookies[s[0]] = s[1]
     return cookies
-
-
-def FetchRemoteAddr():
-    from flask import request
-
-    return request.environ.get("HTTP_X_REAL_IP", request.remote_addr)

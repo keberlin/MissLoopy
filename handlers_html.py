@@ -20,6 +20,13 @@ from utils import *
 
 PER_PAGE = 20
 
+DEFAULT_SORT = "distance"
+DEFAULT_DISTANCE = 50  # km
+LIMIT_AGE_MIN = 18
+LIMIT_AGE_MAX = 99
+LIMIT_HEIGHT_MIN = "any"
+LIMIT_HEIGHT_MAX = "any"
+
 # HTML Pages
 
 
@@ -118,7 +125,7 @@ def handle_profile(entry, values):
     dict["location"] = entry.location
     dict["gender"] = entry.gender
     dict["ethnicity"] = entry.ethnicity
-    dict["height"] = Height(entry.height, unit_height, 2)
+    dict["height"] = Height(entry.height, unit_height, 2) or ""
     dict["weight"] = entry.weight or 0
     dict["education"] = entry.education or 0
     dict["status"] = entry.status or 0
@@ -158,13 +165,19 @@ def handle_seeking(entry, values):
     unit_distance, unit_height = Units(country)
 
     dict = {}
+    dict["limit_age_min"] = LIMIT_AGE_MIN
+    dict["limit_age_max"] = LIMIT_AGE_MAX
+    dict["default_age_min"] = LIMIT_AGE_MIN
+    dict["default_age_max"] = LIMIT_AGE_MAX
+    dict["default_height_min"] = LIMIT_HEIGHT_MIN
+    dict["default_height_max"] = LIMIT_HEIGHT_MAX
     dict["gender_choice"] = entry.gender_choice or 0
     dict["ethnicity_choice"] = entry.ethnicity_choice or 0
     dict["weight_choice"] = entry.weight_choice or 0
     dict["age_min"] = entry.age_min
     dict["age_max"] = entry.age_max
-    dict["height_min"] = Height(entry.height_min, unit_height, 2)
-    dict["height_max"] = Height(entry.height_max, unit_height, 2)
+    dict["height_min"] = Height(entry.height_min, unit_height, 2) or ""
+    dict["height_max"] = Height(entry.height_max, unit_height, 2) or ""
     dict["looking_for"] = entry.looking_for
 
     return dict
@@ -253,17 +266,6 @@ def handle_filter(entry, values):
 
     profile_id = entry.id
 
-    default_sort = "distance"
-    default_distance = 50  # km
-    default_location = entry.location
-    default_gender_choice = entry.gender_choice
-    default_age_min = entry.age_min
-    default_age_max = entry.age_max
-    default_ethnicity_choice = entry.ethnicity_choice
-    default_height_min = entry.height_min
-    default_height_max = entry.height_max
-    default_weight_choice = entry.weight_choice
-
     sort = (
         distance
     ) = location = gender_choice = age_min = age_max = ethnicity_choice = height_min = height_max = weight_choice = None
@@ -287,40 +289,37 @@ def handle_filter(entry, values):
         weight_choice = filter.weight_choice
 
     if sort is None:
-        sort = default_sort
+        sort = DEFAULT_SORT
     if distance is None:
-        distance = default_distance
-    if location is None:
-        location = default_location
+        distance = DEFAULT_DISTANCE
     if gender_choice is None:
-        gender_choice = default_gender_choice
-    if age_min is None:
-        age_min = default_age_min
-    if age_max is None:
-        age_max = default_age_max
+        gender_choice = entry.gender_choice
     if ethnicity_choice is None:
-        ethnicity_choice = default_ethnicity_choice
-    if height_min is None:
-        height_min = default_height_min
-    if height_max is None:
-        height_max = default_height_max
+        ethnicity_choice = entry.ethnicity_choice
     if weight_choice is None:
-        weight_choice = default_weight_choice
+        weight_choice = entry.weight_choice
 
-    country = GazCountry(location)
+    country = GazCountry(location or entry.location)
     unit_distance, unit_height = Units(country)
 
     dict = {}
+    dict["limit_age_min"] = LIMIT_AGE_MIN
+    dict["limit_age_max"] = LIMIT_AGE_MAX
+    dict["default_age_min"] = entry.age_min or LIMIT_AGE_MIN
+    dict["default_age_max"] = entry.age_max or LIMIT_AGE_MAX
+    dict["default_location"] = entry.location
+    dict["default_height_min"] = Height(entry.height_min, unit_height, 2) or LIMIT_HEIGHT_MIN
+    dict["default_height_max"] = Height(entry.height_max, unit_height, 2) or LIMIT_HEIGHT_MAX
     dict["metric"] = unit_distance == UNIT_KM
     dict["sort"] = sort
     dict["distance"] = distance
-    dict["location"] = location
+    dict["location"] = location or ""
     dict["gender_choice"] = gender_choice
     dict["age_min"] = age_min
     dict["age_max"] = age_max
     dict["ethnicity_choice"] = ethnicity_choice
-    dict["height_min"] = Height(height_min, unit_height, 2)
-    dict["height_max"] = Height(height_max, unit_height, 2)
+    dict["height_min"] = Height(height_min, unit_height, 2) or ""
+    dict["height_max"] = Height(height_max, unit_height, 2) or ""
     dict["weight_choice"] = weight_choice
 
     return dict
@@ -337,20 +336,6 @@ def handle_results(entry, values):
     ethnicity = entry.ethnicity
     height = entry.height
     weight = entry.weight
-
-    default_sort = "distance"
-    default_distance = 50  # km
-    default_location = entry.location
-    default_x = entry.x
-    default_y = entry.y
-    default_tz = entry.tz
-    default_gender_choice = entry.gender_choice
-    default_age_min = entry.age_min
-    default_age_max = entry.age_max
-    default_ethnicity_choice = entry.ethnicity_choice
-    default_height_min = entry.height_min
-    default_height_max = entry.height_max
-    default_weight_choice = entry.weight_choice
 
     sort = (
         distance
@@ -378,28 +363,28 @@ def handle_results(entry, values):
         weight_choice = filter.weight_choice
 
     if sort is None:
-        sort = default_sort
+        sort = DEFAULT_SORT
     if distance is None:
-        distance = default_distance
+        distance = DEFAULT_DISTANCE
     if location is None:
-        location = default_location
-        x = default_x
-        y = default_y
-        tz = default_tz
+        location = entry.location
+        x = entry.x
+        y = entry.y
+        tz = entry.tz
     if gender_choice is None:
-        gender_choice = default_gender_choice
+        gender_choice = entry.gender_choice
     if age_min is None:
-        age_min = default_age_min
+        age_min = entry.age_min
     if age_max is None:
-        age_max = default_age_max
+        age_max = entry.age_max
     if ethnicity_choice is None:
-        ethnicity_choice = default_ethnicity_choice
+        ethnicity_choice = entry.ethnicity_choice
     if height_min is None:
-        height_min = default_height_min
+        height_min = entry.height_min
     if height_max is None:
-        height_max = default_height_max
+        height_max = entry.height_max
     if weight_choice is None:
-        weight_choice = default_weight_choice
+        weight_choice = entry.weight_choice
 
     entries = search.search2(
         db.session,
@@ -522,7 +507,7 @@ def handle_member(entry, values):
     dict["country"] = GazCountry(entry.location)
     dict["lat"] = entry.y * 360.0 / CIRCUM_Y
     dict["lng"] = entry.x * 360.0 / CIRCUM_X
-    dict["height"] = Height(entry.height, unit_height, 2)
+    dict["height"] = Height(entry.height, unit_height, 2) or ""
     dict["weight"] = Weight(entry.weight)
     dict["education"] = Education(entry.education)
     dict["status"] = Status(entry.status)

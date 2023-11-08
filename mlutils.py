@@ -348,7 +348,7 @@ def Login(email, password):
     return {"id": id}
 
 
-def Authenticate(cookies=None, remote_addr=None):
+def Authenticate(cookies, remote_addr):
     if not cookies:
         cookies = FetchCookies()
     if not cookies:
@@ -376,8 +376,6 @@ def Authenticate(cookies=None, remote_addr=None):
 
     now = datetime.utcnow()
     entry.last_login = now
-    if not remote_addr:
-        remote_addr = FetchRemoteAddr()
     if remote_addr and entry.last_ip != remote_addr:
         entry.last_ip = remote_addr
         entry.last_ip_country = IpCountry(remote_addr)
