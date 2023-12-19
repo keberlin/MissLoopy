@@ -142,7 +142,8 @@ def maybe_logged_in_html():
 def logged_in_html():
     if not g.entry:
         attrs = html_defaults(request.user_agent.string)
-        attrs["redirect"] = request.url
+        redirect_url = "http://" + request.environ["HTTP_X_FORWARDED_HOST"] + request.environ["RAW_URI"]
+        attrs["redirect"] = redirect_url
         return render_template("login.html", **attrs)
 
     page = request.path[1:]

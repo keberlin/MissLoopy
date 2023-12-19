@@ -411,7 +411,7 @@ def BlockedMutually(id, id_with):
 
 def DeletePhoto(session, pid):
     # Remove photo file using pid
-    session.query(EmailModel).filter(PhotoModel.pid == pid).delete()
+    session.query(PhotoModel).filter(PhotoModel.pid == pid).delete()
     session.commit()
     filename = os.path.join(BASE_DIR, PhotoFilename(pid))
     try:

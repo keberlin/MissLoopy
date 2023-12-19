@@ -46,8 +46,6 @@ def GazClosestMatchesQuick(query, max):
     if alias:
         query = alias
 
-    closest = []
-
     entries = (
         session.query(LocationModel.location)
         .filter(LocationModel.location.ilike(query))
@@ -55,7 +53,8 @@ def GazClosestMatchesQuick(query, max):
         .limit(max)
         .all()
     )
-    closest.extend([(entry.location) for entry in entries])
+    closest = [entry.location for entry in entries]
+
     if len(closest) < max:
         entries = (
             session.query(LocationModel.location)
@@ -78,8 +77,6 @@ def GazClosestMatches(query, max):
     if alias:
         query = alias
 
-    closest = []
-
     entries = (
         session.query(LocationModel.location)
         .filter(LocationModel.location.ilike("%" + query + "%"))
@@ -87,13 +84,17 @@ def GazClosestMatches(query, max):
         .limit(max)
         .all()
     )
-    closest.extend([(entry.location) for entry in entries])
+    closest = [entry.location for entry in entries]
 
     if len(closest) < max:
         entries = (
-            session.query(func.lower(func.substr(LocationModel.location, 1, min(len(query), 15)))).distinct().all()
+            # session.query(func.lower(LocationModel.location)).distinct().all()
+            session.query(func.lower(func.left(LocationModel.location, 15)))
+            .distinct()
+            .all()
         )
-        locations = [(entry[0]) for entry in entries]
+        # locations = set([entry[0][:15] for entry in entries])
+        locations = [entry[0] for entry in entries]
 
         matches = difflib.get_close_matches(query, locations, max)
         # TODO remove any consecutive entries that are a subset of their preceding entry, e.g. Brugge, Brugg

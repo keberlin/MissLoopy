@@ -1,7 +1,7 @@
 from database import db_init, MISSLOOPY_DB_URI
 from emails import EmailKickedStopForumSpam
 from logger import logger
-from mlutils import *
+from mlutils import DeleteMember
 from model import ProfileModel
 
 # from utils import *

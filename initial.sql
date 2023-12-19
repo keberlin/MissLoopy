@@ -1,5 +1,9 @@
 # Database: missloopy
 
+CREATE DATABASE missloopy
+  WITH OWNER "postgres"
+  TEMPLATE template1;
+
 DROP TABLE IF EXISTS profiles;
 DROP TABLE IF EXISTS photos;
 DROP TABLE IF EXISTS emails;
@@ -146,7 +150,11 @@ CREATE TABLE filters (
 );
 
 
-# Database: gazatteer
+# Database: gazetteer
+
+CREATE DATABASE gazetteer
+  WITH OWNER "postgres"
+  TEMPLATE template1;
 
 CREATE TABLE locations (location VARCHAR PRIMARY KEY NOT NULL, x INTEGER, y INTEGER, tz VARCHAR, population INTEGER);
 
@@ -156,6 +164,9 @@ COMMIT;
 
 
 # Database: ipaddress
+
+CREATE DATABASE ipaddress
+  WITH OWNER "postgres";
 
 CREATE TABLE ranges (lower BIGINT NOT NULL, upper BIGINT NOT NULL, country VARCHAR);
 

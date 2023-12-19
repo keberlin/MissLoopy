@@ -2,12 +2,16 @@ import re
 
 from database import db_init, MISSLOOPY_DB_URI
 from mlutils import *
-from model import *
+from model import EmailModel
 
 session = db_init(MISSLOOPY_DB_URI)
 
 entries = (
-    session.query(EmailModel.id_from, EmailModel.message).filter(EmailModel.message.notlike("data:image/%%")).all()
+    session.query(EmailModel.id_from, EmailModel.message)
+    .filter(EmailModel.message.notlike("data:image/%%"))
+    .order_by(EmailModel.sent)
+    .distinct()
+    .all()
 )
 for entry in entries:
     id_from = entry.id_from
