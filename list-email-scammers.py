@@ -1,12 +1,12 @@
 from datetime import datetime, timedelta
 import time
 
-from database import db_init, MISSLOOPY_DB_URI
+from database import db_init
 from mlutils import *
 from model import EmailModel
 from utils import *
 
-session = db_init(MISSLOOPY_DB_URI)
+session = db_init()
 
 entries = (
     session.query(EmailModel.id_from, func.count(EmailModel.id_to.distinct()), func.min(EmailModel.sent))

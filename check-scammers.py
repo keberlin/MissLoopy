@@ -1,11 +1,11 @@
 import csv
 
-from database import db_init, MISSLOOPY_DB_URI
+from database import db_init
 from mlutils import *
 from model import *
 from utils import *
 
-session = db_init(MISSLOOPY_DB_URI)
+session = db_init()
 
 entries = session.query(ProfileModel.email).filter(ProfileModel.verified.is_(True)).all()
 emails = set([entry.email.lower() for entry in entries])

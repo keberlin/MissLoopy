@@ -3,7 +3,7 @@ import collections
 from datetime import datetime, timedelta
 import sys
 
-from database import db_init, MISSLOOPY_DB_URI
+from database import db_init
 from gazetteer import *
 from localization import *
 from logger import logger
@@ -15,7 +15,7 @@ from tzone import *
 from units import *
 from utils import *
 
-session = db_init(MISSLOOPY_DB_URI)
+session = db_init()
 
 YEARS = [1, 2, 5]
 

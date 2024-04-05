@@ -1,12 +1,12 @@
 import hashlib
 import re
 
-from database import db_init, MISSLOOPY_DB_URI
+from database import db_init
 from mlutils import *
 from model import *
 from utils import *
 
-session = db_init(MISSLOOPY_DB_URI)
+session = db_init()
 
 entries = session.query(ProfileModel).limit(10).all()  # TODO Remove the limit
 for entry in entries:

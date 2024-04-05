@@ -1,4 +1,4 @@
-from database import db_init, MISSLOOPY_DB_URI
+from database import db_init
 from emails import EmailKickedStopForumSpam
 from logger import logger
 from mlutils import DeleteMember
@@ -6,7 +6,7 @@ from model import ProfileModel
 
 # from utils import *
 
-session = db_init(MISSLOOPY_DB_URI)
+session = db_init()
 
 entries = session.query(ProfileModel.last_ip).filter(ProfileModel.verified.is_(True)).all()
 ips = set([entry.last_ip for entry in entries])

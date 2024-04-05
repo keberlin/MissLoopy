@@ -1,12 +1,12 @@
 from datetime import datetime, timedelta
 
-from database import db_init, MISSLOOPY_DB_URI
+from database import db_init
 from logger import logger
 from mlutils import *
 from model import *
 from utils import *
 
-session = db_init(MISSLOOPY_DB_URI)
+session = db_init()
 
 
 def Bit(enum):

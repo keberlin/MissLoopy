@@ -1,12 +1,12 @@
 import argparse
 
-from database import db_init, MISSLOOPY_DB_URI
+from database import db_init
 from emails import *
 from logger import logger
 from mlutils import *
 from model import *
 
-session = db_init(MISSLOOPY_DB_URI)
+session = db_init()
 
 parser = argparse.ArgumentParser(description="Delete Photos.")
 parser.add_argument("pid", nargs="+", help="photo ids to be deleted")

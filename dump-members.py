@@ -1,7 +1,7 @@
 from datetime import database
 import os
 
-from database import db_init, MISSLOOPY_DB_URI
+from database import db_init
 from gazetteer import *
 from localization import *
 import mask
@@ -14,7 +14,7 @@ from utils import *
 
 BASE_DIR = os.path.dirname(__file__)
 
-session = db_init(MISSLOOPY_DB_URI)
+session = db_init()
 
 since = session.query(AdminModel.last_dump_member_search).one()
 

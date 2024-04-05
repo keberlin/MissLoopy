@@ -1,9 +1,9 @@
-from database import db_init, MISSLOOPY_DB_URI
+from database import db_init
 from emails import *
 from localization import *
 from mlutils import *
 
-session = db_init(MISSLOOPY_DB_URI)
+session = db_init()
 
 profile_id = 1
 pid = 1

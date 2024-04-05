@@ -1,12 +1,12 @@
 import sys
 
 import database
-from database import db_init, MISSLOOPY_DB_URI
+from database import db_init
 from mlutils import *
 from model import *
 from utils import *
 
-session = db_init(MISSLOOPY_DB_URI)
+session = db_init()
 
 id = int(sys.argv[1])
 

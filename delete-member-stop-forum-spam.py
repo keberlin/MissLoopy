@@ -1,13 +1,13 @@
 import argparse
 
-from database import db_init, MISSLOOPY_DB_URI
+from database import db_init
 from emails import EmailKicked
 from logger import logger
 from mlutils import DeleteMember
 from model import EmailModel, ProfileModel
 from urlutils import StopForumSpamAdd
 
-session = db_init(MISSLOOPY_DB_URI)
+session = db_init()
 
 parser = argparse.ArgumentParser(description="Delete Members.")
 parser.add_argument("id", nargs="+", help="member ids to be deleted")

@@ -1,12 +1,12 @@
 import re
 import sys
 
-from database import db_init, MISSLOOPY_DB_URI
+from database import db_init
 from mlutils import *
 from model import *
 import spam
 
-session = db_init(MISSLOOPY_DB_URI)
+session = db_init()
 
 MAX_LENGTH = 100
 

@@ -1,13 +1,12 @@
 from datetime import datetime, timedelta
 import os
 
-from database import db_init, MISSLOOPY_DB_URI
+from database import db_init
 from emails import EmailInboxReminder
 from logger import logger
-from mlutils import *
-from model import *
+from model import EmailModel, ProfileModel
 
-session = db_init(MISSLOOPY_DB_URI)
+session = db_init()
 
 now = datetime.utcnow()
 since = now - timedelta(days=14)

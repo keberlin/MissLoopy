@@ -1,6 +1,6 @@
 import os
 
-from database import db_init, MISSLOOPY_DB_URI
+from database import db_init
 from gazetteer import *
 from localization import *
 from logger import logger
@@ -11,7 +11,7 @@ from tzone import *
 from units import *
 from utils import *
 
-session = db_init(MISSLOOPY_DB_URI)
+session = db_init()
 
 BASE_DIR = os.path.dirname(__file__)
 

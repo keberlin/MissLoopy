@@ -4,13 +4,13 @@ import sys
 
 from sqlalchemy.sql.expression import and_, func, or_
 
-from database import db_init, MISSLOOPY_DB_URI
+from database import db_init
 from iputils import *
 import mask
 from mlutils import *
 from model import *
 
-session = db_init(MISSLOOPY_DB_URI)
+session = db_init()
 
 parser = optparse.OptionParser()
 parser.add_option("-n", "--non-interactive", dest="stdin", action="store_true", help="use stdin for input")

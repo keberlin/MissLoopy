@@ -1,11 +1,11 @@
 import csv
 
-from database import db_init, MISSLOOPY_DB_URI
+from database import db_init
 from mlutils import *
 from model import *
 from utils import *
 
-session = db_init(MISSLOOPY_DB_URI)
+session = db_init()
 
 bounced = set()
 with open("bounced.log", "r") as f:

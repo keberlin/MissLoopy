@@ -54,5 +54,9 @@ dbip.txt: ip-dbip.py dbip-country-lite.csv
 	@./analyse-junk.sh
 	@touch $@
 
+format: .FORCE
+	isort *.py */*.py
+	black -l120 .
+
 tests: .FORCE
 	nosetests tests #--with-coverage

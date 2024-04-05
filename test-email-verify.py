@@ -1,10 +1,10 @@
 from datetime import datetime, timedelta
 
-from database import db_init, MISSLOOPY_DB_URI
+from database import db_init
 from emails import EmailVerify
 from model import ProfileModel, UUIDModel
 
-session = db_init(MISSLOOPY_DB_URI)
+session = db_init()
 
 email = "keith.hollis@gmail.com"
 

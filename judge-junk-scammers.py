@@ -1,6 +1,6 @@
 import csv
 
-from database import db_init, MISSLOOPY_DB_URI
+from database import db_init
 from emails import *
 from gazetteer import *
 from logger import logger
@@ -8,7 +8,7 @@ from mlutils import *
 from model import EmailModel, ProfileModel
 from urlutils import StopForumSpamAdd
 
-session = db_init(MISSLOOPY_DB_URI)
+session = db_init()
 
 ids = set()
 with open("junk-auto.log", "r") as file:

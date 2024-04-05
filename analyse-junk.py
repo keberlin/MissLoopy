@@ -1,14 +1,13 @@
 import re
 import sys
 
-from database import MISSLOOPY_DB_URI, db_init
-
 # from mlutils import *
+from database import db_init
 from model import SpamModel
 
 # from utils import *
 
-session = db_init(MISSLOOPY_DB_URI)
+session = db_init()
 
 MANDATORY = [
     "western union",

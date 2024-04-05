@@ -1,10 +1,10 @@
-from database import db_init, MISSLOOPY_DB_URI
+from database import db_init
 from emails import *
 from localization import *
 from mlutils import *
 from model import *
 
-session = db_init(MISSLOOPY_DB_URI)
+session = db_init()
 
 email1 = "keith.hollis@gmail.com"
 email2 = "razeberlin@gmail.com"

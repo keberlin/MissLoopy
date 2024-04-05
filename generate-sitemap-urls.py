@@ -1,7 +1,7 @@
-from database import db_init, MISSLOOPY_DB_URI
+from database import db_init
 from model import ProfileModel
 
-session = db_init(MISSLOOPY_DB_URI)
+session = db_init()
 entries = session.query(ProfileModel.id).filter(ProfileModel.verified.is_(True)).all()
 
 with open("web_urls.txt", "w") as f:

@@ -2,7 +2,7 @@ import csv
 
 from sqlalchemy.sql import func
 
-from database import db_init, MISSLOOPY_DB_URI
+from database import db_init
 from emails import EmailKickedStopForumSpam
 from logger import logger
 from mlutils import DeleteMember
@@ -11,7 +11,7 @@ from model import ProfileModel
 # from utils import *
 
 
-session = db_init(MISSLOOPY_DB_URI)
+session = db_init()
 
 entries = session.query(ProfileModel.email).filter(ProfileModel.verified.is_(True)).all()
 emails = set([entry.email.lower() for entry in entries])

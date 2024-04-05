@@ -1,6 +1,6 @@
 from datetime import datetime
 
-from database import db_init, MISSLOOPY_DB_URI
+from database import db_init
 from emails import EmailNewMembers
 from localization import *
 from logger import logger
@@ -9,7 +9,7 @@ from model import *
 import search
 from utils import *
 
-session = db_init(MISSLOOPY_DB_URI)
+session = db_init()
 
 since = session.query(AdminModel.last_new_member_search).scalar()
 

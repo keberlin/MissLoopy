@@ -1,13 +1,13 @@
 import os
 
-from database import db_init, MISSLOOPY_DB_URI
+from database import db_init
 from gazetteer import *
 from mlhtml import *
 from mlutils import *
 from model import ProfileModel
 from utils import *
 
-session = db_init(MISSLOOPY_DB_URI)
+session = db_init()
 
 BASE_DIR = os.path.dirname(__file__)
 
