@@ -4,7 +4,7 @@ flask-sqlalchemy
 gunicorn
 jinja2
 pillow
-psycopg2
+#psycopg2
 psycopg2-binary
 pytz
 requests
