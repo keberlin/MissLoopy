@@ -1,11 +1,8 @@
 argparse
-beautifulsoup4
-coverage
 flask
 flask-sqlalchemy
 gunicorn
 jinja2
-nose
 pillow
 psycopg2
 psycopg2-binary
