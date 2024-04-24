@@ -84,9 +84,8 @@ def top():
 def logged_out_html():
     page = request.path[1:]
     values = dict([(x, "|".join(request.values.getlist(x))) for x in list(request.values.keys())])
-    json = request.get_json()
-    if json:
-        values.update(json)
+
+    logger.info(f"logged_out_json: page: {page}, values: {values}")
 
     attrs = html_defaults(request.user_agent.string)
     attrs.update(values)
@@ -101,9 +100,8 @@ def logged_out_html():
 def maybe_logged_in_html():
     page = request.path[1:]
     values = dict([(x, "|".join(request.values.getlist(x))) for x in list(request.values.keys())])
-    json = request.get_json()
-    if json:
-        values.update(json)
+
+    logger.info(f"maybe_logged_in_html: page: {page}, values: {values}")
 
     id = g.entry.id if g.entry else None
     user = g.entry.name if g.entry else None
@@ -148,9 +146,8 @@ def logged_in_html():
 
     page = request.path[1:]
     values = dict([(x, "|".join(request.values.getlist(x))) for x in list(request.values.keys())])
-    json = request.get_json()
-    if json:
-        values.update(json)
+
+    logger.info(f"logged_in_html: page: {page}, values: {values}")
 
     id = g.entry.id
     user = g.entry.name
@@ -200,6 +197,8 @@ def logged_out_json():
     if json:
         values.update(json)
 
+    logger.info(f"logged_out_json: page: {page}, values: {values}")
+
     func = globals().get("handle_%s" % page)
     data = func(None, values, request.files)
     return jsonify(data)
@@ -232,6 +231,8 @@ def logged_in_json():
     json = request.get_json()
     if json:
         values.update(json)
+
+    logger.info(f"logged_in_json: page: {page}, values: {values}")
 
     func = globals().get("handle_%s" % page)
     data = func(g.entry, values, request.files)
