@@ -32,7 +32,7 @@ MAX_LENGTH = 1000
 # JSON returns
 
 
-def handle_closestnames(entry, values, files):
+def handle_closestnames(entry, values):
     if "query" not in values:
         return {"error": "No query specified."}
 
@@ -45,7 +45,7 @@ def handle_closestnames(entry, values, files):
     return {"matches": closest}
 
 
-def handle_mlaccount(entry, values, files):
+def handle_mlaccount(entry, values):
     id = entry.id
 
     # TODO Find a mechanism for updating a member's email address too..
@@ -74,7 +74,7 @@ def handle_mlaccount(entry, values, files):
     return {"message": "Account updated successfully."}
 
 
-def handle_mladdfavorite(entry, values, files):
+def handle_mladdfavorite(entry, values):
     id = entry.id
 
     ids = [int(x) for x in values["id"].split("|")]
@@ -90,7 +90,7 @@ def handle_mladdfavorite(entry, values, files):
         return {"message": "These members have been added to your favorites list."}
 
 
-def handle_mlblock(entry, values, files):
+def handle_mlblock(entry, values):
     id = entry.id
 
     ids = [int(x) for x in values["id"].split("|")]
@@ -106,7 +106,7 @@ def handle_mlblock(entry, values, files):
         return {"message": "These members have now been blocked."}
 
 
-def handle_mldeletefavorite(entry, values, files):
+def handle_mldeletefavorite(entry, values):
     id = entry.id
 
     if "ids" in values:
@@ -126,7 +126,7 @@ def handle_mldeletefavorite(entry, values, files):
         return {"message": "These members have been removed from your favorites list."}
 
 
-def handle_mldeletephoto(entry, values, files):
+def handle_mldeletephoto(entry, values):
     id = entry.id
 
     if "pids" in values:
@@ -136,10 +136,10 @@ def handle_mldeletephoto(entry, values, files):
 
     for pid in pids:
         # Ensure this member owns the photo first
-        entry = db.session.query(EmailModel.id).filter(PhotoModel.pid == pid).one_or_none()
+        entry = db.session.query(PhotoModel.profile_id).filter(PhotoModel.pid == pid).one_or_none()
         if not entry:
             return {"error": "Photo %d not found." % (pid)}
-        if entry.id != id:
+        if entry.profile_id != id:
             return {"error": "You are not the owner of photo %d." % (pid)}
 
     DeletePhotos(db.session, pids)
@@ -160,7 +160,7 @@ def handle_mldeletephoto(entry, values, files):
         return {"message": "These photos have been deleted.", "pids": pids, "master": master}
 
 
-def handle_mlmasterphoto(entry, values, files):
+def handle_mlmasterphoto(entry, values):
     if "pid" not in values:
         return {"error": "No Photo selected."}
 
@@ -189,7 +189,7 @@ def handle_mlmasterphoto(entry, values, files):
     return {"message": "This photo has been set to your main profile photo.", "pids": pids, "master": master}
 
 
-def handle_mlprofile(entry, values, files):
+def handle_mlprofile(entry, values):
     if "name" not in values:
         return {"error": "name not specified."}
 
@@ -245,7 +245,7 @@ def handle_mlprofile(entry, values, files):
     return {"message": "Profile updated successfully."}
 
 
-def handle_mlregister(entry, values, files):
+def handle_mlregister(entry, values):
     if "email" not in values:
         return {"error": "No Email Address specified."}
     if "password" not in values:
@@ -322,7 +322,7 @@ def handle_mlregister(entry, values, files):
     return {"code": 1002}
 
 
-def handle_mlresend(entry, values, files):
+def handle_mlresend(entry, values):
     if "email" not in values:
         return {"error": "email not specified"}
 
@@ -338,7 +338,7 @@ def handle_mlresend(entry, values, files):
     return {"message": "Verify Registration email has been resent..."}
 
 
-def handle_mlforgotpassword(entry, values, files):
+def handle_mlforgotpassword(entry, values):
     if "email" not in values:
         return {"error": "email not specified"}
 
@@ -364,7 +364,7 @@ def handle_mlforgotpassword(entry, values, files):
     return {"message": "Your password reset email has been sent..."}
 
 
-def handle_mlresetpassword(entry, values, files):
+def handle_mlresetpassword(entry, values):
     if "uuid" not in values:
         return {"error": "uuid not specified"}
     if "email" not in values:
@@ -390,7 +390,7 @@ def handle_mlresetpassword(entry, values, files):
     return {"message": "Your password has been changed..."}
 
 
-def handle_mlchangepassword(entry, values, files):
+def handle_mlchangepassword(entry, values):
     if "password" not in values:
         return {"error": "password not specified"}
 
@@ -404,7 +404,7 @@ def handle_mlchangepassword(entry, values, files):
     return {"message": "Your password has been changed..."}
 
 
-def handle_mllocation(entry, values, files):
+def handle_mllocation(entry, values):
     if "location" not in values:
         return {"error": "No location specified."}
 
@@ -417,7 +417,7 @@ def handle_mllocation(entry, values, files):
     return {"code": 1003}
 
 
-def handle_mlseeking(entry, values, files):
+def handle_mlseeking(entry, values):
     profile_id = entry.id
 
     if "gender_choice" not in values:
@@ -464,7 +464,7 @@ def handle_mlseeking(entry, values, files):
     return {"message": "Seeking updated successfully."}
 
 
-def handle_mlfilter(entry, values, files):
+def handle_mlfilter(entry, values):
     profile_id = entry.id
 
     name = values.get("name")
@@ -535,7 +535,7 @@ def handle_mlfilter(entry, values, files):
     return {"code": 1000}
 
 
-def handle_mlsendemail(entry, values, files):
+def handle_mlsendemail(entry, values):
     id = entry.id
     location = entry.location
     country = GazCountry(location)
@@ -614,7 +614,7 @@ def handle_mlsendphoto(entry, values, files):
     except:
         return {"error": "Unrecognized image format."}
     # Ensure it is no bigger than this
-    im.thumbnail((IMAGE_MAX_SIZE, IMAGE_MAX_SIZE), Image.ANTIALIAS)
+    im.thumbnail((IMAGE_MAX_SIZE, IMAGE_MAX_SIZE), Image.LANCZOS)
     data = io.StringIO()
     im.save(data, "JPEG")
     image = "data:image/jpg;base64," + base64.b64encode(data.getvalue())
@@ -644,7 +644,7 @@ def handle_mlsendphoto(entry, values, files):
     return {"message": "Your photo has been sent.", "entry": d}
 
 
-def handle_mlspam(entry, values, files):
+def handle_mlspam(entry, values):
     id = entry.id
 
     id_spam = int(values["id"])
@@ -663,7 +663,7 @@ def handle_mlspam(entry, values, files):
     return {"message": "Thank you for reporting this member..."}
 
 
-def handle_mlunblock(entry, values, files):
+def handle_mlunblock(entry, values):
     id = entry.id
 
     if "ids" in values:
@@ -689,7 +689,8 @@ def handle_mluploadphoto(entry, values, files):
 
     try:
         im = Image.open(files["file"].stream)
-    except:
+    except Exception as ex:
+        logger.error(str(ex))
         return {"error": "Unrecognized image format."}
     # Ensure it is at least this big
     if im.size[0] < IMAGE_MIN_SIZE or im.size[1] < IMAGE_MIN_SIZE:
@@ -698,15 +699,17 @@ def handle_mluploadphoto(entry, values, files):
         }
     # Ensure it is no bigger than this
     try:
-        im.thumbnail((IMAGE_MAX_SIZE, IMAGE_MAX_SIZE), Image.ANTIALIAS)
-    except:
+        im.thumbnail((IMAGE_MAX_SIZE, IMAGE_MAX_SIZE), Image.LANCZOS)
+    except Exception as ex:
+        logger.error(str(ex))
         return {"error": "Unsupported image format."}
 
     # Add watermark to bottom-right corner
     if im.mode != "RGBA":
         try:
             im = im.convert("RGBA")
-        except:
+        except Exception as ex:
+            logger.error(str(ex))
             return {"error": "Unsupported image format."}
     layer = Image.new("RGBA", im.size, (0, 0, 0, 0))
     mark = Image.open(os.path.join(BASE_DIR, "watermark.png"))
@@ -721,7 +724,7 @@ def handle_mluploadphoto(entry, values, files):
     assert item.pid
 
     # Create a photo file using pid and copy data into it
-    filename = os.path.join(BASE_DIR, "static", PhotoFilename(entry.pid))
+    filename = os.path.join(BASE_DIR, "static", PhotoFilename(item.pid))
     if os.path.isfile(filename):
         logger.error("Photo file %s already exists!" % (filename))
         os.remove(filename)
@@ -730,7 +733,7 @@ def handle_mluploadphoto(entry, values, files):
     im = im.convert("RGB")
     im.save(filename, "JPEG")
 
-    EmailNewPhoto(db.session, filename, entry.pid, id)
+    EmailNewPhoto(db.session, filename, item.pid, id)
 
     pids = []
     master = 0
@@ -743,7 +746,7 @@ def handle_mluploadphoto(entry, values, files):
     return {"message": "Photo uploaded successfully.", "pids": pids, "master": master}
 
 
-def handle_mlwink(entry, values, files):
+def handle_mlwink(entry, values):
     id = entry.id
     location = entry.location
     country = GazCountry(location)

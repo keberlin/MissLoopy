@@ -273,6 +273,7 @@
       $.ajax({
         url: '/mlwink',
         type: 'POST',
+        contentType: "application/json; charset=utf-8",
         data: 'id={{ id }}',
         error: function(jqXHR, textStatus, errorThrown) {
           jsShowError("There's a problem with your Internet connection.");
@@ -317,6 +318,7 @@
       $.ajax({
         url: '/mlblock',
         type: 'POST',
+        contentType: "application/json; charset=utf-8",
         data: 'id={{ id }}',
         error: function(jqXHR, textStatus, errorThrown) {
           jsShowError("There's a problem with your Internet connection.");

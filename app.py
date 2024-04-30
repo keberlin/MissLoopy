@@ -51,6 +51,9 @@ def login_required(f):
 def create_app():
     app = MyFlask(__name__)
 
+    # File uploading
+    app.config["MAX_CONTENT_LENGTH"] = 2 * 1024 * 1024  # 2MB
+
     # Databases
     app.config["SQLALCHEMY_ECHO"] = TEST
     app.config["SQLALCHEMY_DATABASE_URI"] = MISSLOOPY_DB_URI
@@ -216,10 +219,8 @@ def logged_out_json():
 @app.route("/mlprofile", methods=["POST"])
 @app.route("/mlseeking", methods=["POST"])
 @app.route("/mlsendemail", methods=["POST"])
-@app.route("/mlsendphoto", methods=["POST"])
 @app.route("/mlspam", methods=["POST"])
 @app.route("/mlunblock", methods=["POST"])
-@app.route("/mluploadphoto", methods=["POST"])
 @app.route("/mlwink", methods=["POST"])
 @login_required
 def logged_in_json():
@@ -233,6 +234,27 @@ def logged_in_json():
         values.update(json)
 
     logger.info(f"logged_in_json: page: {page}, values: {values}")
+
+    func = globals().get("handle_%s" % page)
+    data = func(g.entry, values)
+    return jsonify(data)
+
+
+@app.route("/mlsendphoto", methods=["POST"])
+@app.route("/mluploadphoto", methods=["POST"])
+@login_required
+def logged_in_json_with_files():
+    if not g.entry:
+        return jsonify({"error": "Not logged in."})
+
+    page = request.path[1:]
+    logger.debug(f"page: {page}")
+    logger.debug(f"request: {request}")
+    logger.debug(f"files: {request.files}")
+    logger.debug(f"values: {request.values}")
+    values = dict([(x, "|".join(request.values.getlist(x))) for x in list(request.values.keys())])
+
+    logger.info(f"logged_in_json_with_files: page: {page}, values: {values}")
 
     func = globals().get("handle_%s" % page)
     data = func(g.entry, values, request.files)

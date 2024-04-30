@@ -139,6 +139,8 @@
           url: '/mluploadphoto',
           type: 'POST',
           data: data,
+          contentType: false,
+          processData: false,
           xhr: function() {
             // get the native XmlHttpRequest object
             var xhr = $.ajaxSettings.xhr();
@@ -169,8 +171,6 @@
             jsShowError("There's a problem with your Internet connection.");
           },
           cache: false,
-          contentType: false,
-          processData: false,
           async: true
         });
         /* Angular doesn't support progress info yet :(

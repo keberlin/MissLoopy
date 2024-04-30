@@ -44,6 +44,7 @@
       $.ajax({
         url: '/mlresend',
         type: 'POST',
+        contentType: "application/json; charset=utf-8",
         data: ({'email':'{{ email }}'}),
         error: function(jqXHR, textStatus, errorThrown) {
           jsShowError("There's a problem with your Internet connection.");

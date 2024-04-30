@@ -209,6 +209,7 @@
       $.ajax({
         url: '/mlprofile',
         type: 'POST',
+        contentType: "application/json; charset=utf-8",
         data: $(this).serialize(),
         error: function(jqXHR, textStatus, errorThrown) {
           jsShowError("There's a problem with your Internet connection.");

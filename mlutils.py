@@ -413,7 +413,7 @@ def DeletePhoto(session, pid):
     # Remove photo file using pid
     session.query(PhotoModel).filter(PhotoModel.pid == pid).delete()
     session.commit()
-    filename = os.path.join(BASE_DIR, PhotoFilename(pid))
+    filename = os.path.join(BASE_DIR, "static", PhotoFilename(pid))
     try:
         os.remove(filename)
     except:

@@ -95,6 +95,7 @@
       $.ajax({
         url: '/mlseeking',
         type: 'POST',
+        contentType: "application/json; charset=utf-8",
         data: $(this).serialize(),
         success: handleSuccess,
         error: function(jqXHR, textStatus, errorThrown) {
