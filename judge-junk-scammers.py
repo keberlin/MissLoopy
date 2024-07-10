@@ -22,15 +22,6 @@ with open("junk-reported.log", "r") as file:
         words = line.split()
         ids.add(words[0])
 
-entries = (
-    session.query(EmailModel.id_from, func.max(EmailModel.sent))
-    .filter(EmailModel.id_from.in_(ids))
-    .group_by(EmailModel.id_from)
-    .order_by(func.max(EmailModel.sent).desc())
-    .all()
-)
-ids = [x.id_from for x in entries]
-
 for id in ids:
     entry = session.query(ProfileModel).filter(ProfileModel.id == id).one_or_none()
     if not entry:

@@ -159,10 +159,6 @@ for item in MANDATORY:
         continue
     spam[item] = 0.75
 
-entries = session.query(SpamModel).all()
-for entry in entries:
-    print(f"entry: {entry}")
-
 session.query(SpamModel).delete()
 for str, cost in spam.items():
     item = SpamModel(str=str, cost=cost)
