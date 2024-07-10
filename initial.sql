@@ -127,8 +127,6 @@ CREATE TABLE spam (str VARCHAR, cost FLOAT);
 
 CREATE TABLE uuids (uuid UUID PRIMARY KEY NOT NULL, profile_id INTEGER NOT NULL, expiry TIMESTAMP NOT NULL);
 
-COMMIT;
-
 # Filters
 
 CREATE TABLE filters (
@@ -160,8 +158,6 @@ CREATE TABLE locations (location VARCHAR PRIMARY KEY NOT NULL, x INTEGER, y INTE
 
 CREATE INDEX idx1 ON locations (location);
 
-COMMIT;
-
 
 # Database: ipaddress
 
@@ -172,5 +168,3 @@ CREATE TABLE ranges (lower BIGINT NOT NULL, upper BIGINT NOT NULL, country VARCH
 
 CREATE INDEX idx1 ON ranges (lower);
 CREATE INDEX idx2 ON ranges (upper);
-
-COMMIT;

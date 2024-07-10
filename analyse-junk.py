@@ -1,11 +1,8 @@
 import re
 import sys
 
-# from mlutils import *
 from database import db_init
 from model import SpamModel
-
-# from utils import *
 
 session = db_init()
 
@@ -162,8 +159,12 @@ for item in MANDATORY:
         continue
     spam[item] = 0.75
 
-with session.begin():
-    session.query(SpamModel).delete()
-    for str, cost in spam.items():
-        item = SpamModel(str=str, cost=cost)
-        session.add(item)
+entries = session.query(SpamModel).all()
+for entry in entries:
+    print(f"entry: {entry}")
+
+session.query(SpamModel).delete()
+for str, cost in spam.items():
+    item = SpamModel(str=str, cost=cost)
+    session.add(item)
+session.commit()

@@ -7,6 +7,5 @@ session = db_init()
 
 profile_id = 1
 pid = 1
-filename = PhotoFilename(pid)
 
-EmailNewPhoto(session, filename, pid, profile_id)
+EmailNewPhoto(session, PhotoFilename(pid), pid, profile_id)

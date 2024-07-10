@@ -10,3 +10,5 @@ python purge-scammers.py
 #python dump-members.py
 
 make html
+
+sh analyse-junk.sh

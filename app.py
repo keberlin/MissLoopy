@@ -248,10 +248,6 @@ def logged_in_json_with_files():
         return jsonify({"error": "Not logged in."})
 
     page = request.path[1:]
-    logger.debug(f"page: {page}")
-    logger.debug(f"request: {request}")
-    logger.debug(f"files: {request.files}")
-    logger.debug(f"values: {request.values}")
     values = dict([(x, "|".join(request.values.getlist(x))) for x in list(request.values.keys())])
 
     logger.info(f"logged_in_json_with_files: page: {page}, values: {values}")

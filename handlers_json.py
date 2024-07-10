@@ -169,13 +169,13 @@ def handle_mlmasterphoto(entry, values):
     pid = int(values["pid"])
 
     # Ensure this member owns the photo first
-    entry = db.session.query(EmailModel.id).filter(PhotoModel.pid == pid).one_or_none()
+    entry = db.session.query(PhotoModel.id).filter(PhotoModel.pid == pid).one_or_none()
     if entry.id != id:
         return {"error": "You are not the owner of this photo."}
     # Remove the master flag from all photos
-    db.session.query(EmailModel).filter(EmailModel.id == id).update({"master": False})
+    db.session.query(PhotoModel).filter(PhotoModel.id == id).update({"master": False})
     # Restore the master flag for the selected photo
-    db.session.query(EmailModel).filter(PhotoModel.pid == pid).update({"master": True})
+    db.session.query(PhotoModel).filter(PhotoModel.pid == pid).update({"master": True})
     db.session.commit()
 
     pids = []
@@ -733,7 +733,7 @@ def handle_mluploadphoto(entry, values, files):
     im = im.convert("RGB")
     im.save(filename, "JPEG")
 
-    EmailNewPhoto(db.session, filename, item.pid, id)
+    EmailNewPhoto(db.session, PhotoFilename(item.pid), item.pid, id)
 
     pids = []
     master = 0

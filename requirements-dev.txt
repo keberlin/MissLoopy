@@ -9,17 +9,17 @@
 --trusted-host files.pythonhosted.org
 --trusted-host pypi.python.org
 
-coverage==7.5.0
+coverage==7.5.4
     # via -r requirements-dev.in
 exceptiongroup==1.2.1
     # via pytest
 iniconfig==2.0.0
     # via pytest
-packaging==24.0
+packaging==24.1
     # via pytest
 pluggy==1.5.0
     # via pytest
-pytest==8.1.1
+pytest==8.2.2
     # via -r requirements-dev.in
 tomli==2.0.1
     # via pytest
